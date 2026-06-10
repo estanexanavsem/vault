@@ -35,6 +35,7 @@ ESLint enforces type-aware TypeScript rules, React Hooks rules, `no-console` war
 ## Testing Guidelines
 
 There is currently no frontend test script or test framework configured. Before opening a change, run at least `npm run lint` and `npm run build`. If you add tests, add an npm script and use colocated names such as `Component.test.tsx` or `service.test.ts`.
+Do not use Playwright for visual verification. Visual review and screenshot-based validation are handled by the user.
 
 ## Commit & Pull Request Guidelines
 

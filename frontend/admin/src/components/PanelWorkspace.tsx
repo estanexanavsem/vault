@@ -1,5 +1,5 @@
-import { Button, Group, Tabs } from '@mantine/core'
-import { Plus, Pencil, Trash2 } from 'lucide-react'
+import { Button, Tabs } from '@mantine/core'
+import { Plus } from 'lucide-react'
 import type { Account, AccountFile, Transfer } from '../types'
 import AccountTable from './AccountTable'
 import TransferTable from './TransferTable'
@@ -14,8 +14,6 @@ interface PanelWorkspaceProps {
   activeAccountId: number | null
   selectedTransferId: number | null
   selectedFileId: number | null
-  selectedTransfer: Transfer | null
-  selectedFile: AccountFile | null
   accountsLoading: boolean
   transfersLoading: boolean
   filesLoading: boolean
@@ -27,14 +25,14 @@ interface PanelWorkspaceProps {
   onSelectTransfer: (id: number) => void
   onSelectFile: (id: number) => void
   onCreateAccount: () => void
-  onEditAccount: () => void
-  onDeleteAccount: () => void
+  onEditAccount: (id: number) => void
+  onDeleteAccount: (id: number) => void
   onCreateTransfer: () => void
-  onEditTransfer: () => void
-  onDeleteTransfer: () => void
+  onEditTransfer: (id: number) => void
+  onDeleteTransfer: (id: number) => void
   onCreateFile: () => void
-  onEditFile: () => void
-  onDeleteFile: () => void
+  onEditFile: (id: number) => void
+  onDeleteFile: (id: number) => void
 }
 
 function PanelWorkspace({
@@ -46,8 +44,6 @@ function PanelWorkspace({
   activeAccountId,
   selectedTransferId,
   selectedFileId,
-  selectedTransfer,
-  selectedFile,
   accountsLoading,
   transfersLoading,
   filesLoading,
@@ -83,92 +79,82 @@ function PanelWorkspace({
 
   return (
     <>
-      <header className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-semibold text-slate-50">Аккаунты</h1>
-        <Group>
-          <Button leftSection={<Plus size={16} />} color="blue" onClick={onCreateAccount}>
-            Добавить
-          </Button>
-          <Button
-            leftSection={<Pencil size={16} />}
-            variant="light"
-            disabled={!selectedAccount}
-            onClick={onEditAccount}
-          >
-            Редактировать
-          </Button>
-          <Button
-            leftSection={<Trash2 size={16} />}
-            color="red"
-            variant="light"
-            disabled={!selectedAccount}
-            onClick={onDeleteAccount}
-          >
-            Удалить
-          </Button>
-        </Group>
+      <header className="mb-3 flex items-center justify-between gap-3 sm:mb-4">
+        <h1 className="text-xl font-semibold text-slate-50 sm:text-2xl">Аккаунты</h1>
+        <Button
+          leftSection={<Plus size={16} />}
+          color="blue"
+          size="sm"
+          className="!h-10 shrink-0"
+          onClick={onCreateAccount}
+        >
+          Добавить аккаунт
+        </Button>
       </header>
 
-      <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-slate-800 bg-slate-900 lg:flex-row">
-        <div className="max-h-[38vh] min-h-0 overflow-auto border-b border-slate-800 p-3 lg:max-h-none lg:w-2/5 lg:border-r lg:border-b-0 lg:p-4">
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-slate-800 bg-slate-900 lg:flex-row">
+        <div className="max-h-[34dvh] min-h-0 overflow-auto border-b border-slate-800 p-2 sm:p-3 lg:max-h-none lg:w-2/5 lg:border-r lg:border-b-0 lg:p-4">
           <AccountTable
             accounts={accounts}
             selectedAccountId={activeAccountId}
             isLoading={accountsLoading}
             error={accountsError}
             onSelectAccount={onSelectAccount}
+            onEditAccount={onEditAccount}
+            onDeleteAccount={onDeleteAccount}
           />
         </div>
 
         <div className="min-h-0 min-w-0 flex-1 overflow-auto p-3 lg:w-3/5 lg:p-4">
-          <div className="mb-3 min-w-0">
-            <h2 className="truncate text-lg font-medium text-slate-50">
+          <div className="mb-4 min-w-0">
+            <h2 className="text-lg font-medium break-words text-slate-50">
               {selectedAccount ? selectedAccount.login : 'Аккаунт не выбран'}
             </h2>
             {accountDetails.length > 0 && (
-              <p className="mt-1 truncate text-xs text-slate-400">
-                {accountDetails.map(([label, value]) => `${label}: ${value}`).join(' · ')}
-              </p>
+              <dl className="mt-2 grid grid-cols-2 gap-1 text-[11px] leading-4 text-slate-400 sm:flex sm:flex-wrap">
+                {accountDetails.map(([label, value]) => {
+                  const spansTwoColumns = label === 'Полное имя счета' || label === 'Эл. почта'
+
+                  return (
+                    <div
+                      key={label}
+                      className={[
+                        'min-w-0 rounded border border-slate-800 bg-slate-950/35 px-2 py-0.5 sm:max-w-72',
+                        spansTwoColumns ? 'col-span-2' : '',
+                      ].join(' ')}
+                    >
+                      <dt className="inline font-medium text-slate-500">{label}: </dt>
+                      <dd className="inline break-words text-slate-300">{value}</dd>
+                    </div>
+                  )
+                })}
+              </dl>
             )}
           </div>
 
           <Tabs value={activeTab} onChange={(value) => onTabChange(value ?? 'transfers')}>
-            <Tabs.List>
-              <Tabs.Tab value="transfers">Переводы</Tabs.Tab>
-              <Tabs.Tab value="files">Файлы</Tabs.Tab>
+            <Tabs.List className="!flex-nowrap">
+              <Tabs.Tab value="transfers" className="!h-11 flex-1">
+                Переводы
+              </Tabs.Tab>
+              <Tabs.Tab value="files" className="!h-11 flex-1">
+                Файлы
+              </Tabs.Tab>
             </Tabs.List>
 
             <Tabs.Panel value="transfers" pt="md">
-              <Group mb="sm">
+              <div className="mb-3 flex justify-end">
                 <Button
                   leftSection={<Plus size={14} />}
-                  size="xs"
+                  size="sm"
                   color="blue"
                   disabled={!activeAccountId}
+                  className="!h-10 w-full sm:w-auto"
                   onClick={onCreateTransfer}
                 >
-                  Добавить
+                  Добавить перевод
                 </Button>
-                <Button
-                  leftSection={<Pencil size={14} />}
-                  size="xs"
-                  variant="light"
-                  disabled={!selectedTransfer}
-                  onClick={onEditTransfer}
-                >
-                  Редактировать
-                </Button>
-                <Button
-                  leftSection={<Trash2 size={14} />}
-                  size="xs"
-                  color="red"
-                  variant="light"
-                  disabled={!selectedTransfer}
-                  onClick={onDeleteTransfer}
-                >
-                  Удалить
-                </Button>
-              </Group>
+              </div>
               <TransferTable
                 transfers={transfers}
                 selectedAccountId={activeAccountId}
@@ -176,40 +162,24 @@ function PanelWorkspace({
                 isLoading={transfersLoading}
                 error={transfersError}
                 onSelectTransfer={onSelectTransfer}
+                onEditTransfer={onEditTransfer}
+                onDeleteTransfer={onDeleteTransfer}
               />
             </Tabs.Panel>
 
             <Tabs.Panel value="files" pt="md">
-              <Group mb="sm">
+              <div className="mb-3 flex justify-end">
                 <Button
                   leftSection={<Plus size={14} />}
-                  size="xs"
+                  size="sm"
                   color="blue"
                   disabled={!activeAccountId}
+                  className="!h-10 w-full sm:w-auto"
                   onClick={onCreateFile}
                 >
-                  Добавить
+                  Добавить файл
                 </Button>
-                <Button
-                  leftSection={<Pencil size={14} />}
-                  size="xs"
-                  variant="light"
-                  disabled={!selectedFile}
-                  onClick={onEditFile}
-                >
-                  Редактировать
-                </Button>
-                <Button
-                  leftSection={<Trash2 size={14} />}
-                  size="xs"
-                  color="red"
-                  variant="light"
-                  disabled={!selectedFile}
-                  onClick={onDeleteFile}
-                >
-                  Удалить
-                </Button>
-              </Group>
+              </div>
               <FileTable
                 files={files}
                 selectedAccountId={activeAccountId}
@@ -217,6 +187,8 @@ function PanelWorkspace({
                 isLoading={filesLoading}
                 error={filesError}
                 onSelectFile={onSelectFile}
+                onEditFile={onEditFile}
+                onDeleteFile={onDeleteFile}
               />
             </Tabs.Panel>
           </Tabs>

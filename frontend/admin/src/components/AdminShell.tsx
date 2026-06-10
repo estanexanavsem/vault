@@ -3,9 +3,9 @@ import MainPanel from './MainPanel'
 
 function AdminShell() {
   return (
-    <div className="flex h-screen min-w-0 bg-slate-950 text-slate-100">
+    <div className="flex h-dvh min-w-0 flex-col bg-slate-950 text-slate-100 sm:flex-row">
       <Sidebar />
-      <main className="min-w-0 flex-1 overflow-hidden">
+      <main className="order-1 min-h-0 min-w-0 flex-1 overflow-hidden sm:order-2">
         <MainPanel />
       </main>
     </div>

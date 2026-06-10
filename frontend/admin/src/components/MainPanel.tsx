@@ -8,7 +8,12 @@ import {
   type AccountFormInput,
   type AccountFormValues,
 } from '../forms/accountForm'
-import { defaultFileValues, fileSchema, type FileFormInput, type FileFormValues } from '../forms/fileForm'
+import {
+  defaultFileValues,
+  fileSchema,
+  type FileFormInput,
+  type FileFormValues,
+} from '../forms/fileForm'
 import { optionalText } from '../forms/formValue'
 import {
   defaultTransferValues,
@@ -18,7 +23,12 @@ import {
   type TransferFormInput,
   type TransferFormValues,
 } from '../forms/transferForm'
-import { panelQueryKeys, useAccountsQuery, useFilesQuery, useTransfersQuery } from '../hooks/usePanelData'
+import {
+  panelQueryKeys,
+  useAccountsQuery,
+  useFilesQuery,
+  useTransfersQuery,
+} from '../hooks/usePanelData'
 import { accountService } from '../services/accountService'
 import { fileService } from '../services/fileService'
 import { transferService } from '../services/transferService'
@@ -63,8 +73,9 @@ function MainPanel() {
   const selectedAccount = accounts.find((a) => a.id === selectedAccountId) ?? accounts[0] ?? null
   const activeAccountId = selectedAccount?.id ?? null
   const selectedTransfer =
-    transfers.find((transfer) => transfer.id === selectedTransferId && transfer.account_id === activeAccountId) ??
-    null
+    transfers.find(
+      (transfer) => transfer.id === selectedTransferId && transfer.account_id === activeAccountId,
+    ) ?? null
   const selectedFile =
     files.find((file) => file.id === selectedFileId && file.account_id === activeAccountId) ?? null
 
@@ -93,8 +104,13 @@ function MainPanel() {
   })
 
   const updateAccountMutation = useMutation({
-    mutationFn: ({ id, payload }: { id: number; payload: Parameters<typeof accountService.updateAccount>[1] }) =>
-      accountService.updateAccount(id, payload),
+    mutationFn: ({
+      id,
+      payload,
+    }: {
+      id: number
+      payload: Parameters<typeof accountService.updateAccount>[1]
+    }) => accountService.updateAccount(id, payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: panelQueryKeys.accounts })
       closeFormDialog()
@@ -122,8 +138,13 @@ function MainPanel() {
   })
 
   const updateTransferMutation = useMutation({
-    mutationFn: ({ id, payload }: { id: number; payload: Parameters<typeof transferService.updateTransfer>[1] }) =>
-      transferService.updateTransfer(id, payload),
+    mutationFn: ({
+      id,
+      payload,
+    }: {
+      id: number
+      payload: Parameters<typeof transferService.updateTransfer>[1]
+    }) => transferService.updateTransfer(id, payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: panelQueryKeys.transfers })
       closeFormDialog()
@@ -149,8 +170,13 @@ function MainPanel() {
   })
 
   const updateFileMutation = useMutation({
-    mutationFn: ({ id, payload }: { id: number; payload: Parameters<typeof fileService.updateFile>[1] }) =>
-      fileService.updateFile(id, payload),
+    mutationFn: ({
+      id,
+      payload,
+    }: {
+      id: number
+      payload: Parameters<typeof fileService.updateFile>[1]
+    }) => fileService.updateFile(id, payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: panelQueryKeys.files })
       closeFormDialog()
@@ -178,25 +204,36 @@ function MainPanel() {
     setFormDialog({ entity: 'account', mode: 'create' })
   }
 
-  const openEditAccount = () => {
-    if (!selectedAccount) {
+  const openEditAccount = (accountId = activeAccountId) => {
+    const account = accounts.find((item) => item.id === accountId) ?? null
+    if (!account) {
       return
     }
 
+    selectAccount(account.id)
     accountForm.reset({
-      login: selectedAccount.login,
+      login: account.login,
       password: '',
-      holder_name: selectedAccount.holder_name,
-      account_name: selectedAccount.account_name,
-      full_account_name: selectedAccount.full_account_name,
-      account_number: selectedAccount.account_number,
-      routing_number: selectedAccount.routing_number,
-      email: selectedAccount.email,
-      phone: selectedAccount.phone,
-      balance: selectedAccount.balance,
+      holder_name: account.holder_name,
+      account_name: account.account_name,
+      full_account_name: account.full_account_name,
+      account_number: account.account_number,
+      routing_number: account.routing_number,
+      email: account.email,
+      phone: account.phone,
+      balance: account.balance,
     })
     setFormError('')
     setFormDialog({ entity: 'account', mode: 'edit' })
+  }
+
+  const openDeleteAccount = (accountId = activeAccountId) => {
+    if (!accountId) {
+      return
+    }
+
+    selectAccount(accountId)
+    setDeleteDialog('account')
   }
 
   const openCreateTransfer = () => {
@@ -205,22 +242,35 @@ function MainPanel() {
     setFormDialog({ entity: 'transfer', mode: 'create' })
   }
 
-  const openEditTransfer = () => {
-    if (!selectedTransfer) {
+  const openEditTransfer = (transferId = selectedTransferId) => {
+    const transfer =
+      transfers.find((item) => item.id === transferId && item.account_id === activeAccountId) ??
+      null
+    if (!transfer) {
       return
     }
 
+    setSelectedTransferId(transfer.id)
     transferForm.reset({
-      amount: selectedTransfer.amount,
-      description: selectedTransfer.description,
-      full_description: selectedTransfer.full_description,
-      category: selectedTransfer.category || 'Other',
-      reference: selectedTransfer.reference,
-      transfer_type: selectedTransfer.transfer_type || selectedTransfer.status || 'Other',
-      transaction_date: toDateInputValue(selectedTransfer.transaction_date),
+      amount: transfer.amount,
+      description: transfer.description,
+      full_description: transfer.full_description,
+      category: transfer.category || 'Other',
+      reference: transfer.reference,
+      transfer_type: transfer.transfer_type || transfer.status || 'Other',
+      transaction_date: toDateInputValue(transfer.transaction_date),
     })
     setFormError('')
     setFormDialog({ entity: 'transfer', mode: 'edit' })
+  }
+
+  const openDeleteTransfer = (transferId = selectedTransferId) => {
+    if (!transferId) {
+      return
+    }
+
+    setSelectedTransferId(transferId)
+    setDeleteDialog('transfer')
   }
 
   const openCreateFile = () => {
@@ -229,19 +279,31 @@ function MainPanel() {
     setFormDialog({ entity: 'file', mode: 'create' })
   }
 
-  const openEditFile = () => {
-    if (!selectedFile) {
+  const openEditFile = (fileId = selectedFileId) => {
+    const file =
+      files.find((item) => item.id === fileId && item.account_id === activeAccountId) ?? null
+    if (!file) {
       return
     }
 
+    setSelectedFileId(file.id)
     fileForm.reset({
       file: null,
-      name: selectedFile.name,
-      type: selectedFile.type,
-      description: selectedFile.description,
+      name: file.name,
+      type: file.type,
+      description: file.description,
     })
     setFormError('')
     setFormDialog({ entity: 'file', mode: 'edit' })
+  }
+
+  const openDeleteFile = (fileId = selectedFileId) => {
+    if (!fileId) {
+      return
+    }
+
+    setSelectedFileId(fileId)
+    setDeleteDialog('file')
   }
 
   const handleSaveAccount: SubmitHandler<AccountFormValues> = async (values) => {
@@ -372,7 +434,9 @@ function MainPanel() {
   const isTransferSaving = createTransferMutation.isPending || updateTransferMutation.isPending
   const isFileSaving = uploadFileMutation.isPending || updateFileMutation.isPending
   const isDeleting =
-    deleteAccountMutation.isPending || deleteTransferMutation.isPending || deleteFileMutation.isPending
+    deleteAccountMutation.isPending ||
+    deleteTransferMutation.isPending ||
+    deleteFileMutation.isPending
   const deleteTitle =
     deleteDialog === 'account'
       ? 'Удалить аккаунт'
@@ -391,7 +455,7 @@ function MainPanel() {
         : `Удалить файл "${selectedFile?.name ?? ''}"?`
 
   return (
-    <div className="flex h-full min-w-0 flex-col p-3 sm:p-6">
+    <div className="flex h-full min-w-0 flex-col p-2 sm:p-6">
       <PanelWorkspace
         activeTab={activeTab}
         accounts={accounts}
@@ -401,8 +465,6 @@ function MainPanel() {
         activeAccountId={activeAccountId}
         selectedTransferId={selectedTransferId}
         selectedFileId={selectedFileId}
-        selectedTransfer={selectedTransfer}
-        selectedFile={selectedFile}
         accountsLoading={accountsQuery.isPending}
         transfersLoading={transfersQuery.isPending}
         filesLoading={filesQuery.isPending}
@@ -415,13 +477,13 @@ function MainPanel() {
         onSelectFile={setSelectedFileId}
         onCreateAccount={openCreateAccount}
         onEditAccount={openEditAccount}
-        onDeleteAccount={() => setDeleteDialog('account')}
+        onDeleteAccount={openDeleteAccount}
         onCreateTransfer={openCreateTransfer}
         onEditTransfer={openEditTransfer}
-        onDeleteTransfer={() => setDeleteDialog('transfer')}
+        onDeleteTransfer={openDeleteTransfer}
         onCreateFile={openCreateFile}
         onEditFile={openEditFile}
-        onDeleteFile={() => setDeleteDialog('file')}
+        onDeleteFile={openDeleteFile}
       />
 
       <PanelDialogs

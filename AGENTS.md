@@ -35,6 +35,7 @@ Use standard Go style: `gofmt`, short package names, explicit error handling, an
 ## Testing Guidelines
 
 Run `make check` before backend changes. Add focused Go tests for handlers, middleware, validation, database behavior, and security helpers. Frontend tests are not configured; for UI changes run `npm run build`, plus admin lint/format checks in `frontend/admin/`.
+Do not use Playwright for visual verification. Visual review and screenshot-based validation are handled by the user.
 
 ## Commit & Pull Request Guidelines
 

@@ -15,27 +15,29 @@ function Sidebar() {
   }
 
   return (
-    <div className="flex w-14 shrink-0 flex-col items-center justify-between border-r border-slate-800 bg-slate-950 py-4">
+    <div className="order-2 flex h-16 shrink-0 items-center justify-between border-t border-slate-800 bg-slate-950 px-3 py-2 sm:order-1 sm:h-auto sm:w-14 sm:flex-col sm:border-t-0 sm:border-r sm:px-0 sm:py-4">
       <div>
         <Tooltip label="Аккаунты" position="right">
           <ActionIcon
+            aria-label="Аккаунты"
             variant="transparent"
             color="blue"
             size="lg"
-            className="!text-slate-100 hover:!bg-slate-800"
+            className="!h-11 !w-11 !text-slate-100 hover:!bg-slate-800"
           >
             <LayoutGrid size={20} strokeWidth={2.2} />
           </ActionIcon>
         </Tooltip>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex gap-2 sm:flex-col">
         <Tooltip label="Настройки" position="right">
           <ActionIcon
+            aria-label="Настройки"
             variant="transparent"
             color="blue"
             size="lg"
-            className="!text-slate-100 hover:!bg-slate-800"
+            className="!h-11 !w-11 !text-slate-100 hover:!bg-slate-800"
           >
             <Settings size={20} strokeWidth={2.2} />
           </ActionIcon>
@@ -43,11 +45,12 @@ function Sidebar() {
 
         <Tooltip label="Выйти" position="right">
           <ActionIcon
+            aria-label="Выйти"
             variant="transparent"
             color="blue"
             size="lg"
             onClick={() => void handleLogout()}
-            className="!text-slate-100 hover:!bg-slate-800"
+            className="!h-11 !w-11 !text-slate-100 hover:!bg-slate-800"
           >
             <LogOut size={20} strokeWidth={2.2} />
           </ActionIcon>
