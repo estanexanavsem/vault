@@ -1,0 +1,32 @@
+# Local data
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# Build artifacts
+bin/
+dist/
+build/
+*.test
+*.out
+coverage.out
+
+# Go workspace/cache files
+go.work
+go.work.sum
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Tooling and editor state
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
