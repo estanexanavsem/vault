@@ -1,5 +1,5 @@
-import { Menu } from 'lucide-react'
 import { TruistMark } from '../common/TruistMark'
+import { MobileNavMenu } from './MobileNavMenu'
 
 interface TopbarProps {
   greetingName: string
@@ -49,9 +49,12 @@ export function Topbar({
           </button>
         </div>
 
-        <button className="mobile-menu-button" type="button" aria-label="Open menu">
-          <Menu size={24} aria-hidden="true" />
-        </button>
+        <MobileNavMenu
+          isAccountPage={isAccountPage}
+          onOpenAccount={onOpenAccount}
+          onShowHome={onShowHome}
+          onSignOut={onSignOut}
+        />
       </div>
     </header>
   )

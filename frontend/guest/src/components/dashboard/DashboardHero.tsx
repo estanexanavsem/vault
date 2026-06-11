@@ -1,4 +1,4 @@
-import { ChevronDown } from 'lucide-react'
+import { QuickLinksMenu } from './QuickLinksMenu'
 
 interface DashboardHeroProps {
   greetingName: string
@@ -14,10 +14,7 @@ export function DashboardHero({ greetingName, statementLabel }: DashboardHeroPro
           <button type="button">{statementLabel}</button>
           <button type="button">Security center</button>
         </div>
-        <button className="mobile-quick-links" type="button">
-          <span>Quick Links</span>
-          <ChevronDown size={22} aria-hidden="true" />
-        </button>
+        <QuickLinksMenu statementLabel={statementLabel} />
       </div>
     </section>
   )
