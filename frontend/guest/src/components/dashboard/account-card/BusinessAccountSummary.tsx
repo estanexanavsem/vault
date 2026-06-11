@@ -1,4 +1,4 @@
-import { WalletCards } from 'lucide-react'
+import { Wallet } from 'lucide-react'
 import type { AccountSummary } from '../../../utils/accountSummary'
 
 interface BusinessAccountSummaryProps {
@@ -12,7 +12,7 @@ export function BusinessAccountSummary({ account, onOpenAccount }: BusinessAccou
       <div className="account-family">
         <div className="account-family-label">
           <span className="account-icon">
-            <WalletCards size={20} aria-hidden="true" />
+            <Wallet size={20} aria-hidden="true" />
           </span>
           <strong>Cash &amp; savings</strong>
         </div>

@@ -1,4 +1,3 @@
-import { MoreHorizontal } from 'lucide-react'
 import { useState } from 'react'
 import type { GuestData } from '../../types/guest'
 import { getAccountSummary } from '../../utils/accountSummary'
@@ -21,9 +20,6 @@ export function AccountCard({ data, onOpenAccount }: AccountCardProps) {
         <h2 id="accounts-title" className="section-kicker">
           Accounts
         </h2>
-        <button className="icon-button more-button" type="button" aria-label="More account actions">
-          <MoreHorizontal size={24} aria-hidden="true" />
-        </button>
       </div>
 
       <div className="tabs" aria-label="Account groups">
