@@ -285,8 +285,8 @@ export function PanelDialogs({
                   <Select
                     data={transferCategoryOptions}
                     value={value}
-                    onChange={(nextValue) => onChange(nextValue ?? 'Other')}
-                    allowDeselect={false}
+                    onChange={(nextValue) => onChange(nextValue ?? '')}
+                    allowDeselect
                     classNames={darkInputClassNames}
                     {...field}
                   />
@@ -310,8 +310,8 @@ export function PanelDialogs({
                   <Select
                     data={transferTypeOptions}
                     value={value}
-                    onChange={(nextValue) => onChange(nextValue ?? 'Other')}
-                    allowDeselect={false}
+                    onChange={(nextValue) => onChange(nextValue ?? '')}
+                    allowDeselect
                     classNames={darkInputClassNames}
                     {...field}
                   />

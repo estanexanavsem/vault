@@ -15,11 +15,11 @@ export const getAccountSummary = (account: MasterAccount): AccountSummary => {
   const suffix = getLastFour(account.account_number)
 
   return {
-    availableBalanceDate: formatShortDate(account.updated_at) || '06/11/2026',
+    availableBalanceDate: formatShortDate(account.updated_at),
     balance: account.balance,
     balanceText: formatCurrency(account.balance),
     name,
     suffix,
-    title: `${name} ${suffix}`,
+    title: suffix ? `${name} ${suffix}` : name,
   }
 }

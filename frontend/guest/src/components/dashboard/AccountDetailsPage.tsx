@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import type { GuestData } from '../../types/guest'
 import { getAccountSummary } from '../../utils/accountSummary'
+import { cn } from '../../utils/cn'
+import { formatCurrency } from '../../utils/formatters'
 import { getLatestTransferSummary } from '../../utils/transferSummary'
 import { AccountDetailHero } from './account-details/AccountDetailHero'
 import { AccountDetailSidebar } from './account-details/AccountDetailSidebar'
@@ -14,14 +17,26 @@ interface AccountDetailsPageProps {
 }
 
 export function AccountDetailsPage({ data, onBack }: AccountDetailsPageProps) {
+  const [isAccountDetailsOpen, setAccountDetailsOpen] = useState(false)
   const account = getAccountSummary(data.master)
   const transfer = getLatestTransferSummary(data.transfers, 'Zelle business payment from')
+  const lastDepositText = formatCurrency(Math.abs(transfer.amount))
 
   return (
     <>
-      <AccountDetailHero account={account} onBack={onBack} />
+      <AccountDetailHero
+        account={account}
+        accountDetails={data.master}
+        isAccountDetailsOpen={isAccountDetailsOpen}
+        lastDepositText={lastDepositText}
+        onAccountDetailsOpenChange={setAccountDetailsOpen}
+        onBack={onBack}
+      />
 
-      <main className={styles.main} id="account-detail">
+      <main
+        className={cn(styles.main, isAccountDetailsOpen && styles.mainDetailsOpen)}
+        id="account-detail"
+      >
         <AccountDetailSidebar account={account} />
         <DetailActivitySection account={account} transfer={transfer} />
         <DetailCopy />

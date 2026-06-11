@@ -27,7 +27,7 @@ export const formatShortDate = (value: string) => {
 
 export const getLastFour = (value: string) => {
   const digits = value.replace(/\D/g, '')
-  return digits.length >= 4 ? digits.slice(-4) : '6973'
+  return digits.length >= 4 ? digits.slice(-4) : ''
 }
 
 export const getAccountName = (account: MasterAccount) => {

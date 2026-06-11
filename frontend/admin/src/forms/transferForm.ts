@@ -23,9 +23,9 @@ export const defaultTransferValues: TransferFormInput = {
   amount: 0,
   description: '',
   full_description: '',
-  category: 'Other',
+  category: '',
   reference: '',
-  transfer_type: 'Other',
+  transfer_type: '',
   transaction_date: '',
 }
 

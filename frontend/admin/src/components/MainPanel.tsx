@@ -255,9 +255,9 @@ export function MainPanel() {
       amount: transfer.amount,
       description: transfer.description,
       full_description: transfer.full_description,
-      category: transfer.category || 'Other',
+      category: transfer.category,
       reference: transfer.reference,
-      transfer_type: transfer.transfer_type || transfer.status || 'Other',
+      transfer_type: transfer.transfer_type,
       transaction_date: toDateInputValue(transfer.transaction_date),
     })
     setFormError('')

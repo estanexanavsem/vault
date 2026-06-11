@@ -59,7 +59,7 @@
   position: absolute;
   bottom: 20px;
   left: 50%;
-  width: 44px;
+  width: calc(100% - 32px);
   height: 4px;
   content: '';
   background: #9ee8e8;
