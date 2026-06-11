@@ -659,6 +659,68 @@ func TestGuestSessionHeadersMissingAndWrongCredentials(t *testing.T) {
 	}
 }
 
+func TestGuestSessionCookieReturnsJSONAndLogoutClearsCookie(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	setupHandlerTestDB(t)
+	seedAccount(t, "guest")
+
+	router := gin.New()
+	router.POST("/guest/login", GuestLogin)
+	router.GET("/guest/session", GuestSession)
+	router.POST("/guest/logout", GuestLogout)
+
+	loginReq := httptest.NewRequest(http.MethodPost, "/guest/login", strings.NewReader(`{"login":"guest","password":"secret"}`))
+	loginReq.Header.Set("Content-Type", "application/json")
+	loginResp := httptest.NewRecorder()
+	router.ServeHTTP(loginResp, loginReq)
+	if loginResp.Code != http.StatusOK {
+		t.Fatalf("expected login 200, got %d: %s", loginResp.Code, loginResp.Body.String())
+	}
+
+	var sessionCookie *http.Cookie
+	for _, cookie := range loginResp.Result().Cookies() {
+		if cookie.Name == guestSessionCookie {
+			sessionCookie = cookie
+			break
+		}
+	}
+	if sessionCookie == nil || sessionCookie.Value == "" || !sessionCookie.HttpOnly {
+		t.Fatalf("expected httponly guest session cookie, got %#v", sessionCookie)
+	}
+
+	sessionReq := httptest.NewRequest(http.MethodGet, "/guest/session", nil)
+	sessionReq.Header.Set("Accept", "application/json")
+	sessionReq.AddCookie(sessionCookie)
+	sessionResp := httptest.NewRecorder()
+	router.ServeHTTP(sessionResp, sessionReq)
+	if sessionResp.Code != http.StatusOK {
+		t.Fatalf("expected session 200, got %d: %s", sessionResp.Code, sessionResp.Body.String())
+	}
+	body := sessionResp.Body.String()
+	if !strings.Contains(body, `"success":true`) || !strings.Contains(body, `"master"`) || strings.Contains(body, "handleGateResponse") {
+		t.Fatalf("expected json guest session response, got %s", body)
+	}
+	if strings.Contains(body, `"password"`) {
+		t.Fatalf("guest session leaked password: %s", body)
+	}
+
+	logoutResp := httptest.NewRecorder()
+	router.ServeHTTP(logoutResp, httptest.NewRequest(http.MethodPost, "/guest/logout", nil))
+	if logoutResp.Code != http.StatusOK {
+		t.Fatalf("expected logout 200, got %d: %s", logoutResp.Code, logoutResp.Body.String())
+	}
+	cleared := false
+	for _, cookie := range logoutResp.Result().Cookies() {
+		if cookie.Name == guestSessionCookie && cookie.MaxAge < 0 {
+			cleared = true
+			break
+		}
+	}
+	if !cleared {
+		t.Fatalf("expected logout to clear guest session cookie")
+	}
+}
+
 func TestHelperFunctionsDirectly(t *testing.T) {
 	accounts := accountsToResponse([]models.Account{{ID: 1, Login: "a"}, {ID: 2, Login: "b"}})
 	if len(accounts) != 2 || accounts[0].Login != "a" || accounts[1].ID != 2 {

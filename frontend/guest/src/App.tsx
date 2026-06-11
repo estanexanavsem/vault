@@ -1,8 +1,13 @@
-import axios from 'axios'
-import { useState, type FormEvent } from 'react'
+import { isAxiosError } from 'axios'
+import { useEffect, useState, type FormEvent } from 'react'
 import { LoginScreen } from './components/auth/LoginScreen'
 import { Dashboard } from './components/dashboard/Dashboard'
-import type { ApiErrorResponse, GuestData, GuestLoginResponse } from './types/guest'
+import { guestAuthService } from './services/guestAuthService'
+import type { ApiErrorResponse, GuestData } from './types/guest'
+
+function AuthLoadingScreen() {
+  return <main className="login-screen" aria-label="Checking session" />
+}
 
 function App() {
   const [login, setLogin] = useState('')
@@ -10,24 +15,46 @@ function App() {
   const [data, setData] = useState<GuestData | null>(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [isAuthChecked, setAuthChecked] = useState(false)
+
+  useEffect(() => {
+    let isMounted = true
+
+    guestAuthService
+      .checkSession()
+      .then((sessionData) => {
+        if (isMounted) {
+          setData(sessionData)
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setData(null)
+        }
+      })
+      .finally(() => {
+        if (isMounted) {
+          setAuthChecked(true)
+        }
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
     setError('')
     try {
-      const { data: response } = await axios.post<GuestLoginResponse>('/api/guest/login', {
-        login,
-        password,
-      })
-      if (response.success && response.data) {
-        setData(response.data)
-      } else {
-        setError(response.error ?? 'Invalid credentials')
-      }
+      const responseData = await guestAuthService.login(login, password)
+      setData(responseData)
     } catch (error: unknown) {
-      if (axios.isAxiosError<ApiErrorResponse>(error)) {
+      if (isAxiosError<ApiErrorResponse>(error)) {
         setError(error.response?.data?.error ?? 'Connection error')
+      } else if (error instanceof Error) {
+        setError(error.message)
       } else {
         setError('Connection error')
       }
@@ -37,8 +64,13 @@ function App() {
   }
 
   const handleSignOut = () => {
+    void guestAuthService.logout().catch(() => undefined)
     setData(null)
     setPassword('')
+  }
+
+  if (!isAuthChecked) {
+    return <AuthLoadingScreen />
   }
 
   if (data) {

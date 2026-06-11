@@ -49,6 +49,16 @@ export interface GuestLoginResponse {
   success: boolean
   data?: GuestData
   error?: string
+  expires_at?: string
+}
+
+export interface GuestSessionResponse extends GuestData {
+  success: boolean
+  error?: string
+}
+
+export interface GuestLogoutResponse {
+  success: boolean
 }
 
 export interface ApiErrorResponse {

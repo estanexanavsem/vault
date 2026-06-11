@@ -74,6 +74,7 @@ func newRouter() *gin.Engine {
 		{
 			guest.POST("/login", handlers.GuestLogin)
 			guest.GET("/session", handlers.GuestSession)
+			guest.POST("/logout", handlers.GuestLogout)
 		}
 
 		protected := api.Group("")
