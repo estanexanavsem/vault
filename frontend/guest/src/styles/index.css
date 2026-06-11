@@ -495,6 +495,27 @@ a {
   color: var(--red-700);
 }
 
+.activity-empty {
+  display: grid;
+  justify-items: center;
+  min-height: 238px;
+  margin-top: 20px;
+  color: var(--ink-muted);
+}
+
+.activity-empty p {
+  justify-self: start;
+  margin: 0;
+  font-size: 16px;
+}
+
+.activity-empty img {
+  width: 200px;
+  max-width: 70%;
+  height: auto;
+  margin-top: 22px;
+}
+
 .inline-action {
   display: inline-flex;
   gap: 6px;
