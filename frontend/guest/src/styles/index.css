@@ -374,6 +374,26 @@ a {
   font-variant-numeric: tabular-nums;
 }
 
+.account-linked-empty {
+  display: grid;
+  justify-items: center;
+  min-height: 250px;
+  padding-top: 58px;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+.account-linked-empty img {
+  width: 100px;
+  height: auto;
+}
+
+.account-linked-empty p {
+  margin: 26px 0 0;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
 .pill-button {
   min-width: 156px;
   min-height: 44px;
