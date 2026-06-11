@@ -1,13 +1,24 @@
 // @ts-check
-import js from '@eslint/js'
-import prettierConfig from 'eslint-config-prettier/flat'
-import { defineConfig, globalIgnores } from 'eslint/config'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import globals from 'globals'
-import tseslint from 'typescript-eslint'
+const js = require('@eslint/js')
+const prettierConfig = require('eslint-config-prettier/flat')
+const { defineConfig, globalIgnores } = require('eslint/config')
+const reactHooks = require('eslint-plugin-react-hooks')
+const reactRefresh = require('eslint-plugin-react-refresh').default
+const globals = require('globals')
+const tseslint = require('typescript-eslint')
 
-export default defineConfig([
+const noDefaultExportRules = [
+  {
+    selector: 'ExportDefaultDeclaration',
+    message: 'Default exports are banned. Use named exports instead.',
+  },
+  {
+    selector: "ExportNamedDeclaration > ExportSpecifier[exported.name='default']",
+    message: 'Default exports are banned. Use named exports instead.',
+  },
+]
+
+module.exports = defineConfig([
   globalIgnores(['dist/', 'node_modules/']),
   {
     files: ['**/*.{js,jsx}'],
@@ -17,6 +28,7 @@ export default defineConfig([
     },
     rules: {
       'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'no-restricted-syntax': ['error', ...noDefaultExportRules],
     },
   },
   {
@@ -32,11 +44,12 @@ export default defineConfig([
       globals: globals.browser,
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: import.meta.dirname,
+        tsconfigRootDir: __dirname,
       },
     },
     rules: {
       'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'no-restricted-syntax': ['error', ...noDefaultExportRules],
       '@typescript-eslint/consistent-type-imports': [
         'error',
         { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
@@ -57,9 +70,12 @@ export default defineConfig([
     },
   },
   {
-    files: ['*.config.{js,ts}', 'eslint.config.js'],
+    files: ['*.config.{js,ts,cjs}', 'eslint.config.cjs'],
     languageOptions: {
       globals: globals.node,
+    },
+    rules: {
+      'no-restricted-syntax': 'off',
     },
   },
 ])

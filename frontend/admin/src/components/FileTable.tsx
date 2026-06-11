@@ -15,7 +15,7 @@ interface FileTableProps {
   onDeleteFile: (id: number) => void
 }
 
-function FileTable({
+export function FileTable({
   files,
   selectedAccountId,
   selectedFileId,
@@ -176,5 +176,3 @@ function FileTable({
     </div>
   )
 }
-
-export default FileTable

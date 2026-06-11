@@ -11,7 +11,7 @@ interface AccountSummaryProps {
   onDeleteAccount: (id: number) => void
 }
 
-function AccountSummary({
+export function AccountSummary({
   account,
   accountFacts,
   balance,
@@ -91,5 +91,3 @@ function AccountSummary({
     </section>
   )
 }
-
-export default AccountSummary

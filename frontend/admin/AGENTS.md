@@ -28,9 +28,9 @@ Use npm; `package-lock.json` is committed.
 
 ## Coding Style & Naming Conventions
 
-Write TypeScript with strict compiler settings. Keep React components in PascalCase files such as `AccountTable.tsx`; use camelCase for hooks, stores, services, utilities, and form modules. Prefer named exports for shared utilities and stores.
+Write TypeScript with strict compiler settings. Keep React components in PascalCase files such as `AccountTable.tsx`; use camelCase for hooks, stores, services, utilities, and form modules. Use named exports only; `export default` and `export { X as default }` are banned for source files and enforced by ESLint. Tooling config files may use default exports when the tool expects them.
 
-ESLint enforces type-aware TypeScript rules, React Hooks rules, `no-console` warnings except `console.warn` and `console.error`, and inline `type` imports. Prettier controls formatting.
+ESLint enforces type-aware TypeScript rules, React Hooks rules, no default exports, `no-console` warnings except `console.warn` and `console.error`, and inline `type` imports. Prettier controls formatting.
 
 ## Testing Guidelines
 

@@ -5,7 +5,7 @@ interface DetailGridProps {
   className?: string
 }
 
-function DetailGrid({ rows, className = '' }: DetailGridProps) {
+export function DetailGrid({ rows, className = '' }: DetailGridProps) {
   if (rows.length === 0) {
     return null
   }
@@ -23,5 +23,3 @@ function DetailGrid({ rows, className = '' }: DetailGridProps) {
     </dl>
   )
 }
-
-export default DetailGrid

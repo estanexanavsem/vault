@@ -79,7 +79,7 @@ const transferTypeOptions = [
   { value: 'Intuit', label: 'Intuit' },
 ]
 
-function PanelDialogs({
+export function PanelDialogs({
   formDialog,
   deleteDialog,
   formError,
@@ -420,5 +420,3 @@ function PanelDialogs({
     </>
   )
 }
-
-export default PanelDialogs

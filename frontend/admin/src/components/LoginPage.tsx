@@ -8,7 +8,7 @@ interface Props {
   onLogin: () => void
 }
 
-function LoginPage({ onLogin }: Props) {
+export function LoginPage({ onLogin }: Props) {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -72,5 +72,3 @@ function LoginPage({ onLogin }: Props) {
     </div>
   )
 }
-
-export default LoginPage

@@ -1,9 +1,9 @@
 import { Button, Tabs } from '@mantine/core'
 import { Plus } from 'lucide-react'
 import type { AccountFile, Transfer } from '../types'
-import FileTable from './FileTable'
-import TransferDetails from './TransferDetails'
-import TransferTable from './TransferTable'
+import { FileTable } from './FileTable'
+import { TransferDetails } from './TransferDetails'
+import { TransferTable } from './TransferTable'
 
 interface WorkspaceTabsProps {
   activeTab: string
@@ -28,7 +28,7 @@ interface WorkspaceTabsProps {
   onDeleteFile: (id: number) => void
 }
 
-function WorkspaceTabs({
+export function WorkspaceTabs({
   activeTab,
   transfers,
   files,
@@ -116,5 +116,3 @@ function WorkspaceTabs({
     </div>
   )
 }
-
-export default WorkspaceTabs

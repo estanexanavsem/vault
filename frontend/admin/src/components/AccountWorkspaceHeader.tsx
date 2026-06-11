@@ -12,7 +12,7 @@ interface AccountWorkspaceHeaderProps {
   onCreateAccount: () => void
 }
 
-function AccountWorkspaceHeader({
+export function AccountWorkspaceHeader({
   accounts,
   accountOptions,
   activeAccountId,
@@ -63,5 +63,3 @@ function AccountWorkspaceHeader({
     </header>
   )
 }
-
-export default AccountWorkspaceHeader

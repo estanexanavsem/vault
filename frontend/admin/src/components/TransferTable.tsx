@@ -15,7 +15,7 @@ interface TransferTableProps {
   onDeleteTransfer: (id: number) => void
 }
 
-function TransferTable({
+export function TransferTable({
   transfers,
   selectedAccountId,
   selectedTransferId,
@@ -176,5 +176,3 @@ function TransferTable({
     </div>
   )
 }
-
-export default TransferTable

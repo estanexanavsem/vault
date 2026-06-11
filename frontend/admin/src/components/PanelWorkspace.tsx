@@ -2,9 +2,9 @@ import { useMemo } from 'react'
 import type { Account, AccountFile, Transfer } from '../types'
 import { formatCurrency } from '../utils/formatters'
 import { getAccountFacts, getAccountSelectOptions } from '../utils/panelWorkspace'
-import AccountSummary from './AccountSummary'
-import AccountWorkspaceHeader from './AccountWorkspaceHeader'
-import WorkspaceTabs from './WorkspaceTabs'
+import { AccountSummary } from './AccountSummary'
+import { AccountWorkspaceHeader } from './AccountWorkspaceHeader'
+import { WorkspaceTabs } from './WorkspaceTabs'
 
 interface PanelWorkspaceProps {
   activeTab: string
@@ -37,7 +37,7 @@ interface PanelWorkspaceProps {
   onDeleteFile: (id: number) => void
 }
 
-function PanelWorkspace({
+export function PanelWorkspace({
   activeTab,
   accounts,
   transfers,
@@ -126,5 +126,3 @@ function PanelWorkspace({
     </>
   )
 }
-
-export default PanelWorkspace

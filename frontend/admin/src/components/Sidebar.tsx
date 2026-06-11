@@ -4,7 +4,7 @@ import { LayoutGrid, Settings, LogOut } from 'lucide-react'
 import { authService } from '../services/authService'
 import { useAuthStore } from '../store/authStore'
 
-function Sidebar() {
+export function Sidebar() {
   const queryClient = useQueryClient()
   const setAuthenticated = useAuthStore((s) => s.setAuthenticated)
 
@@ -59,5 +59,3 @@ function Sidebar() {
     </div>
   )
 }
-
-export default Sidebar

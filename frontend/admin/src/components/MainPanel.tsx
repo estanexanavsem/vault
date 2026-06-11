@@ -35,10 +35,10 @@ import { transferService } from '../services/transferService'
 import { usePanelUiStore } from '../store/panelUiStore'
 import type { Entity, FormDialog } from '../types/panel'
 import { getErrorMessage } from '../utils/requestError'
-import PanelDialogs from './PanelDialogs'
-import PanelWorkspace from './PanelWorkspace'
+import { PanelDialogs } from './PanelDialogs'
+import { PanelWorkspace } from './PanelWorkspace'
 
-function MainPanel() {
+export function MainPanel() {
   const queryClient = useQueryClient()
   const selectedAccountId = usePanelUiStore((s) => s.selectedAccountId)
   const selectAccount = usePanelUiStore((s) => s.selectAccount)
@@ -510,5 +510,3 @@ function MainPanel() {
     </div>
   )
 }
-
-export default MainPanel

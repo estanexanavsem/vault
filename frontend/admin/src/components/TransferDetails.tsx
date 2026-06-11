@@ -1,12 +1,13 @@
 import type { Transfer } from '../types'
 import { formatCurrency } from '../utils/formatters'
 import { getTransferDetails } from '../utils/panelWorkspace'
+import { DetailGrid } from './DetailGrid'
 
 interface TransferDetailsProps {
   transfer: Transfer | null
 }
 
-function TransferDetails({ transfer }: TransferDetailsProps) {
+export function TransferDetails({ transfer }: TransferDetailsProps) {
   if (!transfer) {
     return (
       <section className="mt-4 rounded-md border border-dashed border-slate-800 bg-slate-950/25 p-4">
@@ -36,18 +37,7 @@ function TransferDetails({ transfer }: TransferDetailsProps) {
         </div>
       </div>
 
-      <dl className="grid text-sm sm:grid-cols-2 xl:grid-cols-3">
-        {rows.map(([label, value]) => (
-          <div key={label} className="min-w-0 border-b border-slate-800 px-3 py-3 sm:px-4">
-            <dt className="text-[11px] font-semibold tracking-wide text-slate-500 uppercase">
-              {label}
-            </dt>
-            <dd className="mt-1 min-w-0 break-words text-slate-200">{value}</dd>
-          </div>
-        ))}
-      </dl>
+      <DetailGrid rows={rows} className="grid text-sm sm:grid-cols-2 xl:grid-cols-3" />
     </section>
   )
 }
-
-export default TransferDetails

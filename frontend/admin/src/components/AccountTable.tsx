@@ -13,7 +13,7 @@ interface AccountTableProps {
   onDeleteAccount: (id: number) => void
 }
 
-function AccountTable({
+export function AccountTable({
   accounts,
   selectedAccountId,
   isLoading,
@@ -189,5 +189,3 @@ function AccountTable({
     </div>
   )
 }
-
-export default AccountTable

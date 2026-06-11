@@ -1,7 +1,7 @@
-import Sidebar from './Sidebar'
-import MainPanel from './MainPanel'
+import { MainPanel } from './MainPanel'
+import { Sidebar } from './Sidebar'
 
-function AdminShell() {
+export function AdminShell() {
   return (
     <div className="flex h-dvh min-w-0 flex-col bg-slate-950 text-slate-100 sm:flex-row">
       <Sidebar />
@@ -11,5 +11,3 @@ function AdminShell() {
     </div>
   )
 }
-
-export default AdminShell
