@@ -55,14 +55,13 @@ export const getTimeGreeting = (date = new Date()) => {
 }
 
 export const getTransferDescription = (transfer: Transfer | undefined, fallback: string) => {
-  const description = transfer?.description.trim() ?? ''
-
-  if (description !== '') {
-    return description
+  const fullDescription = transfer?.full_description.trim() ?? ''
+  if (fullDescription !== '') {
+    return fullDescription
   }
 
-  const fullDescription = transfer?.full_description.trim() ?? ''
-  return fullDescription !== '' ? fullDescription : fallback
+  const description = transfer?.description.trim() ?? ''
+  return description !== '' ? description : fallback
 }
 
 export const getTransferDate = (transfer: Transfer | undefined) =>
