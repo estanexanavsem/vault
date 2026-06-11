@@ -5,9 +5,10 @@ import { formatCurrency, getAccountName, getLastFour } from '../../utils/formatt
 
 interface AccountCardProps {
   data: GuestData
+  onOpenAccount: () => void
 }
 
-export function AccountCard({ data }: AccountCardProps) {
+export function AccountCard({ data, onOpenAccount }: AccountCardProps) {
   const [activeTab, setActiveTab] = useState<'business' | 'linked'>('business')
   const accountName = getAccountName(data.master)
   const accountSuffix = getLastFour(data.master.account_number)
@@ -69,7 +70,7 @@ export function AccountCard({ data }: AccountCardProps) {
             <strong className="family-balance">{formatCurrency(data.master.balance)}</strong>
           </div>
 
-          <button className="account-row" type="button">
+          <button className="account-row" type="button" onClick={onOpenAccount}>
             <span>
               {accountName} {accountSuffix}
             </span>

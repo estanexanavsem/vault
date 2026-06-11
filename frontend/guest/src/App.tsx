@@ -1,5 +1,6 @@
 import { isAxiosError } from 'axios'
 import { useEffect, useState, type FormEvent } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { LoginScreen } from './components/auth/LoginScreen'
 import { Dashboard } from './components/dashboard/Dashboard'
 import { guestAuthService } from './services/guestAuthService'
@@ -74,7 +75,16 @@ function App() {
   }
 
   if (data) {
-    return <Dashboard data={data} onSignOut={handleSignOut} />
+    return (
+      <Routes>
+        <Route path="/" element={<Dashboard data={data} onSignOut={handleSignOut} />} />
+        <Route
+          path="/accounts/:accountId"
+          element={<Dashboard data={data} onSignOut={handleSignOut} />}
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    )
   }
 
   return (

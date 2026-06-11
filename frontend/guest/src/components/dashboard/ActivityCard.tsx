@@ -1,18 +1,24 @@
-import { ChevronRight, Circle } from 'lucide-react'
+import { ChevronRight, Folder } from 'lucide-react'
 import { useState } from 'react'
 import type { Transfer } from '../../types/guest'
-import { formatSignedCurrency } from '../../utils/formatters'
+import {
+  formatSignedCurrency,
+  getTransferDate,
+  getTransferDescription,
+} from '../../utils/formatters'
 
 interface ActivityCardProps {
+  onOpenAccount: () => void
   transfers: Transfer[]
 }
 
-export function ActivityCard({ transfers }: ActivityCardProps) {
+export function ActivityCard({ onOpenAccount, transfers }: ActivityCardProps) {
   const [activeTab, setActiveTab] = useState<'recent' | 'upcoming'>('recent')
   const latestTransfer = transfers[0]
-  const description = latestTransfer?.description.trim() || latestTransfer?.full_description.trim()
-  const label = description !== '' ? description : 'Zelle business transfer'
+  const label = getTransferDescription(latestTransfer, 'Zelle business transfer')
   const amount = latestTransfer?.amount ?? 10
+  const transactionDate = getTransferDate(latestTransfer)
+  const transferMeta = transactionDate || latestTransfer?.status.trim() || ''
   const isUpcoming = activeTab === 'upcoming'
 
   return (
@@ -57,13 +63,13 @@ export function ActivityCard({ transfers }: ActivityCardProps) {
             <span>Amount</span>
           </div>
 
-          <button className="activity-row" type="button">
+          <button className="activity-row" type="button" onClick={onOpenAccount}>
+            <span className="activity-icon" aria-hidden="true">
+              <Folder size={16} />
+            </span>
             <span className="activity-copy">
               <strong>{label}</strong>
-              <span className="pending-line">
-                <Circle size={7} fill="currentColor" aria-hidden="true" />
-                Pending
-              </span>
+              {transferMeta ? <span className="activity-meta">{transferMeta}</span> : null}
             </span>
             <span className={`activity-amount ${amount >= 0 ? 'is-positive' : 'is-negative'}`}>
               {formatSignedCurrency(amount)}
