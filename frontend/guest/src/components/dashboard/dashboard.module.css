@@ -396,20 +396,6 @@
   margin-top: 22px;
 }
 
-.inlineAction {
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
-  min-height: 32px;
-  padding: 0;
-  margin-top: 4px;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--purple-600);
-  background: transparent;
-  border: 0;
-}
-
 .siteFooter {
   background: #ffffff;
 }
@@ -476,7 +462,6 @@
 
 @media (hover: hover) {
   .footerLinks a,
-  .inlineAction,
   .accountRow,
   .activityRow,
   .thanksCard,
@@ -491,8 +476,7 @@
       opacity 180ms ease;
   }
 
-  .footerLinks a:hover,
-  .inlineAction:hover {
+  .footerLinks a:hover {
     color: #008b95;
   }
 

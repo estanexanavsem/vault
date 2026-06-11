@@ -47,7 +47,7 @@ export function AccountCard({ data, onOpenAccount }: AccountCardProps) {
         <BusinessAccountSummary account={account} onOpenAccount={onOpenAccount} />
       )}
 
-      <button className={styles.pillButton} type="button">
+      <button className={styles.pillButton} type="button" onClick={onOpenAccount}>
         View all accounts
       </button>
     </section>

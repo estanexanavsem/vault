@@ -1,4 +1,3 @@
-import { ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import type { Transfer } from '../../types/guest'
 import { cn } from '../../utils/cn'
@@ -45,11 +44,6 @@ export function ActivityCard({ onOpenAccount, transfers }: ActivityCardProps) {
       ) : (
         <RecentActivitySummary onOpenAccount={onOpenAccount} transfer={transfer} />
       )}
-
-      <button className={styles.inlineAction} type="button">
-        More activity
-        <ChevronRight size={16} aria-hidden="true" />
-      </button>
     </section>
   )
 }
