@@ -1,9 +1,12 @@
-import { Landmark } from 'lucide-react'
-
 export function TruistMark() {
   return (
     <span className="truist-mark" aria-hidden="true">
-      <Landmark size={18} strokeWidth={2.4} />
+      <svg viewBox="0 0 26 27" role="img" focusable="false">
+        <path
+          fill="currentColor"
+          d="M0 24.0823V2.91771C0 1.43788 0.887894 0.549988 2.36772 0.549988H23.5323C25.0121 0.549988 25.9 1.43788 25.9 2.91771V24.0823C25.9 25.5621 25.0121 26.45 23.5323 26.45H2.36772C0.887894 26.45 0 25.5621 0 24.0823ZM23.7225 24.2725V14.7593H17.1479V19.4737H14.6322V7.52632H17.1479V12.2406H23.7225V2.72745H2.17747V12.2406H8.75212V7.52632H11.2678V19.4737H8.75212V14.7593H2.17747V24.2725H23.7225Z"
+        />
+      </svg>
     </span>
   )
 }
