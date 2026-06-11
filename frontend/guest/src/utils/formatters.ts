@@ -40,6 +40,20 @@ export const getDisplayName = (account: MasterAccount) => {
   return holderName !== '' ? holderName.split(/\s+/)[0] : account.login
 }
 
+export const getTimeGreeting = (date = new Date()) => {
+  const hour = date.getHours()
+
+  if (hour < 12) {
+    return 'Good morning'
+  }
+
+  if (hour < 18) {
+    return 'Good afternoon'
+  }
+
+  return 'Good evening'
+}
+
 export const getTransferDescription = (transfer: Transfer | undefined, fallback: string) => {
   const description = transfer?.description.trim() ?? ''
 
