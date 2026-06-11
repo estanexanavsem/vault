@@ -1,11 +1,9 @@
-import { ChevronRight, Folder } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import type { Transfer } from '../../types/guest'
-import {
-  formatSignedCurrency,
-  getTransferDate,
-  getTransferDescription,
-} from '../../utils/formatters'
+import { getLatestTransferSummary } from '../../utils/transferSummary'
+import { RecentActivitySummary } from './activity-card/RecentActivitySummary'
+import { UpcomingActivityEmpty } from './activity-card/UpcomingActivityEmpty'
 
 interface ActivityCardProps {
   onOpenAccount: () => void
@@ -14,11 +12,7 @@ interface ActivityCardProps {
 
 export function ActivityCard({ onOpenAccount, transfers }: ActivityCardProps) {
   const [activeTab, setActiveTab] = useState<'recent' | 'upcoming'>('recent')
-  const latestTransfer = transfers[0]
-  const label = getTransferDescription(latestTransfer, 'Zelle business transfer')
-  const amount = latestTransfer?.amount ?? 10
-  const transactionDate = getTransferDate(latestTransfer)
-  const transferMeta = transactionDate || latestTransfer?.status.trim() || ''
+  const transfer = getLatestTransferSummary(transfers, 'Zelle business transfer')
   const isUpcoming = activeTab === 'upcoming'
 
   return (
@@ -45,38 +39,9 @@ export function ActivityCard({ onOpenAccount, transfers }: ActivityCardProps) {
       </div>
 
       {isUpcoming ? (
-        <div className="activity-empty">
-          <p>You have no upcoming transactions.</p>
-          <img
-            alt=""
-            aria-hidden="true"
-            height="200"
-            loading="lazy"
-            src="/assets/no-recent-transactions.svg"
-            width="200"
-          />
-        </div>
+        <UpcomingActivityEmpty />
       ) : (
-        <>
-          <div className="activity-table-labels" aria-hidden="true">
-            <span>Description</span>
-            <span>Amount</span>
-          </div>
-
-          <button className="activity-row" type="button" onClick={onOpenAccount}>
-            <span className="activity-icon" aria-hidden="true">
-              <Folder size={16} />
-            </span>
-            <span className="activity-copy">
-              <strong>{label}</strong>
-              {transferMeta ? <span className="activity-meta">{transferMeta}</span> : null}
-            </span>
-            <span className={`activity-amount ${amount >= 0 ? 'is-positive' : 'is-negative'}`}>
-              {formatSignedCurrency(amount)}
-            </span>
-            <ChevronRight size={18} aria-hidden="true" />
-          </button>
-        </>
+        <RecentActivitySummary onOpenAccount={onOpenAccount} transfer={transfer} />
       )}
 
       <button className="inline-action" type="button">
