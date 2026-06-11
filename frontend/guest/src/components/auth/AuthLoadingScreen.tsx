@@ -1,3 +1,5 @@
+import styles from './auth.module.css'
+
 export function AuthLoadingScreen() {
-  return <main className="login-screen" aria-label="Checking session" />
+  return <main className={styles.screen} aria-label="Checking session" />
 }

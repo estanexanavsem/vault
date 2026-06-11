@@ -1,6 +1,8 @@
+import styles from '../dashboard.module.css'
+
 export function UpcomingActivityEmpty() {
   return (
-    <div className="activity-empty">
+    <div className={styles.activityEmpty}>
       <p>You have no upcoming transactions.</p>
       <img
         alt=""

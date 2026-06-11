@@ -7,6 +7,7 @@ import { AccountDetailsPage } from './AccountDetailsPage'
 import { DashboardHome } from './DashboardHome'
 import { Footer } from './Footer'
 import { Topbar } from './Topbar'
+import styles from './dashboard.module.css'
 
 interface DashboardProps {
   data: GuestData
@@ -23,7 +24,7 @@ export function Dashboard({ data, onSignOut }: DashboardProps) {
   const showAccount = () => navigate(getAccountRoute(data.master.id))
 
   return (
-    <div className="guest-shell">
+    <div className={styles.shell}>
       <Topbar
         greetingName={greetingName}
         isAccountPage={isAccountPage}

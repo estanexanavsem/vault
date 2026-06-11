@@ -4,6 +4,11 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  css: {
+    modules: {
+      localsConvention: 'camelCaseOnly',
+    },
+  },
   server: {
     port: 3002,
     proxy: {

@@ -1,6 +1,13 @@
-export function TruistMark() {
+import { cn } from '../../utils/cn'
+import styles from './TruistMark.module.css'
+
+interface TruistMarkProps {
+  className?: string
+}
+
+export function TruistMark({ className }: TruistMarkProps) {
   return (
-    <span className="truist-mark" aria-hidden="true">
+    <span className={cn(styles.mark, className)} aria-hidden="true">
       <svg viewBox="0 0 26 27" role="img" focusable="false">
         <path
           fill="currentColor"

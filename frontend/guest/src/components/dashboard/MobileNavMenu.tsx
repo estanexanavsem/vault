@@ -19,7 +19,9 @@ import {
   X,
 } from 'lucide-react'
 import { useCallback, useState, type ReactNode } from 'react'
+import { cn } from '../../utils/cn'
 import { TruistMark } from '../common/TruistMark'
+import styles from './navigation.module.css'
 
 interface MobileNavMenuProps {
   isAccountPage: boolean
@@ -37,7 +39,7 @@ interface MobileNavItemProps {
 }
 
 function MobileNavItem({ children, current = false, href, icon, onSelect }: MobileNavItemProps) {
-  const className = current ? 'mobile-nav-item is-current' : 'mobile-nav-item'
+  const className = cn(styles.mobileNavItem, current && styles.current)
   const content = (
     <>
       {icon}
@@ -90,7 +92,7 @@ export function MobileNavMenu({
         ref={setReferenceNode}
         {...getReferenceProps({
           'aria-label': 'Open menu',
-          className: 'mobile-menu-button',
+          className: styles.mobileMenuButton,
           type: 'button',
         })}
       >
@@ -99,16 +101,16 @@ export function MobileNavMenu({
 
       {isOpen ? (
         <FloatingPortal>
-          <FloatingOverlay className="mobile-nav-overlay" lockScroll>
+          <FloatingOverlay className={styles.mobileNavOverlay} lockScroll>
             <FloatingFocusManager context={context}>
               <section
                 ref={setFloatingNode}
-                {...getFloatingProps({ className: 'mobile-nav-panel' })}
+                {...getFloatingProps({ className: styles.mobileNavPanel })}
               >
-                <div className="mobile-nav-head">
-                  <TruistMark />
+                <div className={styles.mobileNavHead}>
+                  <TruistMark className={styles.mobileNavMark} />
                   <button
-                    className="mobile-nav-close"
+                    className={styles.mobileNavClose}
                     type="button"
                     aria-label="Close menu"
                     onClick={close}
@@ -117,7 +119,7 @@ export function MobileNavMenu({
                   </button>
                 </div>
 
-                <nav className="mobile-nav-list" aria-label="Mobile primary">
+                <nav className={styles.mobileNavList} aria-label="Mobile primary">
                   <MobileNavItem
                     current={!isAccountPage}
                     icon={<Home size={23} aria-hidden="true" />}
@@ -164,9 +166,9 @@ export function MobileNavMenu({
                   </MobileNavItem>
                 </nav>
 
-                <div className="mobile-nav-footer">
+                <div className={styles.mobileNavFooter}>
                   <button
-                    className="mobile-nav-sign-out"
+                    className={styles.mobileNavSignOut}
                     type="button"
                     onClick={() => {
                       close()

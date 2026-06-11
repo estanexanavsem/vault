@@ -4,6 +4,7 @@ import { AccountCard } from './AccountCard'
 import { ActivityCard } from './ActivityCard'
 import { DashboardHero } from './DashboardHero'
 import { NotificationsCard } from './NotificationsCard'
+import styles from './dashboard.module.css'
 
 interface DashboardHomeProps {
   data: GuestData
@@ -22,16 +23,16 @@ export function DashboardHome({
     <>
       <DashboardHero greetingName={greetingName} statementLabel={statementLabel} />
 
-      <main className="dashboard-main" id="home">
-        <div className="dashboard-grid">
-          <div className="dashboard-left-column">
+      <main className={styles.dashboardMain} id="home">
+        <div className={styles.dashboardGrid}>
+          <div className={styles.dashboardLeftColumn}>
             <AccountCard data={data} onOpenAccount={onOpenAccount} />
             <ActivityCard onOpenAccount={onOpenAccount} transfers={data.transfers} />
           </div>
 
-          <div className="dashboard-right-column">
+          <div className={styles.dashboardRightColumn}>
             <NotificationsCard />
-            <button className="thanks-card" type="button">
+            <button className={styles.thanksCard} type="button">
               <span>Thanks for banking with Truist.</span>
               <ChevronRight size={22} aria-hidden="true" />
             </button>

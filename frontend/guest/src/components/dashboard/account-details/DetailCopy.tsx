@@ -1,6 +1,8 @@
+import styles from './account-details.module.css'
+
 export function DetailCopy() {
   return (
-    <div className="detail-copy">
+    <div className={styles.copy}>
       <p>
         Daily Posted Balance: The posted balance after nightly processing is completed. Please note
         that transactions are paid from your Available Balance according to our posting order, and

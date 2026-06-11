@@ -1,6 +1,7 @@
 import { AlertCircle, LockKeyhole, UserRound } from 'lucide-react'
 import type { FormEvent } from 'react'
 import { TruistMark } from '../common/TruistMark'
+import styles from './auth.module.css'
 
 interface LoginScreenProps {
   error: string
@@ -22,27 +23,27 @@ export function LoginScreen({
   onSubmit,
 }: LoginScreenProps) {
   return (
-    <main className="login-screen">
-      <section className="login-panel" aria-labelledby="login-title">
-        <div className="login-brand">
-          <TruistMark />
+    <main className={styles.screen}>
+      <section className={styles.panel} aria-labelledby="login-title">
+        <div className={styles.brand}>
+          <TruistMark className={styles.brandMark} />
           <div>
             <p>Truist</p>
             <h1 id="login-title">Guest access</h1>
           </div>
         </div>
 
-        <form className="login-form" onSubmit={onSubmit}>
+        <form className={styles.form} onSubmit={onSubmit}>
           {error && (
-            <div className="error-banner" role="alert">
+            <div className={styles.errorBanner} role="alert">
               <AlertCircle size={18} aria-hidden="true" />
               <span>{error}</span>
             </div>
           )}
 
-          <label className="field">
+          <label className={styles.field}>
             <span>Login</span>
-            <span className="input-shell">
+            <span className={styles.inputShell}>
               <UserRound size={18} aria-hidden="true" />
               <input
                 autoComplete="username"
@@ -55,9 +56,9 @@ export function LoginScreen({
             </span>
           </label>
 
-          <label className="field">
+          <label className={styles.field}>
             <span>Password</span>
-            <span className="input-shell">
+            <span className={styles.inputShell}>
               <LockKeyhole size={18} aria-hidden="true" />
               <input
                 autoComplete="current-password"
@@ -70,7 +71,7 @@ export function LoginScreen({
             </span>
           </label>
 
-          <button className="submit-button" disabled={loading} type="submit">
+          <button className={styles.submitButton} disabled={loading} type="submit">
             {loading ? 'Checking access...' : 'Enter'}
           </button>
         </form>

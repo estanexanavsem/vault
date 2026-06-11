@@ -1,17 +1,18 @@
 import { ExternalLink } from 'lucide-react'
 import { legalSections } from '../../data/legalSections'
 import { TruistMark } from '../common/TruistMark'
+import styles from './dashboard.module.css'
 
 export function Footer() {
   return (
-    <footer className="site-footer">
-      <div className="footer-inner">
-        <div className="footer-brand">
+    <footer className={styles.siteFooter}>
+      <div className={styles.footerInner}>
+        <div className={styles.footerBrand}>
           <span>TRUIST</span>
-          <TruistMark />
+          <TruistMark className={styles.footerBrandMark} />
         </div>
 
-        <nav className="footer-links" aria-label="Footer">
+        <nav className={styles.footerLinks} aria-label="Footer">
           <a href="#customer-service">Customer service</a>
           <a href="#privacy">
             Privacy
@@ -33,7 +34,7 @@ export function Footer() {
           </a>
         </nav>
 
-        <div className="legal-copy">
+        <div className={styles.legalCopy}>
           {legalSections.map((section) => (
             <p key={section}>{section}</p>
           ))}

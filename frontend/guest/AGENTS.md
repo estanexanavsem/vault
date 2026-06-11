@@ -29,6 +29,10 @@ Use npm; `package-lock.json` is committed.
 
 Write TypeScript with strict compiler settings. Keep React components in PascalCase files such as `GuestLogin.tsx`; use camelCase for hooks, services, utilities, and helper modules. Prefer named exports for shared code when modules are split out.
 
+Use CSS Modules for component and feature styles. Name component-owned modules after the component, such as `TruistMark.module.css`; name shared feature modules in lower kebab case, such as `auth.module.css` or `account-details.module.css`. Keep `src/styles/index.css` limited to Tailwind import, font declarations, design tokens, reset, and base element styles.
+
+Use the shared `cn()` helper from `src/utils/cn.ts` for conditional or combined class names. Do not build class names with template-string concatenation when `cn()` can express the same state.
+
 ESLint enforces type-aware TypeScript rules, React Hooks rules, `no-console` warnings except `console.warn` and `console.error`, and inline `type` imports. Prettier controls formatting.
 
 Keep API contracts typed at the edge. Avoid `any`; model guest API responses with local interfaces or shared types before reading nested response fields.

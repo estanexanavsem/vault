@@ -6,6 +6,7 @@ import { AccountDetailSidebar } from './account-details/AccountDetailSidebar'
 import { DetailActivitySection } from './account-details/DetailActivitySection'
 import { DetailCopy } from './account-details/DetailCopy'
 import { DownloadAppCard } from './account-details/DownloadAppCard'
+import styles from './account-details/account-details.module.css'
 
 interface AccountDetailsPageProps {
   data: GuestData
@@ -20,7 +21,7 @@ export function AccountDetailsPage({ data, onBack }: AccountDetailsPageProps) {
     <>
       <AccountDetailHero account={account} onBack={onBack} />
 
-      <main className="account-detail-main" id="account-detail">
+      <main className={styles.main} id="account-detail">
         <AccountDetailSidebar account={account} />
         <DetailActivitySection account={account} transfer={transfer} />
         <DetailCopy />

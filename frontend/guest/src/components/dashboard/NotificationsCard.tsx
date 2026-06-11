@@ -1,11 +1,16 @@
 import { Bell } from 'lucide-react'
+import { cn } from '../../utils/cn'
+import styles from './dashboard.module.css'
 
 export function NotificationsCard() {
   return (
-    <section className="dashboard-card notifications-card" aria-labelledby="notifications-title">
-      <div className="notifications-title">
+    <section
+      className={cn(styles.card, styles.notificationsCard)}
+      aria-labelledby="notifications-title"
+    >
+      <div className={styles.notificationsTitle}>
         <Bell size={24} aria-hidden="true" />
-        <h2 id="notifications-title" className="section-kicker">
+        <h2 id="notifications-title" className={styles.sectionKicker}>
           Notifications
         </h2>
       </div>

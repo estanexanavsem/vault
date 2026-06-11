@@ -1,0 +1,144 @@
+.screen {
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  padding: 24px;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(45, 23, 75, 0.92), rgba(74, 40, 112, 0.9)), var(--purple-900);
+}
+
+.panel {
+  width: min(100%, 430px);
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid var(--purple-300);
+  border-radius: 18px;
+}
+
+.brand {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  color: var(--purple-950);
+}
+
+.brandMark {
+  width: 40px;
+  height: 40px;
+  color: #ffffff;
+  background: var(--purple-950);
+  border-radius: 8px;
+}
+
+.brand p,
+.brand h1 {
+  margin: 0;
+}
+
+.brand p {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--purple-600);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.brand h1 {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.form {
+  display: grid;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.errorBanner {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 48px;
+  padding: 12px 14px;
+  color: #8f1f16;
+  background: #fff0ee;
+  border: 1px solid #f2bab3;
+  border-radius: 10px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--purple-950);
+}
+
+.inputShell {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 14px;
+  color: var(--purple-600);
+  border: 1px solid var(--purple-300);
+  border-radius: 8px;
+}
+
+.inputShell input {
+  width: 100%;
+  min-width: 0;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.submitButton {
+  min-height: 50px;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--purple-600);
+  border: 0;
+  border-radius: 999px;
+}
+
+.submitButton:disabled {
+  opacity: 0.65;
+}
+
+@media (hover: hover) {
+  .submitButton {
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease,
+      opacity 180ms ease;
+  }
+
+  .submitButton:hover {
+    background: var(--purple-700);
+  }
+}
+
+@media (max-width: 760px) {
+  .screen {
+    align-items: stretch;
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .panel {
+    display: grid;
+    align-content: center;
+    width: 100%;
+    min-height: 100dvh;
+    padding: 28px 20px;
+    border: 0;
+    border-radius: 0;
+  }
+}

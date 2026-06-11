@@ -1,5 +1,6 @@
 import { ChevronDown } from 'lucide-react'
 import { FloatingDropdown } from '../common/FloatingDropdown'
+import styles from './navigation.module.css'
 
 interface QuickLinksMenuProps {
   statementLabel: string
@@ -7,16 +8,16 @@ interface QuickLinksMenuProps {
 
 export function QuickLinksMenu({ statementLabel }: QuickLinksMenuProps) {
   return (
-    <div className="mobile-quick-links-wrap">
+    <div className={styles.mobileQuickLinksWrap}>
       <FloatingDropdown
-        floatingClassName="mobile-quick-links-menu"
+        floatingClassName={styles.mobileQuickLinksMenu}
         label="Quick Links"
-        triggerClassName="mobile-quick-links"
+        triggerClassName={styles.mobileQuickLinks}
         triggerContent={(isOpen) => (
           <>
             <span>Quick Links</span>
             <ChevronDown
-              className="mobile-quick-links-icon"
+              className={styles.mobileQuickLinksIcon}
               data-open={isOpen ? 'true' : 'false'}
               size={22}
               aria-hidden="true"

@@ -1,6 +1,8 @@
+import styles from '../dashboard.module.css'
+
 export function LinkedAccountEmpty() {
   return (
-    <div className="account-linked-empty">
+    <div className={styles.accountLinkedEmpty}>
       <img
         alt=""
         aria-hidden="true"

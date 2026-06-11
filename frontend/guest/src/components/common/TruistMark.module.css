@@ -1,0 +1,13 @@
+.mark {
+  display: inline-grid;
+  width: 26px;
+  height: 27px;
+  place-items: center;
+  color: currentColor;
+}
+
+.mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

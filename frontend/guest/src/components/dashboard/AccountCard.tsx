@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import type { GuestData } from '../../types/guest'
 import { getAccountSummary } from '../../utils/accountSummary'
+import { cn } from '../../utils/cn'
 import { BusinessAccountSummary } from './account-card/BusinessAccountSummary'
 import { LinkedAccountEmpty } from './account-card/LinkedAccountEmpty'
+import styles from './dashboard.module.css'
 
 interface AccountCardProps {
   data: GuestData
@@ -15,23 +17,23 @@ export function AccountCard({ data, onOpenAccount }: AccountCardProps) {
   const isLinked = activeTab === 'linked'
 
   return (
-    <section className="dashboard-card accounts-card" aria-labelledby="accounts-title">
-      <div className="section-heading-row">
-        <h2 id="accounts-title" className="section-kicker">
+    <section className={cn(styles.card, styles.accountsCard)} aria-labelledby="accounts-title">
+      <div className={styles.sectionHeadingRow}>
+        <h2 id="accounts-title" className={styles.sectionKicker}>
           Accounts
         </h2>
       </div>
 
-      <div className="tabs" aria-label="Account groups">
+      <div className={styles.tabs} aria-label="Account groups">
         <button
-          className={`tab ${activeTab === 'business' ? 'is-active' : ''}`}
+          className={cn(styles.tab, activeTab === 'business' && styles.active)}
           type="button"
           onClick={() => setActiveTab('business')}
         >
           Business
         </button>
         <button
-          className={`tab ${isLinked ? 'is-active' : ''}`}
+          className={cn(styles.tab, isLinked && styles.active)}
           type="button"
           onClick={() => setActiveTab('linked')}
         >
@@ -45,7 +47,7 @@ export function AccountCard({ data, onOpenAccount }: AccountCardProps) {
         <BusinessAccountSummary account={account} onOpenAccount={onOpenAccount} />
       )}
 
-      <button className="pill-button" type="button">
+      <button className={styles.pillButton} type="button">
         View all accounts
       </button>
     </section>

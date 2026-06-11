@@ -1,5 +1,7 @@
+import { cn } from '../../utils/cn'
 import { TruistMark } from '../common/TruistMark'
 import { MobileNavMenu } from './MobileNavMenu'
+import styles from './navigation.module.css'
 
 interface TopbarProps {
   greetingName: string
@@ -17,18 +19,27 @@ export function Topbar({
   onSignOut,
 }: TopbarProps) {
   return (
-    <header className="topbar">
-      <div className="topbar-inner">
-        <button className="brand-link" type="button" aria-label="Truist home" onClick={onShowHome}>
+    <header className={styles.topbar}>
+      <div className={styles.topbarInner}>
+        <button
+          className={styles.brandLink}
+          type="button"
+          aria-label="Truist home"
+          onClick={onShowHome}
+        >
           <TruistMark />
         </button>
 
-        <nav className="desktop-nav" aria-label="Primary">
-          <button className={!isAccountPage ? 'is-current' : ''} type="button" onClick={onShowHome}>
+        <nav className={styles.desktopNav} aria-label="Primary">
+          <button
+            className={cn(!isAccountPage && styles.current)}
+            type="button"
+            onClick={onShowHome}
+          >
             Home
           </button>
           <button
-            className={isAccountPage ? 'is-current' : ''}
+            className={cn(isAccountPage && styles.current)}
             type="button"
             onClick={onOpenAccount}
           >
@@ -39,12 +50,12 @@ export function Topbar({
           <a href="#support">Help &amp; support</a>
         </nav>
 
-        <div className="desktop-session">
-          <span className="avatar" aria-label={`${greetingName} profile`}>
+        <div className={styles.desktopSession}>
+          <span className={styles.avatar} aria-label={`${greetingName} profile`}>
             {greetingName.slice(0, 2).toUpperCase()}
           </span>
-          <span className="status-dot" aria-hidden="true" />
-          <button className="sign-out-button" onClick={onSignOut} type="button">
+          <span className={styles.statusDot} aria-hidden="true" />
+          <button className={styles.signOutButton} onClick={onSignOut} type="button">
             Sign out
           </button>
         </div>

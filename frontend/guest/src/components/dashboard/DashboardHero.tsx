@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getTimeGreeting } from '../../utils/formatters'
 import { QuickLinksMenu } from './QuickLinksMenu'
+import styles from './dashboard.module.css'
 
 interface DashboardHeroProps {
   greetingName: string
@@ -19,12 +20,12 @@ export function DashboardHero({ greetingName, statementLabel }: DashboardHeroPro
   }, [])
 
   return (
-    <section className="hero-band">
-      <div className="hero-inner">
+    <section className={styles.heroBand}>
+      <div className={styles.heroInner}>
         <h1>
           {timeGreeting}, {greetingName}
         </h1>
-        <div className="desktop-quick-actions" aria-label="Quick actions">
+        <div className={styles.desktopQuickActions} aria-label="Quick actions">
           <button type="button">{statementLabel}</button>
           <button type="button">Security center</button>
         </div>

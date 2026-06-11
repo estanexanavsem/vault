@@ -1,5 +1,6 @@
 import { Wallet } from 'lucide-react'
 import type { AccountSummary } from '../../../utils/accountSummary'
+import styles from '../dashboard.module.css'
 
 interface BusinessAccountSummaryProps {
   account: AccountSummary
@@ -9,17 +10,17 @@ interface BusinessAccountSummaryProps {
 export function BusinessAccountSummary({ account, onOpenAccount }: BusinessAccountSummaryProps) {
   return (
     <>
-      <div className="account-family">
-        <div className="account-family-label">
-          <span className="account-icon">
+      <div className={styles.accountFamily}>
+        <div className={styles.accountFamilyLabel}>
+          <span className={styles.accountIcon}>
             <Wallet size={20} aria-hidden="true" />
           </span>
           <strong>Cash &amp; savings</strong>
         </div>
-        <strong className="family-balance">{account.balanceText}</strong>
+        <strong className={styles.familyBalance}>{account.balanceText}</strong>
       </div>
 
-      <button className="account-row" type="button" onClick={onOpenAccount}>
+      <button className={styles.accountRow} type="button" onClick={onOpenAccount}>
         <span>{account.title}</span>
         <strong>{account.balanceText}</strong>
       </button>

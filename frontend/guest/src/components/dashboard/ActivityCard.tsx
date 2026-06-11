@@ -1,9 +1,11 @@
 import { ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import type { Transfer } from '../../types/guest'
+import { cn } from '../../utils/cn'
 import { getLatestTransferSummary } from '../../utils/transferSummary'
 import { RecentActivitySummary } from './activity-card/RecentActivitySummary'
 import { UpcomingActivityEmpty } from './activity-card/UpcomingActivityEmpty'
+import styles from './dashboard.module.css'
 
 interface ActivityCardProps {
   onOpenAccount: () => void
@@ -16,21 +18,21 @@ export function ActivityCard({ onOpenAccount, transfers }: ActivityCardProps) {
   const isUpcoming = activeTab === 'upcoming'
 
   return (
-    <section className="dashboard-card activity-card" aria-labelledby="activity-title">
-      <h2 id="activity-title" className="section-kicker">
+    <section className={cn(styles.card, styles.activityCard)} aria-labelledby="activity-title">
+      <h2 id="activity-title" className={styles.sectionKicker}>
         Activity
       </h2>
 
-      <div className="tabs activity-tabs" aria-label="Activity range">
+      <div className={cn(styles.tabs, styles.activityTabs)} aria-label="Activity range">
         <button
-          className={`tab ${activeTab === 'recent' ? 'is-active' : ''}`}
+          className={cn(styles.tab, activeTab === 'recent' && styles.active)}
           type="button"
           onClick={() => setActiveTab('recent')}
         >
           Recent
         </button>
         <button
-          className={`tab ${isUpcoming ? 'is-active' : ''}`}
+          className={cn(styles.tab, isUpcoming && styles.active)}
           type="button"
           onClick={() => setActiveTab('upcoming')}
         >
@@ -44,7 +46,7 @@ export function ActivityCard({ onOpenAccount, transfers }: ActivityCardProps) {
         <RecentActivitySummary onOpenAccount={onOpenAccount} transfer={transfer} />
       )}
 
-      <button className="inline-action" type="button">
+      <button className={styles.inlineAction} type="button">
         More activity
         <ChevronRight size={16} aria-hidden="true" />
       </button>
