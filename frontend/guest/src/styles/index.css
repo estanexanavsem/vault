@@ -550,9 +550,14 @@ a {
 .footer-links a {
   display: inline-flex;
   gap: 5px;
-  align-items: center;
+  align-items: flex-start;
   min-width: 0;
   overflow-wrap: anywhere;
+}
+
+.footer-links a svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
 }
 
 .legal-copy {
