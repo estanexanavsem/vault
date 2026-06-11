@@ -462,6 +462,7 @@ function MainPanel() {
         transfers={transfers}
         files={files}
         selectedAccount={selectedAccount}
+        selectedTransfer={selectedTransfer}
         activeAccountId={activeAccountId}
         selectedTransferId={selectedTransferId}
         selectedFileId={selectedFileId}

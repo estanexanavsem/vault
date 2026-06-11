@@ -1,9 +1,11 @@
-import { Button, Tabs } from '@mantine/core'
-import { ChevronDown, Plus } from 'lucide-react'
+import { Button, Select, Tabs } from '@mantine/core'
+import { Pencil, Plus, Trash2 } from 'lucide-react'
 import type { Account, AccountFile, Transfer } from '../types'
-import AccountTable from './AccountTable'
-import TransferTable from './TransferTable'
+import { formatCurrency } from '../utils/formatters'
+import { getAccountFacts, getAccountSelectOptions } from '../utils/panelWorkspace'
 import FileTable from './FileTable'
+import TransferDetails from './TransferDetails'
+import TransferTable from './TransferTable'
 
 interface PanelWorkspaceProps {
   activeTab: string
@@ -11,6 +13,7 @@ interface PanelWorkspaceProps {
   transfers: Transfer[]
   files: AccountFile[]
   selectedAccount: Account | null
+  selectedTransfer: Transfer | null
   activeAccountId: number | null
   selectedTransferId: number | null
   selectedFileId: number | null
@@ -41,6 +44,7 @@ function PanelWorkspace({
   transfers,
   files,
   selectedAccount,
+  selectedTransfer,
   activeAccountId,
   selectedTransferId,
   selectedFileId,
@@ -64,130 +68,135 @@ function PanelWorkspace({
   onEditFile,
   onDeleteFile,
 }: PanelWorkspaceProps) {
-  const accountDetailsRows = selectedAccount
-    ? [
-        ['Холдер', selectedAccount.holder_name],
-        ['Счет', selectedAccount.account_name],
-        ['Полное имя счета', selectedAccount.full_account_name],
-        ['Номер', selectedAccount.account_number],
-        ['Роутинг', selectedAccount.routing_number],
-        ['Эл. почта', selectedAccount.email],
-        ['Телефон', selectedAccount.phone],
-      ].filter(([, value]) => value !== '')
-    : []
   const selectedAccountBalance = selectedAccount
-    ? `$${Number(selectedAccount.balance).toFixed(2)}`
+    ? formatCurrency(selectedAccount.balance)
     : '$0.00'
-  const selectedAccountSubtitle = selectedAccount
-    ? [
-        selectedAccount.holder_name,
-        selectedAccount.full_account_name,
-        selectedAccount.account_name,
-      ].find((value) => value.trim() !== '')
-    : undefined
+  const accountOptions = getAccountSelectOptions(accounts)
+  const accountFacts = getAccountFacts(selectedAccount)
 
   return (
     <>
-      <header className="mb-3 flex items-center justify-between gap-3 sm:mb-4">
-        <h1 className="text-xl font-semibold text-slate-50 sm:text-2xl">Аккаунты</h1>
-        <Button
-          leftSection={<Plus size={16} />}
-          color="blue"
-          size="sm"
-          className="!h-10 shrink-0"
-          onClick={onCreateAccount}
-        >
-          Добавить аккаунт
-        </Button>
-      </header>
-
-      <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-slate-800 bg-slate-900 lg:flex-row">
-        <div className="max-h-[34dvh] min-h-0 overflow-auto border-b border-slate-800 p-2 sm:p-3 lg:max-h-none lg:w-2/5 lg:border-r lg:border-b-0 lg:p-4">
-          <AccountTable
-            accounts={accounts}
-            selectedAccountId={activeAccountId}
-            isLoading={accountsLoading}
-            error={accountsError}
-            onSelectAccount={onSelectAccount}
-            onEditAccount={onEditAccount}
-            onDeleteAccount={onDeleteAccount}
-          />
+      <header className="mb-3 grid gap-3 sm:mb-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+        <div className="min-w-0">
+          <h1 className="text-xl font-semibold text-slate-50 sm:text-2xl">Аккаунты</h1>
+          <p className="mt-1 text-sm text-slate-400">Выберите аккаунт и работайте с его переводами</p>
         </div>
 
-        <div className="min-h-0 min-w-0 flex-1 overflow-auto p-3 lg:w-3/5 lg:p-4">
-          {selectedAccount ? (
-            <section className="mb-4 min-w-0 border-b border-slate-800 pb-4">
-              <div className="flex min-w-0 items-start justify-between gap-4">
-                <div className="min-w-0">
-                  <p className="text-[11px] font-semibold tracking-wide text-slate-500 uppercase">
-                    Выбранный аккаунт
-                  </p>
-                  <h2 className="mt-1 text-xl font-semibold break-words text-slate-50">
-                    {selectedAccount.login}
-                  </h2>
-                  {selectedAccountSubtitle && (
-                    <p className="mt-1 max-w-2xl truncate text-sm text-slate-400">
-                      {selectedAccountSubtitle}
-                    </p>
-                  )}
-                </div>
-                <div className="shrink-0 text-right">
-                  <p className="text-[11px] font-semibold tracking-wide text-slate-500 uppercase">
-                    Баланс
-                  </p>
-                  <p className="mt-1 text-lg font-semibold text-slate-50">
-                    {selectedAccountBalance}
-                  </p>
-                </div>
-              </div>
+        <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(260px,420px)_auto] sm:items-end">
+          <Select
+            aria-label="Выбрать аккаунт"
+            searchable
+            clearable={false}
+            disabled={accountsLoading || accounts.length === 0}
+            data={accountOptions}
+            value={activeAccountId ? activeAccountId.toString() : null}
+            placeholder={accountsLoading ? 'Загрузка аккаунтов...' : 'Выберите аккаунт'}
+            nothingFoundMessage="Аккаунт не найден"
+            classNames={{
+              input:
+                '!min-h-10 !border-slate-700 !bg-slate-950/60 !text-slate-50 placeholder:!text-slate-500',
+              dropdown: '!border-slate-700 !bg-slate-950',
+              option: 'data-[checked=true]:!bg-blue-950/60',
+            }}
+            onChange={(value) => {
+              if (value) {
+                onSelectAccount(Number(value))
+              }
+            }}
+          />
+          <Button
+            leftSection={<Plus size={16} />}
+            color="blue"
+            size="sm"
+            className="!h-10 shrink-0"
+            onClick={onCreateAccount}
+          >
+            Добавить аккаунт
+          </Button>
+        </div>
+      </header>
 
-              {accountDetailsRows.length > 0 && (
-                <>
-                  <dl className="mt-4 hidden grid-cols-[minmax(128px,180px)_minmax(0,1fr)] overflow-hidden rounded-md border border-slate-800 text-sm sm:grid">
-                    {accountDetailsRows.map(([label, value]) => (
+      {accountsError && (
+        <p className="mb-3 text-sm text-red-400">
+          Не удалось загрузить аккаунты: {accountsError.message}
+        </p>
+      )}
+
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-slate-800 bg-slate-900">
+        <section className="border-b border-slate-800 p-3 sm:p-4">
+          {selectedAccount ? (
+            <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-start">
+              <div className="min-w-0">
+                <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-semibold tracking-wide text-slate-500 uppercase">
+                      Выбранный аккаунт
+                    </p>
+                    <h2 className="mt-1 text-2xl font-semibold break-words text-slate-50">
+                      {selectedAccount.login}
+                    </h2>
+                  </div>
+                  <div className="shrink-0 sm:text-right">
+                    <p className="text-[11px] font-semibold tracking-wide text-slate-500 uppercase">
+                      Баланс
+                    </p>
+                    <p className="mt-1 text-2xl font-semibold text-slate-50">
+                      {selectedAccountBalance}
+                    </p>
+                  </div>
+                </div>
+
+                {accountFacts.length > 0 && (
+                  <dl className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
+                    {accountFacts.map(([label, value]) => (
                       <div
                         key={label}
-                        className="contents border-b border-slate-800 last:border-b-0"
+                        className="min-w-0 rounded-md border border-slate-800 bg-slate-950/35 px-3 py-2"
                       >
-                        <dt className="border-b border-slate-800 bg-slate-950/35 px-3 py-2 font-medium text-slate-500">
+                        <dt className="text-[11px] font-semibold tracking-wide text-slate-500 uppercase">
                           {label}
                         </dt>
-                        <dd className="min-w-0 border-b border-slate-800 px-3 py-2 break-words text-slate-200">
-                          {value}
-                        </dd>
+                        <dd className="mt-1 min-w-0 text-sm break-words text-slate-200">{value}</dd>
                       </div>
                     ))}
                   </dl>
+                )}
+              </div>
 
-                  <details className="group mt-3 sm:hidden">
-                    <summary className="flex h-10 cursor-pointer list-none items-center justify-between rounded-md border border-slate-800 px-3 text-sm font-medium text-slate-200 [&::-webkit-details-marker]:hidden">
-                      <span>Реквизиты</span>
-                      <ChevronDown
-                        className="text-slate-400 transition-transform group-open:rotate-180"
-                        size={16}
-                      />
-                    </summary>
-                    <dl className="mt-2 divide-y divide-slate-800 rounded-md border border-slate-800 text-sm">
-                      {accountDetailsRows.map(([label, value]) => (
-                        <div
-                          key={label}
-                          className="grid grid-cols-[92px_minmax(0,1fr)] gap-3 px-3 py-2"
-                        >
-                          <dt className="text-slate-500">{label}</dt>
-                          <dd className="min-w-0 break-words text-slate-200">{value}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </details>
-                </>
-              )}
-            </section>
+              <div className="flex flex-col gap-2 sm:flex-row xl:flex-col">
+                <Button
+                  leftSection={<Pencil size={14} />}
+                  variant="light"
+                  color="blue"
+                  size="sm"
+                  className="!h-10"
+                  onClick={() => onEditAccount(selectedAccount.id)}
+                >
+                  Редактировать
+                </Button>
+                <Button
+                  leftSection={<Trash2 size={14} />}
+                  variant="subtle"
+                  color="red"
+                  size="sm"
+                  className="!h-10"
+                  onClick={() => onDeleteAccount(selectedAccount.id)}
+                >
+                  Удалить
+                </Button>
+              </div>
+            </div>
           ) : (
-            <div className="mb-4 border-b border-slate-800 pb-4">
+            <div className="rounded-md border border-dashed border-slate-700 bg-slate-950/35 p-4">
               <h2 className="text-lg font-medium text-slate-50">Аккаунт не выбран</h2>
+              <p className="mt-1 text-sm text-slate-400">
+                Создайте аккаунт или выберите существующий, чтобы увидеть переводы и файлы.
+              </p>
             </div>
           )}
+        </section>
 
+        <div className="min-h-0 min-w-0 flex-1 overflow-auto p-3 sm:p-4">
           <Tabs value={activeTab} onChange={(value) => onTabChange(value ?? 'transfers')}>
             <Tabs.List className="!flex-nowrap">
               <Tabs.Tab value="transfers" className="!h-11 flex-1">
@@ -221,6 +230,7 @@ function PanelWorkspace({
                 onEditTransfer={onEditTransfer}
                 onDeleteTransfer={onDeleteTransfer}
               />
+              <TransferDetails transfer={selectedTransfer} />
             </Tabs.Panel>
 
             <Tabs.Panel value="files" pt="md">
