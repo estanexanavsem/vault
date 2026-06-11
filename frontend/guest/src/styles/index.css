@@ -471,11 +471,18 @@ a {
   width: 100%;
   min-height: 56px;
   margin-top: 16px;
-  padding: 0;
+  padding: 0 12px;
   color: var(--ink);
   text-align: left;
   background: transparent;
   border: 0;
+  border-radius: 10px;
+}
+
+.activity-row:focus-visible {
+  background: #f3eefb;
+  outline: 3px solid rgba(125, 84, 179, 0.22);
+  outline-offset: 2px;
 }
 
 .activity-copy {
@@ -756,6 +763,10 @@ a {
   .thanks-card:hover {
     background: #fbf9ff;
     border-color: var(--purple-600);
+  }
+
+  .activity-row:hover {
+    background: #f3eefb;
   }
 
   .pill-button:hover,
