@@ -2,8 +2,12 @@ import type { Account, Transfer } from '../types'
 import { formatCurrency, formatDateTime, formatTransactionDate } from './formatters'
 
 export type DetailRow = [label: string, value: string]
+export interface AccountSelectOption {
+  value: string
+  label: string
+}
 
-export function getAccountSelectOptions(accounts: Account[]) {
+export function getAccountSelectOptions(accounts: Account[]): AccountSelectOption[] {
   return accounts.map((account) => {
     const details = [account.holder_name, account.account_number].filter(Boolean).join(' / ')
 
