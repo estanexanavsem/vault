@@ -2,6 +2,7 @@
 const js = require('@eslint/js')
 const prettierConfig = require('eslint-config-prettier/flat')
 const { defineConfig, globalIgnores } = require('eslint/config')
+const pluginQuery = require('@tanstack/eslint-plugin-query')
 const reactHooks = require('eslint-plugin-react-hooks')
 const reactRefresh = require('eslint-plugin-react-refresh').default
 const globals = require('globals')
@@ -38,6 +39,7 @@ module.exports = defineConfig([
       tseslint.configs.recommendedTypeChecked,
       tseslint.configs.stylisticTypeChecked,
       reactHooks.configs.flat.recommended,
+      ...pluginQuery.configs['flat/recommended-strict'],
       prettierConfig,
     ],
     languageOptions: {
