@@ -1,4 +1,3 @@
-import type { KeyboardEvent } from 'react'
 import { ActionIcon, Menu } from '@mantine/core'
 import { MoreVertical, Pencil, Trash2 } from 'lucide-react'
 import type { AccountFile } from '../types'
@@ -25,13 +24,6 @@ export function FileTable({
   onEditFile,
   onDeleteFile,
 }: FileTableProps) {
-  const handleKeyDown = (event: KeyboardEvent<HTMLTableRowElement>, fileId: number) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      onSelectFile(fileId)
-    }
-  }
-
   const renderActionMenu = (fileId: number) => (
     <Menu withinPortal position="bottom-end" shadow="md">
       <Menu.Target>
@@ -96,7 +88,6 @@ export function FileTable({
               return (
                 <div
                   key={file.id}
-                  aria-pressed={isSelected}
                   className={
                     isSelected
                       ? 'flex w-full items-start gap-2 rounded-lg border border-blue-500/50 bg-blue-950/50 p-3 text-left'
@@ -105,6 +96,7 @@ export function FileTable({
                 >
                   <button
                     type="button"
+                    aria-pressed={isSelected}
                     className="min-w-0 flex-1 text-left outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70"
                     onClick={() => onSelectFile(file.id)}
                   >
@@ -142,19 +134,19 @@ export function FileTable({
                 {filteredFiles.map((file) => (
                   <tr
                     key={file.id}
-                    role="button"
-                    tabIndex={0}
-                    aria-selected={selectedFileId === file.id}
                     className={
-                      selectedFileId === file.id
-                        ? 'cursor-pointer bg-blue-950/50 outline-none'
-                        : 'cursor-pointer outline-none hover:bg-slate-800/70 focus:bg-slate-800/70'
+                      selectedFileId === file.id ? 'bg-blue-950/50' : 'hover:bg-slate-800/70'
                     }
-                    onClick={() => onSelectFile(file.id)}
-                    onKeyDown={(event) => handleKeyDown(event, file.id)}
                   >
                     <td className="max-w-64 truncate px-3 py-2 font-medium text-slate-50">
-                      {file.name}
+                      <button
+                        type="button"
+                        aria-pressed={selectedFileId === file.id}
+                        className="w-full truncate text-left outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70"
+                        onClick={() => onSelectFile(file.id)}
+                      >
+                        {file.name}
+                      </button>
                     </td>
                     <td className="max-w-72 px-3 py-2 break-all text-slate-300">{file.type}</td>
                     <td className="px-3 py-2 text-right whitespace-nowrap text-slate-50">

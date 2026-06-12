@@ -1,4 +1,3 @@
-import type { KeyboardEvent } from 'react'
 import { ActionIcon, Menu } from '@mantine/core'
 import { MoreVertical, Pencil, Trash2 } from 'lucide-react'
 import type { Account } from '../types'
@@ -22,13 +21,6 @@ export function AccountTable({
   onEditAccount,
   onDeleteAccount,
 }: AccountTableProps) {
-  const handleKeyDown = (event: KeyboardEvent<HTMLTableRowElement>, accountId: number) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      onSelectAccount(accountId)
-    }
-  }
-
   const renderActionMenu = (accountId: number) => (
     <Menu withinPortal position="bottom-end" shadow="md">
       <Menu.Target>
@@ -87,7 +79,6 @@ export function AccountTable({
               return (
                 <div
                   key={account.id}
-                  aria-pressed={isSelected}
                   className={
                     isSelected
                       ? 'flex w-full items-start gap-2 rounded-lg border border-blue-500/50 bg-blue-950/50 p-3 text-left'
@@ -96,6 +87,7 @@ export function AccountTable({
                 >
                   <button
                     type="button"
+                    aria-pressed={isSelected}
                     className="min-w-0 flex-1 text-left outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70"
                     onClick={() => onSelectAccount(account.id)}
                   >
@@ -147,19 +139,21 @@ export function AccountTable({
                 {accounts.map((account) => (
                   <tr
                     key={account.id}
-                    role="button"
-                    tabIndex={0}
-                    aria-selected={selectedAccountId === account.id}
                     className={
                       selectedAccountId === account.id
-                        ? 'selected cursor-pointer bg-blue-950/50 outline-none'
-                        : 'cursor-pointer outline-none hover:bg-slate-800/70 focus:bg-slate-800/70'
+                        ? 'selected bg-blue-950/50'
+                        : 'hover:bg-slate-800/70'
                     }
-                    onClick={() => onSelectAccount(account.id)}
-                    onKeyDown={(event) => handleKeyDown(event, account.id)}
                   >
                     <td className="px-3 py-2 font-medium whitespace-nowrap text-slate-50">
-                      {account.login}
+                      <button
+                        type="button"
+                        aria-pressed={selectedAccountId === account.id}
+                        className="w-full text-left outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70"
+                        onClick={() => onSelectAccount(account.id)}
+                      >
+                        {account.login}
+                      </button>
                     </td>
                     <td className="max-w-56 truncate px-3 py-2 text-slate-300">
                       {account.holder_name}
