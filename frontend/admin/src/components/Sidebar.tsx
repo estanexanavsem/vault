@@ -1,6 +1,6 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { useQueryClient } from '@tanstack/react-query'
-import { LayoutGrid, Settings, LogOut } from 'lucide-react'
+import { LayoutGrid, LogOut } from 'lucide-react'
 import { authService } from '../services/authService'
 import { useAuthStore } from '../store/authStore'
 
@@ -31,18 +31,6 @@ export function Sidebar() {
       </div>
 
       <div className="flex gap-2 sm:flex-col">
-        <Tooltip label="Настройки" position="right">
-          <ActionIcon
-            aria-label="Настройки"
-            variant="transparent"
-            color="blue"
-            size="lg"
-            className="!h-11 !w-11 !text-slate-100 hover:!bg-slate-800"
-          >
-            <Settings size={20} strokeWidth={2.2} />
-          </ActionIcon>
-        </Tooltip>
-
         <Tooltip label="Выйти" position="right">
           <ActionIcon
             aria-label="Выйти"

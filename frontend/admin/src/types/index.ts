@@ -38,9 +38,3 @@ export interface AccountFile {
   description: string
   created_at: string
 }
-
-export type Settings = Record<string, string>
-
-export interface SettingsUpdateResult {
-  updated: true
-}
