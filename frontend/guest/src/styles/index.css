@@ -58,8 +58,16 @@
   }
 
   button,
-  input {
+  input,
+  select,
+  textarea {
     font: inherit;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1em);
   }
 
   button {

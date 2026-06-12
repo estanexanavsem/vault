@@ -51,6 +51,8 @@ export function AccountFormDialog({
               render={({ field }) => (
                 <TextInput
                   id="account-login"
+                  autoCapitalize="none"
+                  autoCorrect="off"
                   error={accountErrors.login?.message}
                   classNames={darkInputClassNames}
                   {...field}
@@ -68,6 +70,9 @@ export function AccountFormDialog({
               render={({ field }) => (
                 <PasswordInput
                   id="account-password"
+                  autoCapitalize="none"
+                  autoComplete="new-password"
+                  autoCorrect="off"
                   error={accountErrors.password?.message}
                   classNames={darkInputClassNames}
                   {...field}
@@ -119,7 +124,14 @@ export function AccountFormDialog({
               name="account_number"
               control={accountForm.control}
               render={({ field }) => (
-                <TextInput id="account-number" classNames={darkInputClassNames} {...field} />
+                <TextInput
+                  id="account-number"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  inputMode="numeric"
+                  classNames={darkInputClassNames}
+                  {...field}
+                />
               )}
             />
           </div>
@@ -133,6 +145,9 @@ export function AccountFormDialog({
               render={({ field }) => (
                 <TextInput
                   id="account-routing-number"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  inputMode="numeric"
                   classNames={darkInputClassNames}
                   {...field}
                 />
@@ -149,6 +164,10 @@ export function AccountFormDialog({
               render={({ field }) => (
                 <TextInput
                   id="account-email"
+                  autoCapitalize="none"
+                  autoComplete="email"
+                  autoCorrect="off"
+                  inputMode="email"
                   type="email"
                   classNames={darkInputClassNames}
                   {...field}
@@ -164,7 +183,15 @@ export function AccountFormDialog({
               name="phone"
               control={accountForm.control}
               render={({ field }) => (
-                <TextInput id="account-phone" classNames={darkInputClassNames} {...field} />
+                <TextInput
+                  id="account-phone"
+                  autoCapitalize="none"
+                  autoComplete="tel"
+                  autoCorrect="off"
+                  inputMode="tel"
+                  classNames={darkInputClassNames}
+                  {...field}
+                />
               )}
             />
           </div>

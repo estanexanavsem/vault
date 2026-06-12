@@ -127,7 +127,13 @@ export function TransferFormDialog({
               name="reference"
               control={transferForm.control}
               render={({ field }) => (
-                <TextInput id="transfer-reference" classNames={darkInputClassNames} {...field} />
+                <TextInput
+                  id="transfer-reference"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  classNames={darkInputClassNames}
+                  {...field}
+                />
               )}
             />
           </div>

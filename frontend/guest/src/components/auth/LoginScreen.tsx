@@ -48,20 +48,15 @@ export function LoginScreen({ error, loading, onSubmit }: LoginScreenProps) {
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit(submitLogin)}>
-          {error && (
-            <div className={styles.errorBanner} role="alert">
-              <AlertCircle size={18} aria-hidden="true" />
-              <span>{error}</span>
-            </div>
-          )}
-
           <label className={styles.field}>
             <span>Login</span>
             <span className={styles.inputShell}>
               <UserRound size={18} aria-hidden="true" />
               <input
                 {...register('login')}
+                autoCapitalize="none"
                 autoComplete="username"
+                autoCorrect="off"
                 aria-invalid={errors.login ? 'true' : undefined}
                 placeholder="Enter your login"
                 required
@@ -79,7 +74,9 @@ export function LoginScreen({ error, loading, onSubmit }: LoginScreenProps) {
               <LockKeyhole size={18} aria-hidden="true" />
               <input
                 {...register('password')}
+                autoCapitalize="none"
                 autoComplete="current-password"
+                autoCorrect="off"
                 aria-invalid={errors.password ? 'true' : undefined}
                 placeholder="Enter your password"
                 required
@@ -90,6 +87,13 @@ export function LoginScreen({ error, loading, onSubmit }: LoginScreenProps) {
               <span className={styles.fieldError}>{errors.password.message}</span>
             ) : null}
           </label>
+
+          {error && (
+            <div className={styles.errorBanner} role="alert">
+              <AlertCircle size={18} aria-hidden="true" />
+              <span>{error}</span>
+            </div>
+          )}
 
           <button
             className={styles.submitButton}

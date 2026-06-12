@@ -201,6 +201,7 @@ export function SecurityCenterPage({ account, onBack, onSessionExpired }: Securi
                     render={({ field }) => (
                       <input
                         id={inputId}
+                        autoCapitalize="none"
                         autoComplete={isEditingEmail ? 'email' : 'tel'}
                         autoCorrect="off"
                         aria-label={inputLabel}

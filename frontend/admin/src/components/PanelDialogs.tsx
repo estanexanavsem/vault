@@ -2,11 +2,13 @@ import { type SubmitHandler, type UseFormReturn } from 'react-hook-form'
 import type { AccountFormInput, AccountFormValues } from '../forms/accountForm'
 import type { FileFormInput, FileFormValues } from '../forms/fileForm'
 import type { TransferFormInput, TransferFormValues } from '../forms/transferForm'
+import { useDirtyFormCloseGuard } from '../hooks/useDirtyFormCloseGuard'
 import type { Entity, FormDialog } from '../types/panel'
 import { AccountFormDialog } from './AccountFormDialog'
 import { DeleteConfirmDialog } from './DeleteConfirmDialog'
 import { FileFormDialog } from './FileFormDialog'
 import { TransferFormDialog } from './TransferFormDialog'
+import { UnsavedChangesDialog } from './UnsavedChangesDialog'
 
 interface PanelDialogsProps {
   formDialog: FormDialog
@@ -50,6 +52,19 @@ export function PanelDialogs({
   onSaveFile,
   onConfirmDelete,
 }: PanelDialogsProps) {
+  const accountCloseGuard = useDirtyFormCloseGuard({
+    isDirty: accountForm.formState.isDirty,
+    onClose: onCloseFormDialog,
+  })
+  const transferCloseGuard = useDirtyFormCloseGuard({
+    isDirty: transferForm.formState.isDirty,
+    onClose: onCloseFormDialog,
+  })
+  const fileCloseGuard = useDirtyFormCloseGuard({
+    isDirty: fileForm.formState.isDirty,
+    onClose: onCloseFormDialog,
+  })
+
   return (
     <>
       <AccountFormDialog
@@ -57,7 +72,7 @@ export function PanelDialogs({
         formError={formError}
         accountForm={accountForm}
         isSaving={savingState.account}
-        onClose={onCloseFormDialog}
+        onClose={accountCloseGuard.requestClose}
         onSave={onSaveAccount}
       />
       <TransferFormDialog
@@ -65,7 +80,7 @@ export function PanelDialogs({
         formError={formError}
         transferForm={transferForm}
         isSaving={savingState.transfer}
-        onClose={onCloseFormDialog}
+        onClose={transferCloseGuard.requestClose}
         onSave={onSaveTransfer}
       />
       <FileFormDialog
@@ -73,8 +88,23 @@ export function PanelDialogs({
         formError={formError}
         fileForm={fileForm}
         isSaving={savingState.file}
-        onClose={onCloseFormDialog}
+        onClose={fileCloseGuard.requestClose}
         onSave={onSaveFile}
+      />
+      <UnsavedChangesDialog
+        opened={accountCloseGuard.confirmCloseOpened}
+        onCancel={accountCloseGuard.closeConfirmDialog}
+        onConfirm={accountCloseGuard.confirmClose}
+      />
+      <UnsavedChangesDialog
+        opened={transferCloseGuard.confirmCloseOpened}
+        onCancel={transferCloseGuard.closeConfirmDialog}
+        onConfirm={transferCloseGuard.confirmClose}
+      />
+      <UnsavedChangesDialog
+        opened={fileCloseGuard.confirmCloseOpened}
+        onCancel={fileCloseGuard.closeConfirmDialog}
+        onConfirm={fileCloseGuard.confirmClose}
       />
       <DeleteConfirmDialog
         opened={deleteDialog !== null}

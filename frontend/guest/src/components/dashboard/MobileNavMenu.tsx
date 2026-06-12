@@ -8,7 +8,7 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react'
-import { CircleDollarSign, Home, Menu, UserRound, X } from 'lucide-react'
+import { CircleDollarSign, Home, Menu, X } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { TruistMark } from '../common/TruistMark'
 import { MobileNavItem } from './MobileNavItem'
@@ -100,9 +100,6 @@ export function MobileNavMenu({
                     }}
                   >
                     Accounts
-                  </MobileNavItem>
-                  <MobileNavItem icon={<UserRound size={23} aria-hidden="true" />}>
-                    Profile &amp; settings
                   </MobileNavItem>
                 </nav>
 
