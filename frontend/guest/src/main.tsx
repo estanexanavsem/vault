@@ -5,9 +5,13 @@ if (import.meta.env.DEV) {
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ErrorBoundary } from 'react-error-boundary'
 import { BrowserRouter } from 'react-router-dom'
+import { Toaster } from 'sonner'
 import App from './App'
+import { ErrorFallback } from './components/common/ErrorFallback'
 import './styles/index.css'
+import { logBoundaryError } from './utils/errorBoundary'
 
 const queryClient = new QueryClient()
 const preloadReloadKey = 'vault:preload-reload'
@@ -28,9 +32,12 @@ window.addEventListener('load', () => sessionStorage.removeItem(preloadReloadKey
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ErrorBoundary FallbackComponent={ErrorFallback} onError={logBoundaryError}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ErrorBoundary>
+      <Toaster closeButton position="top-right" richColors />
     </QueryClientProvider>
   </React.StrictMode>,
 )

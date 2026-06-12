@@ -33,6 +33,8 @@ Use CSS Modules for component and feature styles. Name component-owned modules a
 
 Use the shared `cn()` helper from `src/utils/cn.ts` for conditional or combined class names. Do not build class names with template-string concatenation when `cn()` can express the same state.
 
+Keep React component files limited to rendering, local UI state, and component-owned helpers. Shared side-effect logic such as error logging, analytics, request normalization, storage, and notification helpers must live outside component files, preferably under `src/utils/` or `src/services/`.
+
 ESLint enforces type-aware TypeScript rules, React Hooks rules, `no-console` warnings except `console.warn` and `console.error`, and inline `type` imports. Prettier controls formatting.
 
 Keep API contracts typed at the edge. Avoid `any`; model guest API responses with local interfaces or shared types before reading nested response fields.

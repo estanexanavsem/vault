@@ -1,0 +1,103 @@
+.fallback {
+  display: grid;
+  min-height: 56vh;
+  place-items: center;
+  padding: 32px;
+  color: var(--ink);
+  background: var(--page);
+}
+
+.fullPage {
+  min-height: 100dvh;
+  background: linear-gradient(180deg, rgb(45 23 75 / 92%), rgb(74 40 112 / 90%)), var(--purple-900);
+}
+
+.panel {
+  display: grid;
+  gap: 18px;
+  width: min(100%, 480px);
+  padding: 28px;
+  background: #fff;
+  border: 1px solid var(--purple-300);
+  border-radius: 16px;
+}
+
+.icon {
+  display: inline-grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  color: #8f1f16;
+  background: #fff0ee;
+  border-radius: 999px;
+}
+
+.copy {
+  display: grid;
+  gap: 8px;
+}
+
+.copy h1,
+.copy h2,
+.copy p {
+  margin: 0;
+}
+
+.copy h1,
+.copy h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.copy p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 999px;
+}
+
+.primaryButton {
+  color: #fff;
+  background: var(--purple-600);
+  border: 1px solid var(--purple-600);
+}
+
+.secondaryButton {
+  color: var(--purple-700);
+  background: #fff;
+  border: 1px solid var(--purple-300);
+}
+
+@media (width <= 560px) {
+  .fallback {
+    padding: 20px;
+  }
+
+  .panel {
+    padding: 22px;
+  }
+
+  .actions {
+    display: grid;
+  }
+}

@@ -21,10 +21,10 @@ export const guestAuthService = {
     return response.data
   },
 
-  checkSession: async (): Promise<GuestData> => {
+  checkSession: async (options: { signal?: AbortSignal } = {}): Promise<GuestData> => {
     const response = await readResponse(
       httpClient.get<GuestSessionResponse>('/guest/session', {
-        headers: { Accept: 'application/json' },
+        signal: options.signal,
       }),
     )
 

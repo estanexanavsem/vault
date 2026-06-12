@@ -8,13 +8,7 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react'
-import {
-  CircleDollarSign,
-  Home,
-  Menu,
-  UserRound,
-  X,
-} from 'lucide-react'
+import { CircleDollarSign, Home, Menu, UserRound, X } from 'lucide-react'
 import { useCallback, useState, type ReactNode } from 'react'
 import { cn } from '../../utils/cn'
 import { TruistMark } from '../common/TruistMark'

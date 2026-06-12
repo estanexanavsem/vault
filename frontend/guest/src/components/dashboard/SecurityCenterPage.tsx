@@ -12,12 +12,15 @@ import {
   formatUsPhoneNumber,
   normalizeUsPhoneNumber,
 } from '../../utils/formatters'
+import { notifyRequestError } from '../../utils/notifications'
+import { normalizeRequestError } from '../../utils/requestError'
 import styles from './security-center.module.css'
 
 interface SecurityCenterPageProps {
   account: MasterAccount
   onAccountUpdate: (account: MasterAccount) => void
   onBack: () => void
+  onSessionExpired: () => void
 }
 
 type EditField = 'email' | 'phone'
@@ -66,7 +69,12 @@ const getFullName = (account: MasterAccount) => {
   return holderName !== '' ? holderName : account.login
 }
 
-export function SecurityCenterPage({ account, onAccountUpdate, onBack }: SecurityCenterPageProps) {
+export function SecurityCenterPage({
+  account,
+  onAccountUpdate,
+  onBack,
+  onSessionExpired,
+}: SecurityCenterPageProps) {
   const [isPhoneOpen, setIsPhoneOpen] = useState(false)
   const [editingField, setEditingField] = useState<EditField | null>(null)
   const {
@@ -131,9 +139,31 @@ export function SecurityCenterPage({ account, onAccountUpdate, onBack }: Securit
       onAccountUpdate(updatedAccount)
       setEditingField(null)
       reset({ field: 'email', value: '' })
-    } catch (error) {
+    } catch (error: unknown) {
+      const requestError = normalizeRequestError(error)
+
+      if (requestError.kind === 'auth') {
+        notifyRequestError(error, {
+          id: 'guest-profile-session',
+          title: 'Your session expired',
+        })
+        onSessionExpired()
+        return
+      }
+
+      if (
+        requestError.kind === 'network' ||
+        requestError.kind === 'server' ||
+        requestError.kind === 'timeout'
+      ) {
+        notifyRequestError(error, {
+          id: 'guest-profile-update',
+          title: "We couldn't update your contact information",
+        })
+      }
+
       setError('root', {
-        message: error instanceof Error ? error.message : 'Could not update profile.',
+        message: requestError.userMessage,
       })
     }
   }

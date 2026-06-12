@@ -1,8 +1,11 @@
 import { lazy, Suspense } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import { useLocation, useNavigate } from 'react-router-dom'
 import type { GuestData, MasterAccount } from '../../types/guest'
 import { getAccountRoute } from '../../utils/accountRoute'
+import { logBoundaryError } from '../../utils/errorBoundary'
 import { getDisplayName } from '../../utils/formatters'
+import { ErrorFallback } from '../common/ErrorFallback'
 import { DashboardHome } from './DashboardHome'
 import { Footer } from './Footer'
 import { Topbar } from './Topbar'
@@ -34,6 +37,7 @@ export function Dashboard({ data, onAccountUpdate, onSignOut }: DashboardProps) 
   const showHome = () => navigate('/')
   const showAccount = () => navigate(getAccountRoute(data.master.id))
   const showSecurityCenter = () => navigate('/security-center')
+  const pageBoundaryKeys = [location.pathname, data.master.id]
 
   return (
     <div className={styles.shell}>
@@ -46,26 +50,39 @@ export function Dashboard({ data, onAccountUpdate, onSignOut }: DashboardProps) 
         onSignOut={onSignOut}
       />
 
-      {isAccountPage ? (
-        <Suspense fallback={<DashboardPageFallback />}>
-          <AccountDetailsPage data={data} onBack={showHome} />
-        </Suspense>
-      ) : isSecurityCenterPage ? (
-        <Suspense fallback={<DashboardPageFallback />}>
-          <SecurityCenterPage
-            account={data.master}
-            onAccountUpdate={onAccountUpdate}
-            onBack={showHome}
+      <ErrorBoundary
+        fallbackRender={(props) => (
+          <ErrorFallback
+            {...props}
+            scope="page"
+            onBack={isAccountPage || isSecurityCenterPage ? showHome : undefined}
           />
-        </Suspense>
-      ) : (
-        <DashboardHome
-          data={data}
-          greetingName={greetingName}
-          onOpenAccount={showAccount}
-          onOpenSecurityCenter={showSecurityCenter}
-        />
-      )}
+        )}
+        onError={logBoundaryError}
+        resetKeys={pageBoundaryKeys}
+      >
+        {isAccountPage ? (
+          <Suspense fallback={<DashboardPageFallback />}>
+            <AccountDetailsPage data={data} onBack={showHome} />
+          </Suspense>
+        ) : isSecurityCenterPage ? (
+          <Suspense fallback={<DashboardPageFallback />}>
+            <SecurityCenterPage
+              account={data.master}
+              onAccountUpdate={onAccountUpdate}
+              onBack={showHome}
+              onSessionExpired={onSignOut}
+            />
+          </Suspense>
+        ) : (
+          <DashboardHome
+            data={data}
+            greetingName={greetingName}
+            onOpenAccount={showAccount}
+            onOpenSecurityCenter={showSecurityCenter}
+          />
+        )}
+      </ErrorBoundary>
 
       <Footer />
     </div>
