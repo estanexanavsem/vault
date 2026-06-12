@@ -43,9 +43,6 @@ export function Topbar({
           >
             Accounts
           </button>
-          <a href="#transfer">Transfer &amp; pay</a>
-          <a href="#business">Business tools</a>
-          <a href="#support">Help &amp; support</a>
         </nav>
 
         <div className={styles.desktopSession}>

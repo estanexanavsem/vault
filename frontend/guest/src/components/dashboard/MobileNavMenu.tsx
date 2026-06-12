@@ -9,10 +9,7 @@ import {
   useRole,
 } from '@floating-ui/react'
 import {
-  ArrowLeftRight,
   CircleDollarSign,
-  CircleHelp,
-  ClipboardList,
   Home,
   Menu,
   UserRound,
@@ -36,10 +33,9 @@ interface MobileNavItemProps {
   current?: boolean
   icon: ReactNode
   onSelect?: () => void
-  href?: string
 }
 
-function MobileNavItem({ children, current = false, href, icon, onSelect }: MobileNavItemProps) {
+function MobileNavItem({ children, current = false, icon, onSelect }: MobileNavItemProps) {
   const className = cn(styles.mobileNavItem, current && styles.current)
   const content = (
     <>
@@ -47,14 +43,6 @@ function MobileNavItem({ children, current = false, href, icon, onSelect }: Mobi
       <span>{children}</span>
     </>
   )
-
-  if (href) {
-    return (
-      <a className={className} href={href} role="menuitem" onClick={onSelect}>
-        {content}
-      </a>
-    )
-  }
 
   return (
     <button className={className} type="button" role="menuitem" onClick={onSelect}>
@@ -141,27 +129,6 @@ export function MobileNavMenu({
                     }}
                   >
                     Accounts
-                  </MobileNavItem>
-                  <MobileNavItem
-                    href="#transfer"
-                    icon={<ArrowLeftRight size={23} aria-hidden="true" />}
-                    onSelect={close}
-                  >
-                    Transfer &amp; pay
-                  </MobileNavItem>
-                  <MobileNavItem
-                    href="#business"
-                    icon={<ClipboardList size={23} aria-hidden="true" />}
-                    onSelect={close}
-                  >
-                    Business tools
-                  </MobileNavItem>
-                  <MobileNavItem
-                    href="#support"
-                    icon={<CircleHelp size={23} aria-hidden="true" />}
-                    onSelect={close}
-                  >
-                    Help &amp; support
                   </MobileNavItem>
                   <MobileNavItem icon={<UserRound size={23} aria-hidden="true" />}>
                     Profile &amp; settings
