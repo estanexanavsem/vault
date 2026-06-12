@@ -6,8 +6,10 @@ import (
 	"net/http/httptest"
 	"reflect"
 	"testing"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"vault/config"
 )
 
 func TestCorsOriginsDefaultsAndEnvOverride(t *testing.T) {
@@ -57,6 +59,25 @@ func TestNewRouterHealthAndCors(t *testing.T) {
 	}
 }
 
+func TestNewRouterReadyRequiresDatabase(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	oldDB := config.DB
+	config.DB = nil
+	defer func() {
+		config.DB = oldDB
+	}()
+
+	router := newRouter()
+
+	req := httptest.NewRequest(http.MethodGet, "/ready", nil)
+	resp := httptest.NewRecorder()
+	router.ServeHTTP(resp, req)
+
+	if resp.Code != http.StatusServiceUnavailable {
+		t.Fatalf("expected 503, got %d: %s", resp.Code, resp.Body.String())
+	}
+}
+
 func TestRunReturnsDirectoryCreationError(t *testing.T) {
 	t.Setenv("DB_PATH", "/dev/null/vault.db")
 
@@ -70,18 +91,40 @@ func TestRunWithServerInitializesDBAndUsesPort(t *testing.T) {
 	t.Setenv("DB_PATH", t.TempDir()+"/vault.db")
 	t.Setenv("PORT", "9090")
 	t.Setenv("PANEL_PASSWORD", "panel-secret")
+	t.Setenv("HTTP_READ_HEADER_TIMEOUT", "7s")
+	t.Setenv("HTTP_READ_TIMEOUT", "17s")
+	t.Setenv("HTTP_WRITE_TIMEOUT", "37s")
+	t.Setenv("HTTP_IDLE_TIMEOUT", "77s")
 
 	called := false
-	err := runWithServer(func(r *gin.Engine, addr string) error {
+	err := runWithServer(func(srv *http.Server) error {
 		called = true
-		if addr != ":9090" {
-			t.Fatalf("unexpected listen addr: %q", addr)
+		if srv.Addr != ":9090" {
+			t.Fatalf("unexpected listen addr: %q", srv.Addr)
+		}
+		if srv.ReadHeaderTimeout != 7*time.Second {
+			t.Fatalf("unexpected read header timeout: %s", srv.ReadHeaderTimeout)
+		}
+		if srv.ReadTimeout != 17*time.Second {
+			t.Fatalf("unexpected read timeout: %s", srv.ReadTimeout)
+		}
+		if srv.WriteTimeout != 37*time.Second {
+			t.Fatalf("unexpected write timeout: %s", srv.WriteTimeout)
+		}
+		if srv.IdleTimeout != 77*time.Second {
+			t.Fatalf("unexpected idle timeout: %s", srv.IdleTimeout)
 		}
 		req := httptest.NewRequest(http.MethodGet, "/health", nil)
 		resp := httptest.NewRecorder()
-		r.ServeHTTP(resp, req)
+		srv.Handler.ServeHTTP(resp, req)
 		if resp.Code != http.StatusOK {
 			t.Fatalf("health route not available: %d %s", resp.Code, resp.Body.String())
+		}
+		readyReq := httptest.NewRequest(http.MethodGet, "/ready", nil)
+		readyResp := httptest.NewRecorder()
+		srv.Handler.ServeHTTP(readyResp, readyReq)
+		if readyResp.Code != http.StatusOK {
+			t.Fatalf("ready route not available: %d %s", readyResp.Code, readyResp.Body.String())
 		}
 		return nil
 	})
@@ -100,9 +143,9 @@ func TestRunWithServerReturnsStartError(t *testing.T) {
 	t.Setenv("PANEL_PASSWORD", "panel-secret")
 
 	wantErr := errors.New("listen failed")
-	err := runWithServer(func(_ *gin.Engine, addr string) error {
-		if addr != ":8080" {
-			t.Fatalf("unexpected default listen addr: %q", addr)
+	err := runWithServer(func(srv *http.Server) error {
+		if srv.Addr != ":8080" {
+			t.Fatalf("unexpected default listen addr: %q", srv.Addr)
 		}
 		return wantErr
 	})

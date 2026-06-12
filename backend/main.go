@@ -1,10 +1,16 @@
 package main
 
 import (
+	"context"
+	"errors"
 	"log"
+	"net/http"
 	"os"
+	"os/signal"
 	"path/filepath"
 	"strings"
+	"syscall"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -21,12 +27,10 @@ func main() {
 }
 
 func run() error {
-	return runWithServer(func(r *gin.Engine, addr string) error {
-		return r.Run(addr)
-	})
+	return runWithServer(startHTTPServer)
 }
 
-func runWithServer(start func(*gin.Engine, string) error) error {
+func runWithServer(start func(*http.Server) error) error {
 	dbPath := os.Getenv("DB_PATH")
 	if dbPath == "" {
 		dbPath = "./data/vault.db"
@@ -48,7 +52,63 @@ func runWithServer(start func(*gin.Engine, string) error) error {
 	}
 
 	log.Printf("Vault server starting on :%s", port)
-	return start(r, ":"+port)
+	return start(newHTTPServer(":"+port, r))
+}
+
+func newHTTPServer(addr string, handler http.Handler) *http.Server {
+	return &http.Server{
+		Addr:              addr,
+		Handler:           handler,
+		ReadHeaderTimeout: envDuration("HTTP_READ_HEADER_TIMEOUT", 5*time.Second),
+		ReadTimeout:       envDuration("HTTP_READ_TIMEOUT", 15*time.Second),
+		WriteTimeout:      envDuration("HTTP_WRITE_TIMEOUT", 30*time.Second),
+		IdleTimeout:       envDuration("HTTP_IDLE_TIMEOUT", 60*time.Second),
+	}
+}
+
+func startHTTPServer(srv *http.Server) error {
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer stop()
+
+	errCh := make(chan error, 1)
+	go func() {
+		errCh <- srv.ListenAndServe()
+	}()
+
+	select {
+	case err := <-errCh:
+		if errors.Is(err, http.ErrServerClosed) {
+			return nil
+		}
+		return err
+	case <-ctx.Done():
+		stop()
+		shutdownCtx, cancel := context.WithTimeout(context.Background(), envDuration("HTTP_SHUTDOWN_TIMEOUT", 10*time.Second))
+		defer cancel()
+
+		if err := srv.Shutdown(shutdownCtx); err != nil {
+			return err
+		}
+		err := <-errCh
+		if errors.Is(err, http.ErrServerClosed) {
+			return nil
+		}
+		return err
+	}
+}
+
+func envDuration(name string, fallback time.Duration) time.Duration {
+	raw := strings.TrimSpace(os.Getenv(name))
+	if raw == "" {
+		return fallback
+	}
+
+	duration, err := time.ParseDuration(raw)
+	if err != nil || duration <= 0 {
+		log.Printf("Ignoring invalid %s=%q; using %s", name, raw, fallback)
+		return fallback
+	}
+	return duration
 }
 
 func newRouter() *gin.Engine {
@@ -64,6 +124,13 @@ func newRouter() *gin.Engine {
 
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok"})
+	})
+	r.GET("/ready", func(c *gin.Context) {
+		if err := databaseReady(); err != nil {
+			c.JSON(http.StatusServiceUnavailable, gin.H{"status": "error", "database": "unavailable"})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"status": "ok", "database": "ok"})
 	})
 
 	api := r.Group("/api")
@@ -109,6 +176,18 @@ func newRouter() *gin.Engine {
 		}
 	}
 	return r
+}
+
+func databaseReady() error {
+	if config.DB == nil {
+		return errors.New("database is not initialized")
+	}
+
+	sqlDB, err := config.DB.DB()
+	if err != nil {
+		return err
+	}
+	return sqlDB.Ping()
 }
 
 func corsOrigins() []string {
