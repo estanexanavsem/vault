@@ -2,7 +2,9 @@ import type {
   GuestData,
   GuestLoginResponse,
   GuestLogoutResponse,
+  GuestProfileUpdateResponse,
   GuestSessionResponse,
+  MasterAccount,
 } from '../types/guest'
 import { httpClient, readResponse } from './httpClient'
 
@@ -39,4 +41,16 @@ export const guestAuthService = {
 
   logout: (): Promise<GuestLogoutResponse> =>
     readResponse(httpClient.post<GuestLogoutResponse>('/guest/logout')),
+
+  updateProfile: async (payload: { email?: string; phone?: string }): Promise<MasterAccount> => {
+    const response = await readResponse(
+      httpClient.put<GuestProfileUpdateResponse>('/guest/profile', payload),
+    )
+
+    if (!response.success || !response.master) {
+      throw new Error(response.error ?? 'Could not update profile')
+    }
+
+    return response.master
+  },
 }

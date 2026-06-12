@@ -14,18 +14,19 @@ import (
 )
 
 type accountResponse struct {
-	ID              uint      `json:"id"`
-	Login           string    `json:"login"`
-	HolderName      string    `json:"holder_name"`
-	AccountName     string    `json:"account_name"`
-	FullAccountName string    `json:"full_account_name"`
-	AccountNumber   string    `json:"account_number"`
-	RoutingNumber   string    `json:"routing_number"`
-	Email           string    `json:"email"`
-	Phone           string    `json:"phone"`
-	Balance         float64   `json:"balance"`
-	CreatedAt       time.Time `json:"created_at"`
-	UpdatedAt       time.Time `json:"updated_at"`
+	ID              uint       `json:"id"`
+	Login           string     `json:"login"`
+	HolderName      string     `json:"holder_name"`
+	AccountName     string     `json:"account_name"`
+	FullAccountName string     `json:"full_account_name"`
+	AccountNumber   string     `json:"account_number"`
+	RoutingNumber   string     `json:"routing_number"`
+	Email           string     `json:"email"`
+	Phone           string     `json:"phone"`
+	Balance         float64    `json:"balance"`
+	LastSignInAt    *time.Time `json:"last_sign_in_at,omitempty"`
+	CreatedAt       time.Time  `json:"created_at"`
+	UpdatedAt       time.Time  `json:"updated_at"`
 }
 
 type fileResponse struct {
@@ -59,6 +60,7 @@ func accountToResponse(account models.Account) accountResponse {
 		Email:           account.Email,
 		Phone:           account.Phone,
 		Balance:         account.Balance,
+		LastSignInAt:    account.LastSignInAt,
 		CreatedAt:       account.CreatedAt,
 		UpdatedAt:       account.UpdatedAt,
 	}

@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/sqlite"
@@ -100,7 +101,9 @@ func TestGuestLoginOmitsSecretsAndMigratesPlaintextPassword(t *testing.T) {
 	req := httptest.NewRequest(http.MethodPost, "/guest/login", strings.NewReader(`{"login":"guest","password":"plain-secret"}`))
 	req.Header.Set("Content-Type", "application/json")
 	resp := httptest.NewRecorder()
+	beforeLogin := time.Now().UTC()
 	router.ServeHTTP(resp, req)
+	afterLogin := time.Now().UTC()
 
 	if resp.Code != http.StatusOK {
 		t.Fatalf("expected 200, got %d: %s", resp.Code, resp.Body.String())
@@ -109,6 +112,9 @@ func TestGuestLoginOmitsSecretsAndMigratesPlaintextPassword(t *testing.T) {
 	if strings.Contains(body, "plain-secret") || strings.Contains(body, "file-secret") || strings.Contains(body, `"password"`) {
 		t.Fatalf("response leaked secret material: %s", body)
 	}
+	if !strings.Contains(body, `"last_sign_in_at"`) {
+		t.Fatalf("response missing last_sign_in_at: %s", body)
+	}
 
 	var stored models.Account
 	if err := config.DB.First(&stored, account.ID).Error; err != nil {
@@ -116,6 +122,12 @@ func TestGuestLoginOmitsSecretsAndMigratesPlaintextPassword(t *testing.T) {
 	}
 	if !security.IsPasswordHash(stored.Password) {
 		t.Fatalf("password was not migrated to bcrypt: %q", stored.Password)
+	}
+	if stored.LastSignInAt == nil {
+		t.Fatal("last sign-in timestamp was not stored")
+	}
+	if stored.LastSignInAt.Before(beforeLogin) || stored.LastSignInAt.After(afterLogin) {
+		t.Fatalf("last sign-in timestamp out of login window: %s", stored.LastSignInAt.Format(time.RFC3339Nano))
 	}
 }
 
@@ -301,6 +313,14 @@ func TestGuestSessionWithBasicAuthReturnsDataWithoutFileBlob(t *testing.T) {
 	}
 	if strings.Contains(body, "secret-file") || strings.Contains(body, `"password"`) || strings.Contains(body, `"data"`) {
 		t.Fatalf("guest session leaked restricted fields: %s", body)
+	}
+
+	var updated models.Account
+	if err := config.DB.First(&updated, account.ID).Error; err != nil {
+		t.Fatalf("reload account: %v", err)
+	}
+	if updated.LastSignInAt == nil {
+		t.Fatalf("expected basic auth guest session to record last sign-in")
 	}
 }
 

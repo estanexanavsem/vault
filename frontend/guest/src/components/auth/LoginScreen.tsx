@@ -1,27 +1,41 @@
-import { AlertCircle, LockKeyhole, UserRound } from 'lucide-react'
-import type { FormEvent } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { AlertCircle, LoaderCircle, LockKeyhole, UserRound } from 'lucide-react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { TruistMark } from '../common/TruistMark'
 import styles from './auth.module.css'
 
 interface LoginScreenProps {
   error: string
   loading: boolean
-  login: string
-  password: string
-  onLoginChange: (value: string) => void
-  onPasswordChange: (value: string) => void
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void
+  onSubmit: (login: string, password: string) => Promise<void>
 }
 
-export function LoginScreen({
-  error,
-  loading,
-  login,
-  password,
-  onLoginChange,
-  onPasswordChange,
-  onSubmit,
-}: LoginScreenProps) {
+const loginSchema = z.object({
+  login: z.string().trim().min(1, 'Enter your login.'),
+  password: z.string().min(1, 'Enter your password.'),
+})
+
+type LoginFormValues = z.infer<typeof loginSchema>
+
+export function LoginScreen({ error, loading, onSubmit }: LoginScreenProps) {
+  const {
+    formState: { errors, isSubmitting },
+    handleSubmit,
+    register,
+  } = useForm<LoginFormValues>({
+    defaultValues: {
+      login: '',
+      password: '',
+    },
+    resolver: zodResolver(loginSchema),
+  })
+  const isBusy = loading || isSubmitting
+
+  const submitLogin = async (values: LoginFormValues) => {
+    await onSubmit(values.login.trim(), values.password)
+  }
+
   return (
     <main className={styles.screen}>
       <section className={styles.panel} aria-labelledby="login-title">
@@ -33,7 +47,7 @@ export function LoginScreen({
           </div>
         </div>
 
-        <form className={styles.form} onSubmit={onSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit(submitLogin)}>
           {error && (
             <div className={styles.errorBanner} role="alert">
               <AlertCircle size={18} aria-hidden="true" />
@@ -46,14 +60,17 @@ export function LoginScreen({
             <span className={styles.inputShell}>
               <UserRound size={18} aria-hidden="true" />
               <input
+                {...register('login')}
                 autoComplete="username"
-                onChange={(event) => onLoginChange(event.target.value)}
+                aria-invalid={errors.login ? 'true' : undefined}
                 placeholder="Enter your login"
                 required
                 type="text"
-                value={login}
               />
             </span>
+            {errors.login?.message ? (
+              <span className={styles.fieldError}>{errors.login.message}</span>
+            ) : null}
           </label>
 
           <label className={styles.field}>
@@ -61,18 +78,30 @@ export function LoginScreen({
             <span className={styles.inputShell}>
               <LockKeyhole size={18} aria-hidden="true" />
               <input
+                {...register('password')}
                 autoComplete="current-password"
-                onChange={(event) => onPasswordChange(event.target.value)}
+                aria-invalid={errors.password ? 'true' : undefined}
                 placeholder="Enter your password"
                 required
                 type="password"
-                value={password}
               />
             </span>
+            {errors.password?.message ? (
+              <span className={styles.fieldError}>{errors.password.message}</span>
+            ) : null}
           </label>
 
-          <button className={styles.submitButton} disabled={loading} type="submit">
-            {loading ? 'Checking access...' : 'Enter'}
+          <button
+            className={styles.submitButton}
+            disabled={isBusy}
+            type="submit"
+            aria-label={isBusy ? 'Checking access' : undefined}
+          >
+            {isBusy ? (
+              <LoaderCircle className="motion-safe:animate-spin" size={20} aria-hidden="true" />
+            ) : (
+              'Enter'
+            )}
           </button>
         </form>
       </section>

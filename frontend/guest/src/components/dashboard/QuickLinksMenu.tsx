@@ -3,10 +3,10 @@ import { FloatingDropdown } from '../common/FloatingDropdown'
 import styles from './navigation.module.css'
 
 interface QuickLinksMenuProps {
-  statementLabel: string
+  onOpenSecurityCenter: () => void
 }
 
-export function QuickLinksMenu({ statementLabel }: QuickLinksMenuProps) {
+export function QuickLinksMenu({ onOpenSecurityCenter }: QuickLinksMenuProps) {
   return (
     <div className={styles.mobileQuickLinksWrap}>
       <FloatingDropdown
@@ -28,9 +28,16 @@ export function QuickLinksMenu({ statementLabel }: QuickLinksMenuProps) {
         {(close) => (
           <>
             <button type="button" role="menuitem" onClick={close}>
-              {statementLabel}
+              Statements
             </button>
-            <button type="button" role="menuitem" onClick={close}>
+            <button
+              type="button"
+              role="menuitem"
+              onClick={() => {
+                close()
+                onOpenSecurityCenter()
+              }}
+            >
               Security center
             </button>
           </>

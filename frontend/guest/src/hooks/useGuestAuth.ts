@@ -1,11 +1,9 @@
 import { isAxiosError } from 'axios'
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useState } from 'react'
 import { guestAuthService } from '../services/guestAuthService'
-import type { ApiErrorResponse, GuestData } from '../types/guest'
+import type { ApiErrorResponse, GuestData, MasterAccount } from '../types/guest'
 
 export function useGuestAuth() {
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
   const [data, setData] = useState<GuestData | null>(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -37,8 +35,7 @@ export function useGuestAuth() {
     }
   }, [])
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmit = async (login: string, password: string) => {
     setLoading(true)
     setError('')
     try {
@@ -60,19 +57,19 @@ export function useGuestAuth() {
   const handleSignOut = () => {
     void guestAuthService.logout().catch(() => undefined)
     setData(null)
-    setPassword('')
+  }
+
+  const handleAccountUpdate = (account: MasterAccount) => {
+    setData((current) => (current ? { ...current, master: account } : current))
   }
 
   return {
     data,
     error,
+    handleAccountUpdate,
     handleSignOut,
     handleSubmit,
     isAuthChecked,
     loading,
-    login,
-    password,
-    setLogin,
-    setPassword,
   }
 }

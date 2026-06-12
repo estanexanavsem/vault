@@ -6,6 +6,7 @@ import styles from './navigation.module.css'
 interface TopbarProps {
   greetingName: string
   isAccountPage: boolean
+  isHomePage: boolean
   onOpenAccount: () => void
   onShowHome: () => void
   onSignOut: () => void
@@ -14,6 +15,7 @@ interface TopbarProps {
 export function Topbar({
   greetingName,
   isAccountPage,
+  isHomePage,
   onOpenAccount,
   onShowHome,
   onSignOut,
@@ -31,11 +33,7 @@ export function Topbar({
         </button>
 
         <nav className={styles.desktopNav} aria-label="Primary">
-          <button
-            className={cn(!isAccountPage && styles.current)}
-            type="button"
-            onClick={onShowHome}
-          >
+          <button className={cn(isHomePage && styles.current)} type="button" onClick={onShowHome}>
             Home
           </button>
           <button
@@ -62,6 +60,7 @@ export function Topbar({
 
         <MobileNavMenu
           isAccountPage={isAccountPage}
+          isHomePage={isHomePage}
           onOpenAccount={onOpenAccount}
           onShowHome={onShowHome}
           onSignOut={onSignOut}

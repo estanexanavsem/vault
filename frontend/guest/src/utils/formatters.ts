@@ -1,3 +1,4 @@
+import { AsYouType, parsePhoneNumberFromString } from 'libphonenumber-js/min'
 import type { MasterAccount, Transfer } from '../types/guest'
 
 export const formatCurrency = (value: number) =>
@@ -23,6 +24,42 @@ export const formatShortDate = (value: string) => {
     timeZone: 'UTC',
     year: 'numeric',
   }).format(date)
+}
+
+export const formatEasternDateTime = (value: string) => {
+  const date = new Date(value)
+
+  if (Number.isNaN(date.getTime())) {
+    return ''
+  }
+
+  const formatted = new Intl.DateTimeFormat('en-US', {
+    day: '2-digit',
+    hour: '2-digit',
+    hour12: true,
+    minute: '2-digit',
+    month: '2-digit',
+    timeZone: 'America/New_York',
+    timeZoneName: 'short',
+    year: 'numeric',
+  }).formatToParts(date)
+
+  const getPart = (type: Intl.DateTimeFormatPartTypes) =>
+    formatted.find((part) => part.type === type)?.value ?? ''
+
+  return `${getPart('hour')}:${getPart('minute')} ${getPart('dayPeriod')} ${getPart('timeZoneName')} on ${getPart('month')}/${getPart('day')}/${getPart('year')}`
+}
+
+export const formatUsPhoneNumber = (value: string) => {
+  const phoneNumber = parsePhoneNumberFromString(value, 'US')
+  return phoneNumber?.isPossible() ? phoneNumber.formatNational() : value
+}
+
+export const formatUsPhoneInput = (value: string) => new AsYouType('US').input(value)
+
+export const normalizeUsPhoneNumber = (value: string) => {
+  const phoneNumber = parsePhoneNumberFromString(value, 'US')
+  return phoneNumber?.isValid() && phoneNumber.country === 'US' ? phoneNumber.number : ''
 }
 
 export const getLastFour = (value: string) => {

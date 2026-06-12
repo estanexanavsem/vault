@@ -74,6 +74,7 @@ func newRouter() *gin.Engine {
 		{
 			guest.POST("/login", handlers.GuestLogin)
 			guest.GET("/session", handlers.GuestSession)
+			guest.PUT("/profile", handlers.GuestUpdateProfile)
 			guest.POST("/logout", handlers.GuestLogout)
 		}
 

@@ -10,18 +10,18 @@ interface DashboardHomeProps {
   data: GuestData
   greetingName: string
   onOpenAccount: () => void
-  statementLabel: string
+  onOpenSecurityCenter: () => void
 }
 
 export function DashboardHome({
   data,
   greetingName,
   onOpenAccount,
-  statementLabel,
+  onOpenSecurityCenter,
 }: DashboardHomeProps) {
   return (
     <>
-      <DashboardHero greetingName={greetingName} statementLabel={statementLabel} />
+      <DashboardHero greetingName={greetingName} onOpenSecurityCenter={onOpenSecurityCenter} />
 
       <main className={styles.dashboardMain} id="home">
         <div className={styles.dashboardGrid}>

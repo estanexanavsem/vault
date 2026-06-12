@@ -25,6 +25,7 @@ import styles from './navigation.module.css'
 
 interface MobileNavMenuProps {
   isAccountPage: boolean
+  isHomePage: boolean
   onOpenAccount: () => void
   onShowHome: () => void
   onSignOut: () => void
@@ -64,6 +65,7 @@ function MobileNavItem({ children, current = false, href, icon, onSelect }: Mobi
 
 export function MobileNavMenu({
   isAccountPage,
+  isHomePage,
   onOpenAccount,
   onShowHome,
   onSignOut,
@@ -121,7 +123,7 @@ export function MobileNavMenu({
 
                 <nav className={styles.mobileNavList} aria-label="Mobile primary">
                   <MobileNavItem
-                    current={!isAccountPage}
+                    current={isHomePage}
                     icon={<Home size={23} aria-hidden="true" />}
                     onSelect={() => {
                       close()

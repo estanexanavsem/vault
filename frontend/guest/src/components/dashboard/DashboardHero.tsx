@@ -5,10 +5,10 @@ import styles from './dashboard.module.css'
 
 interface DashboardHeroProps {
   greetingName: string
-  statementLabel: string
+  onOpenSecurityCenter: () => void
 }
 
-export function DashboardHero({ greetingName, statementLabel }: DashboardHeroProps) {
+export function DashboardHero({ greetingName, onOpenSecurityCenter }: DashboardHeroProps) {
   const [timeGreeting, setTimeGreeting] = useState(getTimeGreeting)
 
   useEffect(() => {
@@ -26,10 +26,12 @@ export function DashboardHero({ greetingName, statementLabel }: DashboardHeroPro
           {timeGreeting}, {greetingName}
         </h1>
         <div className={styles.desktopQuickActions} aria-label="Quick actions">
-          <button type="button">{statementLabel}</button>
-          <button type="button">Security center</button>
+          <button type="button">Statements</button>
+          <button type="button" onClick={onOpenSecurityCenter}>
+            Security center
+          </button>
         </div>
-        <QuickLinksMenu statementLabel={statementLabel} />
+        <QuickLinksMenu onOpenSecurityCenter={onOpenSecurityCenter} />
       </div>
     </section>
   )

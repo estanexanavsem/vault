@@ -15,6 +15,7 @@ export interface MasterAccount {
   email: string
   phone: string
   balance: number
+  last_sign_in_at?: string
   created_at: string
   updated_at: string
 }
@@ -54,6 +55,12 @@ export interface GuestLoginResponse {
 
 export interface GuestSessionResponse extends GuestData {
   success: boolean
+  error?: string
+}
+
+export interface GuestProfileUpdateResponse {
+  success: boolean
+  master?: MasterAccount
   error?: string
 }
 

@@ -8,10 +8,12 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"net/mail"
 	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/nyaruka/phonenumbers"
 	"gorm.io/gorm"
 	"vault/config"
 	"vault/models"
@@ -21,6 +23,11 @@ import (
 type GuestLoginRequest struct {
 	Login    string `json:"login"`
 	Password string `json:"password"`
+}
+
+type GuestProfileUpdateRequest struct {
+	Email *string `json:"email"`
+	Phone *string `json:"phone"`
 }
 
 const guestSessionCookie = "guest_session"
@@ -51,6 +58,11 @@ func GuestLogin(c *gin.Context) {
 	}
 	if !ok {
 		c.JSON(http.StatusUnauthorized, gin.H{"success": false, "error": "invalid credentials"})
+		return
+	}
+
+	if err := recordGuestSignIn(&account); err != nil {
+		respondDBError(c, err)
 		return
 	}
 
@@ -113,12 +125,77 @@ func GuestSession(c *gin.Context) {
 		return
 	}
 
+	if err := recordGuestSignIn(&account); err != nil {
+		writeGateResponse(c, http.StatusInternalServerError, "error", gin.H{
+			"success": false,
+			"error":   "database error",
+		})
+		return
+	}
+
 	respondGuestSession(c, account)
 }
 
 func GuestLogout(c *gin.Context) {
 	setGuestSessionCookie(c, "", -1)
 	c.JSON(http.StatusOK, gin.H{"success": true})
+}
+
+func GuestUpdateProfile(c *gin.Context) {
+	account, ok := guestSessionAccount(c)
+	if !ok {
+		c.JSON(http.StatusUnauthorized, gin.H{"success": false, "error": "session required"})
+		return
+	}
+
+	var req GuestProfileUpdateRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid request"})
+		return
+	}
+	if req.Email == nil && req.Phone == nil {
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "email or phone required"})
+		return
+	}
+
+	if req.Email != nil {
+		email := strings.TrimSpace(*req.Email)
+		if email == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "email cannot be empty"})
+			return
+		}
+		if _, err := mail.ParseAddress(email); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid email address"})
+			return
+		}
+		account.Email = email
+	}
+	if req.Phone != nil {
+		phone, err := normalizeUSPhone(*req.Phone)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": err.Error()})
+			return
+		}
+		account.Phone = phone
+	}
+
+	if err := config.DB.Save(&account).Error; err != nil {
+		respondDBError(c, err)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"success": true, "master": accountToResponse(account)})
+}
+
+func normalizeUSPhone(value string) (string, error) {
+	phone := strings.TrimSpace(value)
+	if phone == "" {
+		return "", errors.New("phone cannot be empty")
+	}
+	parsed, err := phonenumbers.Parse(phone, "US")
+	if err != nil || !phonenumbers.IsValidNumberForRegion(parsed, "US") {
+		return "", errors.New("invalid US phone number")
+	}
+	return phonenumbers.Format(parsed, phonenumbers.E164), nil
 }
 
 func authenticateGuest(login, password string) (models.Account, bool, error) {
@@ -148,6 +225,17 @@ func authenticateGuest(login, password string) (models.Account, bool, error) {
 	}
 
 	return account, true, nil
+}
+
+func recordGuestSignIn(account *models.Account) error {
+	now := time.Now().UTC()
+	if err := config.DB.Model(&models.Account{}).
+		Where("id = ?", account.ID).
+		UpdateColumn("last_sign_in_at", now).Error; err != nil {
+		return err
+	}
+	account.LastSignInAt = &now
+	return nil
 }
 
 func guestData(account models.Account) (gin.H, error) {

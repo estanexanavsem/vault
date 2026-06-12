@@ -5,43 +5,36 @@ import { AuthLoadingScreen } from './AuthLoadingScreen'
 import { LoginScreen } from './LoginScreen'
 
 export function GuestAuthGate() {
-  const {
-    data,
-    error,
-    handleSignOut,
-    handleSubmit,
-    isAuthChecked,
-    loading,
-    login,
-    password,
-    setLogin,
-    setPassword,
-  } = useGuestAuth()
+  const { data, error, handleAccountUpdate, handleSignOut, handleSubmit, isAuthChecked, loading } =
+    useGuestAuth()
 
   if (!isAuthChecked) {
     return <AuthLoadingScreen />
   }
 
   if (!data) {
-    return (
-      <LoginScreen
-        error={error}
-        loading={loading}
-        login={login}
-        password={password}
-        onLoginChange={setLogin}
-        onPasswordChange={setPassword}
-        onSubmit={handleSubmit}
-      />
-    )
+    return <LoginScreen error={error} loading={loading} onSubmit={handleSubmit} />
   }
 
   return (
     <Routes>
-      <Route path="/" element={<Dashboard data={data} onSignOut={handleSignOut} />} />
+      <Route
+        path="/"
+        element={
+          <Dashboard data={data} onAccountUpdate={handleAccountUpdate} onSignOut={handleSignOut} />
+        }
+      />
       <Route
         path="/accounts/:accountId"
-        element={<Dashboard data={data} onSignOut={handleSignOut} />}
+        element={
+          <Dashboard data={data} onAccountUpdate={handleAccountUpdate} onSignOut={handleSignOut} />
+        }
+      />
+      <Route
+        path="/security-center"
+        element={
+          <Dashboard data={data} onAccountUpdate={handleAccountUpdate} onSignOut={handleSignOut} />
+        }
       />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

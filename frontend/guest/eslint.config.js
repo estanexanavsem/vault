@@ -1,7 +1,9 @@
 // @ts-check
+import { fixupPluginRules } from '@eslint/compat'
 import js from '@eslint/js'
 import prettierConfig from 'eslint-config-prettier/flat'
 import { defineConfig, globalIgnores } from 'eslint/config'
+import reactHookForm from 'eslint-plugin-react-hook-form'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import globals from 'globals'
@@ -35,6 +37,9 @@ export default defineConfig([
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    plugins: {
+      'react-hook-form': fixupPluginRules(reactHookForm),
+    },
     rules: {
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       '@typescript-eslint/consistent-type-imports': [
@@ -45,6 +50,10 @@ export default defineConfig([
         'error',
         { checksVoidReturn: { attributes: false } },
       ],
+      'react-hook-form/destructuring-formstate': 'error',
+      'react-hook-form/no-access-control': 'error',
+      'react-hook-form/no-nested-object-setvalue': 'error',
+      'react-hook-form/no-use-watch': 'error',
     },
   },
   {

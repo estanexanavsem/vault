@@ -629,7 +629,7 @@ func TestGuestLoginValidationAndUnauthorized(t *testing.T) {
 func TestGuestSessionHeadersMissingAndWrongCredentials(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	setupHandlerTestDB(t)
-	seedAccount(t, "guest")
+	account := seedAccount(t, "guest")
 
 	router := gin.New()
 	router.GET("/guest/session", GuestSession)
@@ -656,6 +656,14 @@ func TestGuestSessionHeadersMissingAndWrongCredentials(t *testing.T) {
 	router.ServeHTTP(rightResp, right)
 	if rightResp.Code != http.StatusOK {
 		t.Fatalf("expected header credentials 200, got %d: %s", rightResp.Code, rightResp.Body.String())
+	}
+
+	var updated models.Account
+	if err := config.DB.First(&updated, account.ID).Error; err != nil {
+		t.Fatalf("reload account: %v", err)
+	}
+	if updated.LastSignInAt == nil {
+		t.Fatalf("expected header guest session to record last sign-in")
 	}
 }
 
@@ -718,6 +726,69 @@ func TestGuestSessionCookieReturnsJSONAndLogoutClearsCookie(t *testing.T) {
 	}
 	if !cleared {
 		t.Fatalf("expected logout to clear guest session cookie")
+	}
+}
+
+func TestGuestUpdateProfileRequiresSessionAndUpdatesContact(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	setupHandlerTestDB(t)
+	account := seedAccount(t, "guest")
+
+	router := gin.New()
+	router.POST("/guest/login", GuestLogin)
+	router.PUT("/guest/profile", GuestUpdateProfile)
+
+	unauthorizedReq := httptest.NewRequest(http.MethodPut, "/guest/profile", strings.NewReader(`{"email":"new@example.com"}`))
+	unauthorizedReq.Header.Set("Content-Type", "application/json")
+	unauthorizedResp := httptest.NewRecorder()
+	router.ServeHTTP(unauthorizedResp, unauthorizedReq)
+	if unauthorizedResp.Code != http.StatusUnauthorized {
+		t.Fatalf("expected unauthorized update 401, got %d: %s", unauthorizedResp.Code, unauthorizedResp.Body.String())
+	}
+
+	loginReq := httptest.NewRequest(http.MethodPost, "/guest/login", strings.NewReader(`{"login":"guest","password":"secret"}`))
+	loginReq.Header.Set("Content-Type", "application/json")
+	loginResp := httptest.NewRecorder()
+	router.ServeHTTP(loginResp, loginReq)
+	if loginResp.Code != http.StatusOK {
+		t.Fatalf("expected login 200, got %d: %s", loginResp.Code, loginResp.Body.String())
+	}
+
+	var sessionCookie *http.Cookie
+	for _, cookie := range loginResp.Result().Cookies() {
+		if cookie.Name == guestSessionCookie {
+			sessionCookie = cookie
+			break
+		}
+	}
+	if sessionCookie == nil {
+		t.Fatal("expected guest session cookie")
+	}
+
+	updateReq := httptest.NewRequest(http.MethodPut, "/guest/profile", strings.NewReader(`{
+		"email":" updated@example.com ",
+		"phone":" +1 213 373 4253 "
+	}`))
+	updateReq.Header.Set("Content-Type", "application/json")
+	updateReq.AddCookie(sessionCookie)
+	updateResp := httptest.NewRecorder()
+	router.ServeHTTP(updateResp, updateReq)
+	if updateResp.Code != http.StatusOK {
+		t.Fatalf("expected update 200, got %d: %s", updateResp.Code, updateResp.Body.String())
+	}
+	body := updateResp.Body.String()
+	if !strings.Contains(body, `"success":true`) ||
+		!strings.Contains(body, `"email":"updated@example.com"`) ||
+		!strings.Contains(body, `"phone":"+12133734253"`) {
+		t.Fatalf("unexpected update response: %s", body)
+	}
+
+	var stored models.Account
+	if err := config.DB.First(&stored, account.ID).Error; err != nil {
+		t.Fatalf("load updated account: %v", err)
+	}
+	if stored.Email != "updated@example.com" || stored.Phone != "+12133734253" {
+		t.Fatalf("stored contact mismatch: %+v", stored)
 	}
 }
 

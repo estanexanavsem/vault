@@ -95,6 +95,12 @@
   outline: 0;
 }
 
+.fieldError {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red-700);
+}
+
 .submitButton {
   min-height: 50px;
   margin-top: 8px;
