@@ -44,7 +44,7 @@ export function BalanceInfoModal({
               <X size={18} aria-hidden="true" />
             </button>
             <h2 id="balance-info-title">{title}</h2>
-            <p>{children}</p>
+            <div className={styles.balanceInfoBody}>{children}</div>
             <button className={styles.balanceInfoAction} type="button" onClick={onClose}>
               Close
             </button>
