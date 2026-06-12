@@ -220,11 +220,6 @@
       opacity 180ms ease;
   }
 
-  .desktopNav a:hover,
-  .desktopNav button:hover {
-    color: #008b95;
-  }
-
   .signOutButton:hover {
     background: rgb(255 255 255 / 10%);
   }
