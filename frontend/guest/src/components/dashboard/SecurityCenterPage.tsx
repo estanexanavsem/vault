@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { guestAuthService } from '../../services/guestAuthService'
 import type { MasterAccount } from '../../types/guest'
+import { getFullName, getInitials } from '../../utils/accountIdentity'
 import { cn } from '../../utils/cn'
 import {
   formatEasternDateTime,
@@ -53,21 +54,6 @@ const contactEditorSchema = z
   })
 
 type ContactEditorForm = z.infer<typeof contactEditorSchema>
-
-const getInitials = (name: string, fallback: string) => {
-  const parts = name.trim().split(/\s+/).filter(Boolean)
-
-  if (parts.length >= 2) {
-    return `${parts[0][0]}${parts[1][0]}`.toUpperCase()
-  }
-
-  return (parts[0] ?? fallback).slice(0, 2).toUpperCase()
-}
-
-const getFullName = (account: MasterAccount) => {
-  const holderName = account.holder_name.trim()
-  return holderName !== '' ? holderName : account.login
-}
 
 export function SecurityCenterPage({
   account,

@@ -6,6 +6,7 @@ import { getAccountRoute } from '../../utils/accountRoute'
 import { logBoundaryError } from '../../utils/errorBoundary'
 import { getDisplayName } from '../../utils/formatters'
 import { ErrorFallback } from '../common/ErrorFallback'
+import { DashboardPageFallback } from './DashboardPageFallback'
 import { DashboardHome } from './DashboardHome'
 import { Footer } from './Footer'
 import { Topbar } from './Topbar'
@@ -22,10 +23,6 @@ interface DashboardProps {
   data: GuestData
   onAccountUpdate: (account: MasterAccount) => void
   onSignOut: () => void
-}
-
-function DashboardPageFallback() {
-  return <main className={styles.pageFallback} aria-label="Loading page" />
 }
 
 export function Dashboard({ data, onAccountUpdate, onSignOut }: DashboardProps) {

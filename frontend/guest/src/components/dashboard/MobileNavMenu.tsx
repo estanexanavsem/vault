@@ -9,9 +9,9 @@ import {
   useRole,
 } from '@floating-ui/react'
 import { CircleDollarSign, Home, Menu, UserRound, X } from 'lucide-react'
-import { useCallback, useState, type ReactNode } from 'react'
-import { cn } from '../../utils/cn'
+import { useCallback, useState } from 'react'
 import { TruistMark } from '../common/TruistMark'
+import { MobileNavItem } from './MobileNavItem'
 import styles from './navigation.module.css'
 
 interface MobileNavMenuProps {
@@ -20,29 +20,6 @@ interface MobileNavMenuProps {
   onOpenAccount: () => void
   onShowHome: () => void
   onSignOut: () => void
-}
-
-interface MobileNavItemProps {
-  children: ReactNode
-  current?: boolean
-  icon: ReactNode
-  onSelect?: () => void
-}
-
-function MobileNavItem({ children, current = false, icon, onSelect }: MobileNavItemProps) {
-  const className = cn(styles.mobileNavItem, current && styles.current)
-  const content = (
-    <>
-      {icon}
-      <span>{children}</span>
-    </>
-  )
-
-  return (
-    <button className={className} type="button" role="menuitem" onClick={onSelect}>
-      {content}
-    </button>
-  )
 }
 
 export function MobileNavMenu({
