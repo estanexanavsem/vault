@@ -1,5 +1,23 @@
 import { z } from 'zod'
 import { numberFromInput } from './formValue'
+import { normalizeUsPhoneNumber } from '../utils/formatters'
+
+const optionalEmail = z
+  .string()
+  .trim()
+  .refine(
+    (value) => value === '' || z.email('Введите корректный email').safeParse(value).success,
+    'Введите корректный email',
+  )
+
+const optionalUsPhone = z
+  .string()
+  .trim()
+  .refine(
+    (value) => value === '' || Boolean(normalizeUsPhoneNumber(value)),
+    'Введите корректный номер телефона США',
+  )
+  .transform((value) => (value === '' ? '' : normalizeUsPhoneNumber(value)))
 
 export const accountSchema = z.object({
   login: z.string().trim().min(1, 'Логин обязателен'),
@@ -9,8 +27,8 @@ export const accountSchema = z.object({
   full_account_name: z.string(),
   account_number: z.string(),
   routing_number: z.string(),
-  email: z.string(),
-  phone: z.string(),
+  email: optionalEmail,
+  phone: optionalUsPhone,
   balance: numberFromInput,
 })
 

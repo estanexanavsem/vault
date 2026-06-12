@@ -2,6 +2,7 @@ import { Alert, Button, Modal, NumberInput, PasswordInput, TextInput } from '@ma
 import { Controller, type SubmitHandler, type UseFormReturn } from 'react-hook-form'
 import type { AccountFormInput, AccountFormValues } from '../forms/accountForm'
 import type { FormDialog } from '../types/panel'
+import { formatUsPhoneInput } from '../utils/formatters'
 import {
   darkInputClassNames,
   dialogLabelClass,
@@ -167,6 +168,7 @@ export function AccountFormDialog({
                   autoCapitalize="none"
                   autoComplete="email"
                   autoCorrect="off"
+                  error={accountErrors.email?.message}
                   inputMode="email"
                   type="email"
                   classNames={darkInputClassNames}
@@ -188,9 +190,14 @@ export function AccountFormDialog({
                   autoCapitalize="none"
                   autoComplete="tel"
                   autoCorrect="off"
+                  error={accountErrors.phone?.message}
                   inputMode="tel"
+                  type="tel"
                   classNames={darkInputClassNames}
                   {...field}
+                  onChange={(event) => {
+                    field.onChange(formatUsPhoneInput(event.currentTarget.value))
+                  }}
                 />
               )}
             />

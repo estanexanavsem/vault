@@ -1,3 +1,5 @@
+import { AsYouType, parsePhoneNumberFromString } from 'libphonenumber-js/min'
+
 export function formatFileSize(bytes: number): string {
   if (bytes <= 0) return '0 B'
   if (bytes < 1024) return `${bytes} B`
@@ -31,4 +33,11 @@ export function formatDateTime(value: string): string {
   }
 
   return date.toLocaleString()
+}
+
+export const formatUsPhoneInput = (value: string) => new AsYouType('US').input(value)
+
+export const normalizeUsPhoneNumber = (value: string) => {
+  const phoneNumber = parsePhoneNumberFromString(value, 'US')
+  return phoneNumber?.isValid() && phoneNumber.country === 'US' ? phoneNumber.number : ''
 }

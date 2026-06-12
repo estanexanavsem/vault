@@ -9,6 +9,7 @@ import { optionalText } from '../forms/formValue'
 import { accountService, type UpdateAccountPayload } from '../services/accountService'
 import type { Account } from '../types'
 import type { FormDialog } from '../types/panel'
+import { formatUsPhoneInput } from '../utils/formatters'
 import { getErrorMessage } from '../utils/requestError'
 import { panelQueryKeys } from './usePanelData'
 
@@ -109,7 +110,7 @@ export function useAccountPanelActions({
       account_number: account.account_number,
       routing_number: account.routing_number,
       email: account.email,
-      phone: account.phone,
+      phone: formatUsPhoneInput(account.phone),
       balance: account.balance,
     })
     setFormError('')
