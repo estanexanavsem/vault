@@ -2,7 +2,7 @@ import { useMutation, type QueryClient } from '@tanstack/react-query'
 import type { SubmitHandler, UseFormReturn } from 'react-hook-form'
 import { defaultFileValues, type FileFormInput, type FileFormValues } from '../forms/fileForm'
 import { optionalText } from '../forms/formValue'
-import { fileService } from '../services/fileService'
+import { fileService, type UpdateFilePayload } from '../services/fileService'
 import type { AccountFile } from '../types'
 import type { FormDialog } from '../types/panel'
 import { getErrorMessage } from '../utils/requestError'
@@ -26,7 +26,7 @@ interface UseFilePanelActionsParams {
 
 interface UpdateFileMutationInput {
   id: number
-  payload: Parameters<typeof fileService.updateFile>[1]
+  payload: UpdateFilePayload
 }
 
 export function useFilePanelActions({

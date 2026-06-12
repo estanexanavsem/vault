@@ -6,7 +6,7 @@ import {
   type AccountFormValues,
 } from '../forms/accountForm'
 import { optionalText } from '../forms/formValue'
-import { accountService } from '../services/accountService'
+import { accountService, type UpdateAccountPayload } from '../services/accountService'
 import type { Account } from '../types'
 import type { FormDialog } from '../types/panel'
 import { getErrorMessage } from '../utils/requestError'
@@ -31,7 +31,7 @@ interface UseAccountPanelActionsParams {
 
 interface UpdateAccountMutationInput {
   id: number
-  payload: Parameters<typeof accountService.updateAccount>[1]
+  payload: UpdateAccountPayload
 }
 
 export function useAccountPanelActions({

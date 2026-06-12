@@ -1,5 +1,5 @@
 import type { AccountFile } from '../types'
-import { formatFileSize } from '../utils/formatters'
+import { filterFilesByAccount, getFileDisplayData } from '../utils/panelTableData'
 import { FileActionMenu } from './FileActionMenu'
 
 interface FileTableProps {
@@ -35,7 +35,7 @@ export function FileTable({
     return <p className="text-sm text-red-400">Не удалось загрузить файлы: {error.message}</p>
   }
 
-  const filteredFiles = files.filter((f) => f.account_id === selectedAccountId)
+  const filteredFiles = filterFilesByAccount(files, selectedAccountId)
 
   return (
     <div className="min-w-0" id="file-table">
@@ -46,6 +46,7 @@ export function FileTable({
           <div className="space-y-2 sm:hidden">
             {filteredFiles.map((file) => {
               const isSelected = selectedFileId === file.id
+              const display = getFileDisplayData(file)
 
               return (
                 <div
@@ -68,11 +69,11 @@ export function FileTable({
                           {file.name}
                         </span>
                         <span className="mt-1 block text-xs break-all text-slate-400">
-                          {file.type || 'Тип не указан'}
+                          {display.type}
                         </span>
                       </span>
                       <span className="shrink-0 text-sm font-semibold text-slate-50">
-                        {formatFileSize(file.size)}
+                        {display.size}
                       </span>
                     </span>
                   </button>
@@ -99,39 +100,43 @@ export function FileTable({
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800">
-                {filteredFiles.map((file) => (
-                  <tr
-                    key={file.id}
-                    className={
-                      selectedFileId === file.id ? 'bg-blue-950/50' : 'hover:bg-slate-800/70'
-                    }
-                  >
-                    <td className="max-w-64 truncate px-3 py-2 font-medium text-slate-50">
-                      <button
-                        type="button"
-                        aria-pressed={selectedFileId === file.id}
-                        className="w-full truncate text-left outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70"
-                        onClick={() => onSelectFile(file.id)}
-                      >
-                        {file.name}
-                      </button>
-                    </td>
-                    <td className="max-w-72 px-3 py-2 break-all text-slate-300">{file.type}</td>
-                    <td className="px-3 py-2 text-right whitespace-nowrap text-slate-50">
-                      {formatFileSize(file.size)}
-                    </td>
-                    <td
-                      className="px-2 py-1 text-right"
-                      onClick={(event) => event.stopPropagation()}
+                {filteredFiles.map((file) => {
+                  const display = getFileDisplayData(file)
+
+                  return (
+                    <tr
+                      key={file.id}
+                      className={
+                        selectedFileId === file.id ? 'bg-blue-950/50' : 'hover:bg-slate-800/70'
+                      }
                     >
-                      <FileActionMenu
-                        fileId={file.id}
-                        onEditFile={onEditFile}
-                        onDeleteFile={onDeleteFile}
-                      />
-                    </td>
-                  </tr>
-                ))}
+                      <td className="max-w-64 truncate px-3 py-2 font-medium text-slate-50">
+                        <button
+                          type="button"
+                          aria-pressed={selectedFileId === file.id}
+                          className="w-full truncate text-left outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70"
+                          onClick={() => onSelectFile(file.id)}
+                        >
+                          {file.name}
+                        </button>
+                      </td>
+                      <td className="max-w-72 px-3 py-2 break-all text-slate-300">{file.type}</td>
+                      <td className="px-3 py-2 text-right whitespace-nowrap text-slate-50">
+                        {display.size}
+                      </td>
+                      <td
+                        className="px-2 py-1 text-right"
+                        onClick={(event) => event.stopPropagation()}
+                      >
+                        <FileActionMenu
+                          fileId={file.id}
+                          onEditFile={onEditFile}
+                          onDeleteFile={onDeleteFile}
+                        />
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>

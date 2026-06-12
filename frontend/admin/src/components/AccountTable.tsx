@@ -1,4 +1,5 @@
 import type { Account } from '../types'
+import { getAccountDisplayData } from '../utils/panelTableData'
 import { AccountActionMenu } from './AccountActionMenu'
 
 interface AccountTableProps {
@@ -37,6 +38,7 @@ export function AccountTable({
           <div className="space-y-2 sm:hidden">
             {accounts.map((account) => {
               const isSelected = selectedAccountId === account.id
+              const display = getAccountDisplayData(account)
 
               return (
                 <div
@@ -63,20 +65,12 @@ export function AccountTable({
                         </span>
                       </span>
                       <span className="shrink-0 text-sm font-semibold text-slate-50">
-                        ${Number(account.balance).toFixed(2)}
+                        {display.balance}
                       </span>
                     </span>
                     <span className="mt-3 grid gap-1 text-xs text-slate-400">
-                      <span className="break-words">
-                        {account.full_account_name ||
-                          account.account_name ||
-                          'Название счета не указано'}
-                      </span>
-                      <span className="break-words">
-                        {account.account_number
-                          ? `Номер: ${account.account_number}`
-                          : 'Номер не указан'}
-                      </span>
+                      <span className="break-words">{display.mobileAccountName}</span>
+                      <span className="break-words">{display.mobileAccountNumber}</span>
                     </span>
                   </button>
                   <div className="-mt-1 -mr-1 shrink-0">
@@ -104,49 +98,53 @@ export function AccountTable({
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800">
-                {accounts.map((account) => (
-                  <tr
-                    key={account.id}
-                    className={
-                      selectedAccountId === account.id
-                        ? 'selected bg-blue-950/50'
-                        : 'hover:bg-slate-800/70'
-                    }
-                  >
-                    <td className="px-3 py-2 font-medium whitespace-nowrap text-slate-50">
-                      <button
-                        type="button"
-                        aria-pressed={selectedAccountId === account.id}
-                        className="w-full text-left outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70"
-                        onClick={() => onSelectAccount(account.id)}
-                      >
-                        {account.login}
-                      </button>
-                    </td>
-                    <td className="max-w-56 truncate px-3 py-2 text-slate-300">
-                      {account.holder_name}
-                    </td>
-                    <td className="max-w-64 truncate px-3 py-2 text-slate-300">
-                      {account.full_account_name || '-'}
-                    </td>
-                    <td className="px-3 py-2 whitespace-nowrap text-slate-300">
-                      {account.account_number || '-'}
-                    </td>
-                    <td className="px-3 py-2 text-right whitespace-nowrap text-slate-50">
-                      ${Number(account.balance).toFixed(2)}
-                    </td>
-                    <td
-                      className="px-2 py-1 text-right"
-                      onClick={(event) => event.stopPropagation()}
+                {accounts.map((account) => {
+                  const display = getAccountDisplayData(account)
+
+                  return (
+                    <tr
+                      key={account.id}
+                      className={
+                        selectedAccountId === account.id
+                          ? 'selected bg-blue-950/50'
+                          : 'hover:bg-slate-800/70'
+                      }
                     >
-                      <AccountActionMenu
-                        accountId={account.id}
-                        onEditAccount={onEditAccount}
-                        onDeleteAccount={onDeleteAccount}
-                      />
-                    </td>
-                  </tr>
-                ))}
+                      <td className="px-3 py-2 font-medium whitespace-nowrap text-slate-50">
+                        <button
+                          type="button"
+                          aria-pressed={selectedAccountId === account.id}
+                          className="w-full text-left outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70"
+                          onClick={() => onSelectAccount(account.id)}
+                        >
+                          {account.login}
+                        </button>
+                      </td>
+                      <td className="max-w-56 truncate px-3 py-2 text-slate-300">
+                        {display.holderName}
+                      </td>
+                      <td className="max-w-64 truncate px-3 py-2 text-slate-300">
+                        {display.fullAccountName}
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap text-slate-300">
+                        {display.accountNumber}
+                      </td>
+                      <td className="px-3 py-2 text-right whitespace-nowrap text-slate-50">
+                        {display.balance}
+                      </td>
+                      <td
+                        className="px-2 py-1 text-right"
+                        onClick={(event) => event.stopPropagation()}
+                      >
+                        <AccountActionMenu
+                          accountId={account.id}
+                          onEditAccount={onEditAccount}
+                          onDeleteAccount={onDeleteAccount}
+                        />
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>

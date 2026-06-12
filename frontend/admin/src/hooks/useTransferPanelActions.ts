@@ -7,7 +7,11 @@ import {
   type TransferFormInput,
   type TransferFormValues,
 } from '../forms/transferForm'
-import { transferService } from '../services/transferService'
+import {
+  transferService,
+  type CreateTransferPayload,
+  type UpdateTransferPayload,
+} from '../services/transferService'
 import type { Transfer } from '../types'
 import type { FormDialog } from '../types/panel'
 import { getErrorMessage } from '../utils/requestError'
@@ -31,7 +35,7 @@ interface UseTransferPanelActionsParams {
 
 interface UpdateTransferMutationInput {
   id: number
-  payload: Parameters<typeof transferService.updateTransfer>[1]
+  payload: UpdateTransferPayload
 }
 
 export function useTransferPanelActions({
@@ -120,7 +124,7 @@ export function useTransferPanelActions({
 
     setFormError('')
     try {
-      const payload = {
+      const payload: CreateTransferPayload = {
         account_id: activeAccountId,
         amount: values.amount,
         description: values.description,

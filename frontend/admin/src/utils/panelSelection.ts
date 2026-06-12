@@ -26,12 +26,18 @@ export const getSelectedFile = (
   activeAccountId: number | null,
 ) => files.find((file) => file.id === selectedFileId && file.account_id === activeAccountId) ?? null
 
-export const getDeleteTitle = (deleteDialog: Entity | null) =>
-  deleteDialog === 'account'
-    ? 'Удалить аккаунт'
-    : deleteDialog === 'transfer'
-      ? 'Удалить перевод'
-      : 'Удалить файл'
+export const getDeleteTitle = (deleteDialog: Entity | null) => {
+  switch (deleteDialog) {
+    case 'account':
+      return 'Удалить аккаунт'
+    case 'transfer':
+      return 'Удалить перевод'
+    case 'file':
+      return 'Удалить файл'
+    case null:
+      return ''
+  }
+}
 
 export const getDeleteDescription = ({
   deleteDialog,
@@ -52,5 +58,9 @@ export const getDeleteDescription = ({
     return `Удалить перевод "${transferLabel ?? ''}"?`
   }
 
-  return `Удалить файл "${selectedFileName}"?`
+  if (deleteDialog === 'file') {
+    return `Удалить файл "${selectedFileName}"?`
+  }
+
+  return ''
 }
