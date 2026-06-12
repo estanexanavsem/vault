@@ -3,7 +3,9 @@ package handlers
 import (
 	"errors"
 	"net/http"
+	"path/filepath"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -42,10 +44,44 @@ type fileResponse struct {
 func parseIDParam(c *gin.Context) (uint, bool) {
 	id, err := strconv.ParseUint(c.Param("id"), 10, 0)
 	if err != nil || id == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
+		respondBadRequest(c, "invalid id")
 		return 0, false
 	}
 	return uint(id), true
+}
+
+func respondBadRequest(c *gin.Context, message string) {
+	c.JSON(http.StatusBadRequest, gin.H{"error": message})
+}
+
+func respondDeleted(c *gin.Context, model any, id uint) {
+	result := config.DB.Delete(model, id)
+	if result.Error != nil {
+		respondDBError(c, result.Error)
+		return
+	}
+	if result.RowsAffected == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"deleted": true})
+}
+
+func applyStringUpdate(target *string, value *string) {
+	if value != nil {
+		*target = *value
+	}
+}
+
+func sanitizedFilename(name, fallback string) string {
+	name = filepath.Base(name)
+	name = strings.ReplaceAll(name, `"`, "")
+	name = strings.ReplaceAll(name, "\r", "")
+	name = strings.ReplaceAll(name, "\n", "")
+	if name == "." || name == ".." || name == string(filepath.Separator) || name == "" {
+		return fallback
+	}
+	return name
 }
 
 func accountToResponse(account models.Account) accountResponse {

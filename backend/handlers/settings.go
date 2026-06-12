@@ -31,7 +31,7 @@ func GetSettings(c *gin.Context) {
 func UpdateSettings(c *gin.Context) {
 	var updates map[string]string
 	if err := c.ShouldBindJSON(&updates); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		respondBadRequest(c, "invalid request")
 		return
 	}
 

@@ -63,15 +63,15 @@ func GetTransfer(c *gin.Context) {
 func CreateTransfer(c *gin.Context) {
 	var req createTransferRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		respondBadRequest(c, "invalid request")
 		return
 	}
 	if req.AccountID == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "account_id required"})
+		respondBadRequest(c, "account_id required")
 		return
 	}
 	if req.Amount < 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "amount cannot be negative"})
+		respondBadRequest(c, "amount cannot be negative")
 		return
 	}
 	if err := ensureAccountExists(req.AccountID); err != nil {
@@ -117,12 +117,12 @@ func UpdateTransfer(c *gin.Context) {
 
 	var req updateTransferRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		respondBadRequest(c, "invalid request")
 		return
 	}
 	if req.AccountID != nil {
 		if *req.AccountID == 0 {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "account_id cannot be zero"})
+			respondBadRequest(c, "account_id cannot be zero")
 			return
 		}
 		if err := ensureAccountExists(*req.AccountID); err != nil {
@@ -131,37 +131,21 @@ func UpdateTransfer(c *gin.Context) {
 		}
 		transfer.AccountID = *req.AccountID
 	}
-	if req.FromAccount != nil {
-		transfer.FromAccount = *req.FromAccount
-	}
-	if req.ToAccount != nil {
-		transfer.ToAccount = *req.ToAccount
-	}
+	applyStringUpdate(&transfer.FromAccount, req.FromAccount)
+	applyStringUpdate(&transfer.ToAccount, req.ToAccount)
 	if req.Amount != nil {
 		if *req.Amount < 0 {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "amount cannot be negative"})
+			respondBadRequest(c, "amount cannot be negative")
 			return
 		}
 		transfer.Amount = *req.Amount
 	}
-	if req.Description != nil {
-		transfer.Description = *req.Description
-	}
-	if req.FullDescription != nil {
-		transfer.FullDescription = *req.FullDescription
-	}
-	if req.Category != nil {
-		transfer.Category = *req.Category
-	}
-	if req.Reference != nil {
-		transfer.Reference = *req.Reference
-	}
-	if req.TransferType != nil {
-		transfer.TransferType = *req.TransferType
-	}
-	if req.Status != nil {
-		transfer.Status = *req.Status
-	}
+	applyStringUpdate(&transfer.Description, req.Description)
+	applyStringUpdate(&transfer.FullDescription, req.FullDescription)
+	applyStringUpdate(&transfer.Category, req.Category)
+	applyStringUpdate(&transfer.Reference, req.Reference)
+	applyStringUpdate(&transfer.TransferType, req.TransferType)
+	applyStringUpdate(&transfer.Status, req.Status)
 	if req.TransactionDate != nil {
 		transfer.TransactionDate = *req.TransactionDate
 	}
@@ -179,14 +163,5 @@ func DeleteTransfer(c *gin.Context) {
 		return
 	}
 
-	result := config.DB.Delete(&models.Transfer{}, id)
-	if result.Error != nil {
-		respondDBError(c, result.Error)
-		return
-	}
-	if result.RowsAffected == 0 {
-		c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
-		return
-	}
-	c.JSON(http.StatusOK, gin.H{"deleted": true})
+	respondDeleted(c, &models.Transfer{}, id)
 }

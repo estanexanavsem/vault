@@ -1,10 +1,6 @@
 package middleware
 
 import (
-	"crypto/hmac"
-	"crypto/sha256"
-	"encoding/base64"
-	"encoding/json"
 	"net/http"
 	"strings"
 	"time"
@@ -113,27 +109,18 @@ func createPanelSession(secret string) (string, time.Time, error) {
 	}
 
 	expiresAt := time.Now().Add(panelSessionDuration)
-	payloadBytes, err := json.Marshal(panelSessionPayload{
+	token, err := security.SignedSessionToken(panelSessionPayload{
 		ExpiresAt: expiresAt.Unix(),
 		Nonce:     nonce,
-	})
+	}, secret)
 	if err != nil {
 		return "", time.Time{}, err
 	}
-
-	payload := base64.RawURLEncoding.EncodeToString(payloadBytes)
-	signature := signPanelSession(payload, secret)
-
-	return payload + "." + signature, expiresAt, nil
+	return token, expiresAt, nil
 }
 
 func validPanelSession(token string) bool {
 	if token == "" {
-		return false
-	}
-
-	parts := strings.Split(token, ".")
-	if len(parts) != 2 {
 		return false
 	}
 
@@ -142,17 +129,8 @@ func validPanelSession(token string) bool {
 		return false
 	}
 
-	if !hmac.Equal([]byte(parts[1]), []byte(signPanelSession(parts[0], settings.Value))) {
-		return false
-	}
-
-	payloadBytes, err := base64.RawURLEncoding.DecodeString(parts[0])
-	if err != nil {
-		return false
-	}
-
 	var payload panelSessionPayload
-	if err := json.Unmarshal(payloadBytes, &payload); err != nil {
+	if err := security.DecodeSignedSessionToken(token, settings.Value, &payload); err != nil {
 		return false
 	}
 	if payload.ExpiresAt == 0 || time.Now().After(time.Unix(payload.ExpiresAt, 0)) {
@@ -162,9 +140,7 @@ func validPanelSession(token string) bool {
 }
 
 func signPanelSession(payload string, secret string) string {
-	mac := hmac.New(sha256.New, []byte(secret))
-	mac.Write([]byte(payload))
-	return base64.RawURLEncoding.EncodeToString(mac.Sum(nil))
+	return security.SignSessionPayload(payload, secret)
 }
 
 func bearerToken(header string) string {

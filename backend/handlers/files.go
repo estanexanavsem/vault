@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -61,11 +60,11 @@ func GetFile(c *gin.Context) {
 func CreateFile(c *gin.Context) {
 	var req createFileRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		respondBadRequest(c, "invalid request")
 		return
 	}
 	if req.AccountID == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "account_id required"})
+		respondBadRequest(c, "account_id required")
 		return
 	}
 	if err := ensureAccountExists(req.AccountID); err != nil {
@@ -75,7 +74,7 @@ func CreateFile(c *gin.Context) {
 
 	file := models.File{
 		AccountID:   req.AccountID,
-		Name:        filepath.Base(req.Name),
+		Name:        sanitizedFilename(req.Name, "download"),
 		Type:        req.Type,
 		Description: req.Description,
 	}
@@ -100,12 +99,12 @@ func UpdateFile(c *gin.Context) {
 
 	var req updateFileRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		respondBadRequest(c, "invalid request")
 		return
 	}
 	if req.AccountID != nil {
 		if *req.AccountID == 0 {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "account_id cannot be zero"})
+			respondBadRequest(c, "account_id cannot be zero")
 			return
 		}
 		if err := ensureAccountExists(*req.AccountID); err != nil {
@@ -115,14 +114,10 @@ func UpdateFile(c *gin.Context) {
 		file.AccountID = *req.AccountID
 	}
 	if req.Name != nil {
-		file.Name = filepath.Base(*req.Name)
+		file.Name = sanitizedFilename(*req.Name, "download")
 	}
-	if req.Type != nil {
-		file.Type = *req.Type
-	}
-	if req.Description != nil {
-		file.Description = *req.Description
-	}
+	applyStringUpdate(&file.Type, req.Type)
+	applyStringUpdate(&file.Description, req.Description)
 
 	if err := config.DB.Save(&file).Error; err != nil {
 		respondDBError(c, err)
@@ -137,16 +132,7 @@ func DeleteFile(c *gin.Context) {
 		return
 	}
 
-	result := config.DB.Delete(&models.File{}, id)
-	if result.Error != nil {
-		respondDBError(c, result.Error)
-		return
-	}
-	if result.RowsAffected == 0 {
-		c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
-		return
-	}
-	c.JSON(http.StatusOK, gin.H{"deleted": true})
+	respondDeleted(c, &models.File{}, id)
 }
 
 func UploadFile(c *gin.Context) {
@@ -178,14 +164,14 @@ func UploadFile(c *gin.Context) {
 
 	f, err := file.Open()
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not open file"})
 		return
 	}
 	defer f.Close()
 
 	data, err := io.ReadAll(io.LimitReader(f, maxUploadSize+1))
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not read file"})
 		return
 	}
 	if int64(len(data)) > maxUploadSize {
@@ -193,10 +179,7 @@ func UploadFile(c *gin.Context) {
 		return
 	}
 
-	name := filepath.Base(file.Filename)
-	if name == "." || name == string(filepath.Separator) || name == "" {
-		name = "upload"
-	}
+	name := sanitizedFilename(file.Filename, "upload")
 	contentType := "application/octet-stream"
 	if len(data) > 0 {
 		contentType = http.DetectContentType(data)
@@ -218,12 +201,5 @@ func UploadFile(c *gin.Context) {
 }
 
 func safeHeaderFilename(name string) string {
-	name = filepath.Base(name)
-	name = strings.ReplaceAll(name, `"`, "")
-	name = strings.ReplaceAll(name, "\r", "")
-	name = strings.ReplaceAll(name, "\n", "")
-	if name == "." || name == ".." || name == string(filepath.Separator) || name == "" {
-		return "download"
-	}
-	return name
+	return sanitizedFilename(name, "download")
 }

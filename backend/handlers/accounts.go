@@ -62,12 +62,12 @@ func GetAccount(c *gin.Context) {
 func CreateAccount(c *gin.Context) {
 	var req createAccountRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		respondBadRequest(c, "invalid request")
 		return
 	}
 	req.Login = strings.TrimSpace(req.Login)
 	if req.Login == "" || req.Password == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "login and password required"})
+		respondBadRequest(c, "login and password required")
 		return
 	}
 
@@ -110,19 +110,19 @@ func UpdateAccount(c *gin.Context) {
 
 	var req updateAccountRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		respondBadRequest(c, "invalid request")
 		return
 	}
 	if req.Login != nil {
 		account.Login = strings.TrimSpace(*req.Login)
 		if account.Login == "" {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "login cannot be empty"})
+			respondBadRequest(c, "login cannot be empty")
 			return
 		}
 	}
 	if req.Password != nil {
 		if *req.Password == "" {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "password cannot be empty"})
+			respondBadRequest(c, "password cannot be empty")
 			return
 		}
 		hash, err := security.HashPassword(*req.Password)
@@ -132,27 +132,13 @@ func UpdateAccount(c *gin.Context) {
 		}
 		account.Password = hash
 	}
-	if req.HolderName != nil {
-		account.HolderName = *req.HolderName
-	}
-	if req.AccountName != nil {
-		account.AccountName = *req.AccountName
-	}
-	if req.FullAccountName != nil {
-		account.FullAccountName = *req.FullAccountName
-	}
-	if req.AccountNumber != nil {
-		account.AccountNumber = *req.AccountNumber
-	}
-	if req.RoutingNumber != nil {
-		account.RoutingNumber = *req.RoutingNumber
-	}
-	if req.Email != nil {
-		account.Email = *req.Email
-	}
-	if req.Phone != nil {
-		account.Phone = *req.Phone
-	}
+	applyStringUpdate(&account.HolderName, req.HolderName)
+	applyStringUpdate(&account.AccountName, req.AccountName)
+	applyStringUpdate(&account.FullAccountName, req.FullAccountName)
+	applyStringUpdate(&account.AccountNumber, req.AccountNumber)
+	applyStringUpdate(&account.RoutingNumber, req.RoutingNumber)
+	applyStringUpdate(&account.Email, req.Email)
+	applyStringUpdate(&account.Phone, req.Phone)
 	if req.Balance != nil {
 		account.Balance = *req.Balance
 	}
@@ -170,14 +156,5 @@ func DeleteAccount(c *gin.Context) {
 		return
 	}
 
-	result := config.DB.Delete(&models.Account{}, id)
-	if result.Error != nil {
-		respondDBError(c, result.Error)
-		return
-	}
-	if result.RowsAffected == 0 {
-		c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
-		return
-	}
-	c.JSON(http.StatusOK, gin.H{"deleted": true})
+	respondDeleted(c, &models.Account{}, id)
 }

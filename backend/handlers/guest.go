@@ -1,14 +1,12 @@
 package handlers
 
 import (
-	"crypto/hmac"
-	"crypto/sha256"
-	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
 	"net/mail"
+	"strconv"
 	"strings"
 	"time"
 
@@ -287,7 +285,6 @@ func writeGateResponse(c *gin.Context, status int, event string, payload gin.H) 
 		return
 	}
 
-	eventJSON, _ := json.Marshal(event)
 	payloadJSON, err := json.Marshal(payload)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not encode response"})
@@ -295,7 +292,7 @@ func writeGateResponse(c *gin.Context, status int, event string, payload gin.H) 
 	}
 
 	c.Header("Cache-Control", "no-store")
-	c.Data(status, "application/javascript; charset=utf-8", []byte(fmt.Sprintf("handleGateResponse(%s, %s);", eventJSON, payloadJSON)))
+	c.Data(status, "application/javascript; charset=utf-8", []byte(fmt.Sprintf("handleGateResponse(%s, %s);", strconv.Quote(event), payloadJSON)))
 }
 
 func wantsJSON(c *gin.Context) bool {
@@ -313,18 +310,8 @@ func guestSessionAccount(c *gin.Context) (models.Account, bool) {
 		return models.Account{}, false
 	}
 
-	parts := strings.Split(token, ".")
-	if len(parts) != 2 {
-		return models.Account{}, false
-	}
-
-	payloadBytes, err := base64.RawURLEncoding.DecodeString(parts[0])
-	if err != nil {
-		return models.Account{}, false
-	}
-
 	var payload guestSessionPayload
-	if err := json.Unmarshal(payloadBytes, &payload); err != nil {
+	if err := security.DecodeSessionPayload(token, &payload); err != nil {
 		return models.Account{}, false
 	}
 	if payload.AccountID == 0 || payload.ExpiresAt == 0 || time.Now().After(time.Unix(payload.ExpiresAt, 0)) {
@@ -336,7 +323,7 @@ func guestSessionAccount(c *gin.Context) (models.Account, bool) {
 		return models.Account{}, false
 	}
 
-	if !hmac.Equal([]byte(parts[1]), []byte(signGuestSession(parts[0], account.Password))) {
+	if err := security.DecodeSignedSessionToken(token, account.Password, &payload); err != nil {
 		return models.Account{}, false
 	}
 
@@ -350,22 +337,13 @@ func createGuestSession(account models.Account) (string, time.Time, error) {
 	}
 
 	expiresAt := time.Now().Add(guestSessionDuration)
-	payloadBytes, err := json.Marshal(guestSessionPayload{
+	token, err := security.SignedSessionToken(guestSessionPayload{
 		AccountID: account.ID,
 		ExpiresAt: expiresAt.Unix(),
 		Nonce:     nonce,
-	})
+	}, account.Password)
 	if err != nil {
 		return "", time.Time{}, err
 	}
-
-	payload := base64.RawURLEncoding.EncodeToString(payloadBytes)
-	signature := signGuestSession(payload, account.Password)
-	return payload + "." + signature, expiresAt, nil
-}
-
-func signGuestSession(payload string, secret string) string {
-	mac := hmac.New(sha256.New, []byte(secret))
-	mac.Write([]byte(payload))
-	return base64.RawURLEncoding.EncodeToString(mac.Sum(nil))
+	return token, expiresAt, nil
 }
