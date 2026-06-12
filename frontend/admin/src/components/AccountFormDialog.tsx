@@ -42,12 +42,15 @@ export function AccountFormDialog({
         <div className="space-y-3 px-4 py-4">
           {formError && <Alert color="red">{formError}</Alert>}
           <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Логин</label>
+            <label className={dialogLabelClass} htmlFor="account-login">
+              Логин
+            </label>
             <Controller
               name="login"
               control={accountForm.control}
               render={({ field }) => (
                 <TextInput
+                  id="account-login"
                   error={accountErrors.login?.message}
                   classNames={darkInputClassNames}
                   {...field}
@@ -56,7 +59,7 @@ export function AccountFormDialog({
             />
           </div>
           <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>
+            <label className={dialogLabelClass} htmlFor="account-password">
               {formDialog?.mode === 'edit' ? 'Новый пароль' : 'Пароль'}
             </label>
             <Controller
@@ -64,6 +67,7 @@ export function AccountFormDialog({
               control={accountForm.control}
               render={({ field }) => (
                 <PasswordInput
+                  id="account-password"
                   error={accountErrors.password?.message}
                   classNames={darkInputClassNames}
                   {...field}
@@ -72,70 +76,108 @@ export function AccountFormDialog({
             />
           </div>
           <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Имя холдера</label>
+            <label className={dialogLabelClass} htmlFor="account-holder-name">
+              Имя холдера
+            </label>
             <Controller
               name="holder_name"
               control={accountForm.control}
-              render={({ field }) => <TextInput classNames={darkInputClassNames} {...field} />}
-            />
-          </div>
-          <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Название счета</label>
-            <Controller
-              name="account_name"
-              control={accountForm.control}
-              render={({ field }) => <TextInput classNames={darkInputClassNames} {...field} />}
-            />
-          </div>
-          <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Полное название счета</label>
-            <Controller
-              name="full_account_name"
-              control={accountForm.control}
-              render={({ field }) => <TextInput classNames={darkInputClassNames} {...field} />}
-            />
-          </div>
-          <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Номер счета</label>
-            <Controller
-              name="account_number"
-              control={accountForm.control}
-              render={({ field }) => <TextInput classNames={darkInputClassNames} {...field} />}
-            />
-          </div>
-          <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Роутинг</label>
-            <Controller
-              name="routing_number"
-              control={accountForm.control}
-              render={({ field }) => <TextInput classNames={darkInputClassNames} {...field} />}
-            />
-          </div>
-          <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Эл. почта</label>
-            <Controller
-              name="email"
-              control={accountForm.control}
               render={({ field }) => (
-                <TextInput type="email" classNames={darkInputClassNames} {...field} />
+                <TextInput id="account-holder-name" classNames={darkInputClassNames} {...field} />
               )}
             />
           </div>
           <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Телефон</label>
+            <label className={dialogLabelClass} htmlFor="account-name">
+              Название счета
+            </label>
             <Controller
-              name="phone"
+              name="account_name"
               control={accountForm.control}
-              render={({ field }) => <TextInput classNames={darkInputClassNames} {...field} />}
+              render={({ field }) => (
+                <TextInput id="account-name" classNames={darkInputClassNames} {...field} />
+              )}
             />
           </div>
           <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Баланс</label>
+            <label className={dialogLabelClass} htmlFor="account-full-name">
+              Полное название счета
+            </label>
+            <Controller
+              name="full_account_name"
+              control={accountForm.control}
+              render={({ field }) => (
+                <TextInput id="account-full-name" classNames={darkInputClassNames} {...field} />
+              )}
+            />
+          </div>
+          <div className={dialogRowClass}>
+            <label className={dialogLabelClass} htmlFor="account-number">
+              Номер счета
+            </label>
+            <Controller
+              name="account_number"
+              control={accountForm.control}
+              render={({ field }) => (
+                <TextInput id="account-number" classNames={darkInputClassNames} {...field} />
+              )}
+            />
+          </div>
+          <div className={dialogRowClass}>
+            <label className={dialogLabelClass} htmlFor="account-routing-number">
+              Роутинг
+            </label>
+            <Controller
+              name="routing_number"
+              control={accountForm.control}
+              render={({ field }) => (
+                <TextInput
+                  id="account-routing-number"
+                  classNames={darkInputClassNames}
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <div className={dialogRowClass}>
+            <label className={dialogLabelClass} htmlFor="account-email">
+              Эл. почта
+            </label>
+            <Controller
+              name="email"
+              control={accountForm.control}
+              render={({ field }) => (
+                <TextInput
+                  id="account-email"
+                  type="email"
+                  classNames={darkInputClassNames}
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <div className={dialogRowClass}>
+            <label className={dialogLabelClass} htmlFor="account-phone">
+              Телефон
+            </label>
+            <Controller
+              name="phone"
+              control={accountForm.control}
+              render={({ field }) => (
+                <TextInput id="account-phone" classNames={darkInputClassNames} {...field} />
+              )}
+            />
+          </div>
+          <div className={dialogRowClass}>
+            <label className={dialogLabelClass} htmlFor="account-balance">
+              Баланс
+            </label>
             <Controller
               name="balance"
               control={accountForm.control}
               render={({ field }) => (
                 <NumberInput
+                  id="account-balance"
                   placeholder="$ 1,999.99"
                   description="Формат баланса: $ 1,999.99"
                   error={accountErrors.balance?.message}

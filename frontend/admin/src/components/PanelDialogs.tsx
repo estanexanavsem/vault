@@ -15,10 +15,7 @@ interface PanelDialogsProps {
   accountForm: UseFormReturn<AccountFormInput, unknown, AccountFormValues>
   transferForm: UseFormReturn<TransferFormInput, unknown, TransferFormValues>
   fileForm: UseFormReturn<FileFormInput, unknown, FileFormValues>
-  isAccountSaving: boolean
-  isTransferSaving: boolean
-  isFileSaving: boolean
-  isDeleting: boolean
+  savingState: DialogSavingState
   deleteTitle: string
   deleteDescription: string
   onCloseFormDialog: () => void
@@ -29,6 +26,13 @@ interface PanelDialogsProps {
   onConfirmDelete: () => void
 }
 
+interface DialogSavingState {
+  account: boolean
+  transfer: boolean
+  file: boolean
+  delete: boolean
+}
+
 export function PanelDialogs({
   formDialog,
   deleteDialog,
@@ -36,10 +40,7 @@ export function PanelDialogs({
   accountForm,
   transferForm,
   fileForm,
-  isAccountSaving,
-  isTransferSaving,
-  isFileSaving,
-  isDeleting,
+  savingState,
   deleteTitle,
   deleteDescription,
   onCloseFormDialog,
@@ -55,7 +56,7 @@ export function PanelDialogs({
         formDialog={formDialog}
         formError={formError}
         accountForm={accountForm}
-        isSaving={isAccountSaving}
+        isSaving={savingState.account}
         onClose={onCloseFormDialog}
         onSave={onSaveAccount}
       />
@@ -63,7 +64,7 @@ export function PanelDialogs({
         formDialog={formDialog}
         formError={formError}
         transferForm={transferForm}
-        isSaving={isTransferSaving}
+        isSaving={savingState.transfer}
         onClose={onCloseFormDialog}
         onSave={onSaveTransfer}
       />
@@ -71,7 +72,7 @@ export function PanelDialogs({
         formDialog={formDialog}
         formError={formError}
         fileForm={fileForm}
-        isSaving={isFileSaving}
+        isSaving={savingState.file}
         onClose={onCloseFormDialog}
         onSave={onSaveFile}
       />
@@ -80,7 +81,7 @@ export function PanelDialogs({
         formError={formError}
         title={deleteTitle}
         description={deleteDescription}
-        isDeleting={isDeleting}
+        isDeleting={savingState.delete}
         onClose={onCloseDeleteDialog}
         onConfirm={onConfirmDelete}
       />

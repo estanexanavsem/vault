@@ -46,12 +46,15 @@ export function TransferFormDialog({
         <div className="space-y-3 px-4 py-4">
           {formError && <Alert color="red">{formError}</Alert>}
           <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Дата</label>
+            <label className={dialogLabelClass} htmlFor="transfer-transaction-date">
+              Дата
+            </label>
             <Controller
               name="transaction_date"
               control={transferForm.control}
               render={({ field: { value, onChange, ...field } }) => (
                 <DatePickerInput
+                  id="transfer-transaction-date"
                   value={value || null}
                   onChange={(nextValue) => onChange(nextValue ?? '')}
                   valueFormat="YYYY-MM-DD"
@@ -69,28 +72,43 @@ export function TransferFormDialog({
             />
           </div>
           <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Краткое описание</label>
+            <label className={dialogLabelClass} htmlFor="transfer-description">
+              Краткое описание
+            </label>
             <Controller
               name="description"
               control={transferForm.control}
-              render={({ field }) => <TextInput classNames={darkInputClassNames} {...field} />}
+              render={({ field }) => (
+                <TextInput id="transfer-description" classNames={darkInputClassNames} {...field} />
+              )}
             />
           </div>
           <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Полное описание</label>
+            <label className={dialogLabelClass} htmlFor="transfer-full-description">
+              Полное описание
+            </label>
             <Controller
               name="full_description"
               control={transferForm.control}
-              render={({ field }) => <TextInput classNames={darkInputClassNames} {...field} />}
+              render={({ field }) => (
+                <TextInput
+                  id="transfer-full-description"
+                  classNames={darkInputClassNames}
+                  {...field}
+                />
+              )}
             />
           </div>
           <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Категория</label>
+            <label className={dialogLabelClass} htmlFor="transfer-category">
+              Категория
+            </label>
             <Controller
               name="category"
               control={transferForm.control}
               render={({ field: { value, onChange, ...field } }) => (
                 <Select
+                  id="transfer-category"
                   data={transferCategoryOptions}
                   value={value}
                   onChange={(nextValue) => onChange(nextValue ?? '')}
@@ -102,20 +120,27 @@ export function TransferFormDialog({
             />
           </div>
           <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Референс</label>
+            <label className={dialogLabelClass} htmlFor="transfer-reference">
+              Референс
+            </label>
             <Controller
               name="reference"
               control={transferForm.control}
-              render={({ field }) => <TextInput classNames={darkInputClassNames} {...field} />}
+              render={({ field }) => (
+                <TextInput id="transfer-reference" classNames={darkInputClassNames} {...field} />
+              )}
             />
           </div>
           <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Тип</label>
+            <label className={dialogLabelClass} htmlFor="transfer-type">
+              Тип
+            </label>
             <Controller
               name="transfer_type"
               control={transferForm.control}
               render={({ field: { value, onChange, ...field } }) => (
                 <Select
+                  id="transfer-type"
                   data={transferTypeOptions}
                   value={value}
                   onChange={(nextValue) => onChange(nextValue ?? '')}
@@ -127,12 +152,15 @@ export function TransferFormDialog({
             />
           </div>
           <div className={dialogRowClass}>
-            <label className={dialogLabelClass}>Сумма</label>
+            <label className={dialogLabelClass} htmlFor="transfer-amount">
+              Сумма
+            </label>
             <Controller
               name="amount"
               control={transferForm.control}
               render={({ field }) => (
                 <NumberInput
+                  id="transfer-amount"
                   min={0}
                   allowNegative={false}
                   placeholder="$ 1,999.99"

@@ -9,7 +9,7 @@ export const panelQueryKeys = {
   files: ['files'] as const,
 }
 
-export const panelQueryOptions = {
+const panelQueryOptions = {
   accounts: () =>
     queryOptions({
       queryKey: panelQueryKeys.accounts,

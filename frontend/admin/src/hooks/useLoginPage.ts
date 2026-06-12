@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from 'react'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { isAxiosError } from 'axios'
 import { authService } from '../services/authService'
+import { panelQueryKeys } from './usePanelData'
 
 interface LoginErrorResponse {
   error?: string
@@ -12,11 +13,19 @@ interface UseLoginPageParams {
 }
 
 export function useLoginPage({ onLogin }: UseLoginPageParams) {
+  const queryClient = useQueryClient()
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const loginMutation = useMutation({
     mutationFn: authService.login,
-    onSuccess: onLogin,
+    onSuccess: async () => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: panelQueryKeys.accounts }),
+        queryClient.invalidateQueries({ queryKey: panelQueryKeys.transfers }),
+        queryClient.invalidateQueries({ queryKey: panelQueryKeys.files }),
+      ])
+      onLogin()
+    },
     onError: (err: unknown) => {
       if (isAxiosError<LoginErrorResponse>(err)) {
         setError(err.response?.data?.error ?? 'Неверный пароль')

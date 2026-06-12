@@ -132,10 +132,12 @@ export function useMainPanelController() {
       accountForm: dialog.accountForm,
       transferForm: dialog.transferForm,
       fileForm: dialog.fileForm,
-      isAccountSaving: accountActions.isSaving,
-      isTransferSaving: transferActions.isSaving,
-      isFileSaving: fileActions.isSaving,
-      isDeleting: accountActions.isDeleting || transferActions.isDeleting || fileActions.isDeleting,
+      savingState: {
+        account: accountActions.isSaving,
+        transfer: transferActions.isSaving,
+        file: fileActions.isSaving,
+        delete: accountActions.isDeleting || transferActions.isDeleting || fileActions.isDeleting,
+      },
       deleteTitle: getDeleteTitle(dialog.deleteDialog),
       deleteDescription: getDeleteDescription({
         deleteDialog: dialog.deleteDialog,
