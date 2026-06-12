@@ -3,6 +3,11 @@
   color: var(--ink);
 }
 
+.pageFallback {
+  min-height: 56vh;
+  background: var(--page);
+}
+
 .heroBand {
   min-height: 177px;
   color: #fff;

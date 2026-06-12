@@ -1,18 +1,28 @@
+import { lazy, Suspense } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import type { GuestData, MasterAccount } from '../../types/guest'
 import { getAccountRoute } from '../../utils/accountRoute'
 import { getDisplayName } from '../../utils/formatters'
-import { AccountDetailsPage } from './AccountDetailsPage'
 import { DashboardHome } from './DashboardHome'
 import { Footer } from './Footer'
-import { SecurityCenterPage } from './SecurityCenterPage'
 import { Topbar } from './Topbar'
 import styles from './dashboard.module.css'
+
+const AccountDetailsPage = lazy(() =>
+  import('./AccountDetailsPage').then((module) => ({ default: module.AccountDetailsPage })),
+)
+const SecurityCenterPage = lazy(() =>
+  import('./SecurityCenterPage').then((module) => ({ default: module.SecurityCenterPage })),
+)
 
 interface DashboardProps {
   data: GuestData
   onAccountUpdate: (account: MasterAccount) => void
   onSignOut: () => void
+}
+
+function DashboardPageFallback() {
+  return <main className={styles.pageFallback} aria-label="Loading page" />
 }
 
 export function Dashboard({ data, onAccountUpdate, onSignOut }: DashboardProps) {
@@ -37,13 +47,17 @@ export function Dashboard({ data, onAccountUpdate, onSignOut }: DashboardProps) 
       />
 
       {isAccountPage ? (
-        <AccountDetailsPage data={data} onBack={showHome} />
+        <Suspense fallback={<DashboardPageFallback />}>
+          <AccountDetailsPage data={data} onBack={showHome} />
+        </Suspense>
       ) : isSecurityCenterPage ? (
-        <SecurityCenterPage
-          account={data.master}
-          onAccountUpdate={onAccountUpdate}
-          onBack={showHome}
-        />
+        <Suspense fallback={<DashboardPageFallback />}>
+          <SecurityCenterPage
+            account={data.master}
+            onAccountUpdate={onAccountUpdate}
+            onBack={showHome}
+          />
+        </Suspense>
       ) : (
         <DashboardHome
           data={data}
