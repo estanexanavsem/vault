@@ -25,7 +25,7 @@ export function GuestQueryProvider({ children }: GuestQueryProviderProps) {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
+      <ReactQueryDevtools buttonPosition="bottom-right" initialIsOpen={false} />
     </QueryClientProvider>
   )
 }
