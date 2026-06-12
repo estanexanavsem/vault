@@ -19,7 +19,8 @@
       'Segoe UI',
       sans-serif;
     font-synthesis: none;
-    text-rendering: optimizeLegibility;
+    text-rendering: optimizelegibility;
+
     --purple-950: #2e1a47;
     --purple-900: #321b50;
     --purple-800: #402561;
@@ -35,7 +36,7 @@
     --ink-muted: #6b6074;
     --muted: #7d6a97;
     --line: #ddd8e5;
-    --surface: #ffffff;
+    --surface: #fff;
     --page: #f6f6f5;
     --content-width: 1400px;
   }

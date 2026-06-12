@@ -83,7 +83,9 @@ export function BalanceSummaryCard({
                     <button
                       className={styles.accountNumberReveal}
                       type="button"
-                      aria-label={isAccountNumberVisible ? 'Hide account number' : 'Show account number'}
+                      aria-label={
+                        isAccountNumberVisible ? 'Hide account number' : 'Show account number'
+                      }
                       aria-pressed={isAccountNumberVisible}
                       onClick={() => setAccountNumberVisible((isVisible) => !isVisible)}
                     >
@@ -132,7 +134,9 @@ export function BalanceSummaryCard({
           </button>
         </p>
         {account.availableBalanceDate ? (
-          <p className={styles.balanceNote}>Available balance as of {account.availableBalanceDate}</p>
+          <p className={styles.balanceNote}>
+            Available balance as of {account.availableBalanceDate}
+          </p>
         ) : null}
       </section>
 
@@ -158,8 +162,8 @@ export function BalanceSummaryCard({
           setFloatingNode={setFloatingNode}
           title="Available balance"
         >
-          Your available balance is the money currently available to make purchases, withdrawals, and
-          payments. This balance is updated throughout the day with the transactions you make,
+          Your available balance is the money currently available to make purchases, withdrawals,
+          and payments. This balance is updated throughout the day with the transactions you make,
           including pending transactions and holds. It does not include bill pay checks or checks
           you've written or deposited that have not yet posted. This balance is used in making
           payment decisions and triggering overdraft fees if applicable.

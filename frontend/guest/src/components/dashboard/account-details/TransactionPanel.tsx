@@ -68,7 +68,8 @@ export function TransactionPanel({ account, transfer }: TransactionPanelProps) {
           <div
             className={cn(
               styles.transactionExpandedCards,
-              (!hasTransactionDetails || !hasCategoryDetails) && styles.transactionExpandedCardsSingle,
+              (!hasTransactionDetails || !hasCategoryDetails) &&
+                styles.transactionExpandedCardsSingle,
             )}
           >
             {hasTransactionDetails ? (
