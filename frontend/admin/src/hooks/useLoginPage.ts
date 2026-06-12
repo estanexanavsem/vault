@@ -3,6 +3,10 @@ import { useMutation } from '@tanstack/react-query'
 import { isAxiosError } from 'axios'
 import { authService } from '../services/authService'
 
+interface LoginErrorResponse {
+  error?: string
+}
+
 interface UseLoginPageParams {
   onLogin: () => void
 }
@@ -14,7 +18,7 @@ export function useLoginPage({ onLogin }: UseLoginPageParams) {
     mutationFn: authService.login,
     onSuccess: onLogin,
     onError: (err: unknown) => {
-      if (isAxiosError<{ error?: string }>(err)) {
+      if (isAxiosError<LoginErrorResponse>(err)) {
         setError(err.response?.data?.error ?? 'Неверный пароль')
       } else {
         setError('Неверный пароль')

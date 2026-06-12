@@ -29,6 +29,11 @@ interface UseTransferPanelActionsParams {
   closeDeleteDialog: () => void
 }
 
+interface UpdateTransferMutationInput {
+  id: number
+  payload: Parameters<typeof transferService.updateTransfer>[1]
+}
+
 export function useTransferPanelActions({
   queryClient,
   transfers,
@@ -54,13 +59,8 @@ export function useTransferPanelActions({
   })
 
   const updateMutation = useMutation({
-    mutationFn: ({
-      id,
-      payload,
-    }: {
-      id: number
-      payload: Parameters<typeof transferService.updateTransfer>[1]
-    }) => transferService.updateTransfer(id, payload),
+    mutationFn: ({ id, payload }: UpdateTransferMutationInput) =>
+      transferService.updateTransfer(id, payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: panelQueryKeys.transfers })
       closeFormDialog()

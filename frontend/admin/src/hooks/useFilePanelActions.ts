@@ -24,6 +24,11 @@ interface UseFilePanelActionsParams {
   closeDeleteDialog: () => void
 }
 
+interface UpdateFileMutationInput {
+  id: number
+  payload: Parameters<typeof fileService.updateFile>[1]
+}
+
 export function useFilePanelActions({
   queryClient,
   files,
@@ -49,13 +54,7 @@ export function useFilePanelActions({
   })
 
   const updateMutation = useMutation({
-    mutationFn: ({
-      id,
-      payload,
-    }: {
-      id: number
-      payload: Parameters<typeof fileService.updateFile>[1]
-    }) => fileService.updateFile(id, payload),
+    mutationFn: ({ id, payload }: UpdateFileMutationInput) => fileService.updateFile(id, payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: panelQueryKeys.files })
       closeFormDialog()

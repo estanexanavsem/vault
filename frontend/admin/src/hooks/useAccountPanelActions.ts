@@ -29,6 +29,11 @@ interface UseAccountPanelActionsParams {
   closeDeleteDialog: () => void
 }
 
+interface UpdateAccountMutationInput {
+  id: number
+  payload: Parameters<typeof accountService.updateAccount>[1]
+}
+
 export function useAccountPanelActions({
   queryClient,
   accounts,
@@ -63,13 +68,8 @@ export function useAccountPanelActions({
   })
 
   const updateMutation = useMutation({
-    mutationFn: ({
-      id,
-      payload,
-    }: {
-      id: number
-      payload: Parameters<typeof accountService.updateAccount>[1]
-    }) => accountService.updateAccount(id, payload),
+    mutationFn: ({ id, payload }: UpdateAccountMutationInput) =>
+      accountService.updateAccount(id, payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: panelQueryKeys.accounts })
       closeFormDialog()

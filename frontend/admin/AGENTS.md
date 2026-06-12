@@ -35,6 +35,10 @@ Strict component boundaries:
 - One component file must contain exactly one React component. If a screen needs subcomponents, move each subcomponent into its own PascalCase component file and import it.
 - Component files must not contain helper functions, render functions, business logic handlers, data mappers, or API/form orchestration. Put that code in `src/hooks/`, `src/utils/`, `src/services/`, or `src/forms/` as appropriate, then pass the resulting values and callbacks into the component.
 
+Strict TypeScript type boundaries:
+
+- Do not use inline anonymous object types in TypeScript annotations, generics, assertions, or union members. Define a named `interface` or `type` instead, then reference it by name.
+
 ESLint enforces type-aware TypeScript rules, React Hooks rules, no default exports, `no-console` warnings except `console.warn` and `console.error`, and inline `type` imports. Prettier controls formatting.
 
 ## Testing Guidelines

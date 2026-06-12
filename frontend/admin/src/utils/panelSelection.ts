@@ -1,6 +1,13 @@
 import type { Account, AccountFile, Transfer } from '../types'
 import type { Entity } from '../types/panel'
 
+interface DeleteDescriptionParams {
+  deleteDialog: Entity | null
+  selectedAccountLogin: string
+  selectedTransfer: Transfer | null
+  selectedFileName: string
+}
+
 export const getActiveAccount = (accounts: Account[], selectedAccountId: number | null) =>
   accounts.find((account) => account.id === selectedAccountId) ?? accounts[0] ?? null
 
@@ -31,12 +38,7 @@ export const getDeleteDescription = ({
   selectedAccountLogin,
   selectedTransfer,
   selectedFileName,
-}: {
-  deleteDialog: Entity | null
-  selectedAccountLogin: string
-  selectedTransfer: Transfer | null
-  selectedFileName: string
-}) => {
+}: DeleteDescriptionParams) => {
   if (deleteDialog === 'account') {
     return `Удалить аккаунт "${selectedAccountLogin}"?`
   }
