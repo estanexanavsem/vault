@@ -151,6 +151,8 @@ cp ansible/group_vars/vault.example.yml ansible/group_vars/vault.yml
 
 ## Деплой
 
+Подробный рабочий процесс деплоя описан в [`DEPLOY.md`](DEPLOY.md).
+
 Интерактивный TUI для деплоя:
 
 ```bash

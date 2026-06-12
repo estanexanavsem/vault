@@ -14,6 +14,7 @@ Nested guides in `backend/AGENTS.md` and `frontend/admin/AGENTS.md` provide area
 ## Development & Deployment Docs
 
 - [`DEVELOPMENT.md`](DEVELOPMENT.md): developer-machine tooling, local development commands, validation, and full deploy-cycle commands.
+- [`DEPLOY.md`](DEPLOY.md): direct VPS deploy workflow, normal release command, provisioning cases, post-deploy checks, logs, and server release layout.
 - [`SERVER.md`](SERVER.md): server requirements, network prerequisites, packages installed by Ansible, managed services, server layout, HTTPS, backups, and troubleshooting.
 
 ## Build, Test, and Development Commands
