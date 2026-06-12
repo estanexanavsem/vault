@@ -8,6 +8,15 @@ import type {
 } from '../types/guest'
 import { httpClient, readResponse } from './httpClient'
 
+interface GuestSessionOptions {
+  signal?: AbortSignal
+}
+
+interface GuestProfileUpdatePayload {
+  email?: string
+  phone?: string
+}
+
 export const guestAuthService = {
   login: async (login: string, password: string): Promise<GuestData> => {
     const response = await readResponse(
@@ -21,7 +30,7 @@ export const guestAuthService = {
     return response.data
   },
 
-  checkSession: async (options: { signal?: AbortSignal } = {}): Promise<GuestData> => {
+  checkSession: async (options: GuestSessionOptions = {}): Promise<GuestData> => {
     const response = await readResponse(
       httpClient.get<GuestSessionResponse>('/guest/session', {
         signal: options.signal,
@@ -42,7 +51,7 @@ export const guestAuthService = {
   logout: (): Promise<GuestLogoutResponse> =>
     readResponse(httpClient.post<GuestLogoutResponse>('/guest/logout')),
 
-  updateProfile: async (payload: { email?: string; phone?: string }): Promise<MasterAccount> => {
+  updateProfile: async (payload: GuestProfileUpdatePayload): Promise<MasterAccount> => {
     const response = await readResponse(
       httpClient.put<GuestProfileUpdateResponse>('/guest/profile', payload),
     )

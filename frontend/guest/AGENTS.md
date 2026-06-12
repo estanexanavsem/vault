@@ -37,6 +37,8 @@ Keep React component files limited to rendering, local UI state, and component-o
 
 Use a strict one-file-one-component rule: each component file may declare exactly one React component. Move nested components, sibling components, and reusable render pieces into their own PascalCase component files. Lazy component declarations used only for code-splitting are allowed in the consuming component file.
 
+Do not use inline anonymous object types in TypeScript annotations. Name object shapes with `interface` or `type` before using them in parameters, return types, generics, assertions, or component props.
+
 ESLint enforces type-aware TypeScript rules, React Hooks rules, `no-console` warnings except `console.warn` and `console.error`, and inline `type` imports. Prettier controls formatting.
 
 Keep API contracts typed at the edge. Avoid `any`; model guest API responses with local interfaces or shared types before reading nested response fields.
