@@ -122,7 +122,11 @@ export function PanelDialogs({
                 name="login"
                 control={accountForm.control}
                 render={({ field }) => (
-                  <TextInput error={accountErrors.login?.message} classNames={darkInputClassNames} {...field} />
+                  <TextInput
+                    error={accountErrors.login?.message}
+                    classNames={darkInputClassNames}
+                    {...field}
+                  />
                 )}
               />
             </div>
@@ -187,7 +191,9 @@ export function PanelDialogs({
               <Controller
                 name="email"
                 control={accountForm.control}
-                render={({ field }) => <TextInput type="email" classNames={darkInputClassNames} {...field} />}
+                render={({ field }) => (
+                  <TextInput type="email" classNames={darkInputClassNames} {...field} />
+                )}
               />
             </div>
             <div className={accountRowClass}>
@@ -403,7 +409,12 @@ export function PanelDialogs({
         </form>
       </Modal>
 
-      <Modal opened={deleteDialog !== null} onClose={onCloseDeleteDialog} title={deleteTitle} centered>
+      <Modal
+        opened={deleteDialog !== null}
+        onClose={onCloseDeleteDialog}
+        title={deleteTitle}
+        centered
+      >
         <Stack>
           {formError && <Alert color="red">{formError}</Alert>}
           <Text size="sm">{deleteDescription}</Text>
