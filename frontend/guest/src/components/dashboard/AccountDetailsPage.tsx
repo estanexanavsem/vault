@@ -3,7 +3,7 @@ import type { GuestData } from '../../types/guest'
 import { getAccountSummary } from '../../utils/accountSummary'
 import { cn } from '../../utils/cn'
 import { formatCurrency } from '../../utils/formatters'
-import { getLatestTransferSummary } from '../../utils/transferSummary'
+import { getLatestTransferSummary, getTransferSummaries } from '../../utils/transferSummary'
 import { AccountDetailHero } from './account-details/AccountDetailHero'
 import { AccountDetailSidebar } from './account-details/AccountDetailSidebar'
 import { DetailActivitySection } from './account-details/DetailActivitySection'
@@ -19,8 +19,9 @@ interface AccountDetailsPageProps {
 export function AccountDetailsPage({ data, onBack }: AccountDetailsPageProps) {
   const [isAccountDetailsOpen, setAccountDetailsOpen] = useState(false)
   const account = getAccountSummary(data.master)
-  const transfer = getLatestTransferSummary(data.transfers, 'Zelle business payment from')
-  const lastDepositText = formatCurrency(Math.abs(transfer.amount))
+  const transfer = getLatestTransferSummary(data.transfers)
+  const transferSummaries = getTransferSummaries(data.transfers)
+  const lastDepositText = transfer ? formatCurrency(Math.abs(transfer.amount)) : ''
 
   return (
     <>
@@ -38,7 +39,7 @@ export function AccountDetailsPage({ data, onBack }: AccountDetailsPageProps) {
         id="account-detail"
       >
         <AccountDetailSidebar account={account} />
-        <DetailActivitySection account={account} transfer={transfer} />
+        <DetailActivitySection transfers={transferSummaries} />
         <DetailCopy />
         <DownloadAppCard />
       </main>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { Transfer } from '../../types/guest'
 import { cn } from '../../utils/cn'
-import { getLatestTransferSummary } from '../../utils/transferSummary'
+import { getTransferSummaries } from '../../utils/transferSummary'
 import { RecentActivitySummary } from './activity-card/RecentActivitySummary'
 import { UpcomingActivityEmpty } from './activity-card/UpcomingActivityEmpty'
 import styles from './dashboard.module.css'
@@ -13,7 +13,7 @@ interface ActivityCardProps {
 
 export function ActivityCard({ onOpenAccount, transfers }: ActivityCardProps) {
   const [activeTab, setActiveTab] = useState<'recent' | 'upcoming'>('recent')
-  const transfer = getLatestTransferSummary(transfers, 'Zelle business transfer')
+  const transferSummaries = getTransferSummaries(transfers)
   const isUpcoming = activeTab === 'upcoming'
 
   return (
@@ -42,7 +42,7 @@ export function ActivityCard({ onOpenAccount, transfers }: ActivityCardProps) {
       {isUpcoming ? (
         <UpcomingActivityEmpty />
       ) : (
-        <RecentActivitySummary onOpenAccount={onOpenAccount} transfer={transfer} />
+        <RecentActivitySummary onOpenAccount={onOpenAccount} transfers={transferSummaries} />
       )}
     </section>
   )

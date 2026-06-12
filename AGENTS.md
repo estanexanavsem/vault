@@ -37,6 +37,10 @@ Frontend commands run from each app directory:
 
 Use standard Go style: `gofmt`, short package names, explicit error handling, and focused handlers. For React, use TypeScript, PascalCase component files such as `AccountTable.tsx`, and camelCase for hooks, services, stores, utilities, and forms. Prefer named exports for shared frontend code. Admin ESLint enforces type-aware TypeScript, React Hooks, `no-console`, and inline type-import rules.
 
+## Data Fidelity
+
+Do not invent or hardcode business data as UI fallbacks. Account names, transaction descriptions, payment methods, balances, dates, statuses, file metadata, and similar domain values must come from persisted data or explicit user input. If data is missing, render an empty/neutral state or omit the field; never substitute realistic-looking sample values such as transfer labels, merchant names, amounts, or dates.
+
 ## Testing Guidelines
 
 Run `make check` before backend changes. Add focused Go tests for handlers, middleware, validation, database behavior, and security helpers. Frontend tests are not configured; for UI changes run `npm run build`, plus admin lint/format checks in `frontend/admin/`.

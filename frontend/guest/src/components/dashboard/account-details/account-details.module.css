@@ -495,8 +495,21 @@
   border-bottom: 1px solid var(--line);
 }
 
+.transactionDetailRow + .postedBalanceRow,
+.transactionExpandedPanel + .postedBalanceRow {
+  border-top: 1px solid var(--line);
+}
+
 .postedBalanceRow span {
   align-self: center;
+}
+
+.transactionEmptyState {
+  min-height: 84px;
+  padding: 28px 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-muted);
 }
 
 .transactionDetailRow {
@@ -507,6 +520,11 @@
   text-align: left;
   background: #fff;
   border: 0;
+}
+
+.transactionDetailRow + .transactionDetailRow,
+.transactionExpandedPanel + .transactionDetailRow {
+  border-top: 1px solid var(--line);
 }
 
 .transactionDetailRowOpen {
@@ -575,6 +593,7 @@
 .transactionExpandedPanel {
   padding: 34px 28px 36px;
   border-top: 0;
+  border-bottom: 1px solid var(--line);
 }
 
 .transactionExpandedCards {

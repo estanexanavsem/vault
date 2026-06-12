@@ -1,5 +1,10 @@
 import type { Transfer } from '../types/guest'
-import { formatSignedCurrency, getTransferDate, getTransferDescription } from './formatters'
+import {
+  formatSignedCurrency,
+  formatStatusLabel,
+  getTransferDate,
+  getTransferDescription,
+} from './formatters'
 import { toOptionalText } from './text'
 
 export interface TransferSummary {
@@ -8,31 +13,37 @@ export interface TransferSummary {
   category?: string
   date: string
   fullDescription?: string
+  id?: number
   isPositive: boolean
   label: string
   meta: string
   reference?: string
+  status: string
   transferType?: string
 }
 
-export const getLatestTransferSummary = (
-  transfers: Transfer[],
-  fallbackDescription: string,
-): TransferSummary => {
-  const latestTransfer = transfers[0]
-  const amount = latestTransfer?.amount ?? 10
-  const date = getTransferDate(latestTransfer)
+export const getTransferSummary = (transfer: Transfer): TransferSummary => {
+  const amount = transfer.amount
+  const date = getTransferDate(transfer)
 
   return {
     amount,
     amountText: formatSignedCurrency(amount),
-    category: toOptionalText(latestTransfer?.category),
+    category: toOptionalText(transfer.category),
     date,
-    fullDescription: toOptionalText(latestTransfer?.full_description),
+    fullDescription: toOptionalText(transfer.full_description),
+    id: transfer.id,
     isPositive: amount >= 0,
-    label: getTransferDescription(latestTransfer, fallbackDescription),
-    meta: date || latestTransfer?.status.trim() || '',
-    reference: toOptionalText(latestTransfer?.reference),
-    transferType: toOptionalText(latestTransfer?.transfer_type),
+    label: getTransferDescription(transfer),
+    meta: date || transfer.status.trim(),
+    reference: toOptionalText(transfer.reference),
+    status: formatStatusLabel(transfer.status),
+    transferType: toOptionalText(transfer.transfer_type),
   }
 }
+
+export const getTransferSummaries = (transfers: Transfer[]): TransferSummary[] =>
+  transfers.map((transfer) => getTransferSummary(transfer))
+
+export const getLatestTransferSummary = (transfers: Transfer[]): TransferSummary | undefined =>
+  transfers[0] ? getTransferSummary(transfers[0]) : undefined

@@ -43,6 +43,10 @@ ESLint enforces type-aware TypeScript rules, React Hooks rules, `no-console` war
 
 Keep API contracts typed at the edge. Avoid `any`; model guest API responses with local interfaces or shared types before reading nested response fields.
 
+## Data Fidelity
+
+Do not invent or hardcode business data as UI fallbacks. Guest-facing account names, transaction descriptions, payment methods, balances, dates, statuses, file metadata, and similar domain values must come from persisted API data or explicit user input. If data is missing, render an empty/neutral state or omit the field; never substitute realistic-looking sample values such as transfer labels, merchant names, amounts, or dates.
+
 ## Testing Guidelines
 
 There is currently no frontend test script or test framework configured. Before opening a change, run at least `npm run lint` and `npm run build`. Also run `npm run format:check` for changes touching source or config files. If you add tests, add an npm script and use colocated names such as `Component.test.tsx` or `service.test.ts`.

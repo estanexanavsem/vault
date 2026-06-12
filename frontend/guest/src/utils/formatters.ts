@@ -95,15 +95,22 @@ export const getTimeGreeting = (date = new Date()) => {
   return 'Good evening'
 }
 
-export const getTransferDescription = (transfer: Transfer | undefined, fallback: string) => {
-  const fullDescription = transfer?.full_description.trim() ?? ''
+export const getTransferDescription = (transfer: Transfer) => {
+  const fullDescription = transfer.full_description.trim()
   if (fullDescription !== '') {
     return fullDescription
   }
 
-  const description = transfer?.description.trim() ?? ''
-  return description !== '' ? description : fallback
+  return transfer.description.trim()
 }
+
+export const formatStatusLabel = (value: string) =>
+  value
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join(' ')
 
 export const getTransferDate = (transfer: Transfer | undefined) =>
   transfer?.transaction_date ? formatShortDate(transfer.transaction_date) : ''

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import type { AccountSummary } from '../../../utils/accountSummary'
 import { cn } from '../../../utils/cn'
 import type { TransferSummary } from '../../../utils/transferSummary'
 import dashboardStyles from '../dashboard.module.css'
@@ -8,11 +7,10 @@ import { DetailUpcomingActivityEmpty } from './DetailUpcomingActivityEmpty'
 import { TransactionPanel } from './TransactionPanel'
 
 interface DetailActivitySectionProps {
-  account: AccountSummary
-  transfer: TransferSummary
+  transfers: TransferSummary[]
 }
 
-export function DetailActivitySection({ account, transfer }: DetailActivitySectionProps) {
+export function DetailActivitySection({ transfers }: DetailActivitySectionProps) {
   const [activeTab, setActiveTab] = useState<'recent' | 'upcoming'>('recent')
   const isUpcoming = activeTab === 'upcoming'
 
@@ -39,11 +37,7 @@ export function DetailActivitySection({ account, transfer }: DetailActivitySecti
         </button>
       </div>
 
-      {isUpcoming ? (
-        <DetailUpcomingActivityEmpty />
-      ) : (
-        <TransactionPanel account={account} transfer={transfer} />
-      )}
+      {isUpcoming ? <DetailUpcomingActivityEmpty /> : <TransactionPanel transfers={transfers} />}
     </section>
   )
 }

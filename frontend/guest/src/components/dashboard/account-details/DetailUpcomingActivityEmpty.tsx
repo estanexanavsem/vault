@@ -5,8 +5,8 @@ export function DetailUpcomingActivityEmpty() {
     <div className={styles.upcomingActivity}>
       <p className={styles.upcomingIntro}>
         Showing upcoming activity for the next 30 days. Please note: Only the next instance of a
-        recurring transfer or payment series will be displayed. One-time Zelle payments, external
-        ACH, wire transfers, and paper checks aren't included in this calculation.
+        recurring transfer or payment series will be displayed. Some one-time or externally
+        initiated transactions aren't included in this calculation.
       </p>
 
       <div className={styles.upcomingEmptyState}>

@@ -114,10 +114,12 @@ export function BalanceSummaryCard({
                 </dt>
                 <dd>{account.balanceText}</dd>
               </div>
-              <div>
-                <dt>Last deposit amount</dt>
-                <dd>{lastDepositText}</dd>
-              </div>
+              {lastDepositText ? (
+                <div>
+                  <dt>Last deposit amount</dt>
+                  <dd>{lastDepositText}</dd>
+                </div>
+              ) : null}
             </dl>
             <div className={styles.accountInfoDivider} />
           </div>
