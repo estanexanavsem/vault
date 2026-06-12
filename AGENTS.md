@@ -11,6 +11,11 @@ This repository contains a Go API backend and two Vite React frontends.
 
 Nested guides in `backend/AGENTS.md` and `frontend/admin/AGENTS.md` provide area-specific rules.
 
+## Development & Deployment Docs
+
+- [`DEVELOPMENT.md`](DEVELOPMENT.md): developer-machine tooling, local development commands, validation, and full deploy-cycle commands.
+- [`SERVER.md`](SERVER.md): server requirements, network prerequisites, packages installed by Ansible, managed services, server layout, HTTPS, backups, and troubleshooting.
+
 ## Build, Test, and Development Commands
 
 Backend commands run from `backend/`:

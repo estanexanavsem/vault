@@ -89,6 +89,7 @@ func TestRunReturnsDirectoryCreationError(t *testing.T) {
 func TestRunWithServerInitializesDBAndUsesPort(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	t.Setenv("DB_PATH", t.TempDir()+"/vault.db")
+	t.Setenv("HTTP_ADDR", "")
 	t.Setenv("PORT", "9090")
 	t.Setenv("PANEL_PASSWORD", "panel-secret")
 	t.Setenv("HTTP_READ_HEADER_TIMEOUT", "7s")
@@ -136,9 +137,28 @@ func TestRunWithServerInitializesDBAndUsesPort(t *testing.T) {
 	}
 }
 
+func TestRunWithServerUsesHTTPAddrOverride(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	t.Setenv("DB_PATH", t.TempDir()+"/vault.db")
+	t.Setenv("HTTP_ADDR", "127.0.0.1:9091")
+	t.Setenv("PORT", "9090")
+	t.Setenv("PANEL_PASSWORD", "panel-secret")
+
+	err := runWithServer(func(srv *http.Server) error {
+		if srv.Addr != "127.0.0.1:9091" {
+			t.Fatalf("unexpected listen addr: %q", srv.Addr)
+		}
+		return nil
+	})
+	if err != nil {
+		t.Fatalf("run with server: %v", err)
+	}
+}
+
 func TestRunWithServerReturnsStartError(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	t.Setenv("DB_PATH", t.TempDir()+"/vault.db")
+	t.Setenv("HTTP_ADDR", "")
 	t.Setenv("PORT", "")
 	t.Setenv("PANEL_PASSWORD", "panel-secret")
 

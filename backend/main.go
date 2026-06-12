@@ -46,13 +46,17 @@ func runWithServer(start func(*http.Server) error) error {
 
 	r := newRouter()
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
+	addr := os.Getenv("HTTP_ADDR")
+	if addr == "" {
+		port := os.Getenv("PORT")
+		if port == "" {
+			port = "8080"
+		}
+		addr = ":" + port
 	}
 
-	log.Printf("Vault server starting on :%s", port)
-	return start(newHTTPServer(":"+port, r))
+	log.Printf("Vault server starting on %s", addr)
+	return start(newHTTPServer(addr, r))
 }
 
 func newHTTPServer(addr string, handler http.Handler) *http.Server {

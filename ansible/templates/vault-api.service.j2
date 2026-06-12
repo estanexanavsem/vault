@@ -1,0 +1,24 @@
+[Unit]
+Description=Vault API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User={{ vault_app_user }}
+Group={{ vault_app_user }}
+WorkingDirectory={{ vault_app_root }}/current/backend
+EnvironmentFile={{ vault_app_root }}/shared/env/vault-api.env
+ExecStart={{ vault_app_root }}/current/backend/vault-api
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=15s
+KillSignal=SIGTERM
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths={{ vault_app_root }}/shared
+
+[Install]
+WantedBy=multi-user.target

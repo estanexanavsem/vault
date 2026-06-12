@@ -1,0 +1,51 @@
+{{ vault_admin_domain }} {
+	encode zstd gzip
+
+	@api path /api/* /health /ready
+	handle @api {
+		reverse_proxy 127.0.0.1:{{ vault_api_port }} {
+			header_up X-Forwarded-Host {host}
+			header_up X-Forwarded-Proto {scheme}
+		}
+	}
+
+	handle {
+		root * {{ vault_app_root }}/current/admin
+		try_files {path} /index.html
+		file_server
+	}
+}
+
+{{ vault_guest_domain }} {
+	encode zstd gzip
+
+	@api path /api/* /health /ready
+	handle @api {
+		reverse_proxy 127.0.0.1:{{ vault_api_port }} {
+			header_up X-Forwarded-Host {host}
+			header_up X-Forwarded-Proto {scheme}
+		}
+	}
+
+	handle {
+		root * {{ vault_app_root }}/current/guest
+		try_files {path} /index.html
+		file_server
+	}
+}
+
+{{ vault_api_domain }} {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:{{ vault_api_port }} {
+		header_up X-Forwarded-Host {host}
+		header_up X-Forwarded-Proto {scheme}
+	}
+}
+
+{{ vault_deploy_domain }} {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:{{ semaphore_port }} {
+		header_up X-Forwarded-Host {host}
+		header_up X-Forwarded-Proto {scheme}
+	}
+}

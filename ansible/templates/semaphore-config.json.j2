@@ -1,0 +1,23 @@
+{
+  "sqlite": {
+    "host": "/var/lib/semaphore/semaphore.sqlite"
+  },
+  "dialect": "sqlite",
+  "git_client": "go_git",
+  "interface": "127.0.0.1",
+  "port": "{{ semaphore_port }}",
+  "tmp_path": "/tmp/semaphore",
+  "cookie_hash": "{{ semaphore_cookie_hash }}",
+  "cookie_encryption": "{{ semaphore_cookie_encryption }}",
+  "access_key_encryption": "{{ semaphore_access_key_encryption }}",
+  "web_host": "https://{{ vault_deploy_domain }}",
+  "auth": {
+    "totp": {
+      "enabled": false,
+      "allow_recovery": true
+    }
+  },
+  "schedule": {
+    "timezone": "UTC"
+  }
+}

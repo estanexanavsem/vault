@@ -1,0 +1,30 @@
+---
+vault_app_root: /opt/vault
+vault_app_user: vault
+vault_service_name: vault-api
+vault_api_port: 8080
+vault_keep_releases: 5
+
+vault_admin_domain: admin.example.com
+vault_guest_domain: guest.example.com
+vault_api_domain: api.example.com
+vault_deploy_domain: deploy.example.com
+
+vault_build_goos: linux
+vault_build_goarch: amd64
+vault_build_cgo_enabled: "1"
+
+vault_panel_password: "change-this-before-first-deploy"
+
+semaphore_version: "2.17.26"
+semaphore_port: 3000
+semaphore_admin_user: admin
+semaphore_admin_name: Admin
+semaphore_admin_email: admin@example.com
+semaphore_admin_password: "change-this-before-first-provision"
+
+# Generate these with:
+# head -c32 /dev/urandom | base64
+semaphore_cookie_hash: "replace-with-random-base64"
+semaphore_cookie_encryption: "replace-with-random-base64"
+semaphore_access_key_encryption: "replace-with-random-base64"

@@ -1,0 +1,151 @@
+---
+- name: Build Vault release locally
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    vault_build_base: "{{ playbook_dir }}/../../.deploy/build"
+
+  tasks:
+    - name: Register release id
+      ansible.builtin.set_fact:
+        vault_release_id: "{{ lookup('pipe', 'date -u +%Y%m%d%H%M%S') }}-{{ lookup('pipe', 'git rev-parse --short HEAD 2>/dev/null || echo local') }}"
+
+    - name: Register build directory
+      ansible.builtin.set_fact:
+        vault_build_root: "{{ vault_build_base }}/{{ vault_release_id }}"
+
+    - name: Remove previous build directory for this release
+      ansible.builtin.file:
+        path: "{{ vault_build_root }}"
+        state: absent
+
+    - name: Create build directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - "{{ vault_build_root }}/backend"
+        - "{{ vault_build_root }}/admin"
+        - "{{ vault_build_root }}/guest"
+
+    - name: Build backend binary
+      ansible.builtin.command:
+        cmd: go build -trimpath -ldflags "-s -w" -o "{{ vault_build_root }}/backend/vault-api" .
+        chdir: "{{ playbook_dir }}/../../backend"
+      environment:
+        GOOS: "{{ hostvars[groups['vault'][0]].vault_build_goos | default('linux') }}"
+        GOARCH: "{{ hostvars[groups['vault'][0]].vault_build_goarch | default('amd64') }}"
+        CGO_ENABLED: "{{ hostvars[groups['vault'][0]].vault_build_cgo_enabled | default('1') }}"
+
+    - name: Install admin dependencies
+      ansible.builtin.command:
+        cmd: npm ci
+        chdir: "{{ playbook_dir }}/../../frontend/admin"
+
+    - name: Build admin frontend
+      ansible.builtin.command:
+        cmd: npm run build
+        chdir: "{{ playbook_dir }}/../../frontend/admin"
+
+    - name: Copy admin dist
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/../../frontend/admin/dist/"
+        dest: "{{ vault_build_root }}/admin/"
+        mode: preserve
+
+    - name: Install guest dependencies
+      ansible.builtin.command:
+        cmd: npm ci
+        chdir: "{{ playbook_dir }}/../../frontend/guest"
+
+    - name: Build guest frontend
+      ansible.builtin.command:
+        cmd: npm run build
+        chdir: "{{ playbook_dir }}/../../frontend/guest"
+
+    - name: Copy guest dist
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/../../frontend/guest/dist/"
+        dest: "{{ vault_build_root }}/guest/"
+        mode: preserve
+
+    - name: Register release facts for remote play
+      ansible.builtin.add_host:
+        name: vault_release
+        vault_release_id: "{{ vault_release_id }}"
+        vault_build_root: "{{ vault_build_root }}"
+
+- name: Deploy Vault release to VPS
+  hosts: vault
+  become: true
+  gather_facts: false
+  vars:
+    vault_release_id: "{{ hostvars['vault_release'].vault_release_id }}"
+    vault_build_root: "{{ hostvars['vault_release'].vault_build_root }}"
+    vault_release_path: "{{ vault_app_root }}/releases/{{ vault_release_id }}"
+
+  tasks:
+    - name: Create remote release directory
+      ansible.builtin.file:
+        path: "{{ vault_release_path }}"
+        state: directory
+        owner: "{{ vault_app_user }}"
+        group: "{{ vault_app_user }}"
+        mode: "0755"
+
+    - name: Upload release via rsync
+      ansible.posix.synchronize:
+        src: "{{ vault_build_root }}/"
+        dest: "{{ vault_release_path }}/"
+        archive: true
+        compress: true
+        delete: true
+        private_key: "{{ ansible_ssh_private_key_file | default(omit) }}"
+        use_ssh_args: true
+      delegate_to: localhost
+      become: false
+
+    - name: Set release ownership
+      ansible.builtin.file:
+        path: "{{ vault_release_path }}"
+        state: directory
+        owner: "{{ vault_app_user }}"
+        group: "{{ vault_app_user }}"
+        recurse: true
+
+    - name: Activate current release
+      ansible.builtin.file:
+        src: "{{ vault_release_path }}"
+        dest: "{{ vault_app_root }}/current"
+        state: link
+        force: true
+        owner: "{{ vault_app_user }}"
+        group: "{{ vault_app_user }}"
+
+    - name: Restart Vault API
+      ansible.builtin.systemd:
+        name: "{{ vault_service_name }}"
+        state: restarted
+        daemon_reload: true
+
+    - name: Wait for Vault readiness
+      ansible.builtin.uri:
+        url: "http://127.0.0.1:{{ vault_api_port }}/ready"
+        status_code: 200
+      register: vault_ready
+      retries: 20
+      delay: 1
+      until: vault_ready.status == 200
+
+    - name: Remove old releases
+      ansible.builtin.shell: |
+        set -euo pipefail
+        find "{{ vault_app_root }}/releases" -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\n' \
+          | sort -rn \
+          | awk -v keep="{{ vault_keep_releases }}" 'NR > keep {print $2}' \
+          | xargs -r rm -rf
+      args:
+        executable: /bin/bash
+      changed_when: false

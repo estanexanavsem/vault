@@ -2,6 +2,10 @@
 .env
 .env.*
 !.env.example
+ansible/group_vars/*.yml
+!ansible/group_vars/*.example.yml
+ansible/inventory.ini
+.deploy/
 
 # Logs
 *.log
