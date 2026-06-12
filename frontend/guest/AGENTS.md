@@ -35,6 +35,8 @@ Use the shared `cn()` helper from `src/utils/cn.ts` for conditional or combined 
 
 Keep React component files limited to rendering, local UI state, and component-owned helpers. Shared side-effect logic such as error logging, analytics, request normalization, storage, and notification helpers must live outside component files, preferably under `src/utils/` or `src/services/`.
 
+Use a strict one-file-one-component rule: each component file may declare exactly one React component. Move nested components, sibling components, and reusable render pieces into their own PascalCase component files. Lazy component declarations used only for code-splitting are allowed in the consuming component file.
+
 ESLint enforces type-aware TypeScript rules, React Hooks rules, `no-console` warnings except `console.warn` and `console.error`, and inline `type` imports. Prettier controls formatting.
 
 Keep API contracts typed at the edge. Avoid `any`; model guest API responses with local interfaces or shared types before reading nested response fields.
