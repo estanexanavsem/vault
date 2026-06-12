@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { useLocation, useNavigate } from 'react-router-dom'
-import type { GuestData, MasterAccount } from '../../types/guest'
+import type { GuestData } from '../../types/guest'
 import { getAccountRoute } from '../../utils/accountRoute'
 import { logBoundaryError } from '../../utils/errorBoundary'
 import { getDisplayName } from '../../utils/formatters'
@@ -21,11 +21,10 @@ const SecurityCenterPage = lazy(() =>
 
 interface DashboardProps {
   data: GuestData
-  onAccountUpdate: (account: MasterAccount) => void
   onSignOut: () => void
 }
 
-export function Dashboard({ data, onAccountUpdate, onSignOut }: DashboardProps) {
+export function Dashboard({ data, onSignOut }: DashboardProps) {
   const location = useLocation()
   const navigate = useNavigate()
   const greetingName = getDisplayName(data.master)
@@ -66,7 +65,6 @@ export function Dashboard({ data, onAccountUpdate, onSignOut }: DashboardProps) 
           <Suspense fallback={<DashboardPageFallback />}>
             <SecurityCenterPage
               account={data.master}
-              onAccountUpdate={onAccountUpdate}
               onBack={showHome}
               onSessionExpired={onSignOut}
             />

@@ -46,23 +46,35 @@ export interface GuestFile {
   created_at: string
 }
 
-export interface GuestLoginResponse {
-  success: boolean
-  data?: GuestData
-  error?: string
-  expires_at?: string
-}
+export type GuestLoginResponse =
+  | {
+      data: GuestData
+      expires_at?: string
+      success: true
+    }
+  | {
+      error?: string
+      success: false
+    }
 
-export interface GuestSessionResponse extends GuestData {
-  success: boolean
-  error?: string
-}
+export type GuestSessionResponse =
+  | (GuestData & {
+      success: true
+    })
+  | {
+      error?: string
+      success: false
+    }
 
-export interface GuestProfileUpdateResponse {
-  success: boolean
-  master?: MasterAccount
-  error?: string
-}
+export type GuestProfileUpdateResponse =
+  | {
+      master: MasterAccount
+      success: true
+    }
+  | {
+      error?: string
+      success: false
+    }
 
 export interface GuestLogoutResponse {
   success: boolean

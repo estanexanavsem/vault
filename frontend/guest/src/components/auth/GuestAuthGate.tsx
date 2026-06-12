@@ -11,8 +11,7 @@ const LoginScreen = lazy(() =>
 )
 
 export function GuestAuthGate() {
-  const { data, error, handleAccountUpdate, handleSignOut, handleSubmit, isAuthChecked, loading } =
-    useGuestAuth()
+  const { data, error, handleSignOut, handleSubmit, isAuthChecked, loading } = useGuestAuth()
 
   if (!isAuthChecked) {
     return <AuthLoadingScreen />
@@ -26,39 +25,14 @@ export function GuestAuthGate() {
     )
   }
 
+  const dashboardElement = <Dashboard data={data} onSignOut={handleSignOut} />
+
   return (
     <Suspense fallback={<AuthLoadingScreen />}>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Dashboard
-              data={data}
-              onAccountUpdate={handleAccountUpdate}
-              onSignOut={handleSignOut}
-            />
-          }
-        />
-        <Route
-          path="/accounts/:accountId"
-          element={
-            <Dashboard
-              data={data}
-              onAccountUpdate={handleAccountUpdate}
-              onSignOut={handleSignOut}
-            />
-          }
-        />
-        <Route
-          path="/security-center"
-          element={
-            <Dashboard
-              data={data}
-              onAccountUpdate={handleAccountUpdate}
-              onSignOut={handleSignOut}
-            />
-          }
-        />
+        <Route path="/" element={dashboardElement} />
+        <Route path="/accounts/:accountId" element={dashboardElement} />
+        <Route path="/security-center" element={dashboardElement} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>

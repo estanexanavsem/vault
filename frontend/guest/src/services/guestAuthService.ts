@@ -12,10 +12,15 @@ interface GuestSessionOptions {
   signal?: AbortSignal
 }
 
-interface GuestProfileUpdatePayload {
-  email?: string
-  phone?: string
-}
+export type GuestProfileUpdatePayload =
+  | {
+      email: string
+      phone?: never
+    }
+  | {
+      email?: never
+      phone: string
+    }
 
 export const guestAuthService = {
   login: async (login: string, password: string): Promise<GuestData> => {
@@ -23,7 +28,7 @@ export const guestAuthService = {
       httpClient.post<GuestLoginResponse>('/guest/login', { login, password }),
     )
 
-    if (!response.success || !response.data) {
+    if (!response.success) {
       throw new Error(response.error ?? 'Invalid credentials')
     }
 
@@ -56,7 +61,7 @@ export const guestAuthService = {
       httpClient.put<GuestProfileUpdateResponse>('/guest/profile', payload),
     )
 
-    if (!response.success || !response.master) {
+    if (!response.success) {
       throw new Error(response.error ?? 'Could not update profile')
     }
 

@@ -1,11 +1,5 @@
 import { isAxiosError } from 'axios'
 
-interface ApiErrorBody {
-  error?: unknown
-  message?: unknown
-  success?: unknown
-}
-
 export type RequestErrorKind =
   | 'auth'
   | 'canceled'
@@ -42,8 +36,7 @@ const readApiErrorMessage = (data: unknown): string | undefined => {
     return undefined
   }
 
-  const body = data as ApiErrorBody
-  const rawMessage = typeof body.error === 'string' ? body.error : body.message
+  const rawMessage = typeof data.error === 'string' ? data.error : data.message
   return typeof rawMessage === 'string' && rawMessage.trim() !== '' ? rawMessage.trim() : undefined
 }
 

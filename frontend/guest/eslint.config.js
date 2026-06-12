@@ -1,5 +1,6 @@
 // @ts-check
 import { fixupPluginRules } from '@eslint/compat'
+import pluginQuery from '@tanstack/eslint-plugin-query'
 import js from '@eslint/js'
 import prettierConfig from 'eslint-config-prettier/flat'
 import { defineConfig, globalIgnores } from 'eslint/config'
@@ -28,6 +29,7 @@ export default defineConfig([
       tseslint.configs.recommendedTypeChecked,
       tseslint.configs.stylisticTypeChecked,
       reactHooks.configs.flat.recommended,
+      ...pluginQuery.configs['flat/recommended-strict'],
       prettierConfig,
     ],
     languageOptions: {
@@ -62,7 +64,7 @@ export default defineConfig([
       'react-refresh': reactRefresh,
     },
     rules: {
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'react-refresh/only-export-components': ['error', { allowConstantExport: true }],
     },
   },
   {

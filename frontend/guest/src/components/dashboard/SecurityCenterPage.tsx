@@ -1,81 +1,36 @@
 import { ChevronDown, LoaderCircle, Mail, Pencil, Phone, UserRound, X } from 'lucide-react'
-import { useState, type ChangeEvent } from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { guestAuthService } from '../../services/guestAuthService'
+import { useState } from 'react'
+import { Controller } from 'react-hook-form'
+import { useContactEditor } from '../../hooks/useContactEditor'
 import type { MasterAccount } from '../../types/guest'
 import { getFullName, getInitials } from '../../utils/accountIdentity'
 import { cn } from '../../utils/cn'
-import {
-  formatEasternDateTime,
-  formatUsPhoneInput,
-  formatUsPhoneNumber,
-  normalizeUsPhoneNumber,
-} from '../../utils/formatters'
-import { notifyRequestError } from '../../utils/notifications'
-import { normalizeRequestError } from '../../utils/requestError'
+import { formatEasternDateTime, formatUsPhoneNumber } from '../../utils/formatters'
 import styles from './security-center.module.css'
 
 interface SecurityCenterPageProps {
   account: MasterAccount
-  onAccountUpdate: (account: MasterAccount) => void
   onBack: () => void
   onSessionExpired: () => void
 }
 
-type EditField = 'email' | 'phone'
-
-const contactEditorSchema = z
-  .object({
-    field: z.enum(['email', 'phone']),
-    value: z.string().trim(),
-  })
-  .superRefine((data, ctx) => {
-    if (data.field === 'email') {
-      const emailResult = z.email('Enter a valid email address.').safeParse(data.value)
-      if (!emailResult.success) {
-        ctx.addIssue({
-          code: 'custom',
-          message: 'Enter a valid email address.',
-          path: ['value'],
-        })
-      }
-      return
-    }
-
-    if (!normalizeUsPhoneNumber(data.value)) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Enter a valid US phone number.',
-        path: ['value'],
-      })
-    }
-  })
-
-type ContactEditorForm = z.infer<typeof contactEditorSchema>
-
-export function SecurityCenterPage({
-  account,
-  onAccountUpdate,
-  onBack,
-  onSessionExpired,
-}: SecurityCenterPageProps) {
+export function SecurityCenterPage({ account, onBack, onSessionExpired }: SecurityCenterPageProps) {
   const [isPhoneOpen, setIsPhoneOpen] = useState(false)
-  const [editingField, setEditingField] = useState<EditField | null>(null)
   const {
-    clearErrors,
-    control,
-    formState: { errors, isSubmitting },
-    handleSubmit,
-    reset,
-    setError,
-  } = useForm<ContactEditorForm>({
-    defaultValues: {
-      field: 'email',
-      value: '',
+    closeEditor,
+    editingField,
+    form: {
+      control,
+      formState: { errors, isSubmitting },
+      handleSubmit,
     },
-    resolver: zodResolver(contactEditorSchema),
+    getEditorInputValue,
+    isEditingEmail,
+    openEditor,
+    submitEditor,
+  } = useContactEditor({
+    account,
+    onSessionExpired,
   })
   const fullName = getFullName(account)
   const initials = getInitials(fullName, account.login)
@@ -83,76 +38,11 @@ export function SecurityCenterPage({
     ? formatEasternDateTime(account.last_sign_in_at)
     : ''
   const phoneNumber = formatUsPhoneNumber(account.phone)
-  const isEditingEmail = editingField === 'email'
   const modalTitle = isEditingEmail ? 'Edit email address' : 'Edit phone number'
   const modalCopy = isEditingEmail
     ? 'Updates made to your current email address will affect any associated accounts.'
     : 'Updates made to your current phone number will affect security alerts for your accounts.'
   const inputLabel = isEditingEmail ? 'Primary email address' : 'Primary phone number'
-
-  const openEditor = (field: EditField) => {
-    setEditingField(field)
-    reset({
-      field,
-      value: field === 'email' ? account.email : formatUsPhoneInput(account.phone),
-    })
-  }
-
-  const closeEditor = () => {
-    if (isSubmitting) {
-      return
-    }
-    setEditingField(null)
-    reset({ field: 'email', value: '' })
-    clearErrors()
-  }
-
-  const getEditorInputValue = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = isEditingEmail ? event.target.value : formatUsPhoneInput(event.target.value)
-    clearErrors('value')
-    clearErrors('root')
-    return value
-  }
-
-  const submitEditor = async (values: ContactEditorForm) => {
-    const payload =
-      values.field === 'email'
-        ? { email: values.value.trim() }
-        : { phone: normalizeUsPhoneNumber(values.value) }
-
-    try {
-      const updatedAccount = await guestAuthService.updateProfile(payload)
-      onAccountUpdate(updatedAccount)
-      setEditingField(null)
-      reset({ field: 'email', value: '' })
-    } catch (error: unknown) {
-      const requestError = normalizeRequestError(error)
-
-      if (requestError.kind === 'auth') {
-        notifyRequestError(error, {
-          id: 'guest-profile-session',
-          title: 'Your session expired',
-        })
-        onSessionExpired()
-        return
-      }
-
-      if (
-        requestError.kind === 'network' ||
-        requestError.kind === 'server' ||
-        requestError.kind === 'timeout'
-      ) {
-        notifyRequestError(error, {
-          id: 'guest-profile-update',
-          title: "We couldn't update your contact information",
-        })
-      }
-
-      setError('root', {
-        message: requestError.userMessage,
-      })
-    }
-  }
 
   return (
     <main className={styles.page}>
