@@ -41,11 +41,3 @@
 		header_up X-Forwarded-Proto {scheme}
 	}
 }
-
-{{ vault_deploy_domain }} {
-	encode zstd gzip
-	reverse_proxy 127.0.0.1:{{ semaphore_port }} {
-		header_up X-Forwarded-Host {host}
-		header_up X-Forwarded-Proto {scheme}
-	}
-}

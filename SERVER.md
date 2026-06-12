@@ -20,7 +20,6 @@ DNS-записи A/AAAA должны указывать на сервер:
 - `admin.example.com`
 - `guest.example.com`
 - `api.example.com`
-- `deploy.example.com`
 
 Открытые входящие порты:
 
@@ -67,7 +66,6 @@ ssh root@203.0.113.10
 - `sudo`
 - `ufw`
 - `caddy`
-- `semaphore` из deb-релиза Semaphore UI
 
 Обычно вручную ставить эти пакеты на сервер не нужно, достаточно запустить:
 
@@ -80,14 +78,12 @@ make provision
 Ansible создает и включает:
 
 - `vault-api.service`
-- `semaphore.service`
 - `caddy.service`
 
 Проверка:
 
 ```bash
 systemctl status vault-api --no-pager
-systemctl status semaphore --no-pager
 systemctl status caddy --no-pager
 ```
 
@@ -104,8 +100,6 @@ Ansible использует такую структуру:
     env/vault-api.env
 
 /etc/caddy/Caddyfile
-/etc/semaphore/config.json
-/var/lib/semaphore/semaphore.sqlite
 ```
 
 ## HTTPS
@@ -129,9 +123,8 @@ journalctl -u caddy -n 200 --no-pager
 Внутренние localhost-порты:
 
 - Go API: `127.0.0.1:8080`
-- Semaphore UI: `127.0.0.1:3000`
 
-Эти порты не должны быть открыты наружу. Ansible настраивает UFW с входящим default deny и разрешает только `22/tcp`, `80/tcp` и `443/tcp`. Наружу смотрит только Caddy на `80/443`.
+Этот порт не должен быть открыт наружу. Ansible настраивает UFW с входящим default deny и разрешает только `22/tcp`, `80/tcp` и `443/tcp`. Наружу смотрит только Caddy на `80/443`.
 
 ## Резервные копии SQLite
 
@@ -139,14 +132,6 @@ journalctl -u caddy -n 200 --no-pager
 
 ```bash
 sudo -u vault sqlite3 /opt/vault/shared/data/vault.db ".backup /opt/vault/shared/data/vault-$(date -u +%Y%m%d%H%M%S).db"
-```
-
-База Semaphore:
-
-```bash
-sudo systemctl stop semaphore
-sudo cp /var/lib/semaphore/semaphore.sqlite /var/lib/semaphore/semaphore-$(date -u +%Y%m%d%H%M%S).sqlite
-sudo systemctl start semaphore
 ```
 
 ## Диагностика
@@ -161,6 +146,5 @@ curl -fsS http://127.0.0.1:8080/ready
 
 ```bash
 journalctl -u vault-api -n 200 --no-pager
-journalctl -u semaphore -n 200 --no-pager
 journalctl -u caddy -n 200 --no-pager
 ```

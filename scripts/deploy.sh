@@ -99,8 +99,8 @@ setup_config() {
 		return 0
 	fi
 
-	local host user port key domain_root admin_domain guest_domain api_domain deploy_domain
-	local panel_password semaphore_password semaphore_email target_arch
+	local host user port key domain_root admin_domain guest_domain api_domain
+	local panel_password target_arch
 
 	host="$(ask_required "VPS host/IP:" "203.0.113.10")"
 	user="$(ask_required "SSH user:" "root")"
@@ -111,12 +111,9 @@ setup_config() {
 	admin_domain="$(ask_required "Admin domain:" "admin.${domain_root}")"
 	guest_domain="$(ask_required "Guest domain:" "guest.${domain_root}")"
 	api_domain="$(ask_required "API domain:" "api.${domain_root}")"
-	deploy_domain="$(ask_required "Deploy dashboard domain:" "deploy.${domain_root}")"
 
 	target_arch="$(gum choose --header "Target VPS architecture" "amd64" "arm64")"
 	panel_password="$(ask_secret "Panel password:")"
-	semaphore_password="$(ask_secret "Semaphore admin password:")"
-	semaphore_email="$(ask_required "Semaphore admin email:" "admin@${domain_root}")"
 
 	mkdir -p "$ANSIBLE_DIR/group_vars"
 
@@ -140,24 +137,12 @@ vault_keep_releases: 5
 vault_admin_domain: ${admin_domain}
 vault_guest_domain: ${guest_domain}
 vault_api_domain: ${api_domain}
-vault_deploy_domain: ${deploy_domain}
 
 vault_build_goos: linux
 vault_build_goarch: ${target_arch}
 vault_build_cgo_enabled: "1"
 
 vault_panel_password: "${panel_password}"
-
-semaphore_version: "2.17.26"
-semaphore_port: 3000
-semaphore_admin_user: admin
-semaphore_admin_name: Admin
-semaphore_admin_email: ${semaphore_email}
-semaphore_admin_password: "${semaphore_password}"
-
-semaphore_cookie_hash: "$(random_key)"
-semaphore_cookie_encryption: "$(random_key)"
-semaphore_access_key_encryption: "$(random_key)"
 EOF
 
 	chmod 0600 "$VARS_FILE"
@@ -197,7 +182,7 @@ syntax_check() {
 
 run_provision() {
 	ensure_config
-	if confirm_or_yes "Provision VPS and install Caddy/Semaphore/systemd units?" false; then
+	if confirm_or_yes "Provision VPS and install Caddy/systemd units?" false; then
 		ansible-playbook -i "$INVENTORY_FILE" "$ANSIBLE_DIR/playbooks/provision.yml"
 	fi
 }
@@ -220,14 +205,14 @@ run_full() {
 run_status() {
 	ensure_config
 	local service
-	service="$(gum choose --header "Service status" "vault-api" "semaphore" "caddy")"
+	service="$(gum choose --header "Service status" "vault-api" "caddy")"
 	ansible -i "$INVENTORY_FILE" vault -b -m ansible.builtin.command -a "systemctl status ${service} --no-pager"
 }
 
 run_logs() {
 	ensure_config
 	local service lines
-	service="$(gum choose --header "Service logs" "vault-api" "semaphore" "caddy")"
+	service="$(gum choose --header "Service logs" "vault-api" "caddy")"
 	lines="$(gum input --prompt "Lines: " --value "200" --char-limit 6)"
 	ansible -i "$INVENTORY_FILE" vault -b -m ansible.builtin.command -a "journalctl -u ${service} -n ${lines} --no-pager"
 }

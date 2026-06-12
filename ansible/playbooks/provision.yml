@@ -9,15 +9,7 @@
       ansible.builtin.assert:
         that:
           - vault_panel_password != 'change-this-before-first-deploy'
-          - semaphore_admin_password != 'change-this-before-first-provision'
-          - semaphore_cookie_hash != 'replace-with-random-base64'
-          - semaphore_cookie_encryption != 'replace-with-random-base64'
-          - semaphore_access_key_encryption != 'replace-with-random-base64'
         fail_msg: "Copy group_vars/vault.example.yml to group_vars/vault.yml and replace all secret placeholders."
-
-    - name: Map Semaphore package architecture
-      ansible.builtin.set_fact:
-        semaphore_arch: "{{ 'amd64' if ansible_facts['architecture'] in ['x86_64', 'amd64'] else 'arm64' if ansible_facts['architecture'] in ['aarch64', 'arm64'] else ansible_facts['architecture'] }}"
 
   tasks:
     - name: Install base packages
@@ -139,99 +131,6 @@
         mode: "0644"
       notify: Reload systemd
 
-    - name: Create Semaphore user
-      ansible.builtin.user:
-        name: semaphore
-        system: true
-        home: /home/semaphore
-        shell: /usr/sbin/nologin
-        create_home: true
-
-    - name: Create Semaphore directories
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        state: directory
-        owner: semaphore
-        group: semaphore
-        mode: "{{ item.mode }}"
-      loop:
-        - { path: /etc/semaphore, mode: "0750" }
-        - { path: /var/lib/semaphore, mode: "0750" }
-        - { path: /tmp/semaphore, mode: "0750" }
-
-    - name: Download Semaphore deb package
-      ansible.builtin.get_url:
-        url: "https://github.com/semaphoreui/semaphore/releases/download/v{{ semaphore_version }}/semaphore_{{ semaphore_version }}_linux_{{ semaphore_arch }}.deb"
-        dest: "/tmp/semaphore_{{ semaphore_version }}_linux_{{ semaphore_arch }}.deb"
-        mode: "0644"
-
-    - name: Install Semaphore deb package
-      ansible.builtin.apt:
-        deb: "/tmp/semaphore_{{ semaphore_version }}_linux_{{ semaphore_arch }}.deb"
-        state: present
-
-    - name: Install Semaphore config
-      ansible.builtin.template:
-        src: ../templates/semaphore-config.json.j2
-        dest: /etc/semaphore/config.json
-        owner: semaphore
-        group: semaphore
-        mode: "0600"
-      notify: Restart Semaphore
-
-    - name: Install Semaphore systemd unit
-      ansible.builtin.template:
-        src: ../templates/semaphore.service.j2
-        dest: /etc/systemd/system/semaphore.service
-        owner: root
-        group: root
-        mode: "0644"
-      notify:
-        - Reload systemd
-        - Restart Semaphore
-
-    - name: Run Semaphore migrations
-      ansible.builtin.command:
-        cmd: semaphore migrate --config /etc/semaphore/config.json
-      become_user: semaphore
-      changed_when: false
-
-    - name: Check initial Semaphore admin marker
-      ansible.builtin.stat:
-        path: /var/lib/semaphore/.admin-created
-      register: semaphore_admin_marker
-      become_user: semaphore
-
-    - name: Create initial Semaphore admin
-      ansible.builtin.command:
-        argv:
-          - semaphore
-          - users
-          - add
-          - --config
-          - /etc/semaphore/config.json
-          - --admin
-          - --login
-          - "{{ semaphore_admin_user }}"
-          - --name
-          - "{{ semaphore_admin_name }}"
-          - --email
-          - "{{ semaphore_admin_email }}"
-          - --password
-          - "{{ semaphore_admin_password }}"
-      become_user: semaphore
-      when: not semaphore_admin_marker.stat.exists
-      no_log: true
-
-    - name: Mark initial Semaphore admin as created
-      ansible.builtin.file:
-        path: /var/lib/semaphore/.admin-created
-        state: touch
-        owner: semaphore
-        group: semaphore
-        mode: "0600"
-      when: not semaphore_admin_marker.stat.exists
-
     - name: Install Caddyfile
       ansible.builtin.template:
         src: ../templates/Caddyfile.j2
@@ -250,7 +149,6 @@
         daemon_reload: true
       loop:
         - caddy
-        - semaphore
 
   handlers:
     - name: Reload systemd
@@ -261,9 +159,3 @@
       ansible.builtin.systemd:
         name: caddy
         state: reloaded
-
-    - name: Restart Semaphore
-      ansible.builtin.systemd:
-        name: semaphore
-        state: restarted
-        daemon_reload: true

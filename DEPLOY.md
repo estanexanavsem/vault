@@ -51,7 +51,7 @@ npm run build
 
 ## Первый деплой или изменение инфраструктуры
 
-Provisioning нужен при первом запуске на новом VPS или после изменений в серверной конфигурации: Caddy, systemd, UFW, Semaphore, env-файлы, домены, сервисные пользователи.
+Provisioning нужен при первом запуске на новом VPS или после изменений в серверной конфигурации: Caddy, systemd, UFW, env-файлы, домены, сервисные пользователи.
 
 ```bash
 make provision
@@ -107,17 +107,15 @@ ansible/group_vars/vault.example.yml
 ```bash
 curl -fsS https://api.guestbank.net/ready
 curl -fsSI https://admin.guestbank.net/
-curl -fsSI https://guest.guestbank.net/
-curl -fsSI https://deploy.guestbank.net/
+curl -fsSI https://truist.guestbank.net/
 ```
 
 Ожидаемо:
 
 - API `/ready` возвращает `{"database":"ok","status":"ok"}`;
-- admin, guest и deploy возвращают HTTP `200`;
+- admin и guest возвращают HTTP `200`;
 - наружу доступны только `22/tcp`, `80/tcp`, `443/tcp`;
 - `vault-api` слушает `127.0.0.1:8080`;
-- Semaphore слушает `127.0.0.1:3000`.
 
 ## Статус и логи
 
@@ -133,13 +131,11 @@ make logs
 ```bash
 systemctl status vault-api --no-pager
 systemctl status caddy --no-pager
-systemctl status semaphore --no-pager
 ```
 
 ```bash
 journalctl -u vault-api -n 200 --no-pager
 journalctl -u caddy -n 200 --no-pager
-journalctl -u semaphore -n 200 --no-pager
 ```
 
 ## Где лежит release на сервере
