@@ -51,10 +51,10 @@ export function MobileNavMenu({
     <>
       <button
         ref={setReferenceNode}
+        type="button"
         {...getReferenceProps({
           'aria-label': 'Open menu',
           className: styles.mobileMenuButton,
-          type: 'button',
         })}
       >
         <Menu size={24} aria-hidden="true" />

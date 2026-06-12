@@ -1,6 +1,24 @@
 import { AsYouType, parsePhoneNumberFromString } from 'libphonenumber-js/min'
 import type { MasterAccount, Transfer } from '../types/guest'
 
+const shortDateFormatter = new Intl.DateTimeFormat('en-US', {
+  day: '2-digit',
+  month: '2-digit',
+  timeZone: 'UTC',
+  year: 'numeric',
+})
+
+const easternDateTimeFormatter = new Intl.DateTimeFormat('en-US', {
+  day: '2-digit',
+  hour: '2-digit',
+  hour12: true,
+  minute: '2-digit',
+  month: '2-digit',
+  timeZone: 'America/New_York',
+  timeZoneName: 'short',
+  year: 'numeric',
+})
+
 export const formatCurrency = (value: number) =>
   value.toLocaleString('en-US', {
     currency: 'USD',
@@ -18,12 +36,7 @@ export const formatShortDate = (value: string) => {
     return ''
   }
 
-  return new Intl.DateTimeFormat('en-US', {
-    day: '2-digit',
-    month: '2-digit',
-    timeZone: 'UTC',
-    year: 'numeric',
-  }).format(date)
+  return shortDateFormatter.format(date)
 }
 
 export const formatEasternDateTime = (value: string) => {
@@ -33,16 +46,7 @@ export const formatEasternDateTime = (value: string) => {
     return ''
   }
 
-  const formatted = new Intl.DateTimeFormat('en-US', {
-    day: '2-digit',
-    hour: '2-digit',
-    hour12: true,
-    minute: '2-digit',
-    month: '2-digit',
-    timeZone: 'America/New_York',
-    timeZoneName: 'short',
-    year: 'numeric',
-  }).formatToParts(date)
+  const formatted = easternDateTimeFormatter.formatToParts(date)
 
   const getPart = (type: Intl.DateTimeFormatPartTypes) =>
     formatted.find((part) => part.type === type)?.value ?? ''

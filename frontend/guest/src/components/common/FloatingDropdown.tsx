@@ -76,10 +76,10 @@ export function FloatingDropdown({
     <>
       <button
         ref={setReferenceNode}
+        type="button"
         {...getReferenceProps({
           'aria-label': label,
           className: triggerClassName,
-          type: 'button',
         })}
       >
         {triggerContent(isOpen)}

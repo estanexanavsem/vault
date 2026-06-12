@@ -43,10 +43,15 @@ export type ContactEditorForm = z.infer<typeof contactEditorSchema>
 
 interface UseContactEditorOptions {
   account: MasterAccount
+  onEditorClosed?: () => void
   onSessionExpired: () => void
 }
 
-export function useContactEditor({ account, onSessionExpired }: UseContactEditorOptions) {
+export function useContactEditor({
+  account,
+  onEditorClosed,
+  onSessionExpired,
+}: UseContactEditorOptions) {
   const queryClient = useQueryClient()
   const [editingField, setEditingField] = useState<ContactEditField | null>(null)
   const updateProfileMutation = useMutation({
@@ -76,6 +81,7 @@ export function useContactEditor({ account, onSessionExpired }: UseContactEditor
   const resetEditor = () => {
     setEditingField(null)
     reset({ field: 'email', value: '' })
+    onEditorClosed?.()
   }
 
   const openEditor = (field: ContactEditField) => {

@@ -1,5 +1,5 @@
 import { ChevronDown, LoaderCircle, Mail, Pencil, Phone, UserRound, X } from 'lucide-react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Controller } from 'react-hook-form'
 import { useContactEditor } from '../../hooks/useContactEditor'
 import type { MasterAccount } from '../../types/guest'
@@ -16,6 +16,7 @@ interface SecurityCenterPageProps {
 
 export function SecurityCenterPage({ account, onBack, onSessionExpired }: SecurityCenterPageProps) {
   const [isPhoneOpen, setIsPhoneOpen] = useState(false)
+  const dialogRef = useRef<HTMLDialogElement | null>(null)
   const {
     closeEditor,
     editingField,
@@ -30,6 +31,7 @@ export function SecurityCenterPage({ account, onBack, onSessionExpired }: Securi
     submitEditor,
   } = useContactEditor({
     account,
+    onEditorClosed: () => dialogRef.current?.close(),
     onSessionExpired,
   })
   const fullName = getFullName(account)
@@ -43,6 +45,24 @@ export function SecurityCenterPage({ account, onBack, onSessionExpired }: Securi
     ? 'Updates made to your current email address will affect any associated accounts.'
     : 'Updates made to your current phone number will affect security alerts for your accounts.'
   const inputLabel = isEditingEmail ? 'Primary email address' : 'Primary phone number'
+  const inputId = isEditingEmail ? 'contact-editor-email' : 'contact-editor-phone'
+
+  const openContactEditor = (field: 'email' | 'phone') => {
+    openEditor(field)
+    const dialog = dialogRef.current
+    if (dialog && !dialog.open) {
+      dialog.showModal()
+    }
+  }
+
+  const closeContactEditor = () => {
+    if (isSubmitting) {
+      return
+    }
+
+    closeEditor()
+    dialogRef.current?.close()
+  }
 
   return (
     <main className={styles.page}>
@@ -94,7 +114,7 @@ export function SecurityCenterPage({ account, onBack, onSessionExpired }: Securi
             <button
               className={styles.outlineButton}
               type="button"
-              onClick={() => openEditor('email')}
+              onClick={() => openContactEditor('email')}
             >
               <Pencil size={16} aria-hidden="true" />
               Edit
@@ -130,7 +150,7 @@ export function SecurityCenterPage({ account, onBack, onSessionExpired }: Securi
               <button
                 className={styles.outlineButton}
                 type="button"
-                onClick={() => openEditor('phone')}
+                onClick={() => openContactEditor('phone')}
               >
                 <Pencil size={16} aria-hidden="true" />
                 Edit
@@ -139,20 +159,27 @@ export function SecurityCenterPage({ account, onBack, onSessionExpired }: Securi
           ) : null}
         </section>
 
-        {editingField ? (
-          <div className={styles.modalOverlay} role="presentation">
-            <form
-              className={styles.modal}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="contact-editor-title"
-              onSubmit={handleSubmit(submitEditor)}
-            >
+        <dialog
+          ref={dialogRef}
+          className={styles.modalOverlay}
+          aria-labelledby="contact-editor-title"
+          onCancel={(event) => {
+            if (isSubmitting) {
+              event.preventDefault()
+              return
+            }
+
+            closeEditor()
+          }}
+          onClose={closeEditor}
+        >
+          {editingField ? (
+            <form className={styles.modal} onSubmit={handleSubmit(submitEditor)}>
               <button
                 className={styles.modalClose}
                 type="button"
                 aria-label="Close"
-                onClick={closeEditor}
+                onClick={closeContactEditor}
               >
                 <X size={22} aria-hidden="true" />
               </button>
@@ -160,7 +187,7 @@ export function SecurityCenterPage({ account, onBack, onSessionExpired }: Securi
               <h3 id="contact-editor-title">{modalTitle}</h3>
               <p className={styles.modalCopy}>{modalCopy}</p>
 
-              <label className={styles.modalField}>
+              <label className={styles.modalField} htmlFor={inputId}>
                 <span>{inputLabel}</span>
                 <span className={styles.inputShell}>
                   {isEditingEmail ? (
@@ -173,8 +200,10 @@ export function SecurityCenterPage({ account, onBack, onSessionExpired }: Securi
                     name="value"
                     render={({ field }) => (
                       <input
+                        id={inputId}
                         autoComplete={isEditingEmail ? 'email' : 'tel'}
                         autoCorrect="off"
+                        aria-label={inputLabel}
                         aria-invalid={errors.value ? 'true' : undefined}
                         inputMode={isEditingEmail ? 'email' : 'tel'}
                         maxLength={isEditingEmail ? 254 : 14}
@@ -218,14 +247,14 @@ export function SecurityCenterPage({ account, onBack, onSessionExpired }: Securi
                   className={styles.secondaryButton}
                   type="button"
                   disabled={isSubmitting}
-                  onClick={closeEditor}
+                  onClick={closeContactEditor}
                 >
                   Cancel
                 </button>
               </div>
             </form>
-          </div>
-        ) : null}
+          ) : null}
+        </dialog>
       </section>
     </main>
   )

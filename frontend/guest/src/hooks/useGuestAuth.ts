@@ -9,11 +9,34 @@ import {
 import { notifyRequestError } from '../utils/notifications'
 import { getLoginRequestErrorMessage, normalizeRequestError } from '../utils/requestError'
 
+const notifySessionCheckError = (error: unknown) => {
+  if (!error) {
+    return
+  }
+
+  const requestError = normalizeRequestError(error)
+
+  if (
+    requestError.kind === 'network' ||
+    requestError.kind === 'server' ||
+    requestError.kind === 'timeout'
+  ) {
+    notifyRequestError(error, {
+      id: 'guest-session-check',
+      title: "We couldn't verify your session",
+    })
+  }
+}
+
 export function useGuestAuth() {
   const queryClient = useQueryClient()
   const [error, setError] = useState('')
   const [isSessionQueryEnabled, setSessionQueryEnabled] = useState(true)
-  const sessionQuery = useQuery({
+  const {
+    data: sessionData,
+    error: sessionError,
+    isPending: isSessionPending,
+  } = useQuery({
     ...guestSessionOptions(),
     enabled: isSessionQueryEnabled,
   })
@@ -27,23 +50,8 @@ export function useGuestAuth() {
   const logoutMutation = useMutation(guestLogoutOptions())
 
   useEffect(() => {
-    if (!sessionQuery.isError) {
-      return
-    }
-
-    const requestError = normalizeRequestError(sessionQuery.error)
-
-    if (
-      requestError.kind === 'network' ||
-      requestError.kind === 'server' ||
-      requestError.kind === 'timeout'
-    ) {
-      notifyRequestError(sessionQuery.error, {
-        id: 'guest-session-check',
-        title: "We couldn't verify your session",
-      })
-    }
-  }, [sessionQuery.error, sessionQuery.isError])
+    notifySessionCheckError(sessionError)
+  }, [sessionError])
 
   const handleSubmit = async (login: string, password: string) => {
     setError('')
@@ -78,11 +86,11 @@ export function useGuestAuth() {
   }
 
   return {
-    data: sessionQuery.data ?? null,
+    data: sessionData ?? null,
     error,
     handleSignOut,
     handleSubmit,
-    isAuthChecked: !isSessionQueryEnabled || !sessionQuery.isPending,
+    isAuthChecked: !isSessionQueryEnabled || !isSessionPending,
     loading: loginMutation.isPending,
   }
 }
