@@ -1,6 +1,5 @@
-import { ActionIcon, Menu } from '@mantine/core'
-import { MoreVertical, Pencil, Trash2 } from 'lucide-react'
 import type { Account } from '../types'
+import { AccountActionMenu } from './AccountActionMenu'
 
 interface AccountTableProps {
   accounts: Account[]
@@ -21,43 +20,6 @@ export function AccountTable({
   onEditAccount,
   onDeleteAccount,
 }: AccountTableProps) {
-  const renderActionMenu = (accountId: number) => (
-    <Menu withinPortal position="bottom-end" shadow="md">
-      <Menu.Target>
-        <ActionIcon
-          aria-label="Действия аккаунта"
-          variant="subtle"
-          color="gray"
-          className="!h-9 !w-9 !text-slate-300 hover:!bg-slate-800"
-          onClick={(event) => event.stopPropagation()}
-        >
-          <MoreVertical size={18} />
-        </ActionIcon>
-      </Menu.Target>
-      <Menu.Dropdown>
-        <Menu.Item
-          leftSection={<Pencil size={14} />}
-          onClick={(event) => {
-            event.stopPropagation()
-            onEditAccount(accountId)
-          }}
-        >
-          Редактировать
-        </Menu.Item>
-        <Menu.Item
-          color="red"
-          leftSection={<Trash2 size={14} />}
-          onClick={(event) => {
-            event.stopPropagation()
-            onDeleteAccount(accountId)
-          }}
-        >
-          Удалить
-        </Menu.Item>
-      </Menu.Dropdown>
-    </Menu>
-  )
-
   if (isLoading) {
     return <p className="text-sm text-slate-400">Загрузка аккаунтов...</p>
   }
@@ -117,7 +79,13 @@ export function AccountTable({
                       </span>
                     </span>
                   </button>
-                  <div className="-mt-1 -mr-1 shrink-0">{renderActionMenu(account.id)}</div>
+                  <div className="-mt-1 -mr-1 shrink-0">
+                    <AccountActionMenu
+                      accountId={account.id}
+                      onEditAccount={onEditAccount}
+                      onDeleteAccount={onDeleteAccount}
+                    />
+                  </div>
                 </div>
               )
             })}
@@ -171,7 +139,11 @@ export function AccountTable({
                       className="px-2 py-1 text-right"
                       onClick={(event) => event.stopPropagation()}
                     >
-                      {renderActionMenu(account.id)}
+                      <AccountActionMenu
+                        accountId={account.id}
+                        onEditAccount={onEditAccount}
+                        onDeleteAccount={onDeleteAccount}
+                      />
                     </td>
                   </tr>
                 ))}

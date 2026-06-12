@@ -30,6 +30,11 @@ Use npm; `package-lock.json` is committed.
 
 Write TypeScript with strict compiler settings. Keep React components in PascalCase files such as `AccountTable.tsx`; use camelCase for hooks, stores, services, utilities, and form modules. Use named exports only; `export default` and `export { X as default }` are banned for source files and enforced by ESLint. Tooling config files may use default exports when the tool expects them.
 
+Strict component boundaries:
+
+- One component file must contain exactly one React component. If a screen needs subcomponents, move each subcomponent into its own PascalCase component file and import it.
+- Component files must not contain helper functions, render functions, business logic handlers, data mappers, or API/form orchestration. Put that code in `src/hooks/`, `src/utils/`, `src/services/`, or `src/forms/` as appropriate, then pass the resulting values and callbacks into the component.
+
 ESLint enforces type-aware TypeScript rules, React Hooks rules, no default exports, `no-console` warnings except `console.warn` and `console.error`, and inline `type` imports. Prettier controls formatting.
 
 ## Testing Guidelines

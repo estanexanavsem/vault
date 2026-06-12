@@ -1,35 +1,13 @@
-import { useState, type FormEvent } from 'react'
-import { isAxiosError } from 'axios'
 import { Paper, PasswordInput, Text, Stack, Button, Alert } from '@mantine/core'
 import { Lock } from 'lucide-react'
-import { authService } from '../services/authService'
+import { useLoginPage } from '../hooks/useLoginPage'
 
 interface Props {
   onLogin: () => void
 }
 
 export function LoginPage({ onLogin }: Props) {
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError('')
-    try {
-      await authService.login(password)
-      onLogin()
-    } catch (err: unknown) {
-      if (isAxiosError<{ error?: string }>(err)) {
-        setError(err.response?.data?.error ?? 'Неверный пароль')
-      } else {
-        setError('Неверный пароль')
-      }
-    } finally {
-      setLoading(false)
-    }
-  }
+  const { password, error, loading, setPassword, handleSubmit } = useLoginPage({ onLogin })
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 p-4">

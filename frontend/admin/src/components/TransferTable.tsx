@@ -1,7 +1,6 @@
-import { ActionIcon, Menu } from '@mantine/core'
-import { MoreVertical, Pencil, Trash2 } from 'lucide-react'
 import type { Transfer } from '../types'
 import { formatTransactionDate } from '../utils/formatters'
+import { TransferActionMenu } from './TransferActionMenu'
 
 interface TransferTableProps {
   transfers: Transfer[]
@@ -24,43 +23,6 @@ export function TransferTable({
   onEditTransfer,
   onDeleteTransfer,
 }: TransferTableProps) {
-  const renderActionMenu = (transferId: number) => (
-    <Menu withinPortal position="bottom-end" shadow="md">
-      <Menu.Target>
-        <ActionIcon
-          aria-label="Действия перевода"
-          variant="subtle"
-          color="gray"
-          className="!h-9 !w-9 !text-slate-300 hover:!bg-slate-800"
-          onClick={(event) => event.stopPropagation()}
-        >
-          <MoreVertical size={18} />
-        </ActionIcon>
-      </Menu.Target>
-      <Menu.Dropdown>
-        <Menu.Item
-          leftSection={<Pencil size={14} />}
-          onClick={(event) => {
-            event.stopPropagation()
-            onEditTransfer(transferId)
-          }}
-        >
-          Редактировать
-        </Menu.Item>
-        <Menu.Item
-          color="red"
-          leftSection={<Trash2 size={14} />}
-          onClick={(event) => {
-            event.stopPropagation()
-            onDeleteTransfer(transferId)
-          }}
-        >
-          Удалить
-        </Menu.Item>
-      </Menu.Dropdown>
-    </Menu>
-  )
-
   if (!selectedAccountId) {
     return <p className="text-sm text-slate-400">Выберите аккаунт, чтобы посмотреть переводы</p>
   }
@@ -112,7 +74,13 @@ export function TransferTable({
                       {transfer.description || 'Описание не указано'}
                     </span>
                   </button>
-                  <div className="-mt-1 -mr-1 shrink-0">{renderActionMenu(transfer.id)}</div>
+                  <div className="-mt-1 -mr-1 shrink-0">
+                    <TransferActionMenu
+                      transferId={transfer.id}
+                      onEditTransfer={onEditTransfer}
+                      onDeleteTransfer={onDeleteTransfer}
+                    />
+                  </div>
                 </div>
               )
             })}
@@ -158,7 +126,11 @@ export function TransferTable({
                       className="px-2 py-1 text-right"
                       onClick={(event) => event.stopPropagation()}
                     >
-                      {renderActionMenu(transfer.id)}
+                      <TransferActionMenu
+                        transferId={transfer.id}
+                        onEditTransfer={onEditTransfer}
+                        onDeleteTransfer={onDeleteTransfer}
+                      />
                     </td>
                   </tr>
                 ))}

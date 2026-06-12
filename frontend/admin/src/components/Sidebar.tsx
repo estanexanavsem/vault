@@ -1,18 +1,9 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
-import { useQueryClient } from '@tanstack/react-query'
 import { LayoutGrid, LogOut } from 'lucide-react'
-import { authService } from '../services/authService'
-import { useAuthStore } from '../store/authStore'
+import { useLogout } from '../hooks/useLogout'
 
 export function Sidebar() {
-  const queryClient = useQueryClient()
-  const setAuthenticated = useAuthStore((s) => s.setAuthenticated)
-
-  const handleLogout = async () => {
-    await authService.logout().catch(() => undefined)
-    queryClient.clear()
-    setAuthenticated(false)
-  }
+  const handleLogout = useLogout()
 
   return (
     <div className="order-2 flex h-16 shrink-0 items-center justify-between border-t border-slate-800 bg-slate-950 px-3 py-2 sm:order-1 sm:h-auto sm:w-14 sm:flex-col sm:border-t-0 sm:border-r sm:px-0 sm:py-4">
