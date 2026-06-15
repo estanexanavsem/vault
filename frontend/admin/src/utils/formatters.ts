@@ -37,6 +37,11 @@ export function formatDateTime(value: string): string {
 
 export const formatUsPhoneInput = (value: string) => new AsYouType('US').input(value)
 
+export const formatUsPhoneNumber = (value: string) => {
+  const phoneNumber = parsePhoneNumberFromString(value, 'US')
+  return phoneNumber?.isPossible() ? phoneNumber.formatNational() : value
+}
+
 export const normalizeUsPhoneNumber = (value: string) => {
   const phoneNumber = parsePhoneNumberFromString(value, 'US')
   return phoneNumber?.isValid() && phoneNumber.country === 'US' ? phoneNumber.number : ''

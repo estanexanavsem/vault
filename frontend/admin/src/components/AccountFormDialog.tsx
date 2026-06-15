@@ -192,6 +192,7 @@ export function AccountFormDialog({
                   autoCorrect="off"
                   error={accountErrors.phone?.message}
                   inputMode="tel"
+                  maxLength={14}
                   type="tel"
                   classNames={darkInputClassNames}
                   {...field}

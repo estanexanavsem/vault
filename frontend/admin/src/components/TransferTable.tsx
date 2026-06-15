@@ -53,9 +53,10 @@ export function TransferTable({
                   key={transfer.id}
                   className={
                     isSelected
-                      ? 'flex w-full items-start gap-2 rounded-lg border border-blue-500/50 bg-blue-950/50 p-3 text-left'
-                      : 'flex w-full items-start gap-2 rounded-lg border border-slate-800 bg-slate-950/45 p-3 text-left transition-colors hover:border-slate-700 hover:bg-slate-900'
+                      ? 'flex w-full cursor-pointer items-start gap-2 rounded-lg border border-blue-500/50 bg-blue-950/50 p-3 text-left'
+                      : 'flex w-full cursor-pointer items-start gap-2 rounded-lg border border-slate-800 bg-slate-950/45 p-3 text-left transition-colors hover:border-slate-700 hover:bg-slate-900'
                   }
+                  onClick={() => onSelectTransfer(transfer.id)}
                 >
                   <button
                     type="button"
@@ -73,7 +74,7 @@ export function TransferTable({
                       {display.mobileDescription}
                     </span>
                   </button>
-                  <div className="-mt-1 -mr-1 shrink-0">
+                  <div className="-mt-1 -mr-1 shrink-0" onClick={(event) => event.stopPropagation()}>
                     <TransferActionMenu
                       transferId={transfer.id}
                       onEditTransfer={onEditTransfer}
@@ -102,10 +103,11 @@ export function TransferTable({
                   return (
                     <tr
                       key={transfer.id}
+                      onClick={() => onSelectTransfer(transfer.id)}
                       className={
                         selectedTransferId === transfer.id
-                          ? 'bg-blue-950/50'
-                          : 'hover:bg-slate-800/70'
+                          ? 'cursor-pointer bg-blue-950/50'
+                          : 'cursor-pointer hover:bg-slate-800/70'
                       }
                     >
                       <td className="px-3 py-2 whitespace-nowrap text-slate-300">{display.date}</td>

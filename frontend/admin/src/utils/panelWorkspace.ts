@@ -1,5 +1,5 @@
 import type { Account, Transfer } from '../types'
-import { formatCurrency, formatDateTime, formatTransactionDate } from './formatters'
+import { formatCurrency, formatDateTime, formatTransactionDate, formatUsPhoneNumber } from './formatters'
 
 export type DetailRow = [label: string, value: string]
 export interface AccountSelectOption {
@@ -30,7 +30,7 @@ export function getAccountFacts(account: Account | null): DetailRow[] {
     ['Номер', account.account_number],
     ['Роутинг', account.routing_number],
     ['Эл. почта', account.email],
-    ['Телефон', account.phone],
+    ['Телефон', formatUsPhoneNumber(account.phone)],
   ]
 
   return rows.filter(([, value]) => value !== '')
