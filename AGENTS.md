@@ -9,7 +9,11 @@ This repository contains a Go API backend and two Vite React frontends.
 - `frontend/guest/`: smaller guest-facing React app under `src/`.
 - Backend tests are colocated as `*_test.go`. Frontend builds output to `dist/`; do not edit generated files.
 
-Nested guides in `backend/AGENTS.md` and `frontend/admin/AGENTS.md` provide area-specific rules.
+Nested project guides provide area-specific rules:
+
+- [`backend/AGENTS.md`](backend/AGENTS.md)
+- [`frontend/admin/AGENTS.md`](frontend/admin/AGENTS.md)
+- [`frontend/guest/AGENTS.md`](frontend/guest/AGENTS.md)
 
 ## Development & Deployment Docs
 
