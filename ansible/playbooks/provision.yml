@@ -32,29 +32,37 @@
           - ufw
         state: present
         update_cache: true
+        cache_valid_time: "{{ vault_apt_cache_valid_time | default(86400) }}"
 
     - name: Download Caddy apt key
       ansible.builtin.get_url:
         url: https://dl.cloudsmith.io/public/caddy/stable/gpg.key
         dest: /tmp/caddy-stable-gpg.key
         mode: "0644"
+      register: caddy_apt_key_download
 
     - name: Install Caddy apt key
       ansible.builtin.command:
         cmd: gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg /tmp/caddy-stable-gpg.key
         creates: /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+      register: caddy_apt_keyring
 
     - name: Add Caddy apt repository
       ansible.builtin.get_url:
         url: https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt
         dest: /etc/apt/sources.list.d/caddy-stable.list
         mode: "0644"
+      register: caddy_apt_repository
+
+    - name: Refresh apt cache after Caddy repository changes
+      ansible.builtin.apt:
+        update_cache: true
+      when: caddy_apt_key_download.changed or caddy_apt_keyring.changed or caddy_apt_repository.changed
 
     - name: Install Caddy
       ansible.builtin.apt:
         name: caddy
         state: present
-        update_cache: true
 
     - name: Allow SSH through UFW before enabling firewall
       ansible.builtin.command:

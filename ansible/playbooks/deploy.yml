@@ -5,6 +5,10 @@
   gather_facts: false
   vars:
     vault_build_base: "{{ playbook_dir }}/../../.deploy/build"
+    vault_admin_root: "{{ playbook_dir }}/../../frontend/admin"
+    vault_guest_root: "{{ playbook_dir }}/../../frontend/guest"
+    vault_admin_dependency_marker: "{{ vault_admin_root }}/node_modules/.vault-npm-ci-lock.sha256"
+    vault_guest_dependency_marker: "{{ vault_guest_root }}/node_modules/.vault-npm-ci-lock.sha256"
 
   tasks:
     - name: Register release id
@@ -30,7 +34,19 @@
         - "{{ vault_build_root }}/admin"
         - "{{ vault_build_root }}/guest"
 
-    - name: Build backend binary
+    - name: Register frontend dependency state
+      ansible.builtin.set_fact:
+        vault_admin_package_lock_checksum: "{{ lookup('ansible.builtin.file', vault_admin_root + '/package-lock.json') | hash('sha256') }}"
+        vault_guest_package_lock_checksum: "{{ lookup('ansible.builtin.file', vault_guest_root + '/package-lock.json') | hash('sha256') }}"
+        vault_admin_dependency_marker_checksum: "{{ lookup('ansible.builtin.file', vault_admin_dependency_marker, errors='ignore') | default('', true) | trim }}"
+        vault_guest_dependency_marker_checksum: "{{ lookup('ansible.builtin.file', vault_guest_dependency_marker, errors='ignore') | default('', true) | trim }}"
+
+    - name: Register frontend dependency install plan
+      ansible.builtin.set_fact:
+        vault_admin_dependencies_stale: "{{ vault_admin_dependency_marker_checksum != vault_admin_package_lock_checksum }}"
+        vault_guest_dependencies_stale: "{{ vault_guest_dependency_marker_checksum != vault_guest_package_lock_checksum }}"
+
+    - name: Start backend binary build
       ansible.builtin.command:
         cmd: go build -trimpath -ldflags "-s -w" -o "{{ vault_build_root }}/backend/vault-api" .
         chdir: "{{ playbook_dir }}/../../backend"
@@ -38,36 +54,109 @@
         GOOS: "{{ hostvars[groups['vault'][0]].vault_build_goos | default('linux') }}"
         GOARCH: "{{ hostvars[groups['vault'][0]].vault_build_goarch | default('amd64') }}"
         CGO_ENABLED: "{{ hostvars[groups['vault'][0]].vault_build_cgo_enabled | default('1') }}"
+      async: 1800
+      poll: 0
+      register: vault_backend_build_job
 
-    - name: Install admin dependencies
+    - name: Start admin dependency install
       ansible.builtin.command:
         cmd: npm ci
-        chdir: "{{ playbook_dir }}/../../frontend/admin"
+        chdir: "{{ vault_admin_root }}"
+      async: 1800
+      poll: 0
+      register: vault_admin_npm_job
+      when: vault_admin_dependencies_stale | bool
 
-    - name: Build admin frontend
+    - name: Start guest dependency install
+      ansible.builtin.command:
+        cmd: npm ci
+        chdir: "{{ vault_guest_root }}"
+      async: 1800
+      poll: 0
+      register: vault_guest_npm_job
+      when: vault_guest_dependencies_stale | bool
+
+    - name: Wait for admin dependency install
+      ansible.builtin.async_status:
+        jid: "{{ vault_admin_npm_job.ansible_job_id }}"
+      register: vault_admin_npm_result
+      until: vault_admin_npm_result.finished
+      retries: 120
+      delay: 5
+      when: vault_admin_dependencies_stale | bool
+
+    - name: Record admin dependency checksum
+      ansible.builtin.copy:
+        content: "{{ vault_admin_package_lock_checksum }}\n"
+        dest: "{{ vault_admin_dependency_marker }}"
+        mode: "0644"
+      when: vault_admin_dependencies_stale | bool
+
+    - name: Wait for guest dependency install
+      ansible.builtin.async_status:
+        jid: "{{ vault_guest_npm_job.ansible_job_id }}"
+      register: vault_guest_npm_result
+      until: vault_guest_npm_result.finished
+      retries: 120
+      delay: 5
+      when: vault_guest_dependencies_stale | bool
+
+    - name: Record guest dependency checksum
+      ansible.builtin.copy:
+        content: "{{ vault_guest_package_lock_checksum }}\n"
+        dest: "{{ vault_guest_dependency_marker }}"
+        mode: "0644"
+      when: vault_guest_dependencies_stale | bool
+
+    - name: Start admin frontend build
       ansible.builtin.command:
         cmd: npm run build
-        chdir: "{{ playbook_dir }}/../../frontend/admin"
+        chdir: "{{ vault_admin_root }}"
+      async: 1800
+      poll: 0
+      register: vault_admin_build_job
+
+    - name: Start guest frontend build
+      ansible.builtin.command:
+        cmd: npm run build
+        chdir: "{{ vault_guest_root }}"
+      async: 1800
+      poll: 0
+      register: vault_guest_build_job
+
+    - name: Wait for backend binary build
+      ansible.builtin.async_status:
+        jid: "{{ vault_backend_build_job.ansible_job_id }}"
+      register: vault_backend_build_result
+      until: vault_backend_build_result.finished
+      retries: 120
+      delay: 5
+
+    - name: Wait for admin frontend build
+      ansible.builtin.async_status:
+        jid: "{{ vault_admin_build_job.ansible_job_id }}"
+      register: vault_admin_build_result
+      until: vault_admin_build_result.finished
+      retries: 120
+      delay: 5
+
+    - name: Wait for guest frontend build
+      ansible.builtin.async_status:
+        jid: "{{ vault_guest_build_job.ansible_job_id }}"
+      register: vault_guest_build_result
+      until: vault_guest_build_result.finished
+      retries: 120
+      delay: 5
 
     - name: Copy admin dist
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/../../frontend/admin/dist/"
+        src: "{{ vault_admin_root }}/dist/"
         dest: "{{ vault_build_root }}/admin/"
         mode: preserve
 
-    - name: Install guest dependencies
-      ansible.builtin.command:
-        cmd: npm ci
-        chdir: "{{ playbook_dir }}/../../frontend/guest"
-
-    - name: Build guest frontend
-      ansible.builtin.command:
-        cmd: npm run build
-        chdir: "{{ playbook_dir }}/../../frontend/guest"
-
     - name: Copy guest dist
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/../../frontend/guest/dist/"
+        src: "{{ vault_guest_root }}/dist/"
         dest: "{{ vault_build_root }}/guest/"
         mode: preserve
 
