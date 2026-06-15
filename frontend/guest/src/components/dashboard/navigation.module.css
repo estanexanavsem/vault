@@ -79,10 +79,97 @@
   display: inline-grid;
   width: 32px;
   height: 32px;
+  padding: 0;
   place-items: center;
   color: var(--purple-950);
   background: #a7e7e5;
+  border: 0;
   border-radius: 999px;
+}
+
+.profileMenuOverlay {
+  position: fixed;
+  inset: 75px 0 0;
+  z-index: 30;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 16px;
+  background: rgb(18 18 18 / 58%);
+  backdrop-filter: blur(5px);
+}
+
+.profileMenu {
+  z-index: 31;
+  width: min(100%, var(--content-width));
+  padding: 26px 28px 32px;
+  color: var(--purple-950);
+  background: #fff;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 14px 34px rgb(17 10 28 / 28%);
+}
+
+.profileMenuHead {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.profileMenuHead h2 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.profileMenuHead p {
+  margin: 8px 0 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b6074;
+  white-space: nowrap;
+}
+
+.profileMenuGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.profileMenuGrid a {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 12px;
+  min-height: 112px;
+  padding: 22px;
+  color: var(--purple-600);
+  background: #f8f7fa;
+  border-radius: 4px;
+}
+
+.profileMenuGrid a svg {
+  color: var(--purple-950);
+}
+
+.profileMenuGrid a span {
+  display: grid;
+  gap: 8px;
+}
+
+.profileMenuGrid a strong {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.profileMenuGrid a small {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #5f5669;
 }
 
 .statusDot {
@@ -211,6 +298,7 @@
 @media (hover: hover) {
   .desktopNav a,
   .desktopNav button,
+  .profileMenuGrid a,
   .signOutButton {
     transition:
       background-color 180ms ease,
@@ -219,8 +307,13 @@
       opacity 180ms ease;
   }
 
+  .profileMenuGrid a:hover,
   .signOutButton:hover {
     background: rgb(255 255 255 / 10%);
+  }
+
+  .profileMenuGrid a:hover {
+    background: #f0ebf6;
   }
 }
 
@@ -233,7 +326,8 @@
   }
 
   .desktopNav,
-  .desktopSession {
+  .desktopSession,
+  .profileMenuOverlay {
     display: none;
   }
 
@@ -289,17 +383,23 @@
     box-shadow: 0 12px 26px rgb(45 23 75 / 18%);
   }
 
+  .mobileQuickLinksMenu a,
   .mobileQuickLinksMenu button {
+    display: flex;
+    align-items: center;
     min-height: 44px;
     padding: 0 14px;
     font-size: 14px;
     font-weight: 700;
     color: var(--purple-600);
+    text-decoration: none;
     text-align: left;
     background: #fff;
     border: 0;
   }
 
+  .mobileQuickLinksMenu a + button,
+  .mobileQuickLinksMenu button + a,
   .mobileQuickLinksMenu button + button {
     border-top: 1px solid var(--line);
   }

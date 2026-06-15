@@ -1,13 +1,14 @@
 import { Wallet } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import type { AccountSummary } from '../../../utils/accountSummary'
 import styles from '../dashboard.module.css'
 
 interface BusinessAccountSummaryProps {
   account: AccountSummary
-  onOpenAccount: () => void
+  accountRoute: string
 }
 
-export function BusinessAccountSummary({ account, onOpenAccount }: BusinessAccountSummaryProps) {
+export function BusinessAccountSummary({ account, accountRoute }: BusinessAccountSummaryProps) {
   return (
     <>
       <div className={styles.accountFamily}>
@@ -20,10 +21,10 @@ export function BusinessAccountSummary({ account, onOpenAccount }: BusinessAccou
         <strong className={styles.familyBalance}>{account.balanceText}</strong>
       </div>
 
-      <button className={styles.accountRow} type="button" onClick={onOpenAccount}>
+      <Link className={styles.accountRow} to={accountRoute}>
         <span>{account.title}</span>
         <strong>{account.balanceText}</strong>
-      </button>
+      </Link>
     </>
   )
 }

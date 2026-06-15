@@ -7,35 +7,38 @@ import { NotificationsCard } from './NotificationsCard'
 import styles from './dashboard.module.css'
 
 interface DashboardHomeProps {
+  accountRoute: string
   data: GuestData
   greetingName: string
-  onOpenAccount: () => void
-  onOpenSecurityCenter: () => void
 }
 
 export function DashboardHome({
+  accountRoute,
   data,
   greetingName,
-  onOpenAccount,
-  onOpenSecurityCenter,
 }: DashboardHomeProps) {
   return (
     <>
-      <DashboardHero greetingName={greetingName} onOpenSecurityCenter={onOpenSecurityCenter} />
+      <DashboardHero greetingName={greetingName} />
 
       <main className={styles.dashboardMain} id="home">
         <div className={styles.dashboardGrid}>
           <div className={styles.dashboardLeftColumn}>
-            <AccountCard data={data} onOpenAccount={onOpenAccount} />
-            <ActivityCard onOpenAccount={onOpenAccount} transfers={data.transfers} />
+            <AccountCard accountRoute={accountRoute} data={data} />
+            <ActivityCard accountRoute={accountRoute} transfers={data.transfers} />
           </div>
 
           <div className={styles.dashboardRightColumn}>
             <NotificationsCard />
-            <button className={styles.thanksCard} type="button">
+            <a
+              className={styles.thanksCard}
+              href="https://www.truist.com/digital-banking"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <span>Thanks for banking with Truist.</span>
               <ChevronRight size={22} aria-hidden="true" />
-            </button>
+            </a>
           </div>
         </div>
       </main>

@@ -10,7 +10,13 @@ export function DetailCopy() {
         Daily Posted Balance does not reflect all pending transactions and fees and should not be
         used to determine whether overdraft fees were assessed.
       </p>
-      <a href="#fee-schedule">Personal Deposit Accounts Fee Schedule</a>
+      <a
+        href="https://www.truist.com/content/dam/truist-bank/us/en/documents/rates-fees/personal/truist-one-personal-deposit-accounts-fee-schedule.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Personal Deposit Accounts Fee Schedule
+      </a>
     </div>
   )
 }

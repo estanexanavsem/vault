@@ -15,18 +15,16 @@ import { MobileNavItem } from './MobileNavItem'
 import styles from './navigation.module.css'
 
 interface MobileNavMenuProps {
+  accountRoute: string
   isAccountPage: boolean
   isHomePage: boolean
-  onOpenAccount: () => void
-  onShowHome: () => void
   onSignOut: () => void
 }
 
 export function MobileNavMenu({
+  accountRoute,
   isAccountPage,
   isHomePage,
-  onOpenAccount,
-  onShowHome,
   onSignOut,
 }: MobileNavMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
@@ -84,20 +82,16 @@ export function MobileNavMenu({
                   <MobileNavItem
                     current={isHomePage}
                     icon={<Home size={23} aria-hidden="true" />}
-                    onSelect={() => {
-                      close()
-                      onShowHome()
-                    }}
+                    onSelect={close}
+                    to="/"
                   >
                     Home
                   </MobileNavItem>
                   <MobileNavItem
                     current={isAccountPage}
                     icon={<CircleDollarSign size={23} aria-hidden="true" />}
-                    onSelect={() => {
-                      close()
-                      onOpenAccount()
-                    }}
+                    onSelect={close}
+                    to={accountRoute}
                   >
                     Accounts
                   </MobileNavItem>

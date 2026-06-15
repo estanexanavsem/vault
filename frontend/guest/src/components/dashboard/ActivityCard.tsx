@@ -7,11 +7,11 @@ import { UpcomingActivityEmpty } from './activity-card/UpcomingActivityEmpty'
 import styles from './dashboard.module.css'
 
 interface ActivityCardProps {
-  onOpenAccount: () => void
+  accountRoute: string
   transfers: Transfer[]
 }
 
-export function ActivityCard({ onOpenAccount, transfers }: ActivityCardProps) {
+export function ActivityCard({ accountRoute, transfers }: ActivityCardProps) {
   const [activeTab, setActiveTab] = useState<'recent' | 'upcoming'>('recent')
   const transferSummaries = getTransferSummaries(transfers)
   const isUpcoming = activeTab === 'upcoming'
@@ -42,7 +42,7 @@ export function ActivityCard({ onOpenAccount, transfers }: ActivityCardProps) {
       {isUpcoming ? (
         <UpcomingActivityEmpty />
       ) : (
-        <RecentActivitySummary onOpenAccount={onOpenAccount} transfers={transferSummaries} />
+        <RecentActivitySummary accountRoute={accountRoute} transfers={transferSummaries} />
       )}
     </section>
   )

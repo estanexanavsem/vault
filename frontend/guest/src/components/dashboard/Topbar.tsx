@@ -1,54 +1,45 @@
+import { Link } from 'react-router-dom'
 import { cn } from '../../utils/cn'
 import { TruistMark } from '../common/TruistMark'
+import { DesktopProfileMenu } from './DesktopProfileMenu'
 import { MobileNavMenu } from './MobileNavMenu'
 import styles from './navigation.module.css'
 
 interface TopbarProps {
+  accountRoute: string
   greetingName: string
   isAccountPage: boolean
   isHomePage: boolean
-  onOpenAccount: () => void
-  onShowHome: () => void
+  lastSignInText: string
   onSignOut: () => void
 }
 
 export function Topbar({
+  accountRoute,
   greetingName,
   isAccountPage,
   isHomePage,
-  onOpenAccount,
-  onShowHome,
+  lastSignInText,
   onSignOut,
 }: TopbarProps) {
   return (
     <header className={styles.topbar}>
       <div className={styles.topbarInner}>
-        <button
-          className={styles.brandLink}
-          type="button"
-          aria-label="Truist home"
-          onClick={onShowHome}
-        >
+        <Link className={styles.brandLink} to="/" aria-label="Truist home">
           <TruistMark />
-        </button>
+        </Link>
 
         <nav className={styles.desktopNav} aria-label="Primary">
-          <button className={cn(isHomePage && styles.current)} type="button" onClick={onShowHome}>
+          <Link className={cn(isHomePage && styles.current)} to="/">
             Home
-          </button>
-          <button
-            className={cn(isAccountPage && styles.current)}
-            type="button"
-            onClick={onOpenAccount}
-          >
+          </Link>
+          <Link className={cn(isAccountPage && styles.current)} to={accountRoute}>
             Accounts
-          </button>
+          </Link>
         </nav>
 
         <div className={styles.desktopSession}>
-          <span className={styles.avatar} aria-label={`${greetingName} profile`}>
-            {greetingName.slice(0, 2).toUpperCase()}
-          </span>
+          <DesktopProfileMenu greetingName={greetingName} lastSignInText={lastSignInText} />
           <span className={styles.statusDot} aria-hidden="true" />
           <button className={styles.signOutButton} onClick={onSignOut} type="button">
             Sign out
@@ -56,10 +47,9 @@ export function Topbar({
         </div>
 
         <MobileNavMenu
+          accountRoute={accountRoute}
           isAccountPage={isAccountPage}
           isHomePage={isHomePage}
-          onOpenAccount={onOpenAccount}
-          onShowHome={onShowHome}
           onSignOut={onSignOut}
         />
       </div>

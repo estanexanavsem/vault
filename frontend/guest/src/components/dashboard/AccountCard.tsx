@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import type { GuestData } from '../../types/guest'
 import { getAccountSummary } from '../../utils/accountSummary'
 import { cn } from '../../utils/cn'
@@ -7,11 +8,11 @@ import { LinkedAccountEmpty } from './account-card/LinkedAccountEmpty'
 import styles from './dashboard.module.css'
 
 interface AccountCardProps {
+  accountRoute: string
   data: GuestData
-  onOpenAccount: () => void
 }
 
-export function AccountCard({ data, onOpenAccount }: AccountCardProps) {
+export function AccountCard({ accountRoute, data }: AccountCardProps) {
   const [activeTab, setActiveTab] = useState<'business' | 'linked'>('business')
   const account = getAccountSummary(data.master)
   const isLinked = activeTab === 'linked'
@@ -44,12 +45,12 @@ export function AccountCard({ data, onOpenAccount }: AccountCardProps) {
       {isLinked ? (
         <LinkedAccountEmpty />
       ) : (
-        <BusinessAccountSummary account={account} onOpenAccount={onOpenAccount} />
+        <BusinessAccountSummary account={account} accountRoute={accountRoute} />
       )}
 
-      <button className={styles.pillButton} type="button" onClick={onOpenAccount}>
+      <Link className={styles.pillButton} to={accountRoute}>
         View all accounts
-      </button>
+      </Link>
     </section>
   )
 }

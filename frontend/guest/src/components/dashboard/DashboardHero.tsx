@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { getTimeGreeting } from '../../utils/formatters'
 import { QuickLinksMenu } from './QuickLinksMenu'
 import styles from './dashboard.module.css'
 
 interface DashboardHeroProps {
   greetingName: string
-  onOpenSecurityCenter: () => void
 }
 
-export function DashboardHero({ greetingName, onOpenSecurityCenter }: DashboardHeroProps) {
+export function DashboardHero({ greetingName }: DashboardHeroProps) {
   const [timeGreeting, setTimeGreeting] = useState(getTimeGreeting)
 
   useEffect(() => {
@@ -26,12 +26,11 @@ export function DashboardHero({ greetingName, onOpenSecurityCenter }: DashboardH
           {timeGreeting}, {greetingName}
         </h1>
         <div className={styles.desktopQuickActions} aria-label="Quick actions">
-          <button type="button">Statements</button>
-          <button type="button" onClick={onOpenSecurityCenter}>
+          <Link to="/security-center">
             Security center
-          </button>
+          </Link>
         </div>
-        <QuickLinksMenu onOpenSecurityCenter={onOpenSecurityCenter} />
+        <QuickLinksMenu />
       </div>
     </section>
   )

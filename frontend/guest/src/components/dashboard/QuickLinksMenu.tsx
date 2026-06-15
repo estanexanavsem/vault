@@ -1,12 +1,9 @@
 import { ChevronDown } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { FloatingDropdown } from '../common/FloatingDropdown'
 import styles from './navigation.module.css'
 
-interface QuickLinksMenuProps {
-  onOpenSecurityCenter: () => void
-}
-
-export function QuickLinksMenu({ onOpenSecurityCenter }: QuickLinksMenuProps) {
+export function QuickLinksMenu() {
   return (
     <div className={styles.mobileQuickLinksWrap}>
       <FloatingDropdown
@@ -30,16 +27,13 @@ export function QuickLinksMenu({ onOpenSecurityCenter }: QuickLinksMenuProps) {
             <button type="button" role="menuitem" onClick={close}>
               Statements
             </button>
-            <button
-              type="button"
+            <Link
+              to="/security-center"
               role="menuitem"
-              onClick={() => {
-                close()
-                onOpenSecurityCenter()
-              }}
+              onClick={close}
             >
               Security center
-            </button>
+            </Link>
           </>
         )}
       </FloatingDropdown>

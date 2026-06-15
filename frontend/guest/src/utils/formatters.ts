@@ -19,6 +19,16 @@ const easternDateTimeFormatter = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
 })
 
+const profileMenuDateTimeFormatter = new Intl.DateTimeFormat('en-US', {
+  day: 'numeric',
+  hour: 'numeric',
+  hour12: true,
+  minute: '2-digit',
+  month: 'long',
+  timeZone: 'America/New_York',
+  year: 'numeric',
+})
+
 export const formatCurrency = (value: number) =>
   value.toLocaleString('en-US', {
     currency: 'USD',
@@ -52,6 +62,18 @@ export const formatEasternDateTime = (value: string) => {
     formatted.find((part) => part.type === type)?.value ?? ''
 
   return `${getPart('hour')}:${getPart('minute')} ${getPart('dayPeriod')} ${getPart('timeZoneName')} on ${getPart('month')}/${getPart('day')}/${getPart('year')}`
+}
+
+export const formatProfileMenuDateTime = (value: string) => {
+  const date = new Date(value)
+
+  if (Number.isNaN(date.getTime())) {
+    return ''
+  }
+
+  return profileMenuDateTimeFormatter.format(date).replace(/\b(AM|PM)\b/, (match) =>
+    match.toLowerCase(),
+  )
 }
 
 export const formatUsPhoneNumber = (value: string) => {

@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import type { GuestData } from '../../types/guest'
 import { getAccountRoute } from '../../utils/accountRoute'
 import { logBoundaryError } from '../../utils/errorBoundary'
-import { getDisplayName } from '../../utils/formatters'
+import { formatProfileMenuDateTime, getDisplayName } from '../../utils/formatters'
 import { ErrorFallback } from '../common/ErrorFallback'
 import { DashboardPageFallback } from './DashboardPageFallback'
 import { DashboardHome } from './DashboardHome'
@@ -28,21 +28,23 @@ export function Dashboard({ data, onSignOut }: DashboardProps) {
   const location = useLocation()
   const navigate = useNavigate()
   const greetingName = getDisplayName(data.master)
+  const lastSignInText = data.master.last_sign_in_at
+    ? formatProfileMenuDateTime(data.master.last_sign_in_at)
+    : ''
+  const accountRoute = getAccountRoute(data.master.id)
   const isAccountPage = location.pathname.startsWith('/accounts/')
   const isSecurityCenterPage = location.pathname === '/security-center'
   const showHome = () => navigate('/')
-  const showAccount = () => navigate(getAccountRoute(data.master.id))
-  const showSecurityCenter = () => navigate('/security-center')
   const pageBoundaryKeys = [location.pathname, data.master.id]
 
   return (
     <div className={styles.shell}>
       <Topbar
+        accountRoute={accountRoute}
         greetingName={greetingName}
         isAccountPage={isAccountPage}
         isHomePage={!isAccountPage && !isSecurityCenterPage}
-        onOpenAccount={showAccount}
-        onShowHome={showHome}
+        lastSignInText={lastSignInText}
         onSignOut={onSignOut}
       />
 
@@ -71,10 +73,9 @@ export function Dashboard({ data, onSignOut }: DashboardProps) {
           </Suspense>
         ) : (
           <DashboardHome
+            accountRoute={accountRoute}
             data={data}
             greetingName={greetingName}
-            onOpenAccount={showAccount}
-            onOpenSecurityCenter={showSecurityCenter}
           />
         )}
       </ErrorBoundary>

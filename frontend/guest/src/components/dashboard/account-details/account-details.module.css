@@ -475,7 +475,7 @@
   padding: 0 12px;
   font-size: 16px;
   font-weight: 500;
-  color: var(--purple-600);
+  color: rgb(46 26 71);
   border-bottom: 1px solid var(--line);
 }
 
@@ -571,7 +571,7 @@
   overflow: hidden;
   font-size: 14px;
   line-height: 1.15;
-  text-transform: uppercase;
+  text-transform: none;
   overflow-wrap: anywhere;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -792,7 +792,14 @@
 }
 
 .downloadAppCard strong {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
   font-size: 15px;
+}
+
+.downloadAppCard strong svg {
+  flex: 0 0 auto;
 }
 
 @media (hover: hover) {
@@ -1038,12 +1045,7 @@
       'status credit control';
     grid-template-columns: minmax(0, 1fr) 96px 22px;
     gap: 6px 14px;
-    min-height: 190px;
     padding: 22px 16px 34px;
-  }
-
-  .transactionDetailRowOpen {
-    min-height: 156px;
   }
 
   .transactionDate {
@@ -1168,7 +1170,7 @@
 
   .copy {
     margin-top: 16px;
-    font-size: 11px;
+    font-size: 16px;
     line-height: 1.22;
   }
 
@@ -1183,14 +1185,10 @@
   }
 
   .downloadAppCard span {
-    font-size: 16px;
+    font-size: 20px;
   }
 
   .downloadAppCard strong {
-    font-size: 12px;
-  }
-
-  .downloadAppCard svg {
-    display: none;
+    font-size: 16px;
   }
 }

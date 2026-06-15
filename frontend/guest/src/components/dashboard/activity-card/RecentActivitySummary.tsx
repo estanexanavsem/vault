@@ -1,14 +1,15 @@
-import { ChevronRight, Folder } from 'lucide-react'
+import { ArrowRight, ChevronRight, Folder } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { cn } from '../../../utils/cn'
 import type { TransferSummary } from '../../../utils/transferSummary'
 import styles from '../dashboard.module.css'
 
 interface RecentActivitySummaryProps {
-  onOpenAccount: () => void
+  accountRoute: string
   transfers: TransferSummary[]
 }
 
-export function RecentActivitySummary({ onOpenAccount, transfers }: RecentActivitySummaryProps) {
+export function RecentActivitySummary({ accountRoute, transfers }: RecentActivitySummaryProps) {
   if (transfers.length === 0) {
     return <p className={styles.activityNoRows}>No recent transactions.</p>
   }
@@ -22,11 +23,10 @@ export function RecentActivitySummary({ onOpenAccount, transfers }: RecentActivi
 
       <div className={styles.activityRows}>
         {transfers.map((transfer, index) => (
-          <button
+          <Link
             className={styles.activityRow}
             key={transfer.id ?? `${transfer.date}-${transfer.amount}-${index}`}
-            type="button"
-            onClick={onOpenAccount}
+            to={accountRoute}
           >
             <span className={styles.activityIcon} aria-hidden="true">
               <Folder size={16} />
@@ -44,9 +44,14 @@ export function RecentActivitySummary({ onOpenAccount, transfers }: RecentActivi
               {transfer.amountText}
             </span>
             <ChevronRight size={18} aria-hidden="true" />
-          </button>
+          </Link>
         ))}
       </div>
+
+      <Link className={styles.moreActivityButton} to={accountRoute}>
+        More activity
+        <ArrowRight size={16} aria-hidden="true" />
+      </Link>
     </>
   )
 }
