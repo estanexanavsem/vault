@@ -1,17 +1,17 @@
 .shell {
   min-height: 100dvh;
-  color: var(--ink);
+  color: var(--color-text-primary);
 }
 
 .pageFallback {
   min-height: 56vh;
-  background: var(--page);
+  background: var(--color-page);
 }
 
 .heroBand {
   min-height: 177px;
-  color: #fff;
-  background: var(--purple-800);
+  color: var(--color-text-inverse);
+  background: var(--color-brand-hero);
 }
 
 .heroInner {
@@ -42,10 +42,10 @@
   padding: 0 16px;
   font-size: 16px;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-inverse);
   text-decoration: none;
   cursor: pointer;
-  background-color: #72569c;
+  background-color: var(--color-brand-action);
   border: 0;
   border-radius: 18px;
   transition:
@@ -54,8 +54,8 @@
 }
 
 .dashboardMain {
-  background: var(--page);
-  border-bottom: 1px solid #ece9ef;
+  background: var(--color-page);
+  border-bottom: 1px solid var(--color-border-muted);
 }
 
 .dashboardGrid {
@@ -81,8 +81,8 @@
 
 .card,
 .thanksCard {
-  background: var(--surface);
-  border: 1px solid var(--line);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
   border-radius: 16px;
 }
 
@@ -100,7 +100,7 @@
   margin: 0;
   font-size: 12px;
   font-weight: 700;
-  color: #42394d;
+  color: var(--color-text-heading-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -110,9 +110,9 @@
   width: 44px;
   height: 44px;
   place-items: center;
-  color: var(--purple-600);
-  background: var(--purple-100);
-  border: 2px solid var(--purple-300);
+  color: var(--color-brand);
+  background: var(--color-surface-brand);
+  border: 2px solid var(--color-border-control);
   border-radius: 999px;
 }
 
@@ -129,7 +129,7 @@
   display: flex;
   gap: 0;
   margin-top: 28px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .tab {
@@ -138,7 +138,7 @@
   padding: 0 24px 8px;
   font-size: 16px;
   font-weight: 500;
-  color: var(--teal-700);
+  color: var(--color-accent);
   background: transparent;
   border: 0;
   border-bottom: 4px solid transparent;
@@ -146,7 +146,7 @@
 
 .tab.active {
   font-weight: 700;
-  border-bottom-color: var(--teal-700);
+  border-bottom-color: var(--color-accent);
 }
 
 .accountFamily {
@@ -155,7 +155,7 @@
   align-items: center;
   justify-content: space-between;
   margin-top: 24px;
-  color: var(--purple-950);
+  color: var(--color-brand-strong);
 }
 
 .accountFamilyLabel {
@@ -173,8 +173,8 @@
   height: 48px;
   flex: 0 0 auto;
   place-items: center;
-  color: var(--purple-700);
-  background: #e8f2f2;
+  color: var(--color-brand-hover);
+  background: var(--color-surface-accent);
   border-radius: 999px;
 }
 
@@ -192,11 +192,11 @@
   min-height: 72px;
   margin-top: 10px;
   padding: 0 22px;
-  color: var(--purple-700);
+  color: var(--color-brand-hover);
   text-decoration: none;
   text-align: left;
-  background: #fff;
-  border: 2px solid var(--purple-300);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border-control);
   border-radius: 8px;
 }
 
@@ -217,7 +217,7 @@
   margin-right: 36px;
   font-size: 22px;
   font-weight: 500;
-  color: var(--purple-950);
+  color: var(--color-brand-strong);
   font-variant-numeric: tabular-nums;
 }
 
@@ -226,7 +226,7 @@
   justify-items: center;
   min-height: 250px;
   padding-top: 58px;
-  color: var(--ink-muted);
+  color: var(--color-text-muted);
   text-align: center;
 }
 
@@ -253,9 +253,9 @@
   padding-inline: 24px;
   font-size: 16px;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-inverse);
   text-decoration: none;
-  background: var(--purple-600);
+  background: var(--color-brand);
   border: 0;
   border-radius: 999px;
 }
@@ -270,9 +270,9 @@
   padding: 0 22px;
   font-size: 24px;
   font-weight: 400;
-  color: var(--purple-950);
+  color: var(--color-brand-strong);
   text-align: left;
-  border: 2px solid var(--purple-300);
+  border: 2px solid var(--color-border-control);
 }
 
 .notificationsCard {
@@ -290,7 +290,7 @@
 .notificationsCard p {
   margin: 28px 0 0;
   font-size: 18px;
-  color: var(--purple-600);
+  color: var(--color-brand);
 }
 
 .activityCard {
@@ -335,21 +335,21 @@
   padding: 0;
   font-size: 15px;
   font-weight: 700;
-  color: var(--purple-600);
+  color: var(--color-brand);
   text-decoration: none;
   background: transparent;
   border: 0;
 }
 
 .activityRow + .activityRow {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border-subtle);
 }
 
 .activityNoRows {
   margin: 18px 0 0;
   font-size: 14px;
   font-weight: 600;
-  color: var(--ink-muted);
+  color: var(--color-text-muted);
 }
 
 .activityRow {
@@ -357,7 +357,7 @@
   height: 80px;
   min-height: 50px;
   padding: 0 0 0 8px;
-  color: var(--ink);
+  color: var(--color-text-primary);
   text-align: left;
   background: transparent;
   border: 0;
@@ -365,8 +365,8 @@
 }
 
 .activityRow:focus-visible {
-  background: #f3eefb;
-  outline: 3px solid rgb(125 84 179 / 22%);
+  background: var(--color-surface-brand-focus);
+  outline: 3px solid var(--color-focus-brand-ring);
   outline-offset: 2px;
 }
 
@@ -390,9 +390,9 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  color: var(--purple-600);
-  background: #fff;
-  border: 1px solid #d8cbe7;
+  color: var(--color-brand);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-icon);
   border-radius: 999px;
 }
 
@@ -406,7 +406,7 @@
   display: inline-flex;
   font-size: 12px;
   font-weight: 600;
-  color: var(--ink-muted);
+  color: var(--color-text-muted);
 }
 
 .activityAmount {
@@ -416,11 +416,11 @@
 }
 
 .positive {
-  color: var(--green-700);
+  color: var(--color-success);
 }
 
 .negative {
-  color: var(--red-700);
+  color: var(--color-danger);
 }
 
 .activityEmpty {
@@ -428,7 +428,7 @@
   justify-items: center;
   min-height: 238px;
   margin-top: 20px;
-  color: var(--ink-muted);
+  color: var(--color-text-muted);
 }
 
 .activityEmpty p {
@@ -445,7 +445,7 @@
 }
 
 .siteFooter {
-  background: #fff;
+  background: var(--color-surface);
 }
 
 .footerInner {
@@ -460,7 +460,7 @@
   align-items: center;
   font-size: 22px;
   font-weight: 700;
-  color: var(--purple-950);
+  color: var(--color-brand-strong);
   letter-spacing: 0.05em;
 }
 
@@ -476,7 +476,7 @@
   margin-top: -25px;
   margin-left: 160px;
   font-size: 15px;
-  color: var(--purple-600);
+  color: var(--color-brand);
 }
 
 .footerLinks a {
@@ -512,7 +512,7 @@
   margin-top: 46px;
   font-size: 14px;
   line-height: 1.42;
-  color: #6b6074;
+  color: var(--color-text-muted);
 }
 
 .legalCopy p {
@@ -523,7 +523,7 @@
   display: inline-flex;
   gap: 4px;
   align-items: baseline;
-  color: var(--purple-600);
+  color: var(--color-brand);
   text-decoration: underline;
 }
 
@@ -550,26 +550,26 @@
   }
 
   .footerLinks a:hover {
-    color: #008b95;
+    color: var(--color-accent-hover);
   }
 
   .accountRow:hover,
   .thanksCard:hover {
-    background: #fbf9ff;
-    border-color: var(--purple-600);
+    background: var(--color-surface-hover);
+    border-color: var(--color-brand);
   }
 
   .activityRow:hover {
-    background: #f3eefb;
+    background: var(--color-surface-brand-focus);
   }
 
   .moreActivityButton:hover {
-    color: #008b95;
+    color: var(--color-accent-hover);
   }
 
   .pillButton:hover,
   .desktopQuickActions a:hover {
-    background: var(--purple-700);
+    background: var(--color-brand-hover);
   }
 }
 

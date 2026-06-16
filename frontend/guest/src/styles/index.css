@@ -10,28 +10,92 @@
 
 @layer base {
   :root {
+    /* Typography and layout */
     --font-sans: 'Vault Sans', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', sans-serif;
-    --purple-950: #2e1a47;
-    --purple-900: #321b50;
-    --purple-800: #402561;
-    --purple-700: #6b4aa0;
-    --purple-600: #7c5aae;
-    --purple-300: #b9a8d8;
-    --purple-100: #eee8f7;
-    --teal-700: #007d86;
-    --teal-100: #e8f4f4;
-    --green-700: #03813a;
-    --red-700: #b42318;
-    --ink: #342445;
-    --ink-muted: #6b6074;
-    --muted: #7d6a97;
-    --line: #ddd8e5;
-    --surface: #fff;
-    --page: #f6f6f5;
     --content-width: 1400px;
 
-    color: #2f2148;
-    background: #f7f7f6;
+    /* Text */
+    --color-text-base: #2f2148;
+    --color-text-primary: #342445;
+    --color-text-strong: #2e1a47;
+    --color-text-heading-muted: #42394d;
+    --color-text-muted: #6b6074;
+    --color-text-subtle: #5f5669;
+    --color-text-soft: #55515a;
+    --color-text-input-icon: #3f3a45;
+    --color-text-brand-soft: #d8cef0;
+    --color-text-inverse: #fff;
+
+    /* Surfaces */
+    --color-page: #f6f6f5;
+    --color-app-background: #f7f7f6;
+    --color-surface: #fff;
+    --color-surface-raised: #fff;
+    --color-surface-subtle: #f8f7fa;
+    --color-surface-muted: #f7f6f5;
+    --color-surface-neutral: #f5f4f6;
+    --color-surface-hover: #fbf9ff;
+    --color-surface-brand: #eee8f7;
+    --color-surface-brand-focus: #f3eefb;
+    --color-surface-brand-hover: #f0ebf6;
+    --color-surface-accent: #e8f2f2;
+
+    /* Borders */
+    --color-border-subtle: #ddd8e5;
+    --color-border-muted: #ece9ef;
+    --color-border-panel: #e5e1eb;
+    --color-border-control: #b9a8d8;
+    --color-border-brand-soft: #cfc3ee;
+    --color-border-icon: #d8cbe7;
+    --color-border-strong: #6f6878;
+
+    /* Brand */
+    --color-brand-strong: #2e1a47;
+    --color-brand-auth: #321b50;
+    --color-brand-hero: #402561;
+    --color-brand-hover: #6b4aa0;
+    --color-brand: #7c5aae;
+    --color-brand-action: #72569c;
+    --color-brand-avatar: #c9c3ff;
+    --color-brand-focus: #c8c5ff;
+
+    /* Accent and status */
+    --color-accent: #007d86;
+    --color-accent-hover: #008b95;
+    --color-accent-indicator: #9ee8e8;
+    --color-accent-avatar: #a7e7e5;
+    --color-accent-selected: #c8eff0;
+    --color-success: #03813a;
+    --color-danger: #b42318;
+    --color-danger-strong: #8f1f16;
+    --color-danger-surface: #fff0ee;
+    --color-danger-border: #f2bab3;
+
+    /* Interaction and effects */
+    --color-overlay: rgb(18 18 18 / 58%);
+    --color-overlay-dialog: rgb(18 18 18 / 52%);
+    --color-overlay-balance: rgb(22 18 27 / 58%);
+    --color-on-dark-hover: rgb(255 255 255 / 10%);
+    --color-brand-border-muted: rgb(185 168 216 / 28%);
+    --color-focus-ring: #00a8b5;
+    --color-focus-brand-ring: rgb(125 84 179 / 22%);
+    --shadow-profile-menu: 0 14px 34px rgb(17 10 28 / 28%);
+    --shadow-mobile-nav: 0 24px 46px rgb(20 10 35 / 28%);
+    --shadow-mobile-quick-links: 0 12px 26px rgb(45 23 75 / 18%);
+    --shadow-dialog: 0 24px 54px rgb(30 18 44 / 28%);
+    --shadow-balance-dialog: 0 12px 30px rgb(20 10 35 / 24%);
+
+    /* Gradients */
+    --gradient-auth:
+      linear-gradient(180deg, rgb(45 23 75 / 92%), rgb(74 40 112 / 90%)), var(--color-brand-auth);
+    --gradient-account-detail-mobile: linear-gradient(
+      180deg,
+      var(--color-brand-strong) 0 65%,
+      var(--color-page) 65% 100%
+    );
+
+    color: var(--color-text-base);
+    background: var(--color-app-background);
     font-family: var(--font-sans);
     font-synthesis: none;
     text-rendering: optimizelegibility;
@@ -51,7 +115,7 @@
     min-height: 100dvh;
     margin: 0;
     font-family: var(--font-sans);
-    background: var(--page);
+    background: var(--color-page);
   }
 
   button,
@@ -81,7 +145,7 @@
   }
 
   :focus-visible {
-    outline: 3px solid #00a8b5;
+    outline: 3px solid var(--color-focus-ring);
     outline-offset: 3px;
   }
 

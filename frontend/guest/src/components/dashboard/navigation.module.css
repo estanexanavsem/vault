@@ -1,6 +1,6 @@
 .topbar {
-  background: var(--purple-950);
-  color: #fff;
+  background: var(--color-brand-strong);
+  color: var(--color-text-inverse);
 }
 
 .topbarInner {
@@ -19,7 +19,7 @@
   height: 44px;
   place-items: center;
   justify-self: start;
-  color: #fff;
+  color: var(--color-text-inverse);
   background: transparent;
   border: 0;
 }
@@ -43,7 +43,7 @@
   padding: 0 16px;
   font-size: 16px;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-inverse);
   background: transparent;
   border: 0;
   border-radius: 10px;
@@ -61,7 +61,7 @@
   width: calc(100% - 32px);
   height: 4px;
   content: '';
-  background: #9ee8e8;
+  background: var(--color-accent-indicator);
   border-radius: 999px;
   transform: translateX(-50%);
 }
@@ -80,8 +80,8 @@
   height: 32px;
   padding: 0;
   place-items: center;
-  color: var(--purple-950);
-  background: #a7e7e5;
+  color: var(--color-brand-strong);
+  background: var(--color-accent-avatar);
   border: 0;
   border-radius: 999px;
 }
@@ -94,7 +94,7 @@
   align-items: flex-start;
   justify-content: center;
   padding: 0 16px;
-  background: rgb(18 18 18 / 58%);
+  background: var(--color-overlay);
   backdrop-filter: blur(5px);
 }
 
@@ -102,10 +102,10 @@
   z-index: 31;
   width: min(100%, var(--content-width));
   padding: 26px 28px 32px;
-  color: var(--purple-950);
-  background: #fff;
+  color: var(--color-brand-strong);
+  background: var(--color-surface);
   border-radius: 0 0 16px 16px;
-  box-shadow: 0 14px 34px rgb(17 10 28 / 28%);
+  box-shadow: var(--shadow-profile-menu);
 }
 
 .profileMenuHead {
@@ -127,7 +127,7 @@
   margin: 8px 0 0;
   font-size: 13px;
   font-weight: 500;
-  color: #6b6074;
+  color: var(--color-text-muted);
   white-space: nowrap;
 }
 
@@ -144,13 +144,13 @@
   gap: 12px;
   min-height: 112px;
   padding: 22px;
-  color: var(--purple-600);
-  background: #f8f7fa;
+  color: var(--color-brand);
+  background: var(--color-surface-subtle);
   border-radius: 4px;
 }
 
 .profileMenuGrid a svg {
-  color: var(--purple-950);
+  color: var(--color-brand-strong);
 }
 
 .profileMenuGrid a span {
@@ -168,14 +168,14 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 1.35;
-  color: #5f5669;
+  color: var(--color-text-subtle);
 }
 
 .statusDot {
   display: none;
   width: 5px;
   height: 5px;
-  background: #fff;
+  background: var(--color-surface);
   border-radius: 999px;
   opacity: 90%;
 }
@@ -186,9 +186,9 @@
   margin-left: 20px;
   padding: 0 24px;
   font-size: 16px;
-  color: #fff;
+  color: var(--color-text-inverse);
   background: transparent;
-  border: 2px solid var(--purple-300);
+  border: 2px solid var(--color-border-control);
   border-radius: 8px;
 }
 
@@ -207,17 +207,17 @@
 
 .mobileNavOverlay {
   z-index: 40;
-  background: rgb(18 18 18 / 58%);
+  background: var(--color-overlay);
 }
 
 .mobileNavPanel {
   width: 100vw;
   margin: 0;
   overflow: hidden;
-  color: #fff;
-  background: var(--purple-800);
+  color: var(--color-text-inverse);
+  background: var(--color-brand-hero);
   border-radius: 0 0 52px;
-  box-shadow: 0 24px 46px rgb(20 10 35 / 28%);
+  box-shadow: var(--shadow-mobile-nav);
 }
 
 .mobileNavHead {
@@ -226,7 +226,7 @@
   justify-content: space-between;
   min-height: 75px;
   padding: 0 16px;
-  background: var(--purple-950);
+  background: var(--color-brand-strong);
 }
 
 .mobileNavMark {
@@ -238,7 +238,7 @@
   width: 44px;
   height: 44px;
   place-items: center;
-  color: #d8cef0;
+  color: var(--color-text-brand-soft);
   background: transparent;
   border: 0;
 }
@@ -257,7 +257,7 @@
   padding: 0 16px;
   font-size: 19px;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-inverse);
   text-align: left;
   background: transparent;
   border: 0;
@@ -269,15 +269,15 @@
 }
 
 .mobileNavItem.current {
-  color: var(--purple-950);
-  background: #c8eff0;
+  color: var(--color-brand-strong);
+  background: var(--color-accent-selected);
 }
 
 .mobileNavFooter {
   margin: 8px 36px 0;
   padding-top: 25px;
   padding-bottom: 42px;
-  border-top: 1px solid rgb(185 168 216 / 28%);
+  border-top: 1px solid var(--color-brand-border-muted);
 }
 
 .mobileNavSignOut {
@@ -288,9 +288,9 @@
   min-height: 56px;
   font-size: 19px;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-inverse);
   background: transparent;
-  border: 2px solid #cfc3ee;
+  border: 2px solid var(--color-border-brand-soft);
   border-radius: 9px;
 }
 
@@ -308,11 +308,11 @@
 
   .profileMenuGrid a:hover,
   .signOutButton:hover {
-    background: rgb(255 255 255 / 10%);
+    background: var(--color-on-dark-hover);
   }
 
   .profileMenuGrid a:hover {
-    background: #f0ebf6;
+    background: var(--color-surface-brand-hover);
   }
 }
 
@@ -340,7 +340,7 @@
     width: 44px;
     height: 44px;
     place-items: center;
-    color: #fff;
+    color: var(--color-text-inverse);
     background: transparent;
     border: 0;
   }
@@ -359,8 +359,8 @@
     padding: 0 14px;
     font-size: 14px;
     font-weight: 700;
-    color: #fff;
-    background: var(--purple-950);
+    color: var(--color-text-inverse);
+    background: var(--color-brand-strong);
     border: 0;
     border-radius: 0;
   }
@@ -376,10 +376,10 @@
   .mobileQuickLinksMenu {
     display: grid;
     z-index: 20;
-    background: #fff;
-    border: 1px solid var(--purple-300);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-control);
     border-top: 0;
-    box-shadow: 0 12px 26px rgb(45 23 75 / 18%);
+    box-shadow: var(--shadow-mobile-quick-links);
   }
 
   .mobileQuickLinksMenu a,
@@ -390,17 +390,17 @@
     padding: 0 14px;
     font-size: 14px;
     font-weight: 700;
-    color: var(--purple-600);
+    color: var(--color-brand);
     text-decoration: none;
     text-align: left;
-    background: #fff;
+    background: var(--color-surface);
     border: 0;
   }
 
   .mobileQuickLinksMenu a + button,
   .mobileQuickLinksMenu button + a,
   .mobileQuickLinksMenu button + button {
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--color-border-subtle);
   }
 }
 
