@@ -12,31 +12,31 @@ interface RecentActivitySummaryProps {
 
 export function RecentActivitySummary({ accountRoute, transfers }: RecentActivitySummaryProps) {
   if (transfers.length === 0) {
-    return <p className={styles.activityNoRows}>No recent transactions.</p>
+    return <p className={styles.empty}>No recent transactions.</p>
   }
 
   return (
     <>
-      <div className={styles.activityTableLabels} aria-hidden="true">
+      <div className={styles.labels} aria-hidden="true">
         <span>Description</span>
         <span>Amount</span>
       </div>
 
-      <div className={styles.activityRows}>
+      <div className={styles.rows}>
         {transfers.map((transfer, index) => (
           <Link
-            className={styles.activityRow}
+            className={styles.row}
             key={transfer.id ?? `${transfer.date}-${transfer.amount}-${index}`}
             to={accountRoute}
           >
-            <TransactionIcon className={styles.activityTransactionIcon} transfer={transfer} />
-            <span className={styles.activityCopy}>
+            <TransactionIcon className={styles.icon} transfer={transfer} />
+            <span className={styles.copy}>
               {transfer.label ? <strong>{transfer.label}</strong> : null}
-              {transfer.meta ? <span className={styles.activityMeta}>{transfer.meta}</span> : null}
+              {transfer.meta ? <span className={styles.meta}>{transfer.meta}</span> : null}
             </span>
             <span
               className={cn(
-                styles.activityAmount,
+                styles.amount,
                 transfer.isPositive ? styles.positive : styles.negative,
               )}
             >
@@ -47,7 +47,7 @@ export function RecentActivitySummary({ accountRoute, transfers }: RecentActivit
         ))}
       </div>
 
-      <Link className={styles.moreActivityButton} to={accountRoute}>
+      <Link className={styles.more} to={accountRoute}>
         More activity
         <ArrowRight size={16} aria-hidden="true" />
       </Link>

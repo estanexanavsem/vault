@@ -1,28 +1,28 @@
-.activityTableLabels,
-.activityRow {
+.labels,
+.row {
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr) auto 20px;
   gap: var(--space-4);
   align-items: center;
 }
 
-.activityTableLabels {
+.labels {
   margin-top: var(--space-5-5);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
 }
 
-.activityTableLabels span:nth-child(2) {
+.labels span:nth-child(2) {
   grid-column: 3 / -1;
   justify-self: end;
 }
 
-.activityRows {
+.rows {
   display: grid;
   margin-top: var(--space-4);
 }
 
-.moreActivityButton {
+.more {
   display: inline-flex;
   gap: var(--space-2);
   align-items: center;
@@ -37,18 +37,18 @@
   border: 0;
 }
 
-.activityRow + .activityRow {
+.row + .row {
   border-top: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
-.activityNoRows {
+.empty {
   margin: var(--space-5-5) 0 0;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-muted);
 }
 
-.activityRow {
+.row {
   width: 100%;
   height: 80px;
   min-height: var(--control-height-3xl);
@@ -60,19 +60,19 @@
   border-radius: 0;
 }
 
-.activityRow:focus-visible {
+.row:focus-visible {
   background: var(--color-surface-brand-focus);
   outline: var(--stroke-width-focus) solid var(--color-focus-brand-ring);
   outline-offset: var(--focus-offset-sm);
 }
 
-.activityCopy {
+.copy {
   display: grid;
   gap: var(--space-0-5);
   min-width: 0;
 }
 
-.activityCopy strong {
+.copy strong {
   overflow: hidden;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
@@ -80,20 +80,20 @@
   white-space: nowrap;
 }
 
-.activityTransactionIcon svg,
-.activityTransactionIcon img {
+.icon svg,
+.icon img {
   width: var(--size-icon-xs);
   height: var(--size-icon-xs);
 }
 
-.activityMeta {
+.meta {
   display: inline-flex;
   font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-muted);
 }
 
-.activityAmount {
+.amount {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   font-variant-numeric: tabular-nums;
@@ -108,37 +108,37 @@
 }
 
 @media (hover: hover) {
-  .activityRow,
-  .moreActivityButton {
+  .row,
+  .more {
     transition: var(--transition-interactive);
   }
 
-  .activityRow:hover {
+  .row:hover {
     background: var(--color-surface-brand-focus);
   }
 
-  .moreActivityButton:hover {
+  .more:hover {
     color: var(--color-accent-hover);
   }
 }
 
 @media (width <= 768px) {
-  .activityTableLabels,
-  .activityRow {
+  .labels,
+  .row {
     grid-template-columns: 26px minmax(0, 1fr) auto 16px;
     gap: var(--space-3);
   }
 
-  .activityTableLabels {
+  .labels {
     margin-top: var(--space-5-5);
   }
 
-  .activityCopy strong {
+  .copy strong {
     max-width: 106px;
     font-size: var(--font-size-2xs);
   }
 
-  .activityAmount {
+  .amount {
     font-size: var(--font-size-sm);
   }
 }
