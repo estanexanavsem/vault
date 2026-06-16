@@ -1,4 +1,4 @@
-.infoPanel {
+.panel {
   max-width: 880px;
   margin-top: var(--space-8);
   padding: var(--space-9-5) var(--space-12) var(--space-10);
@@ -6,40 +6,40 @@
   border: var(--stroke-width-hairline) solid var(--color-border-panel);
 }
 
-.infoPanel + .infoPanel {
+.panel + .panel {
   margin-top: var(--space-5);
 }
 
-.infoPanel:hover {
+.panel:hover {
   outline: var(--stroke-width-control) solid var(--color-brand-focus);
   outline-offset: var(--focus-offset-inset);
 }
 
-.panelHead {
+.head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--space-7);
   align-items: start;
 }
 
-.panelHead svg {
+.head svg {
   margin-top: var(--space-9-5);
   color: var(--color-accent);
   transition: var(--transition-transform-base);
 }
 
-.panelHead svg[data-open='true'] {
+.head svg[data-open='true'] {
   transform: rotate(180deg);
 }
 
-.panelHead h3 {
+.head h3 {
   margin: 0;
   font-size: var(--font-size-8xl);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-snug);
 }
 
-.panelHead p {
+.head p {
   max-width: 760px;
   margin: var(--space-6-5) 0 0;
   font-size: var(--font-size-lg);
@@ -47,7 +47,7 @@
   color: var(--color-text-muted);
 }
 
-.panelToggle {
+.toggle {
   width: 100%;
   padding: 0;
   color: inherit;
@@ -56,7 +56,7 @@
   border: 0;
 }
 
-.detailRow {
+.detail {
   display: flex;
   gap: var(--space-7);
   align-items: flex-start;
@@ -64,13 +64,13 @@
   margin-top: var(--space-18);
 }
 
-.detailRow span {
+.detail span {
   display: block;
   font-size: var(--font-size-md);
   color: var(--color-text-muted);
 }
 
-.detailRow strong {
+.detail strong {
   display: block;
   margin-top: var(--space-1);
   font-size: var(--font-size-2xl);
@@ -78,13 +78,13 @@
   overflow-wrap: anywhere;
 }
 
-.detailRow p {
+.detail p {
   margin: var(--space-3-5) 0 0;
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
 
-.outlineButton {
+.button {
   display: inline-flex;
   gap: var(--space-3);
   align-items: center;
@@ -101,32 +101,32 @@
 }
 
 @media (width <= 1024px) {
-  .infoPanel {
+  .panel {
     margin-top: var(--space-6-5);
     padding: var(--space-7) var(--space-5-5) var(--space-7-5);
   }
 
-  .panelHead {
+  .head {
     gap: var(--space-4);
   }
 
-  .panelHead h3 {
+  .head h3 {
     font-size: var(--font-size-5xl);
   }
 
-  .panelHead p {
+  .head p {
     margin-top: var(--space-5);
     font-size: var(--font-size-md);
   }
 
-  .detailRow {
+  .detail {
     display: grid;
     gap: var(--space-5-5);
     grid-template-columns: 1fr;
     margin-top: var(--space-9-5);
   }
 
-  .outlineButton {
+  .button {
     width: 100%;
     justify-self: stretch;
   }

@@ -29,13 +29,13 @@ export function ContactInfoPanel({
 }: ContactInfoPanelProps) {
   const isToggleable = Boolean(onToggle)
   const detail = (
-    <div className={styles.detailRow} id={detailId}>
+    <div className={styles.detail} id={detailId}>
       <div>
         <span>{label}</span>
         <strong>{value}</strong>
         {note ? <p>{note}</p> : null}
       </div>
-      <button className={styles.outlineButton} type="button" onClick={onEdit}>
+      <button className={styles.button} type="button" onClick={onEdit}>
         <Pencil size={16} aria-hidden="true" />
         Edit
       </button>
@@ -43,10 +43,10 @@ export function ContactInfoPanel({
   )
 
   return (
-    <section className={styles.infoPanel} aria-labelledby={headingId}>
+    <section className={styles.panel} aria-labelledby={headingId}>
       {onToggle ? (
         <button
-          className={cn(styles.panelHead, styles.panelToggle)}
+          className={cn(styles.head, styles.toggle)}
           type="button"
           aria-expanded={isOpen}
           aria-controls={detailId}
@@ -59,7 +59,7 @@ export function ContactInfoPanel({
           <ChevronDown size={22} aria-hidden="true" data-open={isOpen} />
         </button>
       ) : (
-        <div className={styles.panelHead}>
+        <div className={styles.head}>
           <div>
             <h3 id={headingId}>{title}</h3>
             <p>{description}</p>
