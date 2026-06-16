@@ -1,13 +1,13 @@
-.mobileMenuButton {
+.menu {
   display: none;
 }
 
-.mobileNavOverlay {
+.overlay {
   z-index: var(--z-mobile-nav);
   background: var(--color-overlay);
 }
 
-.mobileNavPanel {
+.panel {
   width: 100vw;
   margin: 0;
   overflow: hidden;
@@ -17,7 +17,7 @@
   box-shadow: var(--shadow-mobile-nav);
 }
 
-.mobileNavHead {
+.head {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,11 +26,11 @@
   background: var(--color-brand-strong);
 }
 
-.mobileNavMark {
+.mark {
   margin-left: var(--space-1-5);
 }
 
-.mobileNavClose {
+.close {
   display: inline-grid;
   width: var(--size-touch-target-md);
   height: var(--size-touch-target-md);
@@ -40,13 +40,13 @@
   border: 0;
 }
 
-.mobileNavList {
+.list {
   display: grid;
   gap: var(--space-1-5);
   padding: var(--space-7) var(--space-7) var(--space-6);
 }
 
-.mobileNavFooter {
+.footer {
   --mobile-nav-footer-divider-offset: 25px;
 
   margin: var(--space-3) var(--space-10) 0;
@@ -55,7 +55,7 @@
   border-top: var(--stroke-width-hairline) solid var(--color-brand-border-muted);
 }
 
-.mobileNavSignOut {
+.signout {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -70,7 +70,7 @@
 }
 
 @media (width <= 768px) {
-  .mobileMenuButton {
+  .menu {
     display: inline-grid;
     width: var(--size-touch-target-md);
     height: var(--size-touch-target-md);

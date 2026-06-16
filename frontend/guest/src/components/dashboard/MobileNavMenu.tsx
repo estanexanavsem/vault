@@ -52,7 +52,7 @@ export function MobileNavMenu({
         type="button"
         {...getReferenceProps({
           'aria-label': 'Open menu',
-          className: styles.mobileMenuButton,
+          className: styles.menu,
         })}
       >
         <Menu size={24} aria-hidden="true" />
@@ -60,16 +60,16 @@ export function MobileNavMenu({
 
       {isOpen ? (
         <FloatingPortal>
-          <FloatingOverlay className={styles.mobileNavOverlay} lockScroll>
+          <FloatingOverlay className={styles.overlay} lockScroll>
             <FloatingFocusManager context={context}>
               <section
                 ref={setFloatingNode}
-                {...getFloatingProps({ className: styles.mobileNavPanel })}
+                {...getFloatingProps({ className: styles.panel })}
               >
-                <div className={styles.mobileNavHead}>
-                  <TruistMark className={styles.mobileNavMark} />
+                <div className={styles.head}>
+                  <TruistMark className={styles.mark} />
                   <button
-                    className={styles.mobileNavClose}
+                    className={styles.close}
                     type="button"
                     aria-label="Close menu"
                     onClick={close}
@@ -78,7 +78,7 @@ export function MobileNavMenu({
                   </button>
                 </div>
 
-                <nav className={styles.mobileNavList} aria-label="Mobile primary">
+                <nav className={styles.list} aria-label="Mobile primary">
                   <MobileNavItem
                     current={isHomePage}
                     icon={<Home size={23} aria-hidden="true" />}
@@ -97,9 +97,9 @@ export function MobileNavMenu({
                   </MobileNavItem>
                 </nav>
 
-                <div className={styles.mobileNavFooter}>
+                <div className={styles.footer}>
                   <button
-                    className={styles.mobileNavSignOut}
+                    className={styles.signout}
                     type="button"
                     onClick={() => {
                       close()
