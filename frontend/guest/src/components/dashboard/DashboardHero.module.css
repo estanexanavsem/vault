@@ -1,16 +1,16 @@
-.heroBand {
+.root {
   min-height: 177px;
   color: var(--color-text-inverse);
   background: var(--color-brand-hero);
 }
 
-.heroInner {
+.inner {
   width: min(100%, var(--content-width));
   margin: 0 auto;
   padding: var(--space-9-5) var(--space-9) var(--space-8);
 }
 
-.heroInner h1 {
+.inner h1 {
   margin: 0;
   font-size: var(--font-size-13xl);
   font-weight: var(--font-weight-medium);
@@ -18,13 +18,13 @@
   letter-spacing: 0;
 }
 
-.desktopQuickActions {
+.actions {
   display: flex;
   gap: var(--space-5);
   margin-top: var(--space-9);
 }
 
-.desktopQuickActions a {
+.actions a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,30 +42,30 @@
 }
 
 @media (hover: hover) {
-  .desktopQuickActions a {
+  .actions a {
     transition: var(--transition-interactive);
   }
 
-  .desktopQuickActions a:hover {
+  .actions a:hover {
     background: var(--color-brand-hover);
   }
 }
 
 @media (width <= 768px) {
-  .heroBand {
+  .root {
     min-height: 147px;
   }
 
-  .heroInner {
+  .inner {
     padding: var(--space-6) var(--space-6) var(--space-6-5);
   }
 
-  .heroInner h1 {
+  .inner h1 {
     font-size: var(--font-size-4xl);
     font-weight: var(--font-weight-semibold);
   }
 
-  .desktopQuickActions {
+  .actions {
     display: none;
   }
 }

@@ -20,12 +20,12 @@ export function DashboardHero({ greetingName }: DashboardHeroProps) {
   }, [])
 
   return (
-    <section className={styles.heroBand}>
-      <div className={styles.heroInner}>
+    <section className={styles.root}>
+      <div className={styles.inner}>
         <h1>
           {timeGreeting}, {greetingName}
         </h1>
-        <div className={styles.desktopQuickActions} aria-label="Quick actions">
+        <div className={styles.actions} aria-label="Quick actions">
           <Link to="/security-center">Security center</Link>
         </div>
         <QuickLinksMenu />
