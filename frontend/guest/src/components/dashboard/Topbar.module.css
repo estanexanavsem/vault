@@ -1,9 +1,9 @@
-.topbar {
+.root {
   background: var(--color-brand-strong);
   color: var(--color-text-inverse);
 }
 
-.topbarInner {
+.inner {
   display: grid;
   grid-template-columns: 78px 1fr auto;
   align-items: center;
@@ -13,7 +13,7 @@
   padding: 0 var(--space-5);
 }
 
-.brandLink {
+.brand {
   display: inline-grid;
   width: var(--size-touch-target-md);
   height: var(--size-touch-target-md);
@@ -24,7 +24,7 @@
   border: 0;
 }
 
-.desktopNav {
+.nav {
   display: flex;
   gap: 0;
   align-items: center;
@@ -32,8 +32,8 @@
   font-weight: var(--font-weight-bold);
 }
 
-.desktopNav a,
-.desktopNav button {
+.nav a,
+.nav button {
   position: relative;
   display: inline-flex;
   justify-content: center;
@@ -51,8 +51,8 @@
   transition: var(--transition-background-slow);
 }
 
-.desktopNav a.current::after,
-.desktopNav button.current::after {
+.nav a.current::after,
+.nav button.current::after {
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -64,7 +64,7 @@
   transform: translateX(-50%);
 }
 
-.desktopSession {
+.session {
   display: flex;
   gap: var(--space-4);
   align-items: center;
@@ -72,7 +72,7 @@
   font-weight: var(--font-weight-bold);
 }
 
-.statusDot {
+.status {
   display: none;
   width: var(--size-indicator-xs);
   height: var(--size-indicator-xs);
@@ -81,7 +81,7 @@
   opacity: var(--opacity-subtle-indicator);
 }
 
-.signOutButton {
+.signout {
   min-width: 116px;
   min-height: var(--control-height-2xl);
   margin-left: var(--space-6);
@@ -94,38 +94,38 @@
 }
 
 @media (hover: hover) {
-  .desktopNav a,
-  .desktopNav button,
-  .signOutButton {
+  .nav a,
+  .nav button,
+  .signout {
     transition: var(--transition-interactive);
   }
 
-  .signOutButton:hover {
+  .signout:hover {
     background: var(--color-on-dark-hover);
   }
 }
 
 @media (width <= 768px) {
-  .topbarInner {
+  .inner {
     display: flex;
     justify-content: space-between;
     min-height: var(--size-header-height);
     padding: 0 var(--space-5);
   }
 
-  .desktopNav,
-  .desktopSession {
+  .nav,
+  .session {
     display: none;
   }
 
-  .brandLink {
+  .brand {
     width: var(--size-touch-target-sm);
     height: var(--size-touch-target-sm);
   }
 }
 
 @media (width > 768px) and (width <= 1024px) {
-  .desktopNav {
+  .nav {
     gap: var(--space-5);
     font-size: var(--font-size-2xs);
   }

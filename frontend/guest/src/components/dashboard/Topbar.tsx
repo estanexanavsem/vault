@@ -23,13 +23,13 @@ export function Topbar({
   onSignOut,
 }: TopbarProps) {
   return (
-    <header className={styles.topbar}>
-      <div className={styles.topbarInner}>
-        <Link className={styles.brandLink} to="/" aria-label="Truist home">
+    <header className={styles.root}>
+      <div className={styles.inner}>
+        <Link className={styles.brand} to="/" aria-label="Truist home">
           <TruistMark />
         </Link>
 
-        <nav className={styles.desktopNav} aria-label="Primary">
+        <nav className={styles.nav} aria-label="Primary">
           <Link className={cn(isHomePage && styles.current)} to="/">
             Home
           </Link>
@@ -38,10 +38,10 @@ export function Topbar({
           </Link>
         </nav>
 
-        <div className={styles.desktopSession}>
+        <div className={styles.session}>
           <DesktopProfileMenu greetingName={greetingName} lastSignInText={lastSignInText} />
-          <span className={styles.statusDot} aria-hidden="true" />
-          <button className={styles.signOutButton} onClick={onSignOut} type="button">
+          <span className={styles.status} aria-hidden="true" />
+          <button className={styles.signout} onClick={onSignOut} type="button">
             Sign out
           </button>
         </div>
