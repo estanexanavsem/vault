@@ -60,8 +60,8 @@
 }
 
 .balanceInfoClose svg {
-  width: 18px;
-  height: 18px;
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
 }
 
 .balanceInfoAction {

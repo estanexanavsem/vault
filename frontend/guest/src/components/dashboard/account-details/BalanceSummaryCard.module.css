@@ -101,8 +101,8 @@
 
 .accountNumberReveal {
   display: inline-grid;
-  width: 22px;
-  height: 22px;
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
   flex: 0 0 auto;
   padding: 0;
   place-items: center;
@@ -114,8 +114,8 @@
 
 .accountInfoHelp {
   display: inline-grid;
-  width: 20px;
-  height: 20px;
+  width: var(--size-icon-md);
+  height: var(--size-icon-md);
   padding: 0;
   place-items: center;
   color: var(--color-brand);
@@ -143,8 +143,8 @@
 
 .balanceInfoButton {
   display: inline-grid;
-  width: 20px;
-  height: 20px;
+  width: var(--size-icon-md);
+  height: var(--size-icon-md);
   padding: 0;
   place-items: center;
   color: var(--color-brand-strong);
@@ -177,7 +177,7 @@
 
   .accountDetailsLink {
     justify-content: flex-start;
-    min-height: 22px;
+    min-height: var(--size-icon-lg);
     font-size: var(--font-size-lg);
   }
 

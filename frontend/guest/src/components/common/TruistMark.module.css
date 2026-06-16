@@ -1,7 +1,7 @@
 .mark {
   display: inline-grid;
-  width: 26px;
-  height: 27px;
+  width: var(--size-logo-mark-width);
+  height: var(--size-logo-mark-height);
   place-items: center;
   color: currentcolor;
 }

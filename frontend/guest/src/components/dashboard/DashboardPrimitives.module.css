@@ -52,8 +52,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: var(--size-icon-xl);
+  height: var(--size-icon-xl);
   color: var(--color-brand);
   background: var(--color-surface);
   border: var(--stroke-width-hairline) solid var(--color-border-icon);

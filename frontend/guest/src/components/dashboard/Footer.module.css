@@ -19,8 +19,8 @@
 }
 
 .footerBrandMark {
-  width: 24px;
-  height: 24px;
+  width: var(--size-icon-xl);
+  height: var(--size-icon-xl);
 }
 
 .footerLinks {

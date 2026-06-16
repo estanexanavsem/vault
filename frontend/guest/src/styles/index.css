@@ -36,6 +36,20 @@
     --size-profile-avatar-sm: 32px;
     --size-profile-avatar-md: 74px;
     --size-profile-avatar-lg: 88px;
+    --size-indicator-xs: 5px;
+    --size-indicator-sm: 6px;
+    --size-icon-2xs: 12px;
+    --size-icon-xs: 16px;
+    --size-icon-sm: 18px;
+    --size-icon-md: 20px;
+    --size-icon-lg: 22px;
+    --size-icon-xl: 24px;
+    --size-logo-mark-width: 26px;
+    --size-logo-mark-height: 27px;
+    --size-fdic-mark-width: 38px;
+    --size-fdic-mark-height: 16px;
+    --size-transaction-logo-max-height: 20px;
+    --size-zelle-logo-max-height: 14px;
 
     /* Type scale */
     --font-size-3xs: 11px;

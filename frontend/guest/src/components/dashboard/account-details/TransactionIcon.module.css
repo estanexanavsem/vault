@@ -3,14 +3,14 @@
 }
 
 .transactionLogo {
-  width: 22px;
-  max-width: 24px;
+  width: var(--size-icon-lg);
+  max-width: var(--size-icon-xl);
   height: auto;
-  max-height: 20px;
+  max-height: var(--size-transaction-logo-max-height);
   object-fit: contain;
 }
 
 .transactionLogoWide {
-  width: 26px;
-  max-height: 14px;
+  width: var(--size-logo-mark-width);
+  max-height: var(--size-zelle-logo-max-height);
 }

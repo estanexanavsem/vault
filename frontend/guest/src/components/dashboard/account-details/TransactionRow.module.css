@@ -38,9 +38,9 @@
 }
 
 .transactionStatus span {
-  width: 12px;
-  height: 12px;
-  flex: 0 0 12px;
+  width: var(--size-icon-2xs);
+  height: var(--size-icon-2xs);
+  flex: 0 0 var(--size-icon-2xs);
   background: var(--color-success);
   border-radius: var(--radius-pill);
 }
@@ -122,8 +122,8 @@
 
 .transactionInfoButton {
   display: inline-grid;
-  width: 16px;
-  height: 16px;
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
   padding: 0;
   place-items: center;
   color: var(--color-text-primary);
@@ -187,8 +187,8 @@
   }
 
   .transactionStatus span {
-    width: 12px;
-    height: 12px;
+    width: var(--size-icon-2xs);
+    height: var(--size-icon-2xs);
   }
 
   .transactionDescription {
@@ -222,7 +222,7 @@
   .transactionDetailRow > svg {
     grid-area: control;
     align-self: center;
-    width: 18px;
+    width: var(--size-icon-sm);
   }
 
   .transactionExpandedPanel {

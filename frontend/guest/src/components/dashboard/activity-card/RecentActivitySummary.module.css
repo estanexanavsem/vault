@@ -82,8 +82,8 @@
 
 .activityTransactionIcon svg,
 .activityTransactionIcon img {
-  width: 16px;
-  height: 16px;
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
 }
 
 .activityMeta {

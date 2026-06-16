@@ -68,8 +68,8 @@
 }
 
 .sideNav button.sideNavCurrent::before {
-  width: 6px;
-  height: 6px;
+  width: var(--size-indicator-sm);
+  height: var(--size-indicator-sm);
   content: '';
   background: var(--color-accent-indicator);
   border-radius: var(--radius-pill);
