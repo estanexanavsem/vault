@@ -5,13 +5,13 @@
   border-radius: var(--radius-3xl);
 }
 
-.sectionHeadingRow {
+.heading {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
 }
 
-.sectionKicker {
+.kicker {
   margin: 0;
   font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-bold);
@@ -48,7 +48,7 @@
   border-bottom-color: var(--color-accent);
 }
 
-.activityIcon {
+.icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -74,7 +74,7 @@
     border-radius: var(--radius-xl);
   }
 
-  .sectionKicker {
+  .kicker {
     font-size: var(--font-size-3xs);
   }
 

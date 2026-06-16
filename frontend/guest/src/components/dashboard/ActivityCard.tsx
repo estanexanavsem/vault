@@ -18,11 +18,8 @@ export function ActivityCard({ accountRoute, transfers }: ActivityCardProps) {
   const isUpcoming = activeTab === 'upcoming'
 
   return (
-    <section
-      className={cn(primitiveStyles.card, styles.card)}
-      aria-labelledby="activity-title"
-    >
-      <h2 id="activity-title" className={primitiveStyles.sectionKicker}>
+    <section className={cn(primitiveStyles.card, styles.card)} aria-labelledby="activity-title">
+      <h2 id="activity-title" className={primitiveStyles.kicker}>
         Activity
       </h2>
 

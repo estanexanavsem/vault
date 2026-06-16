@@ -17,21 +17,14 @@ export function TransactionIcon({ className, transfer }: TransactionIconProps) {
 
   return (
     <span
-      className={cn(
-        primitiveStyles.activityIcon,
-        logoAsset && styles.logo,
-        className,
-      )}
+      className={cn(primitiveStyles.icon, logoAsset && styles.logo, className)}
       aria-hidden="true"
     >
       {iconKind === 'deposit' ? <CircleDollarSign size={20} /> : null}
       {iconKind === 'check' ? <ReceiptText size={20} /> : null}
       {logoAsset ? (
         <img
-          className={cn(
-            styles.image,
-            logoAsset.variant === 'wide' && styles.wide,
-          )}
+          className={cn(styles.image, logoAsset.variant === 'wide' && styles.wide)}
           src={logoAsset.src}
           alt=""
         />

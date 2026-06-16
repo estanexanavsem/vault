@@ -11,7 +11,7 @@ export function NotificationsCard() {
     >
       <div className={styles.title}>
         <Bell size={24} aria-hidden="true" />
-        <h2 id="notifications-title" className={primitiveStyles.sectionKicker}>
+        <h2 id="notifications-title" className={primitiveStyles.kicker}>
           Notifications
         </h2>
       </div>

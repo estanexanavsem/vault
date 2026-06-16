@@ -20,12 +20,9 @@ export function AccountCard({ accountRoute, data }: AccountCardProps) {
   const isLinked = activeTab === 'linked'
 
   return (
-    <section
-      className={cn(primitiveStyles.card, styles.card)}
-      aria-labelledby="accounts-title"
-    >
-      <div className={primitiveStyles.sectionHeadingRow}>
-        <h2 id="accounts-title" className={primitiveStyles.sectionKicker}>
+    <section className={cn(primitiveStyles.card, styles.card)} aria-labelledby="accounts-title">
+      <div className={primitiveStyles.heading}>
+        <h2 id="accounts-title" className={primitiveStyles.kicker}>
           Accounts
         </h2>
       </div>
