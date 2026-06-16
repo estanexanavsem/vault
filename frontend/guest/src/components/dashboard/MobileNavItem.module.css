@@ -1,4 +1,4 @@
-.mobileNavItem {
+.item {
   display: flex;
   gap: var(--space-4);
   align-items: center;
@@ -13,11 +13,11 @@
   border-radius: 0;
 }
 
-.mobileNavItem svg {
+.item svg {
   flex: 0 0 auto;
 }
 
-.mobileNavItem.current {
+.item.current {
   color: var(--color-brand-strong);
   background: var(--color-accent-selected);
 }

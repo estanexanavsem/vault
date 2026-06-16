@@ -18,7 +18,7 @@ export function MobileNavItem({
   onSelect,
   to,
 }: MobileNavItemProps) {
-  const className = cn(styles.mobileNavItem, current && styles.current)
+  const className = cn(styles.item, current && styles.current)
 
   if (to) {
     return (
