@@ -1,4 +1,4 @@
-.accountLinkedEmpty {
+.empty {
   display: grid;
   justify-items: center;
   min-height: 250px;
@@ -7,12 +7,12 @@
   text-align: center;
 }
 
-.accountLinkedEmpty img {
+.empty img {
   width: 100px;
   height: auto;
 }
 
-.accountLinkedEmpty p {
+.empty p {
   margin: var(--space-7-5) 0 0;
   font-size: var(--font-size-lg);
   line-height: var(--line-height-copy);

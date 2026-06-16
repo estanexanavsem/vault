@@ -2,7 +2,7 @@ import styles from './LinkedAccountEmpty.module.css'
 
 export function LinkedAccountEmpty() {
   return (
-    <div className={styles.accountLinkedEmpty}>
+    <div className={styles.empty}>
       <img
         alt=""
         aria-hidden="true"

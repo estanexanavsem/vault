@@ -19,7 +19,7 @@ export function TransactionIcon({ className, transfer }: TransactionIconProps) {
     <span
       className={cn(
         primitiveStyles.activityIcon,
-        logoAsset && styles.transactionLogoIcon,
+        logoAsset && styles.logo,
         className,
       )}
       aria-hidden="true"
@@ -29,8 +29,8 @@ export function TransactionIcon({ className, transfer }: TransactionIconProps) {
       {logoAsset ? (
         <img
           className={cn(
-            styles.transactionLogo,
-            logoAsset.variant === 'wide' && styles.transactionLogoWide,
+            styles.image,
+            logoAsset.variant === 'wide' && styles.wide,
           )}
           src={logoAsset.src}
           alt=""

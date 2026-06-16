@@ -1,8 +1,8 @@
-.transactionLogoIcon {
+.logo {
   overflow: hidden;
 }
 
-.transactionLogo {
+.image {
   width: var(--size-icon-lg);
   max-width: var(--size-icon-xl);
   height: auto;
@@ -10,7 +10,7 @@
   object-fit: contain;
 }
 
-.transactionLogoWide {
+.wide {
   width: var(--size-logo-mark-width);
   max-height: var(--size-zelle-logo-max-height);
 }
