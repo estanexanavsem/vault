@@ -12,6 +12,7 @@ const rawVisualSizePattern =
   '/\\b(?:5|6|12|14|16|18|20|22|24|26|27|32|36|38|40|44|46|48|60|74|88)px\\b/'
 const rawLayerPattern = '/\\b\\d+\\b/'
 const rawMotionPattern = '/\\b(?:\\d+(?:\\.\\d+)?m?s|ease(?:-in|-out|-in-out)?|linear)\\b/'
+const rawBackdropFilterPattern = '/\\bblur\\(/'
 const viewportBreakpointValues = ['576px', '768px', '1024px', '1280px']
 
 /** @type {import('stylelint').Config} */
@@ -36,6 +37,7 @@ const config = {
           ],
           'z-index': [rawLayerPattern],
           '/^(?:transition|transition-duration|animation|animation-duration)$/': [rawMotionPattern],
+          'backdrop-filter': [rawBackdropFilterPattern],
         },
       },
     },
