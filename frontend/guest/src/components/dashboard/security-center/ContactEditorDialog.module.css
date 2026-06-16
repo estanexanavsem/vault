@@ -1,4 +1,4 @@
-.modalOverlay {
+.overlay {
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
@@ -11,16 +11,16 @@
   border: 0;
 }
 
-.modalOverlay[open] {
+.overlay[open] {
   display: grid;
   place-items: center;
 }
 
-.modalOverlay::backdrop {
+.overlay::backdrop {
   background: var(--color-overlay-dialog);
 }
 
-.modal {
+.dialog {
   position: relative;
   width: min(100%, 600px);
   padding: var(--space-14) var(--space-8-5) var(--space-9);
@@ -31,7 +31,7 @@
   box-shadow: var(--shadow-dialog);
 }
 
-.modalClose {
+.close {
   position: absolute;
   top: 18px;
   right: 18px;
@@ -44,21 +44,21 @@
   border: 0;
 }
 
-.modal h3 {
+.dialog h3 {
   margin: 0;
   font-size: var(--font-size-11xl);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-heading);
 }
 
-.modalCopy {
+.copy {
   margin: var(--space-9) 0 0;
   font-size: var(--font-size-lg);
   line-height: var(--line-height-copy);
   color: var(--color-text-muted);
 }
 
-.modalField {
+.field {
   display: grid;
   gap: var(--space-4);
   margin-top: var(--space-8);
@@ -66,7 +66,7 @@
   color: var(--color-text-muted);
 }
 
-.inputShell {
+.input {
   display: grid;
   grid-template-columns: 48px minmax(0, 1fr);
   align-items: center;
@@ -77,12 +77,12 @@
   border-radius: var(--radius-xs);
 }
 
-.inputIcon {
+.icon {
   justify-self: center;
   color: var(--color-text-input-icon);
 }
 
-.inputShell input {
+.input input {
   width: 100%;
   min-width: 0;
   height: calc(var(--control-height-2xl) - (var(--stroke-width-hairline) * 2));
@@ -93,26 +93,26 @@
   border: 0;
 }
 
-.inputShell input:focus {
+.input input:focus {
   outline: 0;
 }
 
-.modalError {
+.error {
   margin: var(--space-4-5) 0 0;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   color: var(--color-danger);
 }
 
-.modalActions {
+.actions {
   display: flex;
   gap: var(--space-5);
   align-items: center;
   margin-top: var(--space-8-5);
 }
 
-.primaryButton,
-.secondaryButton {
+.primary,
+.secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -124,27 +124,27 @@
   border-radius: var(--radius-md);
 }
 
-.primaryButton {
+.primary {
   color: var(--color-text-inverse);
   background: var(--color-brand);
   border: var(--stroke-width-control) solid var(--color-brand);
 }
 
-.secondaryButton {
+.secondary {
   color: var(--color-brand);
   background: var(--color-surface);
   border: var(--stroke-width-control) solid var(--color-border-control);
 }
 
 @media (width <= 1024px) {
-  .modalOverlay {
+  .overlay {
     align-items: start;
     padding: 0;
     overflow-y: auto;
     background: var(--color-surface);
   }
 
-  .modal {
+  .dialog {
     width: 100%;
     min-height: 100dvh;
     padding: var(--space-16) var(--space-8-5) var(--space-9);
@@ -152,7 +152,7 @@
     box-shadow: none;
   }
 
-  .modalActions {
+  .actions {
     align-items: stretch;
   }
 }

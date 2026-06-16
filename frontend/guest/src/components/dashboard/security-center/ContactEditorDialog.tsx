@@ -40,7 +40,7 @@ export function ContactEditorDialog({
   return (
     <dialog
       ref={dialogRef}
-      className={styles.modalOverlay}
+      className={styles.overlay}
       aria-labelledby="contact-editor-title"
       onCancel={(event) => {
         if (isSubmitting) {
@@ -53,9 +53,9 @@ export function ContactEditorDialog({
       onClose={onClose}
     >
       {editingField ? (
-        <form className={styles.modal} onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.dialog} onSubmit={handleSubmit(onSubmit)}>
           <button
-            className={styles.modalClose}
+            className={styles.close}
             type="button"
             aria-label="Close"
             onClick={onRequestClose}
@@ -64,15 +64,15 @@ export function ContactEditorDialog({
           </button>
 
           <h3 id="contact-editor-title">{modalTitle}</h3>
-          <p className={styles.modalCopy}>{modalCopy}</p>
+          <p className={styles.copy}>{modalCopy}</p>
 
-          <label className={styles.modalField} htmlFor={inputId}>
+          <label className={styles.field} htmlFor={inputId}>
             <span>{inputLabel}</span>
-            <span className={styles.inputShell}>
+            <span className={styles.input}>
               {isEditingEmail ? (
-                <Mail className={styles.inputIcon} size={22} aria-hidden="true" />
+                <Mail className={styles.icon} size={22} aria-hidden="true" />
               ) : (
-                <Phone className={styles.inputIcon} size={22} aria-hidden="true" />
+                <Phone className={styles.icon} size={22} aria-hidden="true" />
               )}
               <Controller
                 control={control}
@@ -103,12 +103,12 @@ export function ContactEditorDialog({
           </label>
 
           {errors.value?.message || errors.root?.message ? (
-            <p className={styles.modalError}>{errors.value?.message ?? errors.root?.message}</p>
+            <p className={styles.error}>{errors.value?.message ?? errors.root?.message}</p>
           ) : null}
 
-          <div className={styles.modalActions}>
+          <div className={styles.actions}>
             <button
-              className={styles.primaryButton}
+              className={styles.primary}
               type="submit"
               disabled={isSubmitting}
               aria-label={isSubmitting ? 'Updating' : undefined}
@@ -120,7 +120,7 @@ export function ContactEditorDialog({
               )}
             </button>
             <button
-              className={styles.secondaryButton}
+              className={styles.secondary}
               type="button"
               disabled={isSubmitting}
               onClick={onRequestClose}
