@@ -62,10 +62,7 @@ export function MobileNavMenu({
         <FloatingPortal>
           <FloatingOverlay className={styles.overlay} lockScroll>
             <FloatingFocusManager context={context}>
-              <section
-                ref={setFloatingNode}
-                {...getFloatingProps({ className: styles.panel })}
-              >
+              <section ref={setFloatingNode} {...getFloatingProps({ className: styles.panel })}>
                 <div className={styles.head}>
                   <TruistMark className={styles.mark} />
                   <button

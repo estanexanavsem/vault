@@ -35,10 +35,7 @@ export function RecentActivitySummary({ accountRoute, transfers }: RecentActivit
               {transfer.meta ? <span className={styles.meta}>{transfer.meta}</span> : null}
             </span>
             <span
-              className={cn(
-                styles.amount,
-                transfer.isPositive ? styles.positive : styles.negative,
-              )}
+              className={cn(styles.amount, transfer.isPositive ? styles.positive : styles.negative)}
             >
               {transfer.amountText}
             </span>

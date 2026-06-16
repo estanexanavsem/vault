@@ -50,12 +50,7 @@ export function TransactionRow({ transfer }: TransactionRowProps) {
           <TransactionIcon className={styles.icon} transfer={transfer} />
           {transfer.label ? <strong>{transfer.label}</strong> : null}
         </span>
-        <span
-          className={cn(
-            styles.amount,
-            !transfer.isPositive && styles.negative,
-          )}
-        >
+        <span className={cn(styles.amount, !transfer.isPositive && styles.negative)}>
           {transfer.amountText}
         </span>
         {isExpanded ? (
@@ -69,8 +64,7 @@ export function TransactionRow({ transfer }: TransactionRowProps) {
           <div
             className={cn(
               styles.cards,
-              (!hasTransactionDetails || !hasCategoryDetails) &&
-                styles.single,
+              (!hasTransactionDetails || !hasCategoryDetails) && styles.single,
             )}
           >
             {hasTransactionDetails ? (
