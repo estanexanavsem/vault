@@ -1,4 +1,4 @@
-.downloadAppCard {
+.card {
   display: grid;
   grid-column: 2;
   grid-template-columns: minmax(0, 1fr) auto 18px;
@@ -15,24 +15,24 @@
   border-radius: var(--radius-3xl);
 }
 
-.downloadAppCard span {
+.card span {
   font-size: var(--font-size-8xl);
   font-weight: var(--font-weight-regular);
 }
 
-.downloadAppCard strong {
+.card strong {
   display: inline-flex;
   gap: var(--space-2);
   align-items: center;
   font-size: var(--font-size-md);
 }
 
-.downloadAppCard strong svg {
+.card strong svg {
   flex: 0 0 auto;
 }
 
 @media (width <= 768px) {
-  .downloadAppCard {
+  .card {
     grid-template-columns: 1fr;
     justify-items: center;
     min-height: 80px;
@@ -42,11 +42,11 @@
     border-radius: var(--radius-lg);
   }
 
-  .downloadAppCard span {
+  .card span {
     font-size: var(--font-size-4xl);
   }
 
-  .downloadAppCard strong {
+  .card strong {
     font-size: var(--font-size-lg);
   }
 }

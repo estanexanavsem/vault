@@ -4,7 +4,7 @@ import styles from './DownloadAppCard.module.css'
 export function DownloadAppCard() {
   return (
     <a
-      className={styles.downloadAppCard}
+      className={styles.card}
       href="https://www.truist.com/digital-banking"
       target="_blank"
       rel="noopener noreferrer"
