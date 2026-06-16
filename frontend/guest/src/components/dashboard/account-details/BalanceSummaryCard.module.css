@@ -141,7 +141,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-.infoButton {
+.action {
   display: inline-grid;
   width: var(--size-icon-md);
   height: var(--size-icon-md);

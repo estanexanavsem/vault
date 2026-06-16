@@ -36,7 +36,7 @@
   border-bottom: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
-.rowSeparated {
+.separate {
   border-top: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
@@ -52,14 +52,14 @@
   color: var(--color-text-muted);
 }
 
-.moreRow {
+.more {
   display: flex;
   justify-content: center;
   padding: var(--space-5-5) var(--space-4);
   border-top: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
-.moreButton {
+.action {
   min-width: 150px;
   min-height: var(--control-height-sm);
   padding: 0 var(--space-6-5);
@@ -71,11 +71,11 @@
   border-radius: var(--radius-pill);
 }
 
-.moreButton:hover {
+.action:hover {
   background: var(--color-surface-brand);
 }
 
-.moreButton:focus-visible {
+.action:focus-visible {
   outline: var(--stroke-width-focus) solid var(--color-focus-brand-ring);
   outline-offset: var(--focus-offset-sm);
 }

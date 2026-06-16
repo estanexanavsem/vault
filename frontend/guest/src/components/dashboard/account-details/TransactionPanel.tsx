@@ -68,9 +68,7 @@ export function TransactionPanel({ transfers }: TransactionPanelProps) {
 
       {visibleTransactionGroups.map((group, groupIndex) => (
         <Fragment key={group.date || groupIndex}>
-          <div
-            className={cn(styles.row, groupIndex > 0 && styles.rowSeparated)}
-          >
+          <div className={cn(styles.row, groupIndex > 0 && styles.separate)}>
             <span>{group.date}</span>
             <span>Posted Balance: {group.postedBalanceText}</span>
           </div>
@@ -84,12 +82,8 @@ export function TransactionPanel({ transfers }: TransactionPanelProps) {
       ))}
 
       {hasMoreTransactions ? (
-        <div className={styles.moreRow}>
-          <button
-            className={styles.moreButton}
-            type="button"
-            onClick={loadMoreTransactions}
-          >
+        <div className={styles.more}>
+          <button className={styles.action} type="button" onClick={loadMoreTransactions}>
             Load more
           </button>
         </div>

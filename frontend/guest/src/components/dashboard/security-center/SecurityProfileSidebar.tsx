@@ -15,7 +15,7 @@ export function SecurityProfileSidebar({
   return (
     <aside className={styles.root} aria-label="Profile settings">
       <div className={styles.head}>
-        <div className={styles.avatarWrap}>
+        <div className={styles.badge}>
           <span className={styles.avatar}>{initials}</span>
         </div>
         <h1>{fullName}</h1>

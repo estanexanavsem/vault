@@ -127,7 +127,7 @@ export function BalanceSummaryCard({
         <p className={styles.amount}>
           {account.balanceText}
           <button
-            className={styles.infoButton}
+            className={styles.action}
             type="button"
             aria-label="Available balance information"
             onClick={() => setBalanceInfoDialog('available')}
@@ -136,9 +136,7 @@ export function BalanceSummaryCard({
           </button>
         </p>
         {account.availableBalanceDate ? (
-          <p className={styles.note}>
-            Available balance as of {account.availableBalanceDate}
-          </p>
+          <p className={styles.note}>Available balance as of {account.availableBalanceDate}</p>
         ) : null}
       </section>
 
