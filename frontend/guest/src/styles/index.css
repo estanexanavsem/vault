@@ -136,6 +136,12 @@
     --space-23: 80px;
     --space-24: 88px;
 
+    /* Dashboard components */
+    --dashboard-tab-min-width: 78px;
+    --dashboard-tab-mobile-min-width: 74px;
+    --dashboard-tab-mobile-height: 38px;
+    --dashboard-tab-indicator-thickness: 4px;
+
     /* Stroke and focus */
     --stroke-width-hairline: 1px;
     --stroke-width-control: 2px;
