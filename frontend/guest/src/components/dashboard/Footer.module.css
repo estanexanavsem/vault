@@ -99,6 +99,23 @@
   }
 }
 
+@media (width <= 1280px) {
+  .footerLinks {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4-5) var(--space-10);
+    width: 100%;
+    margin: var(--space-5) 0 0;
+  }
+
+  .footerLinks .phoneLink {
+    grid-column: 1 / span 1;
+  }
+
+  .footerLinks .sensitiveInfoLink {
+    grid-column: 2 / span 2;
+  }
+}
+
 @media (width <= 768px) {
   .footerInner {
     padding: var(--space-14) var(--space-7-5) var(--space-20);
