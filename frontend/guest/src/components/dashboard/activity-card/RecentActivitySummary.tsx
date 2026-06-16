@@ -1,7 +1,8 @@
-import { ArrowRight, ChevronRight, Folder } from 'lucide-react'
+import { ArrowRight, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { cn } from '../../../utils/cn'
 import type { TransferSummary } from '../../../utils/transferSummary'
+import { TransactionIcon } from '../account-details/TransactionIcon'
 import styles from '../dashboard.module.css'
 
 interface RecentActivitySummaryProps {
@@ -28,9 +29,7 @@ export function RecentActivitySummary({ accountRoute, transfers }: RecentActivit
             key={transfer.id ?? `${transfer.date}-${transfer.amount}-${index}`}
             to={accountRoute}
           >
-            <span className={styles.activityIcon} aria-hidden="true">
-              <Folder size={16} />
-            </span>
+            <TransactionIcon className={styles.activityTransactionIcon} transfer={transfer} />
             <span className={styles.activityCopy}>
               {transfer.label ? <strong>{transfer.label}</strong> : null}
               {transfer.meta ? <span className={styles.activityMeta}>{transfer.meta}</span> : null}

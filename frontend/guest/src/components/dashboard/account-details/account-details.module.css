@@ -548,6 +548,7 @@
 .transactionStatus span {
   width: 12px;
   height: 12px;
+  flex: 0 0 12px;
   background: var(--green-700);
   border-radius: 999px;
 }
@@ -603,8 +604,7 @@
 }
 
 .transactionAmountNegative {
-  color: #5f5669;
-  font-weight: 400;
+  color: var(--red-700);
 }
 
 .transactionDetailRow > svg {

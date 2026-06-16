@@ -13,7 +13,7 @@ interface ActivityCardProps {
 
 export function ActivityCard({ accountRoute, transfers }: ActivityCardProps) {
   const [activeTab, setActiveTab] = useState<'recent' | 'upcoming'>('recent')
-  const transferSummaries = getTransferSummaries(transfers)
+  const transferSummaries = getTransferSummaries(transfers).slice(0, 3)
   const isUpcoming = activeTab === 'upcoming'
 
   return (

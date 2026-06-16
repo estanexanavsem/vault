@@ -397,6 +397,12 @@
   border-radius: 999px;
 }
 
+.activityTransactionIcon svg,
+.activityTransactionIcon img {
+  width: 16px;
+  height: 16px;
+}
+
 .activityMeta {
   display: inline-flex;
   font-size: 12px;

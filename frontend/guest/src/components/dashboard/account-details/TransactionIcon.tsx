@@ -7,10 +7,11 @@ import dashboardStyles from '../dashboard.module.css'
 import styles from './account-details.module.css'
 
 interface TransactionIconProps {
+  className?: string
   transfer: TransferSummary
 }
 
-export function TransactionIcon({ transfer }: TransactionIconProps) {
+export function TransactionIcon({ className, transfer }: TransactionIconProps) {
   const iconKind = getTransactionIconKind(transfer)
   const logoAsset = getTransactionLogoAsset(iconKind)
 
@@ -20,6 +21,7 @@ export function TransactionIcon({ transfer }: TransactionIconProps) {
         dashboardStyles.activityIcon,
         styles.transactionIcon,
         logoAsset && styles.transactionLogoIcon,
+        className,
       )}
       aria-hidden="true"
     >
