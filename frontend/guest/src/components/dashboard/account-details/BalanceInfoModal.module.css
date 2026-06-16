@@ -94,7 +94,7 @@
   .balanceInfoBody {
     margin-top: var(--space-6);
     font-size: var(--font-size-sm);
-    line-height: 1.4;
+    line-height: var(--line-height-ui);
   }
 
   .balanceInfoAction {

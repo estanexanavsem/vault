@@ -92,12 +92,12 @@
 
   .fdicRow strong {
     font-size: var(--font-size-6xl);
-    line-height: 1;
+    line-height: var(--line-height-none);
   }
 
   .fdicRow span {
     max-width: 330px;
     font-size: var(--font-size-2xs);
-    line-height: 1.08;
+    line-height: var(--line-height-display);
   }
 }

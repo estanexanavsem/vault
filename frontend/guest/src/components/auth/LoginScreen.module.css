@@ -44,7 +44,7 @@
 .brand h1 {
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-semibold);
-  line-height: 22px;
+  line-height: var(--line-height-control);
   letter-spacing: 0;
 }
 

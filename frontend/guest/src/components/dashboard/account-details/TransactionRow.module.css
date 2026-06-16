@@ -205,7 +205,7 @@
     display: -webkit-box;
     overflow: hidden;
     font-size: var(--font-size-lg);
-    line-height: 1.04;
+    line-height: var(--line-height-display-tight);
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     text-transform: none;

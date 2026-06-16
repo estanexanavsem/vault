@@ -65,7 +65,7 @@
   gap: var(--space-5-5);
   margin-top: var(--space-14);
   font-size: var(--font-size-sm);
-  line-height: 1.42;
+  line-height: var(--line-height-footer);
   color: var(--color-text-muted);
 }
 

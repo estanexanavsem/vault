@@ -53,7 +53,7 @@
 
 .copy p {
   font-size: var(--font-size-md);
-  line-height: 1.5;
+  line-height: var(--line-height-comfortable);
   color: var(--color-text-muted);
 }
 
