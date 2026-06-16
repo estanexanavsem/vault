@@ -1,5 +1,9 @@
 .panel {
-  max-width: 880px;
+  --contact-panel-max-width: 880px;
+  --contact-panel-description-max-width: 760px;
+  --contact-panel-action-min-width: 96px;
+
+  max-width: var(--contact-panel-max-width);
   margin-top: var(--space-8);
   padding: var(--space-9-5) var(--space-12) var(--space-10);
   background: var(--color-surface);
@@ -40,7 +44,7 @@
 }
 
 .head p {
-  max-width: 760px;
+  max-width: var(--contact-panel-description-max-width);
   margin: var(--space-6-5) 0 0;
   font-size: var(--font-size-lg);
   line-height: var(--line-height-copy);
@@ -89,7 +93,7 @@
   gap: var(--space-3);
   align-items: center;
   justify-content: center;
-  min-width: 96px;
+  min-width: var(--contact-panel-action-min-width);
   min-height: var(--control-height-lg);
   padding: 0 var(--space-5-5);
   font-size: var(--font-size-lg);

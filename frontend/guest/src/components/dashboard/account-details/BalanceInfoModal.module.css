@@ -11,8 +11,13 @@
 
 .dialog {
   position: relative;
-  width: min(100%, 604px);
-  min-height: 390px;
+  --balance-dialog-width: 604px;
+  --balance-dialog-min-height: 390px;
+  --balance-dialog-close-offset: 20px;
+  --balance-dialog-action-min-width: 82px;
+
+  width: min(100%, var(--balance-dialog-width));
+  min-height: var(--balance-dialog-min-height);
   padding: var(--space-18) var(--space-13);
   color: var(--color-text-primary);
   background: var(--color-surface);
@@ -47,8 +52,8 @@
 
 .close {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: var(--balance-dialog-close-offset);
+  right: var(--balance-dialog-close-offset);
   display: inline-grid;
   width: var(--size-icon-container-sm);
   height: var(--size-icon-container-sm);
@@ -65,7 +70,7 @@
 }
 
 .action {
-  min-width: 82px;
+  min-width: var(--balance-dialog-action-min-width);
   min-height: var(--control-height-lg);
   margin-top: var(--space-12);
   padding: 0 var(--space-6-5);

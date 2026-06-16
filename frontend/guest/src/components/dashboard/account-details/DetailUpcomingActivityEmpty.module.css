@@ -3,8 +3,10 @@
 }
 
 .intro {
+  --detail-upcoming-empty-intro-width: 920px;
+
   margin: 0;
-  max-width: 920px;
+  max-width: var(--detail-upcoming-empty-intro-width);
   font-size: var(--font-size-lg);
   line-height: var(--line-height-relaxed);
   color: var(--color-text-primary);

@@ -1,6 +1,11 @@
 .root {
-  --transaction-table-columns: minmax(100px, 0.78fr) minmax(108px, 0.78fr) minmax(230px, 2.15fr)
-    minmax(118px, 0.72fr) minmax(78px, 0.64fr) minmax(58px, 0.52fr) 28px;
+  --transaction-table-action-width: 28px;
+  --transaction-table-head-columns: minmax(100px, 0.78fr) minmax(108px, 0.78fr)
+    minmax(230px, 2.15fr) minmax(118px, 0.72fr) minmax(78px, 0.64fr) minmax(58px, 0.52fr)
+    var(--transaction-table-action-width);
+  --transaction-row-min-height: 34px;
+  --transaction-empty-min-height: 84px;
+  --transaction-action-min-width: 150px;
 
   margin-top: var(--space-7-5);
   border: var(--stroke-width-hairline) solid var(--color-border-subtle);
@@ -9,7 +14,7 @@
 
 .head {
   display: grid;
-  grid-template-columns: var(--transaction-table-columns);
+  grid-template-columns: var(--transaction-table-head-columns);
   gap: var(--space-3);
   align-items: center;
   min-height: var(--control-height-4xl);
@@ -28,7 +33,7 @@
 .row {
   display: grid;
   grid-template-columns: 1fr auto;
-  min-height: 34px;
+  min-height: var(--transaction-row-min-height);
   padding: 0 var(--space-4);
   font-size: var(--font-size-md);
   color: var(--color-text-subtle);
@@ -45,7 +50,7 @@
 }
 
 .empty {
-  min-height: 84px;
+  min-height: var(--transaction-empty-min-height);
   padding: var(--space-8) var(--space-4);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
@@ -60,7 +65,7 @@
 }
 
 .action {
-  min-width: 150px;
+  min-width: var(--transaction-action-min-width);
   min-height: var(--control-height-sm);
   padding: 0 var(--space-6-5);
   font-size: var(--font-size-md);
