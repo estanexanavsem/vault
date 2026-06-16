@@ -23,7 +23,11 @@ export function formatTransactionDate(value: string): string {
 }
 
 export function formatCurrency(value: number): string {
-  return `$${Number(value).toFixed(2)}`
+  return value.toLocaleString('en-US', {
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    style: 'currency',
+  })
 }
 
 export function formatDateTime(value: string): string {
