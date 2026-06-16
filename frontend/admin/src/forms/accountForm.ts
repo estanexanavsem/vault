@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { numberFromInput } from './formValue'
 import { normalizeUsPhoneNumber } from '../utils/formatters'
 
 const optionalEmail = z
@@ -29,7 +28,6 @@ export const accountSchema = z.object({
   routing_number: z.string(),
   email: optionalEmail,
   phone: optionalUsPhone,
-  balance: numberFromInput,
 })
 
 export type AccountFormInput = z.input<typeof accountSchema>
@@ -45,5 +43,4 @@ export const defaultAccountValues: AccountFormInput = {
   routing_number: '',
   email: '',
   phone: '',
-  balance: 0,
 }

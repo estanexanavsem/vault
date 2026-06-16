@@ -123,8 +123,7 @@ func TestUpdateAccountValidationAndAllFields(t *testing.T) {
 		"account_number":"123",
 		"routing_number":"456",
 		"email":"updated@example.com",
-		"phone":"555",
-		"balance":42.25
+		"phone":"555"
 	}`))
 	update.Header.Set("Content-Type", "application/json")
 	updateResp := httptest.NewRecorder()
@@ -143,8 +142,7 @@ func TestUpdateAccountValidationAndAllFields(t *testing.T) {
 		stored.AccountNumber != "123" ||
 		stored.RoutingNumber != "456" ||
 		stored.Email != "updated@example.com" ||
-		stored.Phone != "555" ||
-		stored.Balance != 42.25 {
+		stored.Phone != "555" {
 		t.Fatalf("stored account mismatch: %+v", stored)
 	}
 	ok, err := security.VerifyPassword(stored.Password, "new-secret")

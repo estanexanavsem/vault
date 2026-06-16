@@ -73,9 +73,9 @@ export const formatProfileMenuDateTime = (value: string) => {
     return ''
   }
 
-  return profileMenuDateTimeFormatter.format(date).replace(/\b(AM|PM)\b/, (match) =>
-    match.toLowerCase(),
-  )
+  return profileMenuDateTimeFormatter
+    .format(date)
+    .replace(/\b(AM|PM)\b/, (match) => match.toLowerCase())
 }
 
 export const formatUsPhoneNumber = (value: string) => {
@@ -137,4 +137,4 @@ export const formatStatusLabel = (value: string) =>
     .join(' ')
 
 export const getTransferDate = (transfer: Transfer | undefined) =>
-  transfer ? formatCurrentShortDate() : ''
+  transfer ? formatShortDate(transfer.transaction_date) : ''

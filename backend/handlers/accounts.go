@@ -11,29 +11,27 @@ import (
 )
 
 type createAccountRequest struct {
-	Login           string  `json:"login"`
-	Password        string  `json:"password"`
-	HolderName      string  `json:"holder_name"`
-	AccountName     string  `json:"account_name"`
-	FullAccountName string  `json:"full_account_name"`
-	AccountNumber   string  `json:"account_number"`
-	RoutingNumber   string  `json:"routing_number"`
-	Email           string  `json:"email"`
-	Phone           string  `json:"phone"`
-	Balance         float64 `json:"balance"`
+	Login           string `json:"login"`
+	Password        string `json:"password"`
+	HolderName      string `json:"holder_name"`
+	AccountName     string `json:"account_name"`
+	FullAccountName string `json:"full_account_name"`
+	AccountNumber   string `json:"account_number"`
+	RoutingNumber   string `json:"routing_number"`
+	Email           string `json:"email"`
+	Phone           string `json:"phone"`
 }
 
 type updateAccountRequest struct {
-	Login           *string  `json:"login"`
-	Password        *string  `json:"password"`
-	HolderName      *string  `json:"holder_name"`
-	AccountName     *string  `json:"account_name"`
-	FullAccountName *string  `json:"full_account_name"`
-	AccountNumber   *string  `json:"account_number"`
-	RoutingNumber   *string  `json:"routing_number"`
-	Email           *string  `json:"email"`
-	Phone           *string  `json:"phone"`
-	Balance         *float64 `json:"balance"`
+	Login           *string `json:"login"`
+	Password        *string `json:"password"`
+	HolderName      *string `json:"holder_name"`
+	AccountName     *string `json:"account_name"`
+	FullAccountName *string `json:"full_account_name"`
+	AccountNumber   *string `json:"account_number"`
+	RoutingNumber   *string `json:"routing_number"`
+	Email           *string `json:"email"`
+	Phone           *string `json:"phone"`
 }
 
 func ListAccounts(c *gin.Context) {
@@ -87,7 +85,6 @@ func CreateAccount(c *gin.Context) {
 		RoutingNumber:   req.RoutingNumber,
 		Email:           req.Email,
 		Phone:           req.Phone,
-		Balance:         req.Balance,
 	}
 	if err := config.DB.Create(&account).Error; err != nil {
 		respondDBError(c, err)
@@ -139,9 +136,6 @@ func UpdateAccount(c *gin.Context) {
 	applyStringUpdate(&account.RoutingNumber, req.RoutingNumber)
 	applyStringUpdate(&account.Email, req.Email)
 	applyStringUpdate(&account.Phone, req.Phone)
-	if req.Balance != nil {
-		account.Balance = *req.Balance
-	}
 
 	if err := config.DB.Save(&account).Error; err != nil {
 		respondDBError(c, err)

@@ -566,6 +566,15 @@
   height: 32px;
 }
 
+.transactionLogoIcon {
+  overflow: hidden;
+}
+
+.transactionLogo {
+  width: 24px;
+  height: auto;
+}
+
 .transactionDescription strong {
   display: -webkit-box;
   overflow: hidden;

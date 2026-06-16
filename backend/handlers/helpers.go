@@ -25,7 +25,6 @@ type accountResponse struct {
 	RoutingNumber   string     `json:"routing_number"`
 	Email           string     `json:"email"`
 	Phone           string     `json:"phone"`
-	Balance         float64    `json:"balance"`
 	LastSignInAt    *time.Time `json:"last_sign_in_at,omitempty"`
 	CreatedAt       time.Time  `json:"created_at"`
 	UpdatedAt       time.Time  `json:"updated_at"`
@@ -95,7 +94,6 @@ func accountToResponse(account models.Account) accountResponse {
 		RoutingNumber:   account.RoutingNumber,
 		Email:           account.Email,
 		Phone:           account.Phone,
-		Balance:         account.Balance,
 		LastSignInAt:    account.LastSignInAt,
 		CreatedAt:       account.CreatedAt,
 		UpdatedAt:       account.UpdatedAt,

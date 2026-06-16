@@ -214,8 +214,7 @@ func TestCreateAccountTrimsLoginHashesPasswordAndOmitsSecret(t *testing.T) {
 	req := httptest.NewRequest(http.MethodPost, "/accounts", strings.NewReader(`{
 		"login":"  alice  ",
 		"password":"secret",
-		"holder_name":"Alice",
-		"balance":25.5
+		"holder_name":"Alice"
 	}`))
 	req.Header.Set("Content-Type", "application/json")
 	resp := httptest.NewRecorder()
@@ -246,6 +245,9 @@ func TestCreateAccountTrimsLoginHashesPasswordAndOmitsSecret(t *testing.T) {
 	}
 	if strings.Contains(getResp.Body.String(), `"password"`) {
 		t.Fatalf("get response includes password: %s", getResp.Body.String())
+	}
+	if strings.Contains(getResp.Body.String(), `"balance"`) {
+		t.Fatalf("get response includes removed balance field: %s", getResp.Body.String())
 	}
 }
 

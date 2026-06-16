@@ -111,7 +111,6 @@ export function useAccountPanelActions({
       routing_number: account.routing_number,
       email: account.email,
       phone: formatUsPhoneInput(account.phone),
-      balance: account.balance,
     })
     setFormError('')
     setFormDialog({ entity: 'account', mode: 'edit' })
@@ -148,7 +147,6 @@ export function useAccountPanelActions({
             routing_number: values.routing_number,
             email: values.email,
             phone: values.phone,
-            balance: values.balance,
           },
         })
       } else {
@@ -162,7 +160,6 @@ export function useAccountPanelActions({
           routing_number: optionalText(values.routing_number),
           email: optionalText(values.email),
           phone: optionalText(values.phone),
-          balance: values.balance,
         })
       }
     } catch (error) {

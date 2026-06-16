@@ -42,8 +42,20 @@ export const getTransferSummary = (transfer: Transfer): TransferSummary => {
   }
 }
 
+const getTransferTime = (transfer: Transfer) => {
+  const time = new Date(transfer.transaction_date).getTime()
+
+  return Number.isNaN(time) ? 0 : time
+}
+
 export const getTransferSummaries = (transfers: Transfer[]): TransferSummary[] =>
-  transfers.map((transfer) => getTransferSummary(transfer))
+  [...transfers]
+    .sort((firstTransfer, secondTransfer) => {
+      const timeDifference = getTransferTime(secondTransfer) - getTransferTime(firstTransfer)
+
+      return timeDifference || secondTransfer.id - firstTransfer.id
+    })
+    .map((transfer) => getTransferSummary(transfer))
 
 export const getLatestTransferSummary = (transfers: Transfer[]): TransferSummary | undefined =>
-  transfers[0] ? getTransferSummary(transfers[0]) : undefined
+  getTransferSummaries(transfers)[0]

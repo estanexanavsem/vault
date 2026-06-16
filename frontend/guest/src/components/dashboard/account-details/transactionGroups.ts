@@ -7,23 +7,38 @@ export interface TransactionDateGroup {
   transfers: TransferSummary[]
 }
 
-export const getTransactionDateGroups = (transfers: TransferSummary[]): TransactionDateGroup[] =>
-  transfers.reduce<TransactionDateGroup[]>((groups, transfer) => {
-    const group = groups.find((item) => item.date === transfer.date)
+const getGroupTotal = (group: TransactionDateGroup) =>
+  group.transfers.reduce((total, item) => total + item.amount, 0)
 
-    if (group) {
-      group.transfers.push(transfer)
-      group.postedBalanceText = formatCurrency(
-        group.transfers.reduce((total, item) => total + item.amount, 0),
-      )
-      return groups
+export const getTransactionDateGroups = (transfers: TransferSummary[]): TransactionDateGroup[] => {
+  const groups: TransactionDateGroup[] = []
+  let currentGroup: TransactionDateGroup | undefined
+
+  for (const transfer of transfers) {
+    if (currentGroup?.date === transfer.date) {
+      currentGroup.transfers.push(transfer)
+      continue
     }
 
-    groups.push({
+    currentGroup = {
       date: transfer.date,
-      postedBalanceText: formatCurrency(transfer.amount),
+      postedBalanceText: '',
       transfers: [transfer],
-    })
+    }
 
-    return groups
-  }, [])
+    groups.push(currentGroup)
+  }
+
+  let runningBalance = 0
+
+  for (let index = groups.length - 1; index >= 0; index -= 1) {
+    const group = groups[index]
+
+    if (group) {
+      runningBalance += getGroupTotal(group)
+      group.postedBalanceText = formatCurrency(runningBalance)
+    }
+  }
+
+  return groups
+}

@@ -8,7 +8,6 @@ export interface Account {
   routing_number: string
   email: string
   phone: string
-  balance: number
   created_at: string
   updated_at: string
 }

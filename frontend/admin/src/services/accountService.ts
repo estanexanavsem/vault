@@ -11,7 +11,6 @@ export interface CreateAccountPayload {
   routing_number?: string
   email?: string
   phone?: string
-  balance?: number
 }
 
 export type UpdateAccountPayload = Partial<CreateAccountPayload>

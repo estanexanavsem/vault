@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import type { Account, AccountFile, Transfer } from '../types'
 import { formatCurrency } from '../utils/formatters'
 import { getAccountFacts, getAccountSelectOptions } from '../utils/panelWorkspace'
+import { getAccountTransferBalance } from '../utils/transferBalance'
 import { AccountSummary } from './AccountSummary'
 import { AccountWorkspaceHeader } from './AccountWorkspaceHeader'
 import { WorkspaceTabs } from './WorkspaceTabs'
@@ -70,8 +71,11 @@ export function PanelWorkspace({
   const accountOptions = useMemo(() => getAccountSelectOptions(accounts), [accounts])
   const accountFacts = useMemo(() => getAccountFacts(selectedAccount), [selectedAccount])
   const selectedAccountBalance = useMemo(
-    () => (selectedAccount ? formatCurrency(selectedAccount.balance) : '$0.00'),
-    [selectedAccount],
+    () =>
+      selectedAccount
+        ? formatCurrency(getAccountTransferBalance(transfers, selectedAccount.id))
+        : '$0.00',
+    [selectedAccount, transfers],
   )
 
   return (

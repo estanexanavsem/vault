@@ -1,11 +1,11 @@
 import { useDismiss, useFloating, useInteractions, useRole } from '@floating-ui/react'
-import { ChevronDown, ChevronUp, Info, WalletCards } from 'lucide-react'
+import { ChevronDown, ChevronUp, Info } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { cn } from '../../../utils/cn'
 import type { TransferSummary } from '../../../utils/transferSummary'
-import dashboardStyles from '../dashboard.module.css'
 import styles from './account-details.module.css'
 import { BalanceInfoModal } from './BalanceInfoModal'
+import { TransactionIcon } from './TransactionIcon'
 
 interface TransactionRowProps {
   transfer: TransferSummary
@@ -47,12 +47,7 @@ export function TransactionRow({ transfer }: TransactionRowProps) {
           {transfer.status}
         </span>
         <span className={styles.transactionDescription}>
-          <span
-            className={cn(dashboardStyles.activityIcon, styles.transactionIcon)}
-            aria-hidden="true"
-          >
-            <WalletCards size={20} />
-          </span>
+          <TransactionIcon transfer={transfer} />
           {transfer.label ? <strong>{transfer.label}</strong> : null}
         </span>
         <span className={styles.transactionCredit}>{transfer.amountText}</span>

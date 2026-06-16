@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import type { GuestData } from '../../types/guest'
 import { getAccountSummary } from '../../utils/accountSummary'
 import { cn } from '../../utils/cn'
+import { getTransferBalance } from '../../utils/transferBalance'
 import { BusinessAccountSummary } from './account-card/BusinessAccountSummary'
 import { LinkedAccountEmpty } from './account-card/LinkedAccountEmpty'
 import styles from './dashboard.module.css'
@@ -14,7 +15,7 @@ interface AccountCardProps {
 
 export function AccountCard({ accountRoute, data }: AccountCardProps) {
   const [activeTab, setActiveTab] = useState<'business' | 'linked'>('business')
-  const account = getAccountSummary(data.master)
+  const account = getAccountSummary(data.master, getTransferBalance(data.transfers))
   const isLinked = activeTab === 'linked'
 
   return (
