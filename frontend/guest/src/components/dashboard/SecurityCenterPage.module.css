@@ -1,4 +1,4 @@
-.page {
+.root {
   display: grid;
   grid-template-columns: minmax(250px, 360px) minmax(0, 1fr);
   width: min(100%, var(--content-width));
@@ -8,23 +8,23 @@
   background: var(--color-page);
 }
 
-.content {
+.main {
   min-width: 0;
   padding: var(--space-16) var(--space-9) var(--space-23) var(--space-5-5);
 }
 
-.backButton {
+.back {
   display: none;
 }
 
-.titleRow {
+.title {
   display: flex;
   gap: var(--space-5-5);
   align-items: center;
   margin-left: var(--space-3);
 }
 
-.titleRow h2 {
+.title h2 {
   margin: 0;
   font-size: var(--font-size-13xl);
   font-weight: var(--font-weight-regular);
@@ -32,16 +32,16 @@
 }
 
 @media (width <= 1024px) {
-  .page {
+  .root {
     display: block;
     min-height: auto;
   }
 
-  .content {
+  .main {
     padding: var(--space-6-5) var(--space-5) var(--space-15);
   }
 
-  .backButton {
+  .back {
     display: inline-flex;
     min-height: var(--control-height-xs);
     margin-bottom: var(--space-6-5);
@@ -53,12 +53,12 @@
     border: 0;
   }
 
-  .titleRow {
+  .title {
     gap: var(--space-4);
     margin-left: 0;
   }
 
-  .titleRow h2 {
+  .title h2 {
     font-size: var(--font-size-9xl);
   }
 }

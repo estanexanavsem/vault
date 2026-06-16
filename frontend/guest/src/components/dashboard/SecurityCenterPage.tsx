@@ -59,19 +59,19 @@ export function SecurityCenterPage({ account, onBack, onSessionExpired }: Securi
   }
 
   return (
-    <main className={styles.page}>
+    <main className={styles.root}>
       <SecurityProfileSidebar
         fullName={fullName}
         initials={initials}
         lastSignInText={lastSignInText}
       />
 
-      <section className={styles.content} aria-labelledby="personal-info-heading">
-        <button className={styles.backButton} type="button" onClick={onBack}>
+      <section className={styles.main} aria-labelledby="personal-info-heading">
+        <button className={styles.back} type="button" onClick={onBack}>
           Back to dashboard
         </button>
 
-        <div className={styles.titleRow}>
+        <div className={styles.title}>
           <UserRound size={32} aria-hidden="true" />
           <h2 id="personal-info-heading">Personal information</h2>
         </div>
