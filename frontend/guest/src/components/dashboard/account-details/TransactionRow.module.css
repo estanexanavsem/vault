@@ -55,8 +55,8 @@
 }
 
 .transactionIcon {
-  width: 32px;
-  height: 32px;
+  width: var(--size-icon-container-sm);
+  height: var(--size-icon-container-sm);
 }
 
 .transactionDescription strong {
@@ -197,8 +197,8 @@
   }
 
   .transactionIcon {
-    width: 32px;
-    height: 32px;
+    width: var(--size-icon-container-sm);
+    height: var(--size-icon-container-sm);
   }
 
   .transactionDescription strong {

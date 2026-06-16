@@ -25,6 +25,17 @@
     --control-height-4xl: 52px;
     --control-height-5xl: 54px;
     --control-height-6xl: 56px;
+    --size-icon-container-sm: 32px;
+    --size-icon-container-md: 46px;
+    --size-icon-container-lg: 48px;
+    --size-touch-target-sm: 36px;
+    --size-touch-target-md: 44px;
+    --size-brand-mark-sm: 36px;
+    --size-brand-mark-md: 40px;
+    --size-empty-icon-md: 60px;
+    --size-profile-avatar-sm: 32px;
+    --size-profile-avatar-md: 74px;
+    --size-profile-avatar-lg: 88px;
 
     /* Type scale */
     --font-size-3xs: 11px;

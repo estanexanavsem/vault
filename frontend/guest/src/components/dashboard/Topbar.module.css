@@ -15,8 +15,8 @@
 
 .brandLink {
   display: inline-grid;
-  width: 44px;
-  height: 44px;
+  width: var(--size-touch-target-md);
+  height: var(--size-touch-target-md);
   place-items: center;
   justify-self: start;
   color: var(--color-text-inverse);
@@ -119,8 +119,8 @@
   }
 
   .brandLink {
-    width: 36px;
-    height: 36px;
+    width: var(--size-touch-target-sm);
+    height: var(--size-touch-target-sm);
   }
 }
 

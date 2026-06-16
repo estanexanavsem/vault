@@ -19,8 +19,8 @@
 }
 
 .upcomingEmptyState img {
-  width: 60px;
-  height: 60px;
+  width: var(--size-empty-icon-md);
+  height: var(--size-empty-icon-md);
   flex: 0 0 auto;
 }
 
@@ -97,8 +97,8 @@
   }
 
   .upcomingEmptyState img {
-    width: 48px;
-    height: 48px;
+    width: var(--size-icon-container-lg);
+    height: var(--size-icon-container-lg);
   }
 
   .upcomingTable header {

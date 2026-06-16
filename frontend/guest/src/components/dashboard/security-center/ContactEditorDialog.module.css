@@ -36,8 +36,8 @@
   top: 18px;
   right: 18px;
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: var(--size-icon-container-sm);
+  height: var(--size-icon-container-sm);
   place-items: center;
   color: var(--color-brand);
   background: transparent;

@@ -32,8 +32,8 @@
 
 .mobileNavClose {
   display: inline-grid;
-  width: 44px;
-  height: 44px;
+  width: var(--size-touch-target-md);
+  height: var(--size-touch-target-md);
   place-items: center;
   color: var(--color-text-brand-soft);
   background: transparent;
@@ -70,8 +70,8 @@
 @media (width <= 760px) {
   .mobileMenuButton {
     display: inline-grid;
-    width: 44px;
-    height: 44px;
+    width: var(--size-touch-target-md);
+    height: var(--size-touch-target-md);
     place-items: center;
     color: var(--color-text-inverse);
     background: transparent;

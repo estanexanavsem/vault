@@ -50,8 +50,8 @@
   top: 20px;
   right: 20px;
   display: inline-grid;
-  width: 32px;
-  height: 32px;
+  width: var(--size-icon-container-sm);
+  height: var(--size-icon-container-sm);
   padding: 0;
   place-items: center;
   color: var(--color-brand);

@@ -23,8 +23,8 @@
 }
 
 .brandMark {
-  width: 40px;
-  height: 40px;
+  width: var(--size-brand-mark-md);
+  height: var(--size-brand-mark-md);
   color: var(--color-brand-strong);
 }
 

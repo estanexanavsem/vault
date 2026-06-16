@@ -18,8 +18,8 @@
 
 .accountIcon {
   display: inline-grid;
-  width: 48px;
-  height: 48px;
+  width: var(--size-icon-container-lg);
+  height: var(--size-icon-container-lg);
   flex: 0 0 auto;
   place-items: center;
   color: var(--color-brand-hover);

@@ -16,8 +16,8 @@
 
 .avatar {
   display: grid;
-  width: 88px;
-  height: 88px;
+  width: var(--size-profile-avatar-lg);
+  height: var(--size-profile-avatar-lg);
   place-items: center;
   font-size: var(--font-size-14xl);
   font-weight: var(--font-weight-regular);
@@ -81,8 +81,8 @@
   }
 
   .avatar {
-    width: 74px;
-    height: 74px;
+    width: var(--size-profile-avatar-md);
+    height: var(--size-profile-avatar-md);
     font-size: var(--font-size-11xl);
   }
 

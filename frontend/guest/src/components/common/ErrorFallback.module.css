@@ -24,8 +24,8 @@
 
 .icon {
   display: inline-grid;
-  width: 46px;
-  height: 46px;
+  width: var(--size-icon-container-md);
+  height: var(--size-icon-container-md);
   place-items: center;
   color: var(--color-danger-strong);
   background: var(--color-danger-surface);
