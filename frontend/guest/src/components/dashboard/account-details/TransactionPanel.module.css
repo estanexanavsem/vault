@@ -1,6 +1,6 @@
 .transactionPanel {
   margin-top: var(--space-7-5);
-  border: 1px solid var(--color-border-subtle);
+  border: var(--stroke-width-hairline) solid var(--color-border-subtle);
   border-radius: var(--radius-2xs);
 }
 
@@ -16,7 +16,7 @@
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
   color: var(--color-brand-strong);
-  border-bottom: 1px solid var(--color-border-subtle);
+  border-bottom: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
 .transactionHeader span {
@@ -32,11 +32,11 @@
   font-size: var(--font-size-md);
   color: var(--color-text-subtle);
   background: var(--color-surface-muted);
-  border-bottom: 1px solid var(--color-border-subtle);
+  border-bottom: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
 .postedBalanceRowSeparated {
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
 .postedBalanceRow span {
@@ -55,7 +55,7 @@
   display: flex;
   justify-content: center;
   padding: var(--space-5-5) var(--space-4);
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
 .transactionLoadMoreButton {
@@ -66,7 +66,7 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-brand);
   background: var(--color-surface);
-  border: 2px solid var(--color-border-control);
+  border: var(--stroke-width-control) solid var(--color-border-control);
   border-radius: var(--radius-pill);
 }
 
@@ -75,8 +75,8 @@
 }
 
 .transactionLoadMoreButton:focus-visible {
-  outline: 3px solid var(--color-focus-brand-ring);
-  outline-offset: 2px;
+  outline: var(--stroke-width-focus) solid var(--color-focus-brand-ring);
+  outline-offset: var(--focus-offset-sm);
 }
 
 @media (width <= 760px) {

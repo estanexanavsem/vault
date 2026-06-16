@@ -45,7 +45,7 @@
   text-decoration: none;
   text-align: left;
   background: var(--color-surface);
-  border: 2px solid var(--color-border-control);
+  border: var(--stroke-width-control) solid var(--color-border-control);
   border-radius: var(--radius-md);
 }
 

@@ -7,7 +7,7 @@
   padding: var(--space-7-5) var(--space-6);
   color: var(--color-brand-strong);
   background: var(--color-surface);
-  border: 1px solid var(--color-border-subtle);
+  border: var(--stroke-width-hairline) solid var(--color-border-subtle);
   border-radius: var(--radius-md);
 }
 
@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: var(--space-5-5);
-  border-bottom: 1px solid var(--color-border-subtle);
+  border-bottom: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
 .sidebar h2 {

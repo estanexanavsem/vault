@@ -108,6 +108,15 @@
     --space-23: 80px;
     --space-24: 88px;
 
+    /* Stroke and focus */
+    --stroke-width-hairline: 1px;
+    --stroke-width-control: 2px;
+    --stroke-width-focus: 3px;
+    --stroke-width-active: 4px;
+    --focus-offset-sm: 2px;
+    --focus-offset-md: 3px;
+    --focus-offset-inset: -2px;
+
     /* Radius */
     --radius-2xs: 3px;
     --radius-xs: 4px;
@@ -276,8 +285,8 @@
   }
 
   :focus-visible {
-    outline: 3px solid var(--color-focus-ring);
-    outline-offset: 3px;
+    outline: var(--stroke-width-focus) solid var(--color-focus-ring);
+    outline-offset: var(--focus-offset-md);
   }
 
   @media (prefers-reduced-motion: reduce) {

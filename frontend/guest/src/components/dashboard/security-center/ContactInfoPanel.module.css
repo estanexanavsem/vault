@@ -3,7 +3,7 @@
   margin-top: var(--space-8);
   padding: var(--space-9-5) var(--space-12) var(--space-10);
   background: var(--color-surface);
-  border: 1px solid var(--color-border-panel);
+  border: var(--stroke-width-hairline) solid var(--color-border-panel);
 }
 
 .infoPanel + .infoPanel {
@@ -11,8 +11,8 @@
 }
 
 .infoPanel:hover {
-  outline: 2px solid var(--color-brand-focus);
-  outline-offset: -2px;
+  outline: var(--stroke-width-control) solid var(--color-brand-focus);
+  outline-offset: var(--focus-offset-inset);
 }
 
 .panelHead {
@@ -96,7 +96,7 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-brand);
   background: var(--color-surface);
-  border: 2px solid var(--color-border-control);
+  border: var(--stroke-width-control) solid var(--color-border-control);
   border-radius: var(--radius-md);
 }
 

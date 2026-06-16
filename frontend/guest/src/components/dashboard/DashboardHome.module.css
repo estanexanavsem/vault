@@ -1,6 +1,6 @@
 .dashboardMain {
   background: var(--color-page);
-  border-bottom: 1px solid var(--color-border-muted);
+  border-bottom: var(--stroke-width-hairline) solid var(--color-border-muted);
 }
 
 .dashboardGrid {
@@ -37,7 +37,7 @@
   color: var(--color-brand-strong);
   text-align: left;
   background: var(--color-surface);
-  border: 2px solid var(--color-border-control);
+  border: var(--stroke-width-control) solid var(--color-border-control);
   border-radius: var(--radius-3xl);
 }
 

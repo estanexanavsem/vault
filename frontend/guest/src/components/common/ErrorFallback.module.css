@@ -18,7 +18,7 @@
   width: min(100%, 480px);
   padding: var(--space-8);
   background: var(--color-surface);
-  border: 1px solid var(--color-border-control);
+  border: var(--stroke-width-hairline) solid var(--color-border-control);
   border-radius: var(--radius-3xl);
 }
 
@@ -79,13 +79,13 @@
 .primaryButton {
   color: var(--color-text-inverse);
   background: var(--color-brand);
-  border: 1px solid var(--color-brand);
+  border: var(--stroke-width-hairline) solid var(--color-brand);
 }
 
 .secondaryButton {
   color: var(--color-brand-hover);
   background: var(--color-surface);
-  border: 1px solid var(--color-border-control);
+  border: var(--stroke-width-hairline) solid var(--color-border-control);
 }
 
 @media (width <= 560px) {

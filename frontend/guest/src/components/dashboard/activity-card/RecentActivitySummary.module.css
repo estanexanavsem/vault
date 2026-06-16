@@ -38,7 +38,7 @@
 }
 
 .activityRow + .activityRow {
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
 .activityNoRows {
@@ -62,8 +62,8 @@
 
 .activityRow:focus-visible {
   background: var(--color-surface-brand-focus);
-  outline: 3px solid var(--color-focus-brand-ring);
-  outline-offset: 2px;
+  outline: var(--stroke-width-focus) solid var(--color-focus-brand-ring);
+  outline-offset: var(--focus-offset-sm);
 }
 
 .activityCopy {

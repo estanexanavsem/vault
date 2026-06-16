@@ -73,7 +73,7 @@
   min-height: var(--control-height-2xl);
   overflow: hidden;
   background: var(--color-surface);
-  border: 1px solid var(--color-border-strong);
+  border: var(--stroke-width-hairline) solid var(--color-border-strong);
   border-radius: var(--radius-xs);
 }
 
@@ -127,13 +127,13 @@
 .primaryButton {
   color: var(--color-text-inverse);
   background: var(--color-brand);
-  border: 2px solid var(--color-brand);
+  border: var(--stroke-width-control) solid var(--color-brand);
 }
 
 .secondaryButton {
   color: var(--color-brand);
   background: var(--color-surface);
-  border: 2px solid var(--color-border-control);
+  border: var(--stroke-width-control) solid var(--color-border-control);
 }
 
 @media (width <= 900px) {
