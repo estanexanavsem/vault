@@ -1,4 +1,7 @@
 .transactionPanel {
+  --transaction-table-columns: minmax(100px, 0.78fr) minmax(108px, 0.78fr) minmax(230px, 2.15fr)
+    minmax(118px, 0.72fr) minmax(78px, 0.64fr) minmax(58px, 0.52fr) 28px;
+
   margin-top: var(--space-7-5);
   border: var(--stroke-width-hairline) solid var(--color-border-subtle);
   border-radius: var(--radius-2xs);
@@ -6,9 +9,7 @@
 
 .transactionHeader {
   display: grid;
-  grid-template-columns:
-    minmax(100px, 0.78fr) minmax(108px, 0.78fr) minmax(230px, 2.15fr)
-    minmax(118px, 0.72fr) minmax(78px, 0.64fr) minmax(58px, 0.52fr) 28px;
+  grid-template-columns: var(--transaction-table-columns);
   gap: var(--space-3);
   align-items: center;
   min-height: var(--control-height-4xl);
