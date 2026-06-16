@@ -8,6 +8,7 @@ vault_keep_releases: 5
 vault_admin_domain: admin.example.com
 vault_guest_domain: guest.example.com
 vault_api_domain: api.example.com
+vault_root_domain: example.com
 
 vault_build_goos: linux
 vault_build_goarch: amd64

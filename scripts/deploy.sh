@@ -137,6 +137,7 @@ vault_keep_releases: 5
 vault_admin_domain: ${admin_domain}
 vault_guest_domain: ${guest_domain}
 vault_api_domain: ${api_domain}
+vault_root_domain: ${domain_root}
 
 vault_build_goos: linux
 vault_build_goarch: ${target_arch}

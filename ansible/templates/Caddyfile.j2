@@ -1,3 +1,10 @@
+{% if vault_root_domain | default('') %}
+{{ vault_root_domain }} {
+	encode zstd gzip
+	respond 404
+}
+
+{% endif %}
 {{ vault_admin_domain }} {
 	encode zstd gzip
 
