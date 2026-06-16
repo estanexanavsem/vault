@@ -17,7 +17,7 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-text-heading-muted);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-spacing-label);
 }
 
 .tabs {

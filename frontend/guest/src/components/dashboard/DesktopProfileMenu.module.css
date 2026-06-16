@@ -85,7 +85,7 @@
 .profileMenuGrid a strong {
   font-size: var(--font-size-sm);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-spacing-label);
 }
 
 .profileMenuGrid a small {

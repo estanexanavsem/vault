@@ -5,6 +5,7 @@ const rawColorValuePattern = '/(?:#[0-9a-fA-F]{3,8}\\b|\\b(?:rgb|rgba|hsl|hsla)\
 const rawFontSizePattern = '/\\b\\d+(?:\\.\\d+)?px\\b/'
 const rawFontWeightPattern = '/\\b[1-9]00\\b/'
 const rawLineHeightPattern = '/\\b(?:\\d+(?:\\.\\d+)?(?:px)?)\\b/'
+const rawLetterSpacingPattern = '/\\b-?\\d+(?:\\.\\d+)?(?:em|rem|px)\\b/'
 const rawSpacingPattern = '/\\b\\d+(?:\\.\\d+)?px\\b/'
 const rawStrokeWidthPattern = '/\\b\\d+(?:\\.\\d+)?px\\b/'
 const rawRadiusPattern = '/\\b\\d+(?:\\.\\d+)?px\\b/'
@@ -28,6 +29,7 @@ const config = {
           'font-size': [rawFontSizePattern],
           'font-weight': [rawFontWeightPattern],
           'line-height': [rawLineHeightPattern],
+          'letter-spacing': [rawLetterSpacingPattern],
           '/^(?:gap|row-gap|column-gap|margin|margin-top|margin-bottom|margin-left|margin-right|padding|padding-top|padding-bottom|padding-left|padding-right|padding-inline)$/':
             [rawSpacingPattern],
           '/^(?:border|border-top|border-right|border-bottom|border-left|outline|outline-offset)$/':

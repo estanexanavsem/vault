@@ -38,7 +38,7 @@
   font-weight: var(--font-weight-extrabold);
   color: var(--color-brand);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-spacing-label);
 }
 
 .brand h1 {

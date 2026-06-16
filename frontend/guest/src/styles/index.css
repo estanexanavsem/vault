@@ -88,6 +88,8 @@
     --line-height-footer: 1.42;
     --line-height-copy: 1.45;
     --line-height-comfortable: 1.5;
+    --letter-spacing-brand: 0.05em;
+    --letter-spacing-label: 0.08em;
     --font-weight-regular: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
