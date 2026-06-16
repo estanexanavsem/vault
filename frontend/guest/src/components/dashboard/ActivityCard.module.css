@@ -1,14 +1,74 @@
 .card {
+  padding: var(--space-7-5) var(--space-7) var(--space-9);
+  background: var(--color-surface);
+  border: var(--stroke-width-hairline) solid var(--color-border-subtle);
+  border-radius: var(--radius-3xl);
   align-self: start;
   padding-bottom: var(--space-5-5);
 }
 
 .tabs {
+  --dashboard-tab-min-width: 78px;
+  --dashboard-tab-mobile-min-width: 74px;
+  --dashboard-tab-mobile-height: 38px;
+
+  display: flex;
+  gap: 0;
   margin-top: var(--space-7);
+  border-bottom: var(--stroke-width-hairline) solid var(--color-border-subtle);
+}
+
+.kicker {
+  margin: 0;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-heading-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.tab {
+  min-width: var(--dashboard-tab-min-width);
+  min-height: var(--control-height-sm);
+  padding: 0 var(--space-7) var(--space-3);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent);
+  background: transparent;
+  border: 0;
+  border-bottom: var(--stroke-width-active) solid transparent;
+}
+
+.active {
+  font-weight: var(--font-weight-bold);
+  border-bottom-color: var(--color-accent);
 }
 
 @media (width <= 768px) {
   .card {
     order: 4;
+    width: 100%;
+    min-width: 0;
+    padding: var(--space-6) var(--space-5-5) var(--space-6-5);
+    border-radius: var(--radius-xl);
+  }
+
+  .kicker {
+    font-size: var(--font-size-3xs);
+  }
+
+  .tabs {
+    margin-top: var(--space-6);
+  }
+
+  .tab {
+    min-width: var(--dashboard-tab-mobile-min-width);
+    min-height: var(--dashboard-tab-mobile-height);
+  }
+}
+
+@media (hover: hover) {
+  .tab {
+    transition: var(--transition-interactive);
   }
 }

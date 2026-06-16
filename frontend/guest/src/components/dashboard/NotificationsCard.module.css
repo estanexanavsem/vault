@@ -1,4 +1,8 @@
 .card {
+  padding: var(--space-7-5) var(--space-7) var(--space-9);
+  background: var(--color-surface);
+  border: var(--stroke-width-hairline) solid var(--color-border-subtle);
+  border-radius: var(--radius-3xl);
   align-self: start;
   min-height: 104px;
   padding: var(--space-7) var(--space-6-5);
@@ -8,6 +12,14 @@
   display: flex;
   gap: var(--space-4-5);
   align-items: center;
+}
+.kicker {
+  margin: 0;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-heading-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-label);
 }
 
 .card p {
@@ -21,6 +33,15 @@
     order: 3;
     min-height: 100px;
     padding-top: var(--space-6);
+
+    width: 100%;
+    min-width: 0;
+    padding: var(--space-6) var(--space-5-5) var(--space-6-5);
+    border-radius: var(--radius-xl);
+  }
+
+  .kicker {
+    font-size: var(--font-size-3xs);
   }
 
   .card p {

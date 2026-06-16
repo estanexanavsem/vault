@@ -3,7 +3,6 @@ import { cn } from '../../../utils/cn'
 import { getTransactionLogoAsset } from '../../../utils/transactionLogoAssets'
 import { getTransactionIconKind } from '../../../utils/transactionIcon'
 import type { TransferSummary } from '../../../utils/transferSummary'
-import primitiveStyles from '../DashboardPrimitives.module.css'
 import styles from './TransactionIcon.module.css'
 
 interface TransactionIconProps {
@@ -16,10 +15,7 @@ export function TransactionIcon({ className, transfer }: TransactionIconProps) {
   const logoAsset = getTransactionLogoAsset(iconKind)
 
   return (
-    <span
-      className={cn(primitiveStyles.icon, logoAsset && styles.logo, className)}
-      aria-hidden="true"
-    >
+    <span className={cn(styles.icon, logoAsset && styles.logo, className)} aria-hidden="true">
       {iconKind === 'deposit' ? <CircleDollarSign size={20} /> : null}
       {iconKind === 'check' ? <ReceiptText size={20} /> : null}
       {logoAsset ? (

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { cn } from '../../../utils/cn'
 import type { TransferSummary } from '../../../utils/transferSummary'
-import primitiveStyles from '../DashboardPrimitives.module.css'
 import styles from './DetailActivitySection.module.css'
 import { DetailUpcomingActivityEmpty } from './DetailUpcomingActivityEmpty'
 import { TransactionPanel } from './TransactionPanel'
@@ -27,16 +26,16 @@ export function DetailActivitySection({
         <h2 id="detail-activity-title">Activity</h2>
       </div>
 
-      <div className={cn(primitiveStyles.tabs, styles.tabs)} aria-label="Activity range">
+      <div className={cn(styles.tabs)} aria-label="Activity range">
         <button
-          className={cn(primitiveStyles.tab, !isUpcoming && primitiveStyles.active)}
+          className={cn(styles.tab, !isUpcoming && styles.active)}
           type="button"
           onClick={() => setActiveTab('recent')}
         >
           Recent
         </button>
         <button
-          className={cn(primitiveStyles.tab, isUpcoming && primitiveStyles.active)}
+          className={cn(styles.tab, isUpcoming && styles.active)}
           type="button"
           onClick={() => setActiveTab('upcoming')}
         >
