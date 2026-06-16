@@ -1,14 +1,6 @@
 .root {
-  --security-page-grid-min: 250px;
-  --security-page-grid-max: 360px;
-  --security-page-padding-mobile: var(--space-6-5) var(--space-5) var(--space-15);
-  --security-page-mobile-title-gap: var(--space-4);
-  --security-page-mobile-heading: var(--font-size-9xl);
-
   display: grid;
-  grid-template-columns:
-    minmax(var(--security-page-grid-min), var(--security-page-grid-max))
-    minmax(0, 1fr);
+  grid-template-columns: minmax(250px, 360px) minmax(0, 1fr);
   width: min(100%, var(--content-width));
   min-height: calc(100dvh - var(--size-header-height));
   margin: 0 auto;
@@ -46,7 +38,7 @@
   }
 
   .main {
-    padding: var(--security-page-padding-mobile);
+    padding: var(--space-6-5) var(--space-5) var(--space-15);
   }
 
   .back {
@@ -62,11 +54,11 @@
   }
 
   .title {
-    gap: var(--security-page-mobile-title-gap);
+    gap: var(--space-4);
     margin-left: 0;
   }
 
   .title h2 {
-    font-size: var(--security-page-mobile-heading);
+    font-size: var(--font-size-9xl);
   }
 }
