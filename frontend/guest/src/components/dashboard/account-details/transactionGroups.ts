@@ -10,7 +10,10 @@ export interface TransactionDateGroup {
 const getGroupTotal = (group: TransactionDateGroup) =>
   group.transfers.reduce((total, item) => total + item.amount, 0)
 
-export const getTransactionDateGroups = (transfers: TransferSummary[]): TransactionDateGroup[] => {
+export const getTransactionDateGroups = (
+  transfers: TransferSummary[],
+  accountBalance: number,
+): TransactionDateGroup[] => {
   const groups: TransactionDateGroup[] = []
   let currentGroup: TransactionDateGroup | undefined
 
@@ -29,7 +32,7 @@ export const getTransactionDateGroups = (transfers: TransferSummary[]): Transact
     groups.push(currentGroup)
   }
 
-  let runningBalance = 0
+  let runningBalance = accountBalance
 
   for (let index = groups.length - 1; index >= 0; index -= 1) {
     const group = groups[index]

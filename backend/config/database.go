@@ -25,9 +25,6 @@ func InitDB(dbPath string) error {
 	if err != nil {
 		return err
 	}
-	if err := removeAccountBalanceColumn(); err != nil {
-		return err
-	}
 
 	if err := ensurePanelPassword(); err != nil {
 		return err
@@ -35,14 +32,6 @@ func InitDB(dbPath string) error {
 
 	log.Println("Database initialized successfully")
 	return nil
-}
-
-func removeAccountBalanceColumn() error {
-	if !DB.Migrator().HasColumn(&models.Account{}, "balance") {
-		return nil
-	}
-
-	return DB.Migrator().DropColumn(&models.Account{}, "balance")
 }
 
 func ensurePanelPassword() error {

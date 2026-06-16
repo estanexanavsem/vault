@@ -6,11 +6,13 @@ import { DetailUpcomingActivityEmpty } from './DetailUpcomingActivityEmpty'
 import { TransactionPanel } from './TransactionPanel'
 
 interface DetailActivitySectionProps {
+  accountBalance: number
   isAccountDetailsOpen: boolean
   transfers: TransferSummary[]
 }
 
 export function DetailActivitySection({
+  accountBalance,
   isAccountDetailsOpen,
   transfers,
 }: DetailActivitySectionProps) {
@@ -43,7 +45,11 @@ export function DetailActivitySection({
         </button>
       </div>
 
-      {isUpcoming ? <DetailUpcomingActivityEmpty /> : <TransactionPanel transfers={transfers} />}
+      {isUpcoming ? (
+        <DetailUpcomingActivityEmpty />
+      ) : (
+        <TransactionPanel accountBalance={accountBalance} transfers={transfers} />
+      )}
     </section>
   )
 }

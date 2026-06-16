@@ -2,7 +2,6 @@ import { useState } from 'react'
 import type { GuestData } from '../../types/guest'
 import { getAccountSummary } from '../../utils/accountSummary'
 import { formatCurrency } from '../../utils/formatters'
-import { getTransferBalance } from '../../utils/transferBalance'
 import { getLatestTransferSummary, getTransferSummaries } from '../../utils/transferSummary'
 import { AccountDetailHero } from './account-details/AccountDetailHero'
 import { AccountDetailSidebar } from './account-details/AccountDetailSidebar'
@@ -18,7 +17,7 @@ interface AccountDetailsPageProps {
 
 export function AccountDetailsPage({ data, onBack }: AccountDetailsPageProps) {
   const [isAccountDetailsOpen, setAccountDetailsOpen] = useState(false)
-  const account = getAccountSummary(data.master, getTransferBalance(data.transfers))
+  const account = getAccountSummary(data.master)
   const transfer = getLatestTransferSummary(data.transfers)
   const transferSummaries = getTransferSummaries(data.transfers)
   const lastDepositText = transfer ? formatCurrency(Math.abs(transfer.amount)) : ''
@@ -37,6 +36,7 @@ export function AccountDetailsPage({ data, onBack }: AccountDetailsPageProps) {
       <main className={styles.main} id="account-detail">
         <AccountDetailSidebar account={account} />
         <DetailActivitySection
+          accountBalance={account.balance}
           isAccountDetailsOpen={isAccountDetailsOpen}
           transfers={transferSummaries}
         />

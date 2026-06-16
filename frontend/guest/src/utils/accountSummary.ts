@@ -10,14 +10,14 @@ export interface AccountSummary {
   title: string
 }
 
-export const getAccountSummary = (account: MasterAccount, balance: number): AccountSummary => {
+export const getAccountSummary = (account: MasterAccount): AccountSummary => {
   const name = getAccountName(account)
   const suffix = getLastFour(account.account_number)
 
   return {
     availableBalanceDate: formatCurrentShortDate(),
-    balance,
-    balanceText: formatCurrency(balance),
+    balance: account.balance,
+    balanceText: formatCurrency(account.balance),
     name,
     suffix,
     title: suffix ? `${name} ${suffix}` : name,

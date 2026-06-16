@@ -7,6 +7,7 @@ import { getNextVisibleTransactionGroupCount, getTransferSignature } from './tra
 import { getTransactionDateGroups } from './transactionGroups'
 
 interface TransactionPanelProps {
+  accountBalance: number
   transfers: TransferSummary[]
 }
 
@@ -15,7 +16,7 @@ interface VisibleTransactionState {
   transferSignature: string
 }
 
-export function TransactionPanel({ transfers }: TransactionPanelProps) {
+export function TransactionPanel({ accountBalance, transfers }: TransactionPanelProps) {
   const transferSignature = getTransferSignature(transfers)
   const [visibleTransactionState, setVisibleTransactionState] = useState<VisibleTransactionState>(
     () => ({
@@ -23,7 +24,10 @@ export function TransactionPanel({ transfers }: TransactionPanelProps) {
       transferSignature,
     }),
   )
-  const transactionGroups = useMemo(() => getTransactionDateGroups(transfers), [transfers])
+  const transactionGroups = useMemo(
+    () => getTransactionDateGroups(transfers, accountBalance),
+    [accountBalance, transfers],
+  )
   const initialVisibleGroupCount = useMemo(
     () => getNextVisibleTransactionGroupCount(transactionGroups, 0),
     [transactionGroups],

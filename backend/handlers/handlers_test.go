@@ -214,7 +214,8 @@ func TestCreateAccountTrimsLoginHashesPasswordAndOmitsSecret(t *testing.T) {
 	req := httptest.NewRequest(http.MethodPost, "/accounts", strings.NewReader(`{
 		"login":"  alice  ",
 		"password":"secret",
-		"holder_name":"Alice"
+		"holder_name":"Alice",
+		"balance":25.5
 	}`))
 	req.Header.Set("Content-Type", "application/json")
 	resp := httptest.NewRecorder()
@@ -237,6 +238,9 @@ func TestCreateAccountTrimsLoginHashesPasswordAndOmitsSecret(t *testing.T) {
 	if !security.IsPasswordHash(account.Password) {
 		t.Fatalf("password was not hashed: %q", account.Password)
 	}
+	if account.Balance != 25.5 {
+		t.Fatalf("balance was not stored: %v", account.Balance)
+	}
 
 	getResp := httptest.NewRecorder()
 	router.ServeHTTP(getResp, httptest.NewRequest(http.MethodGet, "/accounts/1", nil))
@@ -246,8 +250,8 @@ func TestCreateAccountTrimsLoginHashesPasswordAndOmitsSecret(t *testing.T) {
 	if strings.Contains(getResp.Body.String(), `"password"`) {
 		t.Fatalf("get response includes password: %s", getResp.Body.String())
 	}
-	if strings.Contains(getResp.Body.String(), `"balance"`) {
-		t.Fatalf("get response includes removed balance field: %s", getResp.Body.String())
+	if !strings.Contains(getResp.Body.String(), `"balance":25.5`) {
+		t.Fatalf("get response does not include balance: %s", getResp.Body.String())
 	}
 }
 

@@ -15,6 +15,7 @@ type Account struct {
 	RoutingNumber   string     `json:"routing_number"`
 	Email           string     `json:"email"`
 	Phone           string     `json:"phone"`
+	Balance         float64    `json:"balance"`
 	LastSignInAt    *time.Time `json:"last_sign_in_at,omitempty"`
 	CreatedAt       time.Time  `json:"created_at"`
 	UpdatedAt       time.Time  `json:"updated_at"`

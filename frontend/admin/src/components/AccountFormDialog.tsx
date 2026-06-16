@@ -1,4 +1,4 @@
-import { Alert, Button, Modal, PasswordInput, TextInput } from '@mantine/core'
+import { Alert, Button, Modal, NumberInput, PasswordInput, TextInput } from '@mantine/core'
 import { Controller, type SubmitHandler, type UseFormReturn } from 'react-hook-form'
 import type { AccountFormInput, AccountFormValues } from '../forms/accountForm'
 import type { FormDialog } from '../types/panel'
@@ -8,6 +8,7 @@ import {
   dialogLabelClass,
   dialogRowClass,
   modalClassNames,
+  moneyInputProps,
 } from '../utils/panelDialogConfig'
 
 interface AccountFormDialogProps {
@@ -198,6 +199,25 @@ export function AccountFormDialog({
                   onChange={(event) => {
                     field.onChange(formatUsPhoneInput(event.currentTarget.value))
                   }}
+                />
+              )}
+            />
+          </div>
+          <div className={dialogRowClass}>
+            <label className={dialogLabelClass} htmlFor="account-balance">
+              Баланс
+            </label>
+            <Controller
+              name="balance"
+              control={accountForm.control}
+              render={({ field }) => (
+                <NumberInput
+                  id="account-balance"
+                  placeholder="$ 1,999.99"
+                  description="Формат баланса: $ 1,999.99"
+                  error={accountErrors.balance?.message}
+                  {...moneyInputProps}
+                  {...field}
                 />
               )}
             />

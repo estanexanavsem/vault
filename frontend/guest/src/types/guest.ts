@@ -14,6 +14,7 @@ export interface MasterAccount {
   routing_number: string
   email: string
   phone: string
+  balance: number
   last_sign_in_at?: string
   created_at: string
   updated_at: string
