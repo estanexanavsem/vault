@@ -1,0 +1,100 @@
+.transactionPanel {
+  margin-top: 26px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-2xs);
+}
+
+.transactionHeader {
+  display: grid;
+  grid-template-columns:
+    minmax(100px, 0.78fr) minmax(108px, 0.78fr) minmax(230px, 2.15fr)
+    minmax(118px, 0.72fr) minmax(78px, 0.64fr) minmax(58px, 0.52fr) 28px;
+  gap: 8px;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 12px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-brand-strong);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.transactionHeader span {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.postedBalanceRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 15px;
+  color: var(--color-text-subtle);
+  background: var(--color-surface-muted);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.postedBalanceRowSeparated {
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.postedBalanceRow span {
+  align-self: center;
+}
+
+.transactionEmptyState {
+  min-height: 84px;
+  padding: 28px 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.transactionLoadMoreRow {
+  display: flex;
+  justify-content: center;
+  padding: 18px 12px;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.transactionLoadMoreButton {
+  min-width: 150px;
+  min-height: 40px;
+  padding: 0 22px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-brand);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border-control);
+  border-radius: var(--radius-pill);
+}
+
+.transactionLoadMoreButton:hover {
+  background: var(--color-surface-brand);
+}
+
+.transactionLoadMoreButton:focus-visible {
+  outline: 3px solid var(--color-focus-brand-ring);
+  outline-offset: 2px;
+}
+
+@media (width <= 760px) {
+  .transactionPanel {
+    margin: 28px 0 0;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  .transactionHeader {
+    display: none;
+  }
+
+  .postedBalanceRow {
+    grid-template-columns: 1fr auto;
+    min-height: 32px;
+    padding: 0 14px;
+    font-size: 14px;
+  }
+}

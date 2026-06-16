@@ -1,7 +1,8 @@
 import { Fragment, useMemo, useState } from 'react'
+import { cn } from '../../../utils/cn'
 import type { TransferSummary } from '../../../utils/transferSummary'
-import styles from './account-details.module.css'
 import { TransactionRow } from './TransactionRow'
+import styles from './TransactionPanel.module.css'
 import { getNextVisibleTransactionGroupCount, getTransferSignature } from './transactionPagination'
 import { getTransactionDateGroups } from './transactionGroups'
 
@@ -67,7 +68,12 @@ export function TransactionPanel({ transfers }: TransactionPanelProps) {
 
       {visibleTransactionGroups.map((group, groupIndex) => (
         <Fragment key={group.date || groupIndex}>
-          <div className={styles.postedBalanceRow}>
+          <div
+            className={cn(
+              styles.postedBalanceRow,
+              groupIndex > 0 && styles.postedBalanceRowSeparated,
+            )}
+          >
             <span>{group.date}</span>
             <span>Posted Balance: {group.postedBalanceText}</span>
           </div>

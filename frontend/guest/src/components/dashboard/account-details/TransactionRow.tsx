@@ -3,9 +3,9 @@ import { ChevronDown, ChevronUp, Info } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { cn } from '../../../utils/cn'
 import type { TransferSummary } from '../../../utils/transferSummary'
-import styles from './account-details.module.css'
 import { BalanceInfoModal } from './BalanceInfoModal'
 import { TransactionIcon } from './TransactionIcon'
+import styles from './TransactionRow.module.css'
 
 interface TransactionRowProps {
   transfer: TransferSummary
@@ -47,7 +47,7 @@ export function TransactionRow({ transfer }: TransactionRowProps) {
           {transfer.status}
         </span>
         <span className={styles.transactionDescription}>
-          <TransactionIcon transfer={transfer} />
+          <TransactionIcon className={styles.transactionIcon} transfer={transfer} />
           {transfer.label ? <strong>{transfer.label}</strong> : null}
         </span>
         <span

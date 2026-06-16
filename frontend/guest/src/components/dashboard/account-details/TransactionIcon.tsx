@@ -4,7 +4,7 @@ import { getTransactionLogoAsset } from '../../../utils/transactionLogoAssets'
 import { getTransactionIconKind } from '../../../utils/transactionIcon'
 import type { TransferSummary } from '../../../utils/transferSummary'
 import dashboardStyles from '../dashboard.module.css'
-import styles from './account-details.module.css'
+import styles from './TransactionIcon.module.css'
 
 interface TransactionIconProps {
   className?: string
@@ -19,7 +19,6 @@ export function TransactionIcon({ className, transfer }: TransactionIconProps) {
     <span
       className={cn(
         dashboardStyles.activityIcon,
-        styles.transactionIcon,
         logoAsset && styles.transactionLogoIcon,
         className,
       )}

@@ -1,0 +1,16 @@
+.transactionLogoIcon {
+  overflow: hidden;
+}
+
+.transactionLogo {
+  width: 22px;
+  max-width: 24px;
+  height: auto;
+  max-height: 20px;
+  object-fit: contain;
+}
+
+.transactionLogoWide {
+  width: 26px;
+  max-height: 14px;
+}
