@@ -36,24 +36,24 @@ export function TransactionRow({ transfer }: TransactionRowProps) {
   return (
     <>
       <button
-        className={cn(styles.transactionDetailRow, isExpanded && styles.transactionDetailRowOpen)}
+        className={cn(styles.row, isExpanded && styles.open)}
         type="button"
         aria-expanded={isExpanded}
         onClick={() => setExpanded((isOpen) => !isOpen)}
       >
-        <strong className={styles.transactionDate}>{transfer.date}</strong>
-        <span className={styles.transactionStatus}>
+        <strong className={styles.date}>{transfer.date}</strong>
+        <span className={styles.status}>
           <span aria-hidden="true" />
           {transfer.status}
         </span>
-        <span className={styles.transactionDescription}>
-          <TransactionIcon className={styles.transactionIcon} transfer={transfer} />
+        <span className={styles.desc}>
+          <TransactionIcon className={styles.icon} transfer={transfer} />
           {transfer.label ? <strong>{transfer.label}</strong> : null}
         </span>
         <span
           className={cn(
-            styles.transactionCredit,
-            !transfer.isPositive && styles.transactionAmountNegative,
+            styles.amount,
+            !transfer.isPositive && styles.negative,
           )}
         >
           {transfer.amountText}
@@ -65,20 +65,20 @@ export function TransactionRow({ transfer }: TransactionRowProps) {
         )}
       </button>
       {isExpanded && hasExpandedDetails ? (
-        <div className={styles.transactionExpandedPanel}>
+        <div className={styles.panel}>
           <div
             className={cn(
-              styles.transactionExpandedCards,
+              styles.cards,
               (!hasTransactionDetails || !hasCategoryDetails) &&
-                styles.transactionExpandedCardsSingle,
+                styles.single,
             )}
           >
             {hasTransactionDetails ? (
-              <section className={styles.transactionExpandedCard}>
+              <section className={styles.card}>
                 <h3>
                   Transaction details
                   <button
-                    className={styles.transactionInfoButton}
+                    className={styles.info}
                     type="button"
                     aria-label="Transaction details data source information"
                     onClick={() => setTransactionInfoOpen(true)}
@@ -115,7 +115,7 @@ export function TransactionRow({ transfer }: TransactionRowProps) {
               </section>
             ) : null}
             {hasCategoryDetails ? (
-              <section className={styles.transactionExpandedCard}>
+              <section className={styles.card}>
                 <h3>Category</h3>
                 <dl>
                   <div>
@@ -126,7 +126,7 @@ export function TransactionRow({ transfer }: TransactionRowProps) {
               </section>
             ) : null}
           </div>
-          <p className={styles.transactionExpandedNote}>
+          <p className={styles.note}>
             <strong>Note:</strong> Category and merchant details may take up to an hour to appear
             once a transaction has been completed.
           </p>

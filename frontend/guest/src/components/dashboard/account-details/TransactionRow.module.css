@@ -1,4 +1,4 @@
-.transactionDetailRow {
+.row {
   display: grid;
   grid-template-columns: var(--transaction-table-columns);
   gap: var(--space-3);
@@ -12,21 +12,21 @@
   border: 0;
 }
 
-.transactionDetailRow + .transactionDetailRow,
-.transactionExpandedPanel + .transactionDetailRow {
+.row + .row,
+.panel + .row {
   border-top: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
-.transactionDetailRowOpen {
+.open {
   background: var(--color-surface-brand);
 }
 
-.transactionDate {
+.date {
   grid-column: 1;
   font-size: var(--font-size-xl);
 }
 
-.transactionStatus {
+.status {
   display: inline-flex;
   grid-column: 2;
   gap: var(--space-2-5);
@@ -35,7 +35,7 @@
   font-weight: var(--font-weight-bold);
 }
 
-.transactionStatus span {
+.status span {
   width: var(--size-icon-2xs);
   height: var(--size-icon-2xs);
   flex: 0 0 var(--size-icon-2xs);
@@ -43,7 +43,7 @@
   border-radius: var(--radius-pill);
 }
 
-.transactionDescription {
+.desc {
   display: grid;
   grid-column: 3;
   grid-template-columns: 32px minmax(0, 1fr);
@@ -52,12 +52,12 @@
   min-width: 0;
 }
 
-.transactionIcon {
+.icon {
   width: var(--size-icon-container-sm);
   height: var(--size-icon-container-sm);
 }
 
-.transactionDescription strong {
+.desc strong {
   display: -webkit-box;
   overflow: hidden;
   font-size: var(--font-size-sm);
@@ -68,7 +68,7 @@
   -webkit-box-orient: vertical;
 }
 
-.transactionCredit {
+.amount {
   grid-column: 5;
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
@@ -76,38 +76,38 @@
   font-variant-numeric: tabular-nums;
 }
 
-.transactionAmountNegative {
+.negative {
   color: var(--color-danger);
 }
 
-.transactionDetailRow > svg {
+.row > svg {
   grid-column: 7;
   justify-self: end;
 }
 
-.transactionExpandedPanel {
+.panel {
   padding: var(--space-9-5) var(--space-8) var(--space-10);
   border-top: 0;
   border-bottom: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
-.transactionExpandedCards {
+.cards {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-4-5);
 }
 
-.transactionExpandedCardsSingle {
+.single {
   grid-template-columns: minmax(0, 1fr);
 }
 
-.transactionExpandedCard {
+.card {
   min-height: 214px;
   padding: var(--space-8) var(--space-5-5) var(--space-6);
   background: var(--color-surface-muted);
 }
 
-.transactionExpandedCard h3 {
+.card h3 {
   display: flex;
   gap: var(--space-1);
   align-items: center;
@@ -118,7 +118,7 @@
   color: var(--color-text-primary);
 }
 
-.transactionInfoButton {
+.info {
   display: inline-grid;
   width: var(--size-icon-xs);
   height: var(--size-icon-xs);
@@ -130,39 +130,39 @@
   border-radius: var(--radius-pill);
 }
 
-.transactionExpandedCard dl {
+.card dl {
   display: grid;
   gap: var(--space-3);
   margin: 0;
 }
 
-.transactionExpandedCard dt {
+.card dt {
   margin: 0 0 var(--space-0-5);
   font-size: var(--font-size-sm);
   line-height: normal;
   color: var(--color-text-subtle);
 }
 
-.transactionExpandedCard dd {
+.card dd {
   margin: 0;
   font-size: var(--font-size-lg);
   line-height: normal;
   color: var(--color-text-primary);
 }
 
-.transactionExpandedNote {
+.note {
   margin: var(--space-7) var(--space-3) 0;
   font-size: var(--font-size-lg);
   line-height: var(--line-height-compact);
   color: var(--color-text-subtle);
 }
 
-.transactionExpandedNote strong {
+.note strong {
   color: var(--color-text-primary);
 }
 
 @media (width <= 768px) {
-  .transactionDetailRow {
+  .row {
     grid-template-areas:
       'description credit control'
       'status credit control';
@@ -171,11 +171,11 @@
     padding: var(--space-6-5) var(--space-5) var(--space-9-5);
   }
 
-  .transactionDate {
+  .date {
     display: none;
   }
 
-  .transactionStatus {
+  .status {
     --transaction-mobile-status-offset: 50px;
 
     grid-area: status;
@@ -184,24 +184,24 @@
     font-size: var(--font-size-2xs);
   }
 
-  .transactionStatus span {
+  .status span {
     width: var(--size-icon-2xs);
     height: var(--size-icon-2xs);
   }
 
-  .transactionDescription {
+  .desc {
     grid-area: description;
     grid-template-columns: 38px minmax(0, 1fr);
     gap: var(--space-4);
     align-items: center;
   }
 
-  .transactionIcon {
+  .icon {
     width: var(--size-icon-container-sm);
     height: var(--size-icon-container-sm);
   }
 
-  .transactionDescription strong {
+  .desc strong {
     display: -webkit-box;
     overflow: hidden;
     font-size: var(--font-size-lg);
@@ -211,45 +211,45 @@
     text-transform: none;
   }
 
-  .transactionCredit {
+  .amount {
     grid-area: credit;
     place-self: center start;
     font-size: var(--font-size-lg);
   }
 
-  .transactionDetailRow > svg {
+  .row > svg {
     grid-area: control;
     align-self: center;
     width: var(--size-icon-sm);
   }
 
-  .transactionExpandedPanel {
+  .panel {
     padding: var(--space-5-5) var(--space-4) var(--space-7);
   }
 
-  .transactionExpandedCards {
+  .cards {
     grid-template-columns: 1fr;
     gap: var(--space-4);
   }
 
-  .transactionExpandedCard {
+  .card {
     min-height: 0;
     padding: var(--space-5-5) var(--space-5);
   }
 
-  .transactionExpandedCard h3 {
+  .card h3 {
     font-size: var(--font-size-lg);
   }
 
-  .transactionExpandedCard dt {
+  .card dt {
     font-size: var(--font-size-xs);
   }
 
-  .transactionExpandedCard dd {
+  .card dd {
     font-size: var(--font-size-md);
   }
 
-  .transactionExpandedNote {
+  .note {
     margin: var(--space-5) var(--space-1) 0;
     font-size: var(--font-size-sm);
   }
