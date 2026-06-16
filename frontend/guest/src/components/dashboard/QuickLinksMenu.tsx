@@ -5,16 +5,16 @@ import styles from './QuickLinksMenu.module.css'
 
 export function QuickLinksMenu() {
   return (
-    <div className={styles.mobileQuickLinksWrap}>
+    <div className={styles.wrap}>
       <FloatingDropdown
-        floatingClassName={styles.mobileQuickLinksMenu}
+        floatingClassName={styles.menu}
         label="Quick Links"
-        triggerClassName={styles.mobileQuickLinks}
+        triggerClassName={styles.trigger}
         triggerContent={(isOpen) => (
           <>
             <span>Quick Links</span>
             <ChevronDown
-              className={styles.mobileQuickLinksIcon}
+              className={styles.icon}
               data-open={isOpen ? 'true' : 'false'}
               size={22}
               aria-hidden="true"
