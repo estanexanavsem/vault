@@ -52,8 +52,8 @@ export function TransactionPanel({ transfers }: TransactionPanelProps) {
   }
 
   return (
-    <div className={styles.transactionPanel}>
-      <div className={styles.transactionHeader} aria-hidden="true">
+    <div className={styles.root}>
+      <div className={styles.head} aria-hidden="true">
         <span>Date</span>
         <span>Status</span>
         <span>Description</span>
@@ -63,16 +63,13 @@ export function TransactionPanel({ transfers }: TransactionPanelProps) {
       </div>
 
       {transactionGroups.length === 0 ? (
-        <div className={styles.transactionEmptyState}>No recent transactions.</div>
+        <div className={styles.empty}>No recent transactions.</div>
       ) : null}
 
       {visibleTransactionGroups.map((group, groupIndex) => (
         <Fragment key={group.date || groupIndex}>
           <div
-            className={cn(
-              styles.postedBalanceRow,
-              groupIndex > 0 && styles.postedBalanceRowSeparated,
-            )}
+            className={cn(styles.row, groupIndex > 0 && styles.rowSeparated)}
           >
             <span>{group.date}</span>
             <span>Posted Balance: {group.postedBalanceText}</span>
@@ -87,9 +84,9 @@ export function TransactionPanel({ transfers }: TransactionPanelProps) {
       ))}
 
       {hasMoreTransactions ? (
-        <div className={styles.transactionLoadMoreRow}>
+        <div className={styles.moreRow}>
           <button
-            className={styles.transactionLoadMoreButton}
+            className={styles.moreButton}
             type="button"
             onClick={loadMoreTransactions}
           >
