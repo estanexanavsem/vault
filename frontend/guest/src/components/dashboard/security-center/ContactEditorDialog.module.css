@@ -1,0 +1,158 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  padding: 24px;
+  background: transparent;
+  border: 0;
+}
+
+.modalOverlay[open] {
+  display: grid;
+  place-items: center;
+}
+
+.modalOverlay::backdrop {
+  background: var(--color-overlay-dialog);
+}
+
+.modal {
+  position: relative;
+  width: min(100%, 600px);
+  padding: 46px 30px 32px;
+  color: var(--color-brand-strong);
+  background: var(--color-surface);
+  border: 0;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-dialog);
+}
+
+.modalClose {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  color: var(--color-brand);
+  background: transparent;
+  border: 0;
+}
+
+.modal h3 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.18;
+}
+
+.modalCopy {
+  margin: 32px 0 0;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+.modalField {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+  font-size: 16px;
+  color: var(--color-text-muted);
+}
+
+.inputShell {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  align-items: center;
+  min-height: 48px;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-xs);
+}
+
+.inputIcon {
+  justify-self: center;
+  color: var(--color-text-input-icon);
+}
+
+.inputShell input {
+  width: 100%;
+  min-width: 0;
+  height: 46px;
+  padding: 0 14px;
+  font-size: 16px;
+  color: var(--color-text-soft);
+  background: transparent;
+  border: 0;
+}
+
+.inputShell input:focus {
+  outline: 0;
+}
+
+.modalError {
+  margin: 14px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-danger);
+}
+
+.modalActions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 104px;
+  min-height: 48px;
+  padding: 0 24px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+}
+
+.primaryButton {
+  color: var(--color-text-inverse);
+  background: var(--color-brand);
+  border: 2px solid var(--color-brand);
+}
+
+.secondaryButton {
+  color: var(--color-brand);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border-control);
+}
+
+@media (width <= 900px) {
+  .modalOverlay {
+    align-items: start;
+    padding: 0;
+    overflow-y: auto;
+    background: var(--color-surface);
+  }
+
+  .modal {
+    width: 100%;
+    min-height: 100dvh;
+    padding: 52px 30px 32px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .modalActions {
+    align-items: stretch;
+  }
+}
