@@ -1,0 +1,23 @@
+.mobileNavItem {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-height: 56px;
+  padding: 0 16px;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--color-text-inverse);
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.mobileNavItem svg {
+  flex: 0 0 auto;
+}
+
+.mobileNavItem.current {
+  color: var(--color-brand-strong);
+  background: var(--color-accent-selected);
+}

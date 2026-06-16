@@ -1,0 +1,80 @@
+.mobileMenuButton {
+  display: none;
+}
+
+.mobileNavOverlay {
+  z-index: var(--z-mobile-nav);
+  background: var(--color-overlay);
+}
+
+.mobileNavPanel {
+  width: 100vw;
+  margin: 0;
+  overflow: hidden;
+  color: var(--color-text-inverse);
+  background: var(--color-brand-hero);
+  border-radius: var(--radius-mobile-nav-panel);
+  box-shadow: var(--shadow-mobile-nav);
+}
+
+.mobileNavHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--size-header-height);
+  padding: 0 16px;
+  background: var(--color-brand-strong);
+}
+
+.mobileNavMark {
+  margin-left: 5px;
+}
+
+.mobileNavClose {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  color: var(--color-text-brand-soft);
+  background: transparent;
+  border: 0;
+}
+
+.mobileNavList {
+  display: grid;
+  gap: 5px;
+  padding: 24px 24px 20px;
+}
+
+.mobileNavFooter {
+  margin: 8px 36px 0;
+  padding-top: 25px;
+  padding-bottom: 42px;
+  border-top: 1px solid var(--color-brand-border-muted);
+}
+
+.mobileNavSignOut {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 250px);
+  min-height: 56px;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--color-text-inverse);
+  background: transparent;
+  border: 2px solid var(--color-border-brand-soft);
+  border-radius: var(--radius-control-lg);
+}
+
+@media (width <= 760px) {
+  .mobileMenuButton {
+    display: inline-grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    color: var(--color-text-inverse);
+    background: transparent;
+    border: 0;
+  }
+}

@@ -1,0 +1,132 @@
+.topbar {
+  background: var(--color-brand-strong);
+  color: var(--color-text-inverse);
+}
+
+.topbarInner {
+  display: grid;
+  grid-template-columns: 78px 1fr auto;
+  align-items: center;
+  width: min(100%, var(--content-width));
+  min-height: var(--size-header-height);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.brandLink {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  justify-self: start;
+  color: var(--color-text-inverse);
+  background: transparent;
+  border: 0;
+}
+
+.desktopNav {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.desktopNav a,
+.desktopNav button {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 70px;
+  height: var(--size-header-height);
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-inverse);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: var(--transition-background-slow);
+}
+
+.desktopNav a.current::after,
+.desktopNav button.current::after {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  width: calc(100% - 32px);
+  height: 4px;
+  content: '';
+  background: var(--color-accent-indicator);
+  border-radius: var(--radius-pill);
+  transform: translateX(-50%);
+}
+
+.desktopSession {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.statusDot {
+  display: none;
+  width: 5px;
+  height: 5px;
+  background: var(--color-surface);
+  border-radius: var(--radius-pill);
+  opacity: 90%;
+}
+
+.signOutButton {
+  min-width: 116px;
+  min-height: 48px;
+  margin-left: 20px;
+  padding: 0 24px;
+  font-size: 16px;
+  color: var(--color-text-inverse);
+  background: transparent;
+  border: 2px solid var(--color-border-control);
+  border-radius: var(--radius-md);
+}
+
+@media (hover: hover) {
+  .desktopNav a,
+  .desktopNav button,
+  .signOutButton {
+    transition: var(--transition-interactive);
+  }
+
+  .signOutButton:hover {
+    background: var(--color-on-dark-hover);
+  }
+}
+
+@media (width <= 760px) {
+  .topbarInner {
+    display: flex;
+    justify-content: space-between;
+    min-height: var(--size-header-height);
+    padding: 0 16px;
+  }
+
+  .desktopNav,
+  .desktopSession {
+    display: none;
+  }
+
+  .brandLink {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (width >= 761px) and (width <= 980px) {
+  .desktopNav {
+    gap: 16px;
+    font-size: 12px;
+  }
+}

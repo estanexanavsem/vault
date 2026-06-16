@@ -12,7 +12,7 @@ import { CircleDollarSign, Home, Menu, X } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { TruistMark } from '../common/TruistMark'
 import { MobileNavItem } from './MobileNavItem'
-import styles from './navigation.module.css'
+import styles from './MobileNavMenu.module.css'
 
 interface MobileNavMenuProps {
   accountRoute: string

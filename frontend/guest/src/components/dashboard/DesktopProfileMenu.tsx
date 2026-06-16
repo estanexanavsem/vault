@@ -15,7 +15,7 @@ import {
 import { ShieldCheck, UserRound } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
-import styles from './navigation.module.css'
+import styles from './DesktopProfileMenu.module.css'
 
 interface DesktopProfileMenuProps {
   greetingName: string

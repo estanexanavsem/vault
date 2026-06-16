@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { cn } from '../../utils/cn'
-import styles from './navigation.module.css'
+import styles from './MobileNavItem.module.css'
 
 interface MobileNavItemProps {
   children: ReactNode

@@ -3,7 +3,7 @@ import { cn } from '../../utils/cn'
 import { TruistMark } from '../common/TruistMark'
 import { DesktopProfileMenu } from './DesktopProfileMenu'
 import { MobileNavMenu } from './MobileNavMenu'
-import styles from './navigation.module.css'
+import styles from './Topbar.module.css'
 
 interface TopbarProps {
   accountRoute: string
