@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import type { TransferSummary } from '../../../utils/transferSummary'
 import styles from './account-details.module.css'
 import { TransactionRow } from './TransactionRow'
@@ -9,29 +9,45 @@ interface TransactionPanelProps {
   transfers: TransferSummary[]
 }
 
+interface VisibleTransactionState {
+  groupCount: number
+  transferSignature: string
+}
+
 export function TransactionPanel({ transfers }: TransactionPanelProps) {
-  const [visibleGroupCount, setVisibleGroupCount] = useState(0)
   const transferSignature = getTransferSignature(transfers)
+  const [visibleTransactionState, setVisibleTransactionState] = useState<VisibleTransactionState>(
+    () => ({
+      groupCount: 0,
+      transferSignature,
+    }),
+  )
   const transactionGroups = useMemo(() => getTransactionDateGroups(transfers), [transfers])
   const initialVisibleGroupCount = useMemo(
     () => getNextVisibleTransactionGroupCount(transactionGroups, 0),
     [transactionGroups],
   )
+  const visibleGroupCount =
+    visibleTransactionState.transferSignature === transferSignature
+      ? visibleTransactionState.groupCount
+      : 0
   const resolvedVisibleGroupCount = visibleGroupCount || initialVisibleGroupCount
   const visibleTransactionGroups = transactionGroups.slice(0, resolvedVisibleGroupCount)
   const hasMoreTransactions = resolvedVisibleGroupCount < transactionGroups.length
 
-  useEffect(() => {
-    setVisibleGroupCount(0)
-  }, [transferSignature])
-
   const loadMoreTransactions = () => {
-    setVisibleGroupCount((currentGroupCount) =>
-      getNextVisibleTransactionGroupCount(
-        transactionGroups,
-        currentGroupCount || initialVisibleGroupCount,
-      ),
-    )
+    setVisibleTransactionState((currentState) => {
+      const currentGroupCount =
+        currentState.transferSignature === transferSignature ? currentState.groupCount : 0
+
+      return {
+        groupCount: getNextVisibleTransactionGroupCount(
+          transactionGroups,
+          currentGroupCount || initialVisibleGroupCount,
+        ),
+        transferSignature,
+      }
+    })
   }
 
   return (
