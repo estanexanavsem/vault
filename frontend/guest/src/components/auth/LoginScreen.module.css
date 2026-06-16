@@ -35,7 +35,7 @@
 
 .brand p {
   font-size: var(--font-size-sm);
-  font-weight: 800;
+  font-weight: var(--font-weight-extrabold);
   color: var(--color-brand);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -43,7 +43,7 @@
 
 .brand h1 {
   font-size: var(--font-size-4xl);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   line-height: 22px;
   letter-spacing: 0;
 }
@@ -71,7 +71,7 @@
   display: grid;
   gap: var(--space-3);
   font-size: var(--font-size-sm);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--color-brand-strong);
 }
 
@@ -97,7 +97,7 @@
 
 .fieldError {
   font-size: var(--font-size-xs);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--color-danger);
 }
 
@@ -108,7 +108,7 @@
   min-height: 50px;
   margin-top: var(--space-3);
   font-size: var(--font-size-md);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-inverse);
   background: var(--color-brand);
   border: 0;

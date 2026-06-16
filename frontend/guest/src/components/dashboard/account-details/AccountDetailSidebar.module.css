@@ -22,7 +22,7 @@
 .sidebar h2 {
   margin: 0;
   font-size: var(--font-size-6xl);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   letter-spacing: 0;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .sidebarFamily span {
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   font-variant-numeric: tabular-nums;
 }
 
@@ -59,7 +59,7 @@
 .sidebarAccount span,
 .sidebarAccount strong {
   font-size: var(--font-size-lg);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .sidebarAccount small {

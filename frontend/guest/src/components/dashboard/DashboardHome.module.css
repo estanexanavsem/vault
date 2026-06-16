@@ -33,7 +33,7 @@
   min-height: 82px;
   padding: 0 var(--space-6-5);
   font-size: var(--font-size-8xl);
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   color: var(--color-brand-strong);
   text-align: left;
   background: var(--color-surface);

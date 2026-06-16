@@ -13,7 +13,7 @@
   gap: var(--space-1);
   align-items: center;
   font-size: var(--font-size-6xl);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--color-brand-strong);
   letter-spacing: 0.05em;
 }

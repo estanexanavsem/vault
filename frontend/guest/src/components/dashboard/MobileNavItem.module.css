@@ -5,7 +5,7 @@
   min-height: 56px;
   padding: 0 var(--space-5);
   font-size: var(--font-size-3xl);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-inverse);
   text-align: left;
   background: transparent;

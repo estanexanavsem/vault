@@ -26,7 +26,7 @@
 
 .upcomingEmptyState strong {
   font-size: var(--font-size-sm);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .upcomingTable {
@@ -48,7 +48,7 @@
 
 .upcomingTable header strong {
   font-size: var(--font-size-xl);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .upcomingTable header span {
@@ -56,7 +56,7 @@
   gap: var(--space-3-5);
   align-items: center;
   font-size: var(--font-size-xl);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-subtle);
 }
 

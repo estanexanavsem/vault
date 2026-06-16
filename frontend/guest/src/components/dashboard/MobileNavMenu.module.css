@@ -60,7 +60,7 @@
   width: min(100%, 250px);
   min-height: 56px;
   font-size: var(--font-size-3xl);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-inverse);
   background: transparent;
   border: 2px solid var(--color-border-brand-soft);

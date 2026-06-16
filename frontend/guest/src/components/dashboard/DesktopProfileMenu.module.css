@@ -42,7 +42,7 @@
 .profileMenuHead h2 {
   margin: 0;
   font-size: var(--font-size-12xl);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-tight);
   letter-spacing: 0;
 }
@@ -50,7 +50,7 @@
 .profileMenuHead p {
   margin: var(--space-3) 0 0;
   font-size: var(--font-size-xs);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
   white-space: nowrap;
 }
@@ -90,7 +90,7 @@
 
 .profileMenuGrid a small {
   font-size: var(--font-size-sm);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-relaxed);
   color: var(--color-text-subtle);
 }

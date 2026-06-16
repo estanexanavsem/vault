@@ -9,7 +9,7 @@
 .activityTableLabels {
   margin-top: var(--space-5-5);
   font-size: var(--font-size-lg);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .activityTableLabels span:nth-child(2) {
@@ -30,7 +30,7 @@
   margin-top: var(--space-3);
   padding: 0;
   font-size: var(--font-size-md);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--color-brand);
   text-decoration: none;
   background: transparent;
@@ -44,7 +44,7 @@
 .activityNoRows {
   margin: var(--space-5-5) 0 0;
   font-size: var(--font-size-sm);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-muted);
 }
 
@@ -75,7 +75,7 @@
 .activityCopy strong {
   overflow: hidden;
   font-size: var(--font-size-sm);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -89,13 +89,13 @@
 .activityMeta {
   display: inline-flex;
   font-size: var(--font-size-2xs);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-muted);
 }
 
 .activityAmount {
   font-size: var(--font-size-lg);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   font-variant-numeric: tabular-nums;
 }
 

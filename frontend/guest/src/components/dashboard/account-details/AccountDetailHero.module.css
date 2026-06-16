@@ -43,7 +43,7 @@
 .fdicRow span {
   font-size: var(--font-size-2xs);
   font-style: italic;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   text-decoration: underline;
 }
 
@@ -67,7 +67,7 @@
     margin: 0 0 var(--space-5-5);
     padding: 0;
     font-size: var(--font-size-lg);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
     color: var(--color-text-inverse);
     background: transparent;
     border: 0;

@@ -14,7 +14,7 @@
 .sectionKicker {
   margin: 0;
   font-size: var(--font-size-2xs);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-heading-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -32,7 +32,7 @@
   min-height: 40px;
   padding: 0 var(--space-7) var(--space-3);
   font-size: var(--font-size-lg);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   color: var(--color-accent);
   background: transparent;
   border: 0;
@@ -40,7 +40,7 @@
 }
 
 .tab.active {
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   border-bottom-color: var(--color-accent);
 }
 

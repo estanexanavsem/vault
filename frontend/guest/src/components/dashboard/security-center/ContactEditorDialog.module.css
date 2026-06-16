@@ -47,7 +47,7 @@
 .modal h3 {
   margin: 0;
   font-size: var(--font-size-11xl);
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   line-height: 1.18;
 }
 
@@ -100,7 +100,7 @@
 .modalError {
   margin: var(--space-4-5) 0 0;
   font-size: var(--font-size-sm);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--color-danger);
 }
 
@@ -120,7 +120,7 @@
   min-height: 48px;
   padding: 0 var(--space-7);
   font-size: var(--font-size-lg);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   border-radius: var(--radius-md);
 }
 

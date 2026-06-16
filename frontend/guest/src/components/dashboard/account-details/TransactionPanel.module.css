@@ -14,7 +14,7 @@
   min-height: 52px;
   padding: 0 var(--space-4);
   font-size: var(--font-size-lg);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   color: var(--color-brand-strong);
   border-bottom: 1px solid var(--color-border-subtle);
 }
@@ -47,7 +47,7 @@
   min-height: 84px;
   padding: var(--space-8) var(--space-4);
   font-size: var(--font-size-md);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-muted);
 }
 
@@ -63,7 +63,7 @@
   min-height: 40px;
   padding: 0 var(--space-6-5);
   font-size: var(--font-size-md);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--color-brand);
   background: var(--color-surface);
   border: 2px solid var(--color-border-control);

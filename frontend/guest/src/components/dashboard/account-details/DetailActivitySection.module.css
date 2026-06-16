@@ -21,7 +21,7 @@
 .activityCard h2 {
   margin: 0;
   font-size: var(--font-size-6xl);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   letter-spacing: 0;
 }
 

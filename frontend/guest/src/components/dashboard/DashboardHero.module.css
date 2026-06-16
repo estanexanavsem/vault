@@ -13,7 +13,7 @@
 .heroInner h1 {
   margin: 0;
   font-size: var(--font-size-13xl);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-tight);
   letter-spacing: 0;
 }
@@ -31,7 +31,7 @@
   height: 36px;
   padding: 0 var(--space-5);
   font-size: var(--font-size-lg);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-inverse);
   text-decoration: none;
   cursor: pointer;
@@ -62,7 +62,7 @@
 
   .heroInner h1 {
     font-size: var(--font-size-4xl);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
   }
 
   .desktopQuickActions {
