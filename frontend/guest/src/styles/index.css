@@ -10,17 +10,7 @@
 
 @layer base {
   :root {
-    color: #2f2148;
-    background: #f7f7f6;
-    font-family:
-      'Vault Sans',
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      sans-serif;
-    font-synthesis: none;
-    text-rendering: optimizelegibility;
-
+    --font-sans: 'Vault Sans', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', sans-serif;
     --purple-950: #2e1a47;
     --purple-900: #321b50;
     --purple-800: #402561;
@@ -39,6 +29,12 @@
     --surface: #fff;
     --page: #f6f6f5;
     --content-width: 1400px;
+
+    color: #2f2148;
+    background: #f7f7f6;
+    font-family: var(--font-sans);
+    font-synthesis: none;
+    text-rendering: optimizelegibility;
   }
 
   * {
@@ -54,6 +50,7 @@
     min-width: 320px;
     min-height: 100dvh;
     margin: 0;
+    font-family: var(--font-sans);
     background: var(--page);
   }
 
