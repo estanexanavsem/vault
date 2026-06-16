@@ -39,7 +39,6 @@
   justify-content: center;
   align-items: center;
   min-width: 70px;
-  min-width: var(--size-topbar-item-min);
   height: var(--size-header-height);
   padding: 0 var(--space-5);
   font-size: var(--font-size-lg);
@@ -55,10 +54,10 @@
 .nav a.current::after,
 .nav button.current::after {
   position: absolute;
-  bottom: var(--size-topbar-item-offset);
+  bottom: 20px;
   left: 50%;
   width: calc(100% - var(--space-9));
-  height: var(--stroke-width-active);
+  height: 4px;
   content: '';
   background: var(--color-accent-indicator);
   border-radius: var(--radius-pill);
@@ -83,7 +82,7 @@
 }
 
 .signout {
-  min-width: var(--size-topbar-button-min);
+  min-width: 116px;
   min-height: var(--control-height-2xl);
   margin-left: var(--space-6);
   padding: 0 var(--space-7);
