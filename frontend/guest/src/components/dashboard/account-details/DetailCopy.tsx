@@ -1,4 +1,4 @@
-import styles from './account-details.module.css'
+import styles from './DetailCopy.module.css'
 
 export function DetailCopy() {
   return (

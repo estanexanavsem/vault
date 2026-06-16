@@ -1,4 +1,4 @@
-import styles from './account-details.module.css'
+import styles from './DetailUpcomingActivityEmpty.module.css'
 
 export function DetailUpcomingActivityEmpty() {
   return (

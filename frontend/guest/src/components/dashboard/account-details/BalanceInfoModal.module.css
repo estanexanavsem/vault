@@ -1,0 +1,103 @@
+.balanceInfoOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--color-overlay-balance);
+  backdrop-filter: blur(5px);
+}
+
+.balanceInfoDialog {
+  position: relative;
+  width: min(100%, 604px);
+  min-height: 390px;
+  padding: 56px 44px;
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-balance-dialog);
+}
+
+.balanceInfoDialog h2 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.balanceInfoBody {
+  max-width: 520px;
+  margin: 26px 0 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--color-text-subtle);
+}
+
+.balanceInfoBody p {
+  margin: 18px 0 0;
+}
+
+.balanceInfoBody p:first-child {
+  margin-top: 0;
+}
+
+.balanceInfoClose {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: inline-grid;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  place-items: center;
+  color: var(--color-brand);
+  background: transparent;
+  border: 0;
+}
+
+.balanceInfoClose svg {
+  width: 18px;
+  height: 18px;
+}
+
+.balanceInfoAction {
+  min-width: 82px;
+  min-height: 44px;
+  margin-top: 42px;
+  padding: 0 22px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-inverse);
+  background: var(--color-brand);
+  border: 0;
+  border-radius: var(--radius-md);
+}
+
+@media (width <= 760px) {
+  .balanceInfoOverlay {
+    padding: 18px;
+  }
+
+  .balanceInfoDialog {
+    min-height: 0;
+    padding: 42px 26px 30px;
+  }
+
+  .balanceInfoDialog h2 {
+    font-size: 28px;
+  }
+
+  .balanceInfoBody {
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .balanceInfoAction {
+    margin-top: 28px;
+  }
+}

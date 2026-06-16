@@ -2,7 +2,7 @@ import { ChevronLeft } from 'lucide-react'
 import type { MasterAccount } from '../../../types/guest'
 import type { AccountSummary } from '../../../utils/accountSummary'
 import { BalanceSummaryCard } from './BalanceSummaryCard'
-import styles from './account-details.module.css'
+import styles from './AccountDetailHero.module.css'
 
 interface AccountDetailHeroProps {
   account: AccountSummary

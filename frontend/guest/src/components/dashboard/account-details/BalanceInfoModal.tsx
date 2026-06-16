@@ -7,7 +7,7 @@ import {
 } from '@floating-ui/react'
 import { X } from 'lucide-react'
 import type { ReactNode } from 'react'
-import styles from './account-details.module.css'
+import styles from './BalanceInfoModal.module.css'
 
 interface BalanceInfoModalProps {
   children: ReactNode

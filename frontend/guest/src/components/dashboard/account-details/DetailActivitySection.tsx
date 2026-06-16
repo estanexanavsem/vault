@@ -2,20 +2,27 @@ import { useState } from 'react'
 import { cn } from '../../../utils/cn'
 import type { TransferSummary } from '../../../utils/transferSummary'
 import dashboardStyles from '../dashboard.module.css'
-import styles from './account-details.module.css'
+import styles from './DetailActivitySection.module.css'
 import { DetailUpcomingActivityEmpty } from './DetailUpcomingActivityEmpty'
 import { TransactionPanel } from './TransactionPanel'
 
 interface DetailActivitySectionProps {
+  isAccountDetailsOpen: boolean
   transfers: TransferSummary[]
 }
 
-export function DetailActivitySection({ transfers }: DetailActivitySectionProps) {
+export function DetailActivitySection({
+  isAccountDetailsOpen,
+  transfers,
+}: DetailActivitySectionProps) {
   const [activeTab, setActiveTab] = useState<'recent' | 'upcoming'>('recent')
   const isUpcoming = activeTab === 'upcoming'
 
   return (
-    <section className={styles.activityCard} aria-labelledby="detail-activity-title">
+    <section
+      className={cn(styles.activityCard, isAccountDetailsOpen && styles.activityCardDetailsOpen)}
+      aria-labelledby="detail-activity-title"
+    >
       <div className={styles.activityHeading}>
         <h2 id="detail-activity-title">Activity</h2>
       </div>

@@ -1,0 +1,26 @@
+.copy {
+  display: grid;
+  grid-column: 2;
+  gap: 14px;
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--color-text-subtle);
+}
+
+.copy a {
+  color: var(--color-brand);
+  text-decoration: underline;
+}
+
+.copy p {
+  margin: 0;
+}
+
+@media (width <= 760px) {
+  .copy {
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.22;
+  }
+}

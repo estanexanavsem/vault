@@ -1,6 +1,6 @@
 import { WalletCards } from 'lucide-react'
 import type { AccountSummary } from '../../../utils/accountSummary'
-import styles from './account-details.module.css'
+import styles from './AccountDetailSidebar.module.css'
 
 interface AccountDetailSidebarProps {
   account: AccountSummary

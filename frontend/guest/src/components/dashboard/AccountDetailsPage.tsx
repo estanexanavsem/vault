@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import type { GuestData } from '../../types/guest'
 import { getAccountSummary } from '../../utils/accountSummary'
-import { cn } from '../../utils/cn'
 import { formatCurrency } from '../../utils/formatters'
 import { getTransferBalance } from '../../utils/transferBalance'
 import { getLatestTransferSummary, getTransferSummaries } from '../../utils/transferSummary'
@@ -10,7 +9,7 @@ import { AccountDetailSidebar } from './account-details/AccountDetailSidebar'
 import { DetailActivitySection } from './account-details/DetailActivitySection'
 import { DetailCopy } from './account-details/DetailCopy'
 import { DownloadAppCard } from './account-details/DownloadAppCard'
-import styles from './account-details/account-details.module.css'
+import styles from './AccountDetailsPage.module.css'
 
 interface AccountDetailsPageProps {
   data: GuestData
@@ -35,12 +34,12 @@ export function AccountDetailsPage({ data, onBack }: AccountDetailsPageProps) {
         onBack={onBack}
       />
 
-      <main
-        className={cn(styles.main, isAccountDetailsOpen && styles.mainDetailsOpen)}
-        id="account-detail"
-      >
+      <main className={styles.main} id="account-detail">
         <AccountDetailSidebar account={account} />
-        <DetailActivitySection transfers={transferSummaries} />
+        <DetailActivitySection
+          isAccountDetailsOpen={isAccountDetailsOpen}
+          transfers={transferSummaries}
+        />
         <DetailCopy />
         <DownloadAppCard />
       </main>

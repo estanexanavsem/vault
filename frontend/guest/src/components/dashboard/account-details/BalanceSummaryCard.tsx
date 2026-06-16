@@ -5,7 +5,7 @@ import type { MasterAccount } from '../../../types/guest'
 import type { AccountSummary } from '../../../utils/accountSummary'
 import { getLastFour } from '../../../utils/formatters'
 import { BalanceInfoModal } from './BalanceInfoModal'
-import styles from './account-details.module.css'
+import styles from './BalanceSummaryCard.module.css'
 
 type BalanceInfoDialog = 'available' | 'current'
 

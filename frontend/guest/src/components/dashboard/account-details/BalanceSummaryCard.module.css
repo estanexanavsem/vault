@@ -1,0 +1,222 @@
+.balanceCard {
+  min-height: 205px;
+  padding: 20px 28px 16px;
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.balanceCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.balanceCard h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.accountDetailsLink {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 40px;
+  padding: 0;
+  font-weight: 700;
+  color: var(--color-brand);
+  background: transparent;
+  border: 0;
+}
+
+.accountInfoPanel {
+  margin-top: 42px;
+}
+
+.accountInfoDivider {
+  height: 1px;
+  background: var(--color-border-subtle);
+}
+
+.accountInfoTitle {
+  display: flex;
+  gap: 1px;
+  align-items: center;
+  margin: 22px 0 18px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+.accountInfoTitle span {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.accountInfoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 24px 34px;
+  color: var(--color-text-subtle);
+  background: var(--color-surface-brand);
+  border-radius: var(--radius-lg);
+}
+
+.accountInfoGrid div {
+  min-width: 0;
+  padding: 0 26px;
+  border-left: 1px solid var(--color-brand-strong);
+}
+
+.accountInfoGrid div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.accountInfoGrid dt {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.accountInfoGrid dd {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 8px 0 0;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--color-text-subtle);
+  overflow-wrap: anywhere;
+}
+
+.accountNumberReveal {
+  display: inline-grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  padding: 0;
+  place-items: center;
+  color: var(--color-brand);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-pill);
+}
+
+.accountInfoHelp {
+  display: inline-grid;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  place-items: center;
+  color: var(--color-brand);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-pill);
+}
+
+.accountInfoGrid svg {
+  flex: 0 0 auto;
+  color: var(--color-brand);
+}
+
+.balanceAmount {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: 16px 0 0;
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-brand-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.balanceInfoButton {
+  display: inline-grid;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  place-items: center;
+  color: var(--color-brand-strong);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-pill);
+}
+
+.balanceNote {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--color-text-subtle);
+}
+
+@media (width <= 760px) {
+  .balanceCard {
+    min-height: 250px;
+    padding: 26px 24px 22px;
+    border-radius: var(--radius-md);
+  }
+
+  .balanceCardTop {
+    display: grid;
+    gap: 7px;
+  }
+
+  .balanceCard h1 {
+    font-size: 20px;
+  }
+
+  .accountDetailsLink {
+    justify-content: flex-start;
+    min-height: 22px;
+    font-size: 16px;
+  }
+
+  .accountInfoPanel {
+    margin-top: 24px;
+  }
+
+  .accountInfoTitle {
+    margin: 16px 0 14px;
+    font-size: 15px;
+  }
+
+  .accountInfoGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 18px 20px;
+  }
+
+  .accountInfoGrid div {
+    padding: 0;
+    border-left: 0;
+  }
+
+  .accountInfoGrid dt {
+    font-size: 13px;
+  }
+
+  .accountInfoGrid dd {
+    margin-top: 5px;
+    font-size: 15px;
+  }
+
+  .balanceAmount {
+    margin-top: 18px;
+    font-size: 30px;
+  }
+
+  .balanceNote {
+    margin-top: 9px;
+    font-size: 14px;
+  }
+}
