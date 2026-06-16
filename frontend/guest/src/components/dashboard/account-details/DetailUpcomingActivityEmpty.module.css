@@ -1,18 +1,18 @@
 .upcomingActivity {
-  margin-top: 42px;
+  margin-top: var(--space-12);
 }
 
 .upcomingIntro {
   margin: 0;
   max-width: 920px;
-  font-size: 16px;
-  line-height: 1.35;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
   color: var(--color-text-primary);
 }
 
 .upcomingEmptyState {
   display: flex;
-  gap: 12px;
+  gap: var(--space-4);
   align-items: center;
   min-height: 94px;
   color: var(--color-text-primary);
@@ -25,13 +25,13 @@
 }
 
 .upcomingEmptyState strong {
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 700;
 }
 
 .upcomingTable {
   overflow: hidden;
-  margin-top: 12px;
+  margin-top: var(--space-4);
   border: 1px solid var(--color-brand);
   border-radius: var(--radius-md);
 }
@@ -41,21 +41,21 @@
   align-items: center;
   justify-content: space-between;
   min-height: 52px;
-  padding: 0 16px;
+  padding: 0 var(--space-5);
   color: var(--color-text-primary);
   background: var(--color-border-control);
 }
 
 .upcomingTable header strong {
-  font-size: 17px;
+  font-size: var(--font-size-xl);
   font-weight: 700;
 }
 
 .upcomingTable header span {
   display: inline-flex;
-  gap: 10px;
+  gap: var(--space-3-5);
   align-items: center;
-  font-size: 17px;
+  font-size: var(--font-size-xl);
   font-weight: 700;
   color: var(--color-text-subtle);
 }
@@ -64,32 +64,32 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1.6fr 0.8fr;
   min-height: 52px;
-  padding: 0 16px;
+  padding: 0 var(--space-5);
   align-items: center;
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .upcomingTableHead span {
-  font-size: 16px;
+  font-size: var(--font-size-lg);
   color: var(--color-text-primary);
 }
 
 .upcomingTable p {
   margin: 0;
   min-height: 54px;
-  padding: 18px 16px;
-  font-size: 16px;
+  padding: var(--space-5-5) var(--space-5);
+  font-size: var(--font-size-lg);
   color: var(--color-text-subtle);
 }
 
 @media (width <= 760px) {
   .upcomingActivity {
-    margin-top: 24px;
-    padding: 0 14px 18px;
+    margin-top: var(--space-7);
+    padding: 0 var(--space-4-5) var(--space-5-5);
   }
 
   .upcomingIntro {
-    font-size: 14px;
+    font-size: var(--font-size-sm);
   }
 
   .upcomingEmptyState {
@@ -103,22 +103,22 @@
 
   .upcomingTable header {
     min-height: 48px;
-    padding: 0 14px;
+    padding: 0 var(--space-4-5);
   }
 
   .upcomingTable header strong,
   .upcomingTable header span {
-    font-size: 15px;
+    font-size: var(--font-size-md);
   }
 
   .upcomingTableHead {
     grid-template-columns: 1fr 1fr 1fr 0.9fr;
     min-height: 46px;
-    padding: 0 14px;
+    padding: 0 var(--space-4-5);
   }
 
   .upcomingTableHead span,
   .upcomingTable p {
-    font-size: 14px;
+    font-size: var(--font-size-sm);
   }
 }

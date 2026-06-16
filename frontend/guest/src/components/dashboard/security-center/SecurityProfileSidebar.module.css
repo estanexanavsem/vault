@@ -1,5 +1,5 @@
 .sidebar {
-  padding: 54px 28px 40px;
+  padding: var(--space-17) var(--space-8) var(--space-11);
   background: var(--color-surface);
   border-right: 1px solid var(--color-border-subtle);
 }
@@ -19,7 +19,7 @@
   width: 88px;
   height: 88px;
   place-items: center;
-  font-size: 38px;
+  font-size: var(--font-size-14xl);
   font-weight: 400;
   color: var(--color-brand-strong);
   background: var(--color-brand-avatar);
@@ -27,31 +27,31 @@
 }
 
 .profile h1 {
-  margin: 14px 0 0;
-  font-size: 28px;
+  margin: var(--space-4-5) 0 0;
+  font-size: var(--font-size-10xl);
   font-weight: 400;
-  line-height: 1.15;
+  line-height: var(--line-height-tight);
 }
 
 .profile p {
-  margin: 8px 0 0;
-  font-size: 12px;
+  margin: var(--space-3) 0 0;
+  font-size: var(--font-size-2xs);
   color: var(--color-text-muted);
 }
 
 .sideNav {
   display: grid;
-  gap: 2px;
+  gap: var(--space-0-5);
   margin-top: 38px;
 }
 
 .sideNav button {
   display: flex;
-  gap: 16px;
+  gap: var(--space-5);
   align-items: center;
   min-height: 58px;
-  padding: 0 18px;
-  font-size: 14px;
+  padding: 0 var(--space-5-5);
+  font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-brand);
   text-align: left;
@@ -75,7 +75,7 @@
 
 @media (width <= 900px) {
   .sidebar {
-    padding: 28px 16px 20px;
+    padding: var(--space-8) var(--space-5) var(--space-6);
     border-right: 0;
     border-bottom: 1px solid var(--color-border-subtle);
   }
@@ -83,20 +83,20 @@
   .avatar {
     width: 74px;
     height: 74px;
-    font-size: 30px;
+    font-size: var(--font-size-11xl);
   }
 
   .profile h1 {
-    font-size: 23px;
+    font-size: var(--font-size-7xl);
   }
 
   .sideNav {
-    margin-top: 20px;
+    margin-top: var(--space-6);
   }
 
   .sideNav button {
     min-height: 50px;
-    padding: 0 14px;
-    font-size: 14px;
+    padding: 0 var(--space-4-5);
+    font-size: var(--font-size-sm);
   }
 }

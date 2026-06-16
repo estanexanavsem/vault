@@ -8,12 +8,12 @@
 .shell {
   display: grid;
   grid-template-columns: 340px minmax(0, 1fr);
-  gap: 24px;
+  gap: var(--space-7);
   align-items: start;
   width: min(100%, var(--content-width));
   min-height: 0;
   margin: 0 auto;
-  padding: 34px 32px 18px;
+  padding: var(--space-9-5) var(--space-9) var(--space-5-5);
 }
 
 .mobileBackLink {
@@ -23,14 +23,14 @@
 .content {
   display: grid;
   grid-column: 2;
-  gap: 22px;
+  gap: var(--space-6-5);
   min-width: 0;
   padding-top: 0;
 }
 
 .fdicRow {
   display: flex;
-  gap: 14px;
+  gap: var(--space-4-5);
   align-items: center;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .fdicRow span {
-  font-size: 12px;
+  font-size: var(--font-size-2xs);
   font-style: italic;
   font-weight: 700;
   text-decoration: underline;
@@ -56,17 +56,17 @@
   .shell {
     display: block;
     min-height: 0;
-    padding: 0 16px;
+    padding: 0 var(--space-5);
   }
 
   .mobileBackLink {
     display: inline-flex;
-    gap: 7px;
+    gap: var(--space-2-5);
     align-items: center;
     min-height: 26px;
-    margin: 0 0 18px;
+    margin: 0 0 var(--space-5-5);
     padding: 0;
-    font-size: 16px;
+    font-size: var(--font-size-lg);
     font-weight: 700;
     color: var(--color-text-inverse);
     background: transparent;
@@ -85,19 +85,19 @@
   }
 
   .fdicRow {
-    gap: 11px;
+    gap: var(--space-3-75);
     align-items: flex-start;
-    margin-bottom: 18px;
+    margin-bottom: var(--space-5-5);
   }
 
   .fdicRow strong {
-    font-size: 22px;
+    font-size: var(--font-size-6xl);
     line-height: 1;
   }
 
   .fdicRow span {
     max-width: 330px;
-    font-size: 12px;
+    font-size: var(--font-size-2xs);
     line-height: 1.08;
   }
 }

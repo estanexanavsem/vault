@@ -1,6 +1,6 @@
 .balanceCard {
   min-height: 205px;
-  padding: 20px 28px 16px;
+  padding: var(--space-6) var(--space-8) var(--space-5);
   color: var(--color-text-primary);
   background: var(--color-surface);
   border: 1px solid var(--color-border-subtle);
@@ -15,14 +15,14 @@
 
 .balanceCard h1 {
   margin: 0;
-  font-size: 22px;
+  font-size: var(--font-size-6xl);
   font-weight: 700;
   letter-spacing: 0;
 }
 
 .accountDetailsLink {
   display: inline-flex;
-  gap: 8px;
+  gap: var(--space-3);
   align-items: center;
   min-height: 40px;
   padding: 0;
@@ -33,7 +33,7 @@
 }
 
 .accountInfoPanel {
-  margin-top: 42px;
+  margin-top: var(--space-12);
 }
 
 .accountInfoDivider {
@@ -43,17 +43,17 @@
 
 .accountInfoTitle {
   display: flex;
-  gap: 1px;
+  gap: var(--space-px);
   align-items: center;
-  margin: 22px 0 18px;
-  font-size: 17px;
+  margin: var(--space-6-5) 0 var(--space-5-5);
+  font-size: var(--font-size-xl);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: var(--line-height-snug);
   color: var(--color-text-primary);
 }
 
 .accountInfoTitle span {
-  font-size: 20px;
+  font-size: var(--font-size-4xl);
   line-height: 1;
 }
 
@@ -61,7 +61,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: 0;
-  padding: 24px 34px;
+  padding: var(--space-7) var(--space-9-5);
   color: var(--color-text-subtle);
   background: var(--color-surface-brand);
   border-radius: var(--radius-lg);
@@ -69,7 +69,7 @@
 
 .accountInfoGrid div {
   min-width: 0;
-  padding: 0 26px;
+  padding: 0 var(--space-7-5);
   border-left: 1px solid var(--color-brand-strong);
 }
 
@@ -80,21 +80,21 @@
 
 .accountInfoGrid dt {
   display: flex;
-  gap: 8px;
+  gap: var(--space-3);
   align-items: center;
   margin: 0;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 500;
-  line-height: 1.2;
+  line-height: var(--line-height-snug);
 }
 
 .accountInfoGrid dd {
   display: flex;
-  gap: 10px;
+  gap: var(--space-3-5);
   align-items: center;
-  margin: 8px 0 0;
-  font-size: 16px;
-  line-height: 1.2;
+  margin: var(--space-3) 0 0;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-snug);
   color: var(--color-text-subtle);
   overflow-wrap: anywhere;
 }
@@ -131,10 +131,10 @@
 
 .balanceAmount {
   display: flex;
-  gap: 6px;
+  gap: var(--space-2);
   align-items: center;
-  margin: 16px 0 0;
-  font-size: 34px;
+  margin: var(--space-5) 0 0;
+  font-size: var(--font-size-display-sm);
   font-weight: 400;
   line-height: 1;
   color: var(--color-brand-strong);
@@ -154,46 +154,46 @@
 }
 
 .balanceNote {
-  margin: 8px 0 0;
-  font-size: 14px;
+  margin: var(--space-3) 0 0;
+  font-size: var(--font-size-sm);
   color: var(--color-text-subtle);
 }
 
 @media (width <= 760px) {
   .balanceCard {
     min-height: 250px;
-    padding: 26px 24px 22px;
+    padding: var(--space-7-5) var(--space-7) var(--space-6-5);
     border-radius: var(--radius-md);
   }
 
   .balanceCardTop {
     display: grid;
-    gap: 7px;
+    gap: var(--space-2-5);
   }
 
   .balanceCard h1 {
-    font-size: 20px;
+    font-size: var(--font-size-4xl);
   }
 
   .accountDetailsLink {
     justify-content: flex-start;
     min-height: 22px;
-    font-size: 16px;
+    font-size: var(--font-size-lg);
   }
 
   .accountInfoPanel {
-    margin-top: 24px;
+    margin-top: var(--space-7);
   }
 
   .accountInfoTitle {
-    margin: 16px 0 14px;
-    font-size: 15px;
+    margin: var(--space-5) 0 var(--space-4-5);
+    font-size: var(--font-size-md);
   }
 
   .accountInfoGrid {
     grid-template-columns: 1fr;
-    gap: 14px;
-    padding: 18px 20px;
+    gap: var(--space-4-5);
+    padding: var(--space-5-5) var(--space-6);
   }
 
   .accountInfoGrid div {
@@ -202,21 +202,21 @@
   }
 
   .accountInfoGrid dt {
-    font-size: 13px;
+    font-size: var(--font-size-xs);
   }
 
   .accountInfoGrid dd {
-    margin-top: 5px;
-    font-size: 15px;
+    margin-top: var(--space-1-5);
+    font-size: var(--font-size-md);
   }
 
   .balanceAmount {
-    margin-top: 18px;
-    font-size: 30px;
+    margin-top: var(--space-5-5);
+    font-size: var(--font-size-11xl);
   }
 
   .balanceNote {
     margin-top: 9px;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
   }
 }

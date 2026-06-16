@@ -4,7 +4,7 @@
   z-index: var(--z-modal);
   display: grid;
   place-items: center;
-  padding: 24px;
+  padding: var(--space-7);
   background: var(--color-overlay-balance);
   backdrop-filter: blur(5px);
 }
@@ -13,7 +13,7 @@
   position: relative;
   width: min(100%, 604px);
   min-height: 390px;
-  padding: 56px 44px;
+  padding: var(--space-18) var(--space-13);
   color: var(--color-text-primary);
   background: var(--color-surface);
   border-radius: var(--radius-md);
@@ -22,23 +22,23 @@
 
 .balanceInfoDialog h2 {
   margin: 0;
-  font-size: 36px;
+  font-size: var(--font-size-13xl);
   font-weight: 500;
-  line-height: 1.15;
+  line-height: var(--line-height-tight);
   letter-spacing: 0;
 }
 
 .balanceInfoBody {
   max-width: 520px;
-  margin: 26px 0 0;
-  font-size: 16px;
+  margin: var(--space-7-5) 0 0;
+  font-size: var(--font-size-lg);
   font-weight: 500;
-  line-height: 1.45;
+  line-height: var(--line-height-copy);
   color: var(--color-text-subtle);
 }
 
 .balanceInfoBody p {
-  margin: 18px 0 0;
+  margin: var(--space-5-5) 0 0;
 }
 
 .balanceInfoBody p:first-child {
@@ -67,9 +67,9 @@
 .balanceInfoAction {
   min-width: 82px;
   min-height: 44px;
-  margin-top: 42px;
-  padding: 0 22px;
-  font-size: 16px;
+  margin-top: var(--space-12);
+  padding: 0 var(--space-6-5);
+  font-size: var(--font-size-lg);
   font-weight: 700;
   color: var(--color-text-inverse);
   background: var(--color-brand);
@@ -79,25 +79,25 @@
 
 @media (width <= 760px) {
   .balanceInfoOverlay {
-    padding: 18px;
+    padding: var(--space-5-5);
   }
 
   .balanceInfoDialog {
     min-height: 0;
-    padding: 42px 26px 30px;
+    padding: var(--space-12) var(--space-7-5) var(--space-8-5);
   }
 
   .balanceInfoDialog h2 {
-    font-size: 28px;
+    font-size: var(--font-size-10xl);
   }
 
   .balanceInfoBody {
-    margin-top: 20px;
-    font-size: 14px;
+    margin-top: var(--space-6);
+    font-size: var(--font-size-sm);
     line-height: 1.4;
   }
 
   .balanceInfoAction {
-    margin-top: 28px;
+    margin-top: var(--space-8);
   }
 }

@@ -2,14 +2,14 @@
   display: grid;
   min-height: 100dvh;
   place-items: center;
-  padding: 24px;
+  padding: var(--space-7);
   color: var(--color-text-primary);
   background: var(--gradient-auth);
 }
 
 .panel {
   width: min(100%, 430px);
-  padding: 30px;
+  padding: var(--space-8-5);
   background: var(--color-surface);
   border: 1px solid var(--color-border-control);
   border-radius: var(--radius-4xl);
@@ -17,7 +17,7 @@
 
 .brand {
   display: flex;
-  gap: 14px;
+  gap: var(--space-4-5);
   align-items: center;
   color: var(--color-brand-strong);
 }
@@ -34,7 +34,7 @@
 }
 
 .brand p {
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 800;
   color: var(--color-brand);
   text-transform: uppercase;
@@ -42,7 +42,7 @@
 }
 
 .brand h1 {
-  font-size: 20px;
+  font-size: var(--font-size-4xl);
   font-weight: 600;
   line-height: 22px;
   letter-spacing: 0;
@@ -50,17 +50,17 @@
 
 .form {
   display: grid;
-  gap: 18px;
-  margin-top: 28px;
+  gap: var(--space-5-5);
+  margin-top: var(--space-8);
 }
 
 .errorBanner {
   display: flex;
-  gap: 10px;
+  gap: var(--space-3-5);
   align-items: center;
   min-height: 48px;
-  padding: 12px 14px;
-  font-size: 14px;
+  padding: var(--space-4) var(--space-4-5);
+  font-size: var(--font-size-sm);
   color: var(--color-danger-strong);
   background: var(--color-danger-surface);
   border: 1px solid var(--color-danger-border);
@@ -69,18 +69,18 @@
 
 .field {
   display: grid;
-  gap: 8px;
-  font-size: 14px;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-brand-strong);
 }
 
 .inputShell {
   display: flex;
-  gap: 10px;
+  gap: var(--space-3-5);
   align-items: center;
   min-height: 48px;
-  padding: 0 14px;
+  padding: 0 var(--space-4-5);
   color: var(--color-brand);
   border: 1px solid var(--color-border-control);
   border-radius: var(--radius-md);
@@ -96,7 +96,7 @@
 }
 
 .fieldError {
-  font-size: 13px;
+  font-size: var(--font-size-xs);
   font-weight: 700;
   color: var(--color-danger);
 }
@@ -106,8 +106,8 @@
   align-items: center;
   justify-content: center;
   min-height: 50px;
-  margin-top: 8px;
-  font-size: 15px;
+  margin-top: var(--space-3);
+  font-size: var(--font-size-md);
   font-weight: 700;
   color: var(--color-text-inverse);
   background: var(--color-brand);
@@ -144,7 +144,7 @@
     align-content: center;
     width: 100%;
     min-height: 100dvh;
-    padding: 28px 20px;
+    padding: var(--space-8) var(--space-6);
     border: 0;
     border-radius: 0;
   }

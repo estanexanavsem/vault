@@ -2,13 +2,13 @@
 .activityRow {
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr) auto 20px;
-  gap: 12px;
+  gap: var(--space-4);
   align-items: center;
 }
 
 .activityTableLabels {
-  margin-top: 18px;
-  font-size: 16px;
+  margin-top: var(--space-5-5);
+  font-size: var(--font-size-lg);
   font-weight: 700;
 }
 
@@ -19,17 +19,17 @@
 
 .activityRows {
   display: grid;
-  margin-top: 12px;
+  margin-top: var(--space-4);
 }
 
 .moreActivityButton {
   display: inline-flex;
-  gap: 6px;
+  gap: var(--space-2);
   align-items: center;
   width: fit-content;
-  margin-top: 8px;
+  margin-top: var(--space-3);
   padding: 0;
-  font-size: 15px;
+  font-size: var(--font-size-md);
   font-weight: 700;
   color: var(--color-brand);
   text-decoration: none;
@@ -42,8 +42,8 @@
 }
 
 .activityNoRows {
-  margin: 18px 0 0;
-  font-size: 14px;
+  margin: var(--space-5-5) 0 0;
+  font-size: var(--font-size-sm);
   font-weight: 600;
   color: var(--color-text-muted);
 }
@@ -52,7 +52,7 @@
   width: 100%;
   height: 80px;
   min-height: 50px;
-  padding: 0 0 0 8px;
+  padding: 0 0 0 var(--space-3);
   color: var(--color-text-primary);
   text-align: left;
   background: transparent;
@@ -68,13 +68,13 @@
 
 .activityCopy {
   display: grid;
-  gap: 2px;
+  gap: var(--space-0-5);
   min-width: 0;
 }
 
 .activityCopy strong {
   overflow: hidden;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 700;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -88,13 +88,13 @@
 
 .activityMeta {
   display: inline-flex;
-  font-size: 12px;
+  font-size: var(--font-size-2xs);
   font-weight: 600;
   color: var(--color-text-muted);
 }
 
 .activityAmount {
-  font-size: 16px;
+  font-size: var(--font-size-lg);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
@@ -126,19 +126,19 @@
   .activityTableLabels,
   .activityRow {
     grid-template-columns: 26px minmax(0, 1fr) auto 16px;
-    gap: 8px;
+    gap: var(--space-3);
   }
 
   .activityTableLabels {
-    margin-top: 18px;
+    margin-top: var(--space-5-5);
   }
 
   .activityCopy strong {
     max-width: 106px;
-    font-size: 12px;
+    font-size: var(--font-size-2xs);
   }
 
   .activityAmount {
-    font-size: 14px;
+    font-size: var(--font-size-sm);
   }
 }

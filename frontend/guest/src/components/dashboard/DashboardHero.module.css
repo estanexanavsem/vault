@@ -7,21 +7,21 @@
 .heroInner {
   width: min(100%, var(--content-width));
   margin: 0 auto;
-  padding: 34px 32px 28px;
+  padding: var(--space-9-5) var(--space-9) var(--space-8);
 }
 
 .heroInner h1 {
   margin: 0;
-  font-size: 36px;
+  font-size: var(--font-size-13xl);
   font-weight: 500;
-  line-height: 1.15;
+  line-height: var(--line-height-tight);
   letter-spacing: 0;
 }
 
 .desktopQuickActions {
   display: flex;
-  gap: 16px;
-  margin-top: 32px;
+  gap: var(--space-5);
+  margin-top: var(--space-9);
 }
 
 .desktopQuickActions a {
@@ -29,8 +29,8 @@
   align-items: center;
   justify-content: center;
   height: 36px;
-  padding: 0 16px;
-  font-size: 16px;
+  padding: 0 var(--space-5);
+  font-size: var(--font-size-lg);
   font-weight: 700;
   color: var(--color-text-inverse);
   text-decoration: none;
@@ -57,11 +57,11 @@
   }
 
   .heroInner {
-    padding: 20px 20px 22px;
+    padding: var(--space-6) var(--space-6) var(--space-6-5);
   }
 
   .heroInner h1 {
-    font-size: 20px;
+    font-size: var(--font-size-4xl);
     font-weight: 600;
   }
 

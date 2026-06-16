@@ -15,6 +15,75 @@
     --content-width: 1400px;
     --size-header-height: 75px;
 
+    /* Type scale */
+    --font-size-3xs: 11px;
+    --font-size-2xs: 12px;
+    --font-size-xs: 13px;
+    --font-size-sm: 14px;
+    --font-size-md: 15px;
+    --font-size-lg: 16px;
+    --font-size-xl: 17px;
+    --font-size-2xl: 18px;
+    --font-size-3xl: 19px;
+    --font-size-4xl: 20px;
+    --font-size-5xl: 21px;
+    --font-size-6xl: 22px;
+    --font-size-7xl: 23px;
+    --font-size-8xl: 24px;
+    --font-size-9xl: 26px;
+    --font-size-10xl: 28px;
+    --font-size-11xl: 30px;
+    --font-size-12xl: 32px;
+    --font-size-display-sm: 34px;
+    --font-size-13xl: 36px;
+    --font-size-14xl: 38px;
+    --line-height-tight: 1.15;
+    --line-height-snug: 1.2;
+    --line-height-title: 1.22;
+    --line-height-compact: 1.25;
+    --line-height-relaxed: 1.35;
+    --line-height-copy: 1.45;
+
+    /* Spacing scale */
+    --space-0: 0;
+    --space-px: 1px;
+    --space-0-5: 2px;
+    --space-1: 4px;
+    --space-1-5: 5px;
+    --space-2: 6px;
+    --space-2-5: 7px;
+    --space-3: 8px;
+    --space-3-5: 10px;
+    --space-3-75: 11px;
+    --space-4: 12px;
+    --space-4-5: 14px;
+    --space-5: 16px;
+    --space-5-25: 17px;
+    --space-5-5: 18px;
+    --space-6: 20px;
+    --space-6-5: 22px;
+    --space-7: 24px;
+    --space-7-5: 26px;
+    --space-8: 28px;
+    --space-8-5: 30px;
+    --space-9: 32px;
+    --space-9-5: 34px;
+    --space-10: 36px;
+    --space-11: 40px;
+    --space-12: 42px;
+    --space-13: 44px;
+    --space-14: 46px;
+    --space-15: 48px;
+    --space-16: 52px;
+    --space-17: 54px;
+    --space-18: 56px;
+    --space-19: 58px;
+    --space-20: 64px;
+    --space-21: 72px;
+    --space-22: 76px;
+    --space-23: 80px;
+    --space-24: 88px;
+
     /* Radius */
     --radius-2xs: 3px;
     --radius-xs: 4px;

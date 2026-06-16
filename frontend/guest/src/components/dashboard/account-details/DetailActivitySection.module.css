@@ -1,6 +1,6 @@
 .activityCard {
   grid-column: 2;
-  padding: 42px 18px 24px;
+  padding: var(--space-12) var(--space-5-5) var(--space-7);
   background: var(--color-surface);
   border: 1px solid var(--color-border-subtle);
   border-top: 0;
@@ -15,41 +15,41 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 18px;
+  padding-left: var(--space-5-5);
 }
 
 .activityCard h2 {
   margin: 0;
-  font-size: 22px;
+  font-size: var(--font-size-6xl);
   font-weight: 700;
   letter-spacing: 0;
 }
 
 .detailTabs {
-  margin-top: 48px;
+  margin-top: var(--space-15);
 }
 
 @media (width <= 760px) {
   .activityCard,
   .activityCardDetailsOpen {
-    margin-top: 18px;
+    margin-top: var(--space-5-5);
   }
 
   .activityCard {
-    padding: 40px 0 0;
+    padding: var(--space-11) 0 0;
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-mobile-activity-card);
   }
 
   .activityHeading {
     display: grid;
-    gap: 18px;
-    padding: 0 10px;
+    gap: var(--space-5-5);
+    padding: 0 var(--space-3-5);
   }
 
   .activityHeading h2 {
-    padding-left: 16px;
-    font-size: 20px;
+    padding-left: var(--space-5);
+    font-size: var(--font-size-4xl);
   }
 
   .detailTabs {

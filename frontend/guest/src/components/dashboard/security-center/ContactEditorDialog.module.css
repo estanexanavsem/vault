@@ -6,7 +6,7 @@
   max-width: none;
   height: 100%;
   max-height: none;
-  padding: 24px;
+  padding: var(--space-7);
   background: transparent;
   border: 0;
 }
@@ -23,7 +23,7 @@
 .modal {
   position: relative;
   width: min(100%, 600px);
-  padding: 46px 30px 32px;
+  padding: var(--space-14) var(--space-8-5) var(--space-9);
   color: var(--color-brand-strong);
   background: var(--color-surface);
   border: 0;
@@ -46,23 +46,23 @@
 
 .modal h3 {
   margin: 0;
-  font-size: 30px;
+  font-size: var(--font-size-11xl);
   font-weight: 400;
   line-height: 1.18;
 }
 
 .modalCopy {
-  margin: 32px 0 0;
-  font-size: 16px;
-  line-height: 1.45;
+  margin: var(--space-9) 0 0;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-copy);
   color: var(--color-text-muted);
 }
 
 .modalField {
   display: grid;
-  gap: 12px;
-  margin-top: 28px;
-  font-size: 16px;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  font-size: var(--font-size-lg);
   color: var(--color-text-muted);
 }
 
@@ -86,8 +86,8 @@
   width: 100%;
   min-width: 0;
   height: 46px;
-  padding: 0 14px;
-  font-size: 16px;
+  padding: 0 var(--space-4-5);
+  font-size: var(--font-size-lg);
   color: var(--color-text-soft);
   background: transparent;
   border: 0;
@@ -98,17 +98,17 @@
 }
 
 .modalError {
-  margin: 14px 0 0;
-  font-size: 14px;
+  margin: var(--space-4-5) 0 0;
+  font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-danger);
 }
 
 .modalActions {
   display: flex;
-  gap: 16px;
+  gap: var(--space-5);
   align-items: center;
-  margin-top: 30px;
+  margin-top: var(--space-8-5);
 }
 
 .primaryButton,
@@ -118,8 +118,8 @@
   justify-content: center;
   min-width: 104px;
   min-height: 48px;
-  padding: 0 24px;
-  font-size: 16px;
+  padding: 0 var(--space-7);
+  font-size: var(--font-size-lg);
   font-weight: 700;
   border-radius: var(--radius-md);
 }
@@ -147,7 +147,7 @@
   .modal {
     width: 100%;
     min-height: 100dvh;
-    padding: 52px 30px 32px;
+    padding: var(--space-16) var(--space-8-5) var(--space-9);
     border-radius: 0;
     box-shadow: none;
   }

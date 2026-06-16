@@ -1,10 +1,10 @@
 .copy {
   display: grid;
   grid-column: 2;
-  gap: 14px;
-  margin-top: 20px;
-  font-size: 16px;
-  line-height: 1.25;
+  gap: var(--space-4-5);
+  margin-top: var(--space-6);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-compact);
   color: var(--color-text-subtle);
 }
 
@@ -19,8 +19,8 @@
 
 @media (width <= 760px) {
   .copy {
-    margin-top: 16px;
-    font-size: 16px;
-    line-height: 1.22;
+    margin-top: var(--space-5);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-title);
   }
 }

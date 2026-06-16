@@ -1,5 +1,5 @@
 .card {
-  padding: 26px 24px 32px;
+  padding: var(--space-7-5) var(--space-7) var(--space-9);
   background: var(--color-surface);
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-3xl);
@@ -13,7 +13,7 @@
 
 .sectionKicker {
   margin: 0;
-  font-size: 12px;
+  font-size: var(--font-size-2xs);
   font-weight: 700;
   color: var(--color-text-heading-muted);
   text-transform: uppercase;
@@ -23,15 +23,15 @@
 .tabs {
   display: flex;
   gap: 0;
-  margin-top: 28px;
+  margin-top: var(--space-8);
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .tab {
   min-width: 78px;
   min-height: 40px;
-  padding: 0 24px 8px;
-  font-size: 16px;
+  padding: 0 var(--space-7) var(--space-3);
+  font-size: var(--font-size-lg);
   font-weight: 500;
   color: var(--color-accent);
   background: transparent;
@@ -66,16 +66,16 @@
   .card {
     width: 100%;
     min-width: 0;
-    padding: 20px 18px 22px;
+    padding: var(--space-6) var(--space-5-5) var(--space-6-5);
     border-radius: var(--radius-xl);
   }
 
   .sectionKicker {
-    font-size: 11px;
+    font-size: var(--font-size-3xs);
   }
 
   .tabs {
-    margin-top: 20px;
+    margin-top: var(--space-6);
   }
 
   .tab {

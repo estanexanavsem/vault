@@ -1,13 +1,13 @@
 .infoPanel {
   max-width: 880px;
-  margin-top: 28px;
-  padding: 34px 42px 36px;
+  margin-top: var(--space-8);
+  padding: var(--space-9-5) var(--space-12) var(--space-10);
   background: var(--color-surface);
   border: 1px solid var(--color-border-panel);
 }
 
 .infoPanel + .infoPanel {
-  margin-top: 16px;
+  margin-top: var(--space-5);
 }
 
 .infoPanel:hover {
@@ -18,12 +18,12 @@
 .panelHead {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 24px;
+  gap: var(--space-7);
   align-items: start;
 }
 
 .panelHead svg {
-  margin-top: 34px;
+  margin-top: var(--space-9-5);
   color: var(--color-accent);
   transition: var(--transition-transform-base);
 }
@@ -34,16 +34,16 @@
 
 .panelHead h3 {
   margin: 0;
-  font-size: 24px;
+  font-size: var(--font-size-8xl);
   font-weight: 400;
-  line-height: 1.2;
+  line-height: var(--line-height-snug);
 }
 
 .panelHead p {
   max-width: 760px;
-  margin: 22px 0 0;
-  font-size: 16px;
-  line-height: 1.45;
+  margin: var(--space-6-5) 0 0;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-copy);
   color: var(--color-text-muted);
 }
 
@@ -58,41 +58,41 @@
 
 .detailRow {
   display: flex;
-  gap: 24px;
+  gap: var(--space-7);
   align-items: flex-start;
   justify-content: space-between;
-  margin-top: 56px;
+  margin-top: var(--space-18);
 }
 
 .detailRow span {
   display: block;
-  font-size: 15px;
+  font-size: var(--font-size-md);
   color: var(--color-text-muted);
 }
 
 .detailRow strong {
   display: block;
-  margin-top: 4px;
-  font-size: 18px;
+  margin-top: var(--space-1);
+  font-size: var(--font-size-2xl);
   font-weight: 400;
   overflow-wrap: anywhere;
 }
 
 .detailRow p {
-  margin: 10px 0 0;
-  font-size: 14px;
+  margin: var(--space-3-5) 0 0;
+  font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
 
 .outlineButton {
   display: inline-flex;
-  gap: 8px;
+  gap: var(--space-3);
   align-items: center;
   justify-content: center;
   min-width: 96px;
   min-height: 44px;
-  padding: 0 18px;
-  font-size: 16px;
+  padding: 0 var(--space-5-5);
+  font-size: var(--font-size-lg);
   font-weight: 700;
   color: var(--color-brand);
   background: var(--color-surface);
@@ -102,28 +102,28 @@
 
 @media (width <= 900px) {
   .infoPanel {
-    margin-top: 22px;
-    padding: 24px 18px 26px;
+    margin-top: var(--space-6-5);
+    padding: var(--space-7) var(--space-5-5) var(--space-7-5);
   }
 
   .panelHead {
-    gap: 12px;
+    gap: var(--space-4);
   }
 
   .panelHead h3 {
-    font-size: 21px;
+    font-size: var(--font-size-5xl);
   }
 
   .panelHead p {
-    margin-top: 16px;
-    font-size: 15px;
+    margin-top: var(--space-5);
+    font-size: var(--font-size-md);
   }
 
   .detailRow {
     display: grid;
-    gap: 18px;
+    gap: var(--space-5-5);
     grid-template-columns: 1fr;
-    margin-top: 34px;
+    margin-top: var(--space-9-5);
   }
 
   .outlineButton {

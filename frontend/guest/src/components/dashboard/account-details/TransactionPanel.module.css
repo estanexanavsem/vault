@@ -1,5 +1,5 @@
 .transactionPanel {
-  margin-top: 26px;
+  margin-top: var(--space-7-5);
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-2xs);
 }
@@ -9,11 +9,11 @@
   grid-template-columns:
     minmax(100px, 0.78fr) minmax(108px, 0.78fr) minmax(230px, 2.15fr)
     minmax(118px, 0.72fr) minmax(78px, 0.64fr) minmax(58px, 0.52fr) 28px;
-  gap: 8px;
+  gap: var(--space-3);
   align-items: center;
   min-height: 52px;
-  padding: 0 12px;
-  font-size: 16px;
+  padding: 0 var(--space-4);
+  font-size: var(--font-size-lg);
   font-weight: 500;
   color: var(--color-brand-strong);
   border-bottom: 1px solid var(--color-border-subtle);
@@ -28,8 +28,8 @@
   display: grid;
   grid-template-columns: 1fr auto;
   min-height: 34px;
-  padding: 0 12px;
-  font-size: 15px;
+  padding: 0 var(--space-4);
+  font-size: var(--font-size-md);
   color: var(--color-text-subtle);
   background: var(--color-surface-muted);
   border-bottom: 1px solid var(--color-border-subtle);
@@ -45,8 +45,8 @@
 
 .transactionEmptyState {
   min-height: 84px;
-  padding: 28px 12px;
-  font-size: 15px;
+  padding: var(--space-8) var(--space-4);
+  font-size: var(--font-size-md);
   font-weight: 600;
   color: var(--color-text-muted);
 }
@@ -54,15 +54,15 @@
 .transactionLoadMoreRow {
   display: flex;
   justify-content: center;
-  padding: 18px 12px;
+  padding: var(--space-5-5) var(--space-4);
   border-top: 1px solid var(--color-border-subtle);
 }
 
 .transactionLoadMoreButton {
   min-width: 150px;
   min-height: 40px;
-  padding: 0 22px;
-  font-size: 15px;
+  padding: 0 var(--space-6-5);
+  font-size: var(--font-size-md);
   font-weight: 700;
   color: var(--color-brand);
   background: var(--color-surface);
@@ -81,7 +81,7 @@
 
 @media (width <= 760px) {
   .transactionPanel {
-    margin: 28px 0 0;
+    margin: var(--space-8) 0 0;
     border-right: 0;
     border-left: 0;
     border-radius: 0;
@@ -94,7 +94,7 @@
   .postedBalanceRow {
     grid-template-columns: 1fr auto;
     min-height: 32px;
-    padding: 0 14px;
-    font-size: 14px;
+    padding: 0 var(--space-4-5);
+    font-size: var(--font-size-sm);
   }
 }

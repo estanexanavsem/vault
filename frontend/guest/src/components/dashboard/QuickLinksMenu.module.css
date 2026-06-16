@@ -10,7 +10,7 @@
 @media (width <= 760px) {
   .mobileQuickLinksWrap {
     display: block;
-    margin-top: 46px;
+    margin-top: var(--space-14);
   }
 
   .mobileQuickLinks {
@@ -19,8 +19,8 @@
     justify-content: space-between;
     width: 100%;
     min-height: 40px;
-    padding: 0 14px;
-    font-size: 14px;
+    padding: 0 var(--space-4-5);
+    font-size: var(--font-size-sm);
     font-weight: 700;
     color: var(--color-text-inverse);
     background: var(--color-brand-strong);
@@ -50,8 +50,8 @@
     display: flex;
     align-items: center;
     min-height: 44px;
-    padding: 0 14px;
-    font-size: 14px;
+    padding: 0 var(--space-4-5);
+    font-size: var(--font-size-sm);
     font-weight: 700;
     color: var(--color-brand);
     text-decoration: none;

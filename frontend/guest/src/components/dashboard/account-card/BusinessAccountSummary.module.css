@@ -1,18 +1,18 @@
 .accountFamily {
   display: flex;
-  gap: 18px;
+  gap: var(--space-5-5);
   align-items: center;
   justify-content: space-between;
-  margin-top: 24px;
+  margin-top: var(--space-7);
   color: var(--color-brand-strong);
 }
 
 .accountFamilyLabel {
   display: flex;
-  gap: 14px;
+  gap: var(--space-4-5);
   align-items: center;
   min-width: 0;
-  font-size: 16px;
+  font-size: var(--font-size-lg);
   text-transform: uppercase;
 }
 
@@ -29,18 +29,18 @@
 
 .familyBalance {
   flex: 0 0 auto;
-  font-size: 16px;
+  font-size: var(--font-size-lg);
 }
 
 .accountRow {
   display: flex;
-  gap: 16px;
+  gap: var(--space-5);
   align-items: center;
   justify-content: space-between;
   width: 100%;
   min-height: 72px;
-  margin-top: 10px;
-  padding: 0 22px;
+  margin-top: var(--space-3-5);
+  padding: 0 var(--space-6-5);
   color: var(--color-brand-hover);
   text-decoration: none;
   text-align: left;
@@ -52,7 +52,7 @@
 .accountRow span,
 .accountRow strong {
   min-width: 0;
-  font-size: 18px;
+  font-size: var(--font-size-2xl);
   font-weight: 600;
 }
 
@@ -63,8 +63,8 @@
 
 .accountRow strong {
   flex: 0 0 auto;
-  margin-right: 36px;
-  font-size: 22px;
+  margin-right: var(--space-10);
+  font-size: var(--font-size-6xl);
   font-weight: 500;
   color: var(--color-brand-strong);
   font-variant-numeric: tabular-nums;
@@ -87,27 +87,27 @@
   }
 
   .accountFamilyLabel {
-    gap: 12px;
+    gap: var(--space-4);
     flex: 1 1 auto;
   }
 
   .familyBalance {
     flex: 0 0 auto;
-    padding-top: 8px;
-    font-size: 13px;
+    padding-top: var(--space-3);
+    font-size: var(--font-size-xs);
   }
 
   .accountRow {
     display: grid;
-    gap: 2px;
+    gap: var(--space-0-5);
     justify-content: stretch;
     width: 100%;
     min-height: 62px;
-    padding: 10px 18px;
+    padding: var(--space-3-5) var(--space-5-5);
   }
 
   .accountRow span,
   .accountRow strong {
-    font-size: 17px;
+    font-size: var(--font-size-xl);
   }
 }

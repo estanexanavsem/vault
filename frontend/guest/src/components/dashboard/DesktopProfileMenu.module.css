@@ -17,7 +17,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 0 16px;
+  padding: 0 var(--space-5);
   background: var(--color-overlay);
   backdrop-filter: blur(5px);
 }
@@ -25,7 +25,7 @@
 .profileMenu {
   z-index: var(--z-profile-menu);
   width: min(100%, var(--content-width));
-  padding: 26px 28px 32px;
+  padding: var(--space-7-5) var(--space-8) var(--space-9);
   color: var(--color-brand-strong);
   background: var(--color-surface);
   border-radius: var(--radius-profile-menu);
@@ -34,22 +34,22 @@
 
 .profileMenuHead {
   display: flex;
-  gap: 20px;
+  gap: var(--space-6);
   align-items: flex-start;
   justify-content: space-between;
 }
 
 .profileMenuHead h2 {
   margin: 0;
-  font-size: 32px;
+  font-size: var(--font-size-12xl);
   font-weight: 500;
-  line-height: 1.15;
+  line-height: var(--line-height-tight);
   letter-spacing: 0;
 }
 
 .profileMenuHead p {
-  margin: 8px 0 0;
-  font-size: 13px;
+  margin: var(--space-3) 0 0;
+  font-size: var(--font-size-xs);
   font-weight: 500;
   color: var(--color-text-muted);
   white-space: nowrap;
@@ -58,16 +58,16 @@
 .profileMenuGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 18px;
+  gap: var(--space-3-5);
+  margin-top: var(--space-5-5);
 }
 
 .profileMenuGrid a {
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr);
-  gap: 12px;
+  gap: var(--space-4);
   min-height: 112px;
-  padding: 22px;
+  padding: var(--space-6-5);
   color: var(--color-brand);
   background: var(--color-surface-subtle);
   border-radius: var(--radius-xs);
@@ -79,19 +79,19 @@
 
 .profileMenuGrid a span {
   display: grid;
-  gap: 8px;
+  gap: var(--space-3);
 }
 
 .profileMenuGrid a strong {
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .profileMenuGrid a small {
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 500;
-  line-height: 1.35;
+  line-height: var(--line-height-relaxed);
   color: var(--color-text-subtle);
 }
 

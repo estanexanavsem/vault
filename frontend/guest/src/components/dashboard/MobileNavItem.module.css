@@ -1,10 +1,10 @@
 .mobileNavItem {
   display: flex;
-  gap: 12px;
+  gap: var(--space-4);
   align-items: center;
   min-height: 56px;
-  padding: 0 16px;
-  font-size: 19px;
+  padding: 0 var(--space-5);
+  font-size: var(--font-size-3xl);
   font-weight: 700;
   color: var(--color-text-inverse);
   text-align: left;
