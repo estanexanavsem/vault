@@ -5,12 +5,18 @@
 
 .inner {
   display: grid;
-  grid-template-columns: 78px 1fr auto;
+  grid-template-columns: var(--topbar-brand-width) 1fr auto;
   align-items: center;
   width: min(100%, var(--content-width));
   min-height: var(--size-header-height);
   margin: 0 auto;
   padding: 0 var(--space-5);
+
+  --topbar-brand-width: 78px;
+  --topbar-nav-tab-min-width: 70px;
+  --topbar-nav-indicator-offset: 20px;
+  --topbar-nav-indicator-height: 4px;
+  --topbar-signout-min-width: 116px;
 }
 
 .brand {
@@ -38,7 +44,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  min-width: 70px;
+  min-width: var(--topbar-nav-tab-min-width);
   height: var(--size-header-height);
   padding: 0 var(--space-5);
   font-size: var(--font-size-lg);
@@ -54,10 +60,10 @@
 .nav a.current::after,
 .nav button.current::after {
   position: absolute;
-  bottom: 20px;
+  bottom: var(--topbar-nav-indicator-offset);
   left: 50%;
   width: calc(100% - var(--space-9));
-  height: 4px;
+  height: var(--topbar-nav-indicator-height);
   content: '';
   background: var(--color-accent-indicator);
   border-radius: var(--radius-pill);
@@ -82,7 +88,7 @@
 }
 
 .signout {
-  min-width: 116px;
+  min-width: var(--topbar-signout-min-width);
   min-height: var(--control-height-2xl);
   margin-left: var(--space-6);
   padding: 0 var(--space-7);
