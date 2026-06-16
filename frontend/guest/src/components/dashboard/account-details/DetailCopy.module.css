@@ -17,7 +17,7 @@
   margin: 0;
 }
 
-@media (width <= 760px) {
+@media (width <= 768px) {
   .copy {
     margin-top: var(--space-5);
     font-size: var(--font-size-lg);

@@ -16,7 +16,7 @@
   color: var(--color-brand);
 }
 
-@media (width <= 760px) {
+@media (width <= 768px) {
   .notificationsCard {
     order: 3;
     min-height: 100px;

@@ -52,7 +52,7 @@
   }
 }
 
-@media (width <= 760px) {
+@media (width <= 768px) {
   .dashboardGrid {
     display: flex;
     flex-direction: column;
@@ -77,13 +77,13 @@
   }
 }
 
-@media (width >= 761px) {
+@media (width > 768px) {
   .thanksCard {
     margin-top: -var(--space-px);
   }
 }
 
-@media (width >= 761px) and (width <= 980px) {
+@media (width > 768px) and (width <= 1024px) {
   .dashboardGrid {
     grid-template-columns: minmax(0, 1fr);
   }

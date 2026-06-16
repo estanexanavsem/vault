@@ -31,7 +31,7 @@
   line-height: var(--line-height-tight);
 }
 
-@media (width <= 900px) {
+@media (width <= 1024px) {
   .page {
     display: block;
     min-height: auto;

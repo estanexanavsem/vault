@@ -88,7 +88,7 @@
   border: var(--stroke-width-hairline) solid var(--color-border-control);
 }
 
-@media (width <= 560px) {
+@media (width <= 576px) {
   .fallback {
     padding: var(--space-6);
   }

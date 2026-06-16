@@ -31,7 +31,7 @@
   margin-top: var(--space-15);
 }
 
-@media (width <= 760px) {
+@media (width <= 768px) {
   .activityCard,
   .activityCardDetailsOpen {
     margin-top: var(--space-5-5);

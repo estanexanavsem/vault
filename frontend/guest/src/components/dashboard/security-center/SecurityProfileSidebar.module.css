@@ -75,7 +75,7 @@
   border-radius: var(--radius-pill);
 }
 
-@media (width <= 900px) {
+@media (width <= 1024px) {
   .sidebar {
     padding: var(--space-8) var(--space-5) var(--space-6);
     border-right: 0;

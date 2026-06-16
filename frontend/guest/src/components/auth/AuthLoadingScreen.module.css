@@ -7,7 +7,7 @@
   background: var(--gradient-auth);
 }
 
-@media (width <= 760px) {
+@media (width <= 768px) {
   .screen {
     align-items: stretch;
     padding: 0;

@@ -163,7 +163,7 @@
   color: var(--color-text-primary);
 }
 
-@media (width <= 760px) {
+@media (width <= 768px) {
   .transactionDetailRow {
     grid-template-areas:
       'description credit control'

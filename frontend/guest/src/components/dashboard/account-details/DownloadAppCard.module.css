@@ -31,7 +31,7 @@
   flex: 0 0 auto;
 }
 
-@media (width <= 760px) {
+@media (width <= 768px) {
   .downloadAppCard {
     grid-template-columns: 1fr;
     justify-items: center;

@@ -81,7 +81,7 @@
   }
 }
 
-@media (width <= 760px) {
+@media (width <= 768px) {
   .accountFamily {
     align-items: flex-start;
   }

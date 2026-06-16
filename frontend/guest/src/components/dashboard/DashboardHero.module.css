@@ -51,7 +51,7 @@
   }
 }
 
-@media (width <= 760px) {
+@media (width <= 768px) {
   .heroBand {
     min-height: 147px;
   }

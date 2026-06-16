@@ -100,7 +100,7 @@
   border-radius: var(--radius-md);
 }
 
-@media (width <= 900px) {
+@media (width <= 1024px) {
   .infoPanel {
     margin-top: var(--space-6-5);
     padding: var(--space-7) var(--space-5-5) var(--space-7-5);

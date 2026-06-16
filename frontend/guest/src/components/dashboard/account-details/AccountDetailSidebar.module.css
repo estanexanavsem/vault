@@ -70,7 +70,7 @@
   color: var(--color-text-subtle);
 }
 
-@media (width <= 760px) {
+@media (width <= 1280px) {
   .sidebar {
     display: none;
   }

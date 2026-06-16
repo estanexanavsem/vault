@@ -7,7 +7,7 @@
   display: none;
 }
 
-@media (width <= 760px) {
+@media (width <= 768px) {
   .mobileQuickLinksWrap {
     display: block;
     margin-top: var(--space-14);

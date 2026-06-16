@@ -79,7 +79,7 @@
   outline-offset: var(--focus-offset-sm);
 }
 
-@media (width <= 760px) {
+@media (width <= 768px) {
   .transactionPanel {
     margin: var(--space-8) 0 0;
     border-right: 0;

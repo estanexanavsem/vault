@@ -47,7 +47,18 @@
   text-decoration: underline;
 }
 
-@media (width <= 760px) {
+@media (width <= 1280px) {
+  .shell {
+    display: block;
+  }
+
+  .content {
+    grid-column: auto;
+    width: 100%;
+  }
+}
+
+@media (width <= 768px) {
   .hero {
     height: auto;
     background: var(--gradient-account-detail-mobile);

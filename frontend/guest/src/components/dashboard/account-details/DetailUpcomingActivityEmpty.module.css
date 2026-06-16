@@ -82,7 +82,7 @@
   color: var(--color-text-subtle);
 }
 
-@media (width <= 760px) {
+@media (width <= 768px) {
   .upcomingActivity {
     margin-top: var(--space-7);
     padding: 0 var(--space-4-5) var(--space-5-5);

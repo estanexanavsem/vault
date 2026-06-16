@@ -136,7 +136,7 @@
   border: var(--stroke-width-control) solid var(--color-border-control);
 }
 
-@media (width <= 900px) {
+@media (width <= 1024px) {
   .modalOverlay {
     align-items: start;
     padding: 0;
