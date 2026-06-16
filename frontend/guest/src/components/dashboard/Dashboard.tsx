@@ -10,7 +10,7 @@ import { DashboardPageFallback } from './DashboardPageFallback'
 import { DashboardHome } from './DashboardHome'
 import { Footer } from './Footer'
 import { Topbar } from './Topbar'
-import styles from './dashboard.module.css'
+import styles from './Dashboard.module.css'
 
 const AccountDetailsPage = lazy(() =>
   import('./AccountDetailsPage').then((module) => ({ default: module.AccountDetailsPage })),
@@ -72,11 +72,7 @@ export function Dashboard({ data, onSignOut }: DashboardProps) {
             />
           </Suspense>
         ) : (
-          <DashboardHome
-            accountRoute={accountRoute}
-            data={data}
-            greetingName={greetingName}
-          />
+          <DashboardHome accountRoute={accountRoute} data={data} greetingName={greetingName} />
         )}
       </ErrorBoundary>
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getTimeGreeting } from '../../utils/formatters'
 import { QuickLinksMenu } from './QuickLinksMenu'
-import styles from './dashboard.module.css'
+import styles from './DashboardHero.module.css'
 
 interface DashboardHeroProps {
   greetingName: string
@@ -26,9 +26,7 @@ export function DashboardHero({ greetingName }: DashboardHeroProps) {
           {timeGreeting}, {greetingName}
         </h1>
         <div className={styles.desktopQuickActions} aria-label="Quick actions">
-          <Link to="/security-center">
-            Security center
-          </Link>
+          <Link to="/security-center">Security center</Link>
         </div>
         <QuickLinksMenu />
       </div>

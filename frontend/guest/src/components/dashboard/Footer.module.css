@@ -1,0 +1,132 @@
+.siteFooter {
+  background: var(--color-surface);
+}
+
+.footerInner {
+  width: min(100%, var(--content-width));
+  margin: 0 auto;
+  padding: 54px 32px 88px;
+}
+
+.footerBrand {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-brand-strong);
+  letter-spacing: 0.05em;
+}
+
+.footerBrandMark {
+  width: 24px;
+  height: 24px;
+}
+
+.footerLinks {
+  display: grid;
+  grid-template-columns: max-content max-content max-content max-content max-content;
+  gap: 14px 72px;
+  margin-top: -25px;
+  margin-left: 160px;
+  font-size: 15px;
+  color: var(--color-brand);
+}
+
+.footerLinks a {
+  display: inline-flex;
+  gap: 5px;
+  align-items: flex-start;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.footerLinks a svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.footerLinks .phoneLink {
+  grid-column: 1 / span 2;
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+
+.footerLinks .phoneLink svg {
+  flex-shrink: 0;
+}
+
+.footerLinks .sensitiveInfoLink {
+  grid-column: 3 / span 2;
+}
+
+.legalCopy {
+  display: grid;
+  gap: 18px;
+  margin-top: 46px;
+  font-size: 14px;
+  line-height: 1.42;
+  color: var(--color-text-muted);
+}
+
+.legalCopy p {
+  margin: 0;
+}
+
+.legalCopy a {
+  display: inline-flex;
+  gap: 4px;
+  align-items: baseline;
+  color: var(--color-brand);
+  text-decoration: underline;
+}
+
+.legalCopy a svg {
+  flex: 0 0 auto;
+  transform: translateY(1px);
+}
+
+@media (hover: hover) {
+  .footerLinks a {
+    transition: var(--transition-interactive);
+  }
+
+  .footerLinks a:hover {
+    color: var(--color-accent-hover);
+  }
+}
+
+@media (width <= 760px) {
+  .footerInner {
+    padding: 46px 26px 64px;
+  }
+
+  .footerLinks {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+    margin: 14px 0 0;
+    font-size: 16px;
+  }
+
+  .footerLinks .phoneLink,
+  .footerLinks .sensitiveInfoLink {
+    grid-column: auto;
+  }
+
+  .footerLinks .phoneLink {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .legalCopy {
+    gap: 17px;
+    margin-top: 42px;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .footerBrand {
+    font-size: 20px;
+  }
+}

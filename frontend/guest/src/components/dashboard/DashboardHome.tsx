@@ -4,7 +4,7 @@ import { AccountCard } from './AccountCard'
 import { ActivityCard } from './ActivityCard'
 import { DashboardHero } from './DashboardHero'
 import { NotificationsCard } from './NotificationsCard'
-import styles from './dashboard.module.css'
+import styles from './DashboardHome.module.css'
 
 interface DashboardHomeProps {
   accountRoute: string
@@ -12,11 +12,7 @@ interface DashboardHomeProps {
   greetingName: string
 }
 
-export function DashboardHome({
-  accountRoute,
-  data,
-  greetingName,
-}: DashboardHomeProps) {
+export function DashboardHome({ accountRoute, data, greetingName }: DashboardHomeProps) {
   return (
     <>
       <DashboardHero greetingName={greetingName} />

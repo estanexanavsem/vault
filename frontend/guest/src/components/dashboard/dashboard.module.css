@@ -1,91 +1,8 @@
-.shell {
-  min-height: 100dvh;
-  color: var(--color-text-primary);
-}
-
-.pageFallback {
-  min-height: 56vh;
-  background: var(--color-page);
-}
-
-.heroBand {
-  min-height: 177px;
-  color: var(--color-text-inverse);
-  background: var(--color-brand-hero);
-}
-
-.heroInner {
-  width: min(100%, var(--content-width));
-  margin: 0 auto;
-  padding: 34px 32px 28px;
-}
-
-.heroInner h1 {
-  margin: 0;
-  font-size: 36px;
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: 0;
-}
-
-.desktopQuickActions {
-  display: flex;
-  gap: 16px;
-  margin-top: 32px;
-}
-
-.desktopQuickActions a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-  padding: 0 16px;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--color-text-inverse);
-  text-decoration: none;
-  cursor: pointer;
-  background-color: var(--color-brand-action);
-  border: 0;
-  border-radius: var(--radius-4xl);
-  transition: var(--transition-background-slow);
-}
-
-.dashboardMain {
-  background: var(--color-page);
-  border-bottom: 1px solid var(--color-border-muted);
-}
-
-.dashboardGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 770px) minmax(550px, 550px);
-  align-items: start;
-  gap: 16px;
-  width: min(100%, var(--content-width));
-  margin: 0 auto;
-  padding: 58px 32px 14px;
-}
-
-.dashboardLeftColumn,
-.dashboardRightColumn {
-  display: grid;
-  min-width: 0;
-  gap: 16px;
-}
-
-.dashboardRightColumn {
-  align-content: start;
-}
-
-.card,
-.thanksCard {
+.card {
+  padding: 26px 24px 32px;
   background: var(--color-surface);
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-3xl);
-}
-
-.card {
-  padding: 26px 24px 32px;
 }
 
 .sectionHeadingRow {
@@ -101,26 +18,6 @@
   color: var(--color-text-heading-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-}
-
-.iconButton {
-  display: inline-grid;
-  width: 44px;
-  height: 44px;
-  place-items: center;
-  color: var(--color-brand);
-  background: var(--color-surface-brand);
-  border: 2px solid var(--color-border-control);
-  border-radius: var(--radius-pill);
-}
-
-.moreButton {
-  margin-top: -10px;
-}
-
-.accountsCard .moreButton {
-  width: 36px;
-  height: 36px;
 }
 
 .tabs {
@@ -145,6 +42,10 @@
 .tab.active {
   font-weight: 700;
   border-bottom-color: var(--color-accent);
+}
+
+.accountsCard {
+  order: initial;
 }
 
 .accountFamily {
@@ -256,21 +157,6 @@
   background: var(--color-brand);
   border: 0;
   border-radius: var(--radius-pill);
-}
-
-.thanksCard {
-  display: flex;
-  align-self: start;
-  gap: 16px;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 82px;
-  padding: 0 22px;
-  font-size: 24px;
-  font-weight: 400;
-  color: var(--color-brand-strong);
-  text-align: left;
-  border: 2px solid var(--color-border-control);
 }
 
 .notificationsCard {
@@ -442,113 +328,16 @@
   margin-top: 22px;
 }
 
-.siteFooter {
-  background: var(--color-surface);
-}
-
-.footerInner {
-  width: min(100%, var(--content-width));
-  margin: 0 auto;
-  padding: 54px 32px 88px;
-}
-
-.footerBrand {
-  display: inline-flex;
-  gap: 4px;
-  align-items: center;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--color-brand-strong);
-  letter-spacing: 0.05em;
-}
-
-.footerBrandMark {
-  width: 24px;
-  height: 24px;
-}
-
-.footerLinks {
-  display: grid;
-  grid-template-columns: max-content max-content max-content max-content max-content;
-  gap: 14px 72px;
-  margin-top: -25px;
-  margin-left: 160px;
-  font-size: 15px;
-  color: var(--color-brand);
-}
-
-.footerLinks a {
-  display: inline-flex;
-  gap: 5px;
-  align-items: flex-start;
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-.footerLinks a svg {
-  flex: 0 0 auto;
-  margin-top: 2px;
-}
-
-.footerLinks .phoneLink {
-  grid-column: 1 / span 2;
-  white-space: nowrap;
-  overflow-wrap: normal;
-}
-
-.footerLinks .phoneLink svg {
-  flex-shrink: 0;
-}
-
-.footerLinks .sensitiveInfoLink {
-  grid-column: 3 / span 2;
-}
-
-.legalCopy {
-  display: grid;
-  gap: 18px;
-  margin-top: 46px;
-  font-size: 14px;
-  line-height: 1.42;
-  color: var(--color-text-muted);
-}
-
-.legalCopy p {
-  margin: 0;
-}
-
-.legalCopy a {
-  display: inline-flex;
-  gap: 4px;
-  align-items: baseline;
-  color: var(--color-brand);
-  text-decoration: underline;
-}
-
-.legalCopy a svg {
-  flex: 0 0 auto;
-  transform: translateY(1px);
-}
-
 @media (hover: hover) {
-  .footerLinks a,
   .accountRow,
   .activityRow,
   .moreActivityButton,
-  .thanksCard,
   .pillButton,
-  .desktopQuickActions a,
-  .tab,
-  .iconButton {
+  .tab {
     transition: var(--transition-interactive);
   }
 
-  .footerLinks a:hover {
-    color: var(--color-accent-hover);
-  }
-
-  .accountRow:hover,
-  .thanksCard:hover {
+  .accountRow:hover {
     background: var(--color-surface-hover);
     border-color: var(--color-brand);
   }
@@ -561,53 +350,12 @@
     color: var(--color-accent-hover);
   }
 
-  .pillButton:hover,
-  .desktopQuickActions a:hover {
+  .pillButton:hover {
     background: var(--color-brand-hover);
   }
 }
 
 @media (width <= 760px) {
-  .heroBand {
-    min-height: 147px;
-  }
-
-  .heroInner {
-    padding: 20px 20px 22px;
-  }
-
-  .heroInner h1 {
-    font-size: 20px;
-    font-weight: 600;
-  }
-
-  .desktopQuickActions {
-    display: none;
-  }
-
-  .dashboardGrid {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-    width: 100%;
-    padding: 12px 16px 10px;
-  }
-
-  .dashboardLeftColumn,
-  .dashboardRightColumn {
-    display: contents;
-  }
-
-  .thanksCard {
-    width: 100%;
-    order: 1;
-    min-height: 58px;
-    padding: 24px 8px 24px 16px;
-    font-size: 22px;
-    border-radius: var(--radius-2xl);
-  }
-
   .accountsCard {
     order: 2;
   }
@@ -631,12 +379,6 @@
 
   .sectionKicker {
     font-size: 11px;
-  }
-
-  .moreButton {
-    width: 38px;
-    height: 38px;
-    margin-top: -6px;
   }
 
   .tabs {
@@ -703,55 +445,5 @@
 
   .activityAmount {
     font-size: 14px;
-  }
-
-  .footerInner {
-    padding: 46px 26px 64px;
-  }
-
-  .footerLinks {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    width: 100%;
-    margin: 14px 0 0;
-    font-size: 16px;
-  }
-
-  .footerLinks .phoneLink,
-  .footerLinks .sensitiveInfoLink {
-    grid-column: auto;
-  }
-
-  .footerLinks .phoneLink {
-    white-space: normal;
-    overflow-wrap: anywhere;
-  }
-
-  .legalCopy {
-    gap: 17px;
-    margin-top: 42px;
-    font-size: 14px;
-    line-height: 1.35;
-  }
-
-  .footerBrand {
-    font-size: 20px;
-  }
-}
-
-@media (width >= 761px) {
-  .thanksCard {
-    margin-top: -1px;
-  }
-}
-
-@media (width >= 761px) and (width <= 980px) {
-  .dashboardGrid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .dashboardLeftColumn,
-  .dashboardRightColumn {
-    display: contents;
   }
 }

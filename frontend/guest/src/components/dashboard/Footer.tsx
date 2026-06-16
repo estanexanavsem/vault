@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { legalSections } from '../../data/legalSections'
 import { LegalSectionPart } from './LegalSectionPart'
 import { TruistMark } from '../common/TruistMark'
-import styles from './dashboard.module.css'
+import styles from './Footer.module.css'
 
 const externalLinkProps = {
   target: '_blank',

@@ -1,0 +1,71 @@
+.heroBand {
+  min-height: 177px;
+  color: var(--color-text-inverse);
+  background: var(--color-brand-hero);
+}
+
+.heroInner {
+  width: min(100%, var(--content-width));
+  margin: 0 auto;
+  padding: 34px 32px 28px;
+}
+
+.heroInner h1 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.desktopQuickActions {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.desktopQuickActions a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  cursor: pointer;
+  background-color: var(--color-brand-action);
+  border: 0;
+  border-radius: var(--radius-4xl);
+  transition: var(--transition-background-slow);
+}
+
+@media (hover: hover) {
+  .desktopQuickActions a {
+    transition: var(--transition-interactive);
+  }
+
+  .desktopQuickActions a:hover {
+    background: var(--color-brand-hover);
+  }
+}
+
+@media (width <= 760px) {
+  .heroBand {
+    min-height: 147px;
+  }
+
+  .heroInner {
+    padding: 20px 20px 22px;
+  }
+
+  .heroInner h1 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .desktopQuickActions {
+    display: none;
+  }
+}
