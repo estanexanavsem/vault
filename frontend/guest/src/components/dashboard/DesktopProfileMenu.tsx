@@ -59,7 +59,11 @@ export function DesktopProfileMenu({ greetingName, lastSignInText }: DesktopProf
 
       {isOpen ? (
         <FloatingPortal>
-          <FloatingOverlay className={styles.overlay} style={{ top: 75 }} lockScroll>
+          <FloatingOverlay
+            className={styles.overlay}
+            style={{ top: 'var(--size-header-height)' }}
+            lockScroll
+          >
             <FloatingFocusManager context={context}>
               <section
                 ref={setFloatingNode}
