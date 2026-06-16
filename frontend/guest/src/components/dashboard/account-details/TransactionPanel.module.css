@@ -1,6 +1,6 @@
 .root {
   --transaction-table-action-width: 28px;
-  --transaction-table-head-columns: minmax(100px, 0.78fr) minmax(108px, 0.78fr)
+  --transaction-table-columns: minmax(100px, 0.78fr) minmax(108px, 0.78fr)
     minmax(230px, 2.15fr) minmax(118px, 0.72fr) minmax(78px, 0.64fr) minmax(58px, 0.52fr)
     var(--transaction-table-action-width);
   --transaction-row-min-height: 34px;
@@ -14,7 +14,7 @@
 
 .head {
   display: grid;
-  grid-template-columns: var(--transaction-table-head-columns);
+  grid-template-columns: var(--transaction-table-columns);
   gap: var(--space-3);
   align-items: center;
   min-height: var(--control-height-4xl);
