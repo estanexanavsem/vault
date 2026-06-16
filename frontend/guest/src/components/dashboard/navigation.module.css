@@ -48,9 +48,7 @@
   border: 0;
   border-radius: 10px;
   cursor: pointer;
-  transition:
-    background-color 0.3s ease-out,
-    border-color 0.3s ease-out;
+  transition: background-color 0.3s ease-out;
 }
 
 .desktopNav a.current::after,
@@ -306,7 +304,6 @@
       opacity 180ms ease;
   }
 
-  .profileMenuGrid a:hover,
   .signOutButton:hover {
     background: var(--color-on-dark-hover);
   }

@@ -17,7 +17,6 @@
     /* Text */
     --color-text-base: #2f2148;
     --color-text-primary: #342445;
-    --color-text-strong: #2e1a47;
     --color-text-heading-muted: #42394d;
     --color-text-muted: #6b6074;
     --color-text-subtle: #5f5669;
@@ -30,7 +29,6 @@
     --color-page: #f6f6f5;
     --color-app-background: #f7f7f6;
     --color-surface: #fff;
-    --color-surface-raised: #fff;
     --color-surface-subtle: #f8f7fa;
     --color-surface-muted: #f7f6f5;
     --color-surface-neutral: #f5f4f6;

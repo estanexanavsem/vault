@@ -74,12 +74,12 @@
   border-radius: 6px;
 }
 
-.sideNavCurrent {
-  color: var(--color-text-inverse) !important;
-  background: var(--color-brand-strong) !important;
+.sideNav button.sideNavCurrent {
+  color: var(--color-text-inverse);
+  background: var(--color-brand-strong);
 }
 
-.sideNavCurrent::before {
+.sideNav button.sideNavCurrent::before {
   width: 6px;
   height: 6px;
   content: '';
