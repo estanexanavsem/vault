@@ -1,4 +1,4 @@
-.balanceInfoOverlay {
+.overlay {
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
@@ -9,7 +9,7 @@
   backdrop-filter: var(--effect-backdrop-blur);
 }
 
-.balanceInfoDialog {
+.dialog {
   position: relative;
   width: min(100%, 604px);
   min-height: 390px;
@@ -20,7 +20,7 @@
   box-shadow: var(--shadow-balance-dialog);
 }
 
-.balanceInfoDialog h2 {
+.dialog h2 {
   margin: 0;
   font-size: var(--font-size-13xl);
   font-weight: var(--font-weight-medium);
@@ -28,7 +28,7 @@
   letter-spacing: 0;
 }
 
-.balanceInfoBody {
+.body {
   max-width: 520px;
   margin: var(--space-7-5) 0 0;
   font-size: var(--font-size-lg);
@@ -37,15 +37,15 @@
   color: var(--color-text-subtle);
 }
 
-.balanceInfoBody p {
+.body p {
   margin: var(--space-5-5) 0 0;
 }
 
-.balanceInfoBody p:first-child {
+.body p:first-child {
   margin-top: 0;
 }
 
-.balanceInfoClose {
+.close {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -59,12 +59,12 @@
   border: 0;
 }
 
-.balanceInfoClose svg {
+.close svg {
   width: var(--size-icon-sm);
   height: var(--size-icon-sm);
 }
 
-.balanceInfoAction {
+.action {
   min-width: 82px;
   min-height: var(--control-height-lg);
   margin-top: var(--space-12);
@@ -78,26 +78,26 @@
 }
 
 @media (width <= 768px) {
-  .balanceInfoOverlay {
+  .overlay {
     padding: var(--space-5-5);
   }
 
-  .balanceInfoDialog {
+  .dialog {
     min-height: 0;
     padding: var(--space-12) var(--space-7-5) var(--space-8-5);
   }
 
-  .balanceInfoDialog h2 {
+  .dialog h2 {
     font-size: var(--font-size-10xl);
   }
 
-  .balanceInfoBody {
+  .body {
     margin-top: var(--space-6);
     font-size: var(--font-size-sm);
     line-height: var(--line-height-ui);
   }
 
-  .balanceInfoAction {
+  .action {
     margin-top: var(--space-8);
   }
 }
