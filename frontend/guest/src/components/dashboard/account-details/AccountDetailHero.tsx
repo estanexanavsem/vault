@@ -22,15 +22,15 @@ export function AccountDetailHero({
   onBack,
 }: AccountDetailHeroProps) {
   return (
-    <section className={styles.hero}>
-      <div className={styles.shell}>
-        <button className={styles.mobileBackLink} type="button" onClick={onBack}>
+    <section className={styles.root}>
+      <div className={styles.inner}>
+        <button className={styles.back} type="button" onClick={onBack}>
           <ChevronLeft size={14} aria-hidden="true" />
           Account List
         </button>
 
         <div className={styles.content}>
-          <div className={styles.fdicRow}>
+          <div className={styles.badge}>
             <img src="/assets/FDIC-logo.png" alt="FDIC" />
             <span>
               <em>FDIC-Insured - Backed by the full faith and credit of the U.S. Government</em>

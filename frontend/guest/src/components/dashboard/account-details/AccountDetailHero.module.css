@@ -1,11 +1,11 @@
-.hero {
+.root {
   height: 300px;
   overflow: visible;
   color: var(--color-text-inverse);
   background: var(--color-brand-strong);
 }
 
-.shell {
+.inner {
   display: grid;
   grid-template-columns: var(--layout-account-detail-columns);
   gap: var(--space-7);
@@ -16,7 +16,7 @@
   padding: var(--space-9-5) var(--space-9) var(--space-5-5);
 }
 
-.mobileBackLink {
+.back {
   display: none;
 }
 
@@ -28,19 +28,19 @@
   padding-top: 0;
 }
 
-.fdicRow {
+.badge {
   display: flex;
   gap: var(--space-4-5);
   align-items: center;
 }
 
-.fdicRow img {
+.badge img {
   width: var(--size-fdic-mark-width);
   height: var(--size-fdic-mark-height);
   flex: 0 0 auto;
 }
 
-.fdicRow span {
+.badge span {
   font-size: var(--font-size-2xs);
   font-style: italic;
   font-weight: var(--font-weight-bold);
@@ -48,7 +48,7 @@
 }
 
 @media (width <= 1280px) {
-  .shell {
+  .inner {
     display: block;
   }
 
@@ -59,18 +59,18 @@
 }
 
 @media (width <= 768px) {
-  .hero {
+  .root {
     height: auto;
     background: var(--gradient-account-detail-mobile);
   }
 
-  .shell {
+  .inner {
     display: block;
     min-height: 0;
     padding: 0 var(--space-5);
   }
 
-  .mobileBackLink {
+  .back {
     --mobile-back-link-height: 26px;
 
     display: inline-flex;
@@ -86,7 +86,7 @@
     border: 0;
   }
 
-  .mobileBackLink svg {
+  .back svg {
     width: var(--size-icon-xs);
     height: var(--size-fdic-mark-height);
   }
@@ -97,18 +97,18 @@
     padding-top: 0;
   }
 
-  .fdicRow {
+  .badge {
     gap: var(--space-3-75);
     align-items: flex-start;
     margin-bottom: var(--space-5-5);
   }
 
-  .fdicRow strong {
+  .badge strong {
     font-size: var(--font-size-6xl);
     line-height: var(--line-height-none);
   }
 
-  .fdicRow span {
+  .badge span {
     max-width: 330px;
     font-size: var(--font-size-2xs);
     line-height: var(--line-height-display);
