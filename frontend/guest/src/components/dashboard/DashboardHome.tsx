@@ -17,17 +17,17 @@ export function DashboardHome({ accountRoute, data, greetingName }: DashboardHom
     <>
       <DashboardHero greetingName={greetingName} />
 
-      <main className={styles.dashboardMain} id="home">
-        <div className={styles.dashboardGrid}>
-          <div className={styles.dashboardLeftColumn}>
+      <main className={styles.main} id="home">
+        <div className={styles.grid}>
+          <div className={styles.left}>
             <AccountCard accountRoute={accountRoute} data={data} />
             <ActivityCard accountRoute={accountRoute} transfers={data.transfers} />
           </div>
 
-          <div className={styles.dashboardRightColumn}>
+          <div className={styles.right}>
             <NotificationsCard />
             <a
-              className={styles.thanksCard}
+              className={styles.thanks}
               href="https://www.truist.com/digital-banking"
               target="_blank"
               rel="noopener noreferrer"

@@ -1,9 +1,9 @@
-.dashboardMain {
+.main {
   background: var(--color-page);
   border-bottom: var(--stroke-width-hairline) solid var(--color-border-muted);
 }
 
-.dashboardGrid {
+.grid {
   display: grid;
   grid-template-columns: minmax(0, 770px) minmax(550px, 550px);
   align-items: start;
@@ -13,18 +13,18 @@
   padding: var(--space-19) var(--space-9) var(--space-4-5);
 }
 
-.dashboardLeftColumn,
-.dashboardRightColumn {
+.left,
+.right {
   display: grid;
   min-width: 0;
   gap: var(--space-5);
 }
 
-.dashboardRightColumn {
+.right {
   align-content: start;
 }
 
-.thanksCard {
+.thanks {
   display: flex;
   align-self: start;
   gap: var(--space-5);
@@ -42,18 +42,18 @@
 }
 
 @media (hover: hover) {
-  .thanksCard {
+  .thanks {
     transition: var(--transition-interactive);
   }
 
-  .thanksCard:hover {
+  .thanks:hover {
     background: var(--color-surface-hover);
     border-color: var(--color-brand);
   }
 }
 
 @media (width <= 768px) {
-  .dashboardGrid {
+  .grid {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -62,12 +62,12 @@
     padding: var(--space-4) var(--space-5) var(--space-3-5);
   }
 
-  .dashboardLeftColumn,
-  .dashboardRightColumn {
+  .left,
+  .right {
     display: contents;
   }
 
-  .thanksCard {
+  .thanks {
     width: 100%;
     order: 1;
     min-height: 58px;
@@ -78,18 +78,18 @@
 }
 
 @media (width > 768px) {
-  .thanksCard {
+  .thanks {
     margin-top: -var(--space-px);
   }
 }
 
 @media (width > 768px) and (width <= 1024px) {
-  .dashboardGrid {
+  .grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .dashboardLeftColumn,
-  .dashboardRightColumn {
+  .left,
+  .right {
     display: contents;
   }
 }
