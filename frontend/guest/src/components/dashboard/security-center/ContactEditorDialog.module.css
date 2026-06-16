@@ -85,7 +85,7 @@
 .inputShell input {
   width: 100%;
   min-width: 0;
-  height: 46px;
+  height: calc(var(--control-height-2xl) - (var(--stroke-width-hairline) * 2));
   padding: 0 var(--space-4-5);
   font-size: var(--font-size-lg);
   color: var(--color-text-soft);

@@ -7,6 +7,8 @@ const rawFontWeightPattern = '/\\b[1-9]00\\b/'
 const rawLineHeightPattern = '/\\b(?:\\d+(?:\\.\\d+)?(?:px)?)\\b/'
 const rawSpacingPattern = '/\\b\\d+(?:\\.\\d+)?px\\b/'
 const rawStrokeWidthPattern = '/\\b\\d+(?:\\.\\d+)?px\\b/'
+const rawVisualSizePattern =
+  '/\\b(?:5|6|12|14|16|18|20|22|24|26|27|32|36|38|40|44|46|48|60|74|88)px\\b/'
 
 /** @type {import('stylelint').Config} */
 const config = {
@@ -24,6 +26,9 @@ const config = {
             [rawSpacingPattern],
           '/^(?:border|border-top|border-right|border-bottom|border-left|outline|outline-offset)$/':
             [rawStrokeWidthPattern],
+          '/^(?:width|height|min-width|min-height|max-width|max-height|flex)$/': [
+            rawVisualSizePattern,
+          ],
         },
       },
     },
