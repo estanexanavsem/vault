@@ -1,5 +1,4 @@
 .card {
-  padding: var(--space-7-5) var(--space-7) var(--space-9);
   background: var(--color-surface);
   border: var(--stroke-width-hairline) solid var(--color-border-subtle);
   border-radius: var(--radius-3xl);
@@ -13,6 +12,7 @@
   gap: var(--space-4-5);
   align-items: center;
 }
+
 .kicker {
   margin: 0;
   font-size: var(--font-size-2xs);
@@ -32,8 +32,6 @@
   .card {
     order: 3;
     min-height: 100px;
-    padding-top: var(--space-6);
-
     width: 100%;
     min-width: 0;
     padding: var(--space-6) var(--space-5-5) var(--space-6-5);

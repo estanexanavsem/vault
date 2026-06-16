@@ -11,6 +11,7 @@
 
 .dialog {
   position: relative;
+
   --balance-dialog-width: 604px;
   --balance-dialog-min-height: 390px;
   --balance-dialog-close-offset: 20px;
