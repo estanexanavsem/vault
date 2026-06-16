@@ -20,14 +20,14 @@ export function DetailActivitySection({
 
   return (
     <section
-      className={cn(styles.activityCard, isAccountDetailsOpen && styles.activityCardDetailsOpen)}
+      className={cn(styles.card, isAccountDetailsOpen && styles.open)}
       aria-labelledby="detail-activity-title"
     >
-      <div className={styles.activityHeading}>
+      <div className={styles.head}>
         <h2 id="detail-activity-title">Activity</h2>
       </div>
 
-      <div className={cn(primitiveStyles.tabs, styles.detailTabs)} aria-label="Activity range">
+      <div className={cn(primitiveStyles.tabs, styles.tabs)} aria-label="Activity range">
         <button
           className={cn(primitiveStyles.tab, !isUpcoming && primitiveStyles.active)}
           type="button"
