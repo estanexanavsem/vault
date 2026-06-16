@@ -40,7 +40,7 @@ export function LoginScreen({ error, loading, onSubmit }: LoginScreenProps) {
     <main className={styles.screen}>
       <section className={styles.panel} aria-labelledby="login-title">
         <div className={styles.brand}>
-          <TruistMark className={styles.brandMark} />
+          <TruistMark className={styles.mark} />
           <div>
             <p>Truist</p>
             <h1 id="login-title">Guest access</h1>
@@ -50,7 +50,7 @@ export function LoginScreen({ error, loading, onSubmit }: LoginScreenProps) {
         <form className={styles.form} onSubmit={handleSubmit(submitLogin)}>
           <label className={styles.field}>
             <span>Login</span>
-            <span className={styles.inputShell}>
+            <span className={styles.shell}>
               <UserRound size={18} aria-hidden="true" />
               <input
                 {...register('login')}
@@ -64,13 +64,13 @@ export function LoginScreen({ error, loading, onSubmit }: LoginScreenProps) {
               />
             </span>
             {errors.login?.message ? (
-              <span className={styles.fieldError}>{errors.login.message}</span>
+              <span className={styles.error}>{errors.login.message}</span>
             ) : null}
           </label>
 
           <label className={styles.field}>
             <span>Password</span>
-            <span className={styles.inputShell}>
+            <span className={styles.shell}>
               <LockKeyhole size={18} aria-hidden="true" />
               <input
                 {...register('password')}
@@ -84,19 +84,19 @@ export function LoginScreen({ error, loading, onSubmit }: LoginScreenProps) {
               />
             </span>
             {errors.password?.message ? (
-              <span className={styles.fieldError}>{errors.password.message}</span>
+              <span className={styles.error}>{errors.password.message}</span>
             ) : null}
           </label>
 
           {error && (
-            <div className={styles.errorBanner} role="alert">
+            <div className={styles.alert} role="alert">
               <AlertCircle size={18} aria-hidden="true" />
               <span>{error}</span>
             </div>
           )}
 
           <button
-            className={styles.submitButton}
+            className={styles.submit}
             disabled={isBusy}
             type="submit"
             aria-label={isBusy ? 'Checking access' : undefined}

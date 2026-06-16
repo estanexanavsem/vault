@@ -7,7 +7,7 @@
   background: var(--color-page);
 }
 
-.fullPage {
+.full {
   min-height: 100dvh;
   background: var(--gradient-auth);
 }
@@ -63,8 +63,8 @@
   gap: var(--space-3-5);
 }
 
-.primaryButton,
-.secondaryButton {
+.primary,
+.secondary {
   display: inline-flex;
   gap: var(--space-3);
   align-items: center;
@@ -76,13 +76,13 @@
   border-radius: var(--radius-pill);
 }
 
-.primaryButton {
+.primary {
   color: var(--color-text-inverse);
   background: var(--color-brand);
   border: var(--stroke-width-hairline) solid var(--color-brand);
 }
 
-.secondaryButton {
+.secondary {
   color: var(--color-brand-hover);
   background: var(--color-surface);
   border: var(--stroke-width-hairline) solid var(--color-border-control);

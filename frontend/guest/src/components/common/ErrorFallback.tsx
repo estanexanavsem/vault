@@ -40,12 +40,12 @@ export function ErrorFallback({ onBack, resetErrorBoundary, scope = 'app' }: Err
       </div>
 
       <div className={styles.actions}>
-        <button className={styles.primaryButton} type="button" onClick={primaryAction}>
+        <button className={styles.primary} type="button" onClick={primaryAction}>
           <RefreshCw size={16} aria-hidden="true" />
           {primaryActionLabel}
         </button>
         {onBack ? (
-          <button className={styles.secondaryButton} type="button" onClick={onBack}>
+          <button className={styles.secondary} type="button" onClick={onBack}>
             <ArrowLeft size={16} aria-hidden="true" />
             Back to dashboard
           </button>
@@ -56,11 +56,7 @@ export function ErrorFallback({ onBack, resetErrorBoundary, scope = 'app' }: Err
 
   if (scope === 'app') {
     return (
-      <main
-        className={cn(styles.fallback, styles.fullPage)}
-        role="alert"
-        aria-labelledby={headingId}
-      >
+      <main className={cn(styles.fallback, styles.full)} role="alert" aria-labelledby={headingId}>
         {panel}
       </main>
     )
