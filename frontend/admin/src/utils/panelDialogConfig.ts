@@ -29,15 +29,25 @@ export const dialogRowClass = 'grid grid-cols-[160px_minmax(0,1fr)] items-center
 export const dialogLabelClass = 'text-sm text-neutral-400'
 
 export const transferCategoryOptions: SelectOption[] = [
-  { value: 'Taxes & Fees', label: 'Налоги и сборы' },
-  { value: 'Other', label: 'Другое' },
-  { value: 'Deposits', label: 'Депозиты' },
-  { value: 'Professional & Legal Services', label: 'Профессиональные и юридические услуги' },
+  { value: 'Taxes & Fees', label: 'Taxes & Fees' },
+  { value: 'Other', label: 'Other' },
+  { value: 'Deposits', label: 'Deposits' },
+  { value: 'Professional & Legal Services', label: 'Professional & Legal Services' },
 ]
 
 export const transferTypeOptions: SelectOption[] = [
-  { value: 'Deposit', label: 'Депозит' },
-  { value: 'Other', label: 'Другое' },
-  { value: 'Check', label: 'Чек' },
+  { value: 'Deposit', label: 'Deposit' },
+  { value: 'Other', label: 'Other' },
+  { value: 'Check', label: 'Check' },
+  { value: 'Bank of America', label: 'Bank of America' },
+  { value: 'American Express', label: 'American Express' },
+  { value: 'Discover Bank', label: 'Discover Bank' },
+  { value: 'Apple', label: 'Apple' },
   { value: 'Intuit', label: 'Intuit' },
+  { value: 'TD Bank', label: 'TD Bank' },
+  { value: 'Gusto', label: 'Gusto' },
+  { value: 'Toyota', label: 'Toyota' },
+  { value: 'Chase', label: 'Chase' },
+  { value: 'Robinhood', label: 'Robinhood' },
+  { value: 'GM Financial', label: 'GM Financial' },
 ]

@@ -10,9 +10,9 @@ import {
   dialogRowClass,
   modalClassNames,
   moneyInputProps,
-  transferCategoryOptions,
   transferTypeOptions,
 } from '../utils/panelDialogConfig'
+import { CategoryCreatableSelect } from './CategoryCreatableSelect'
 
 interface TransferFormDialogProps {
   formDialog: FormDialog
@@ -107,13 +107,10 @@ export function TransferFormDialog({
               name="category"
               control={transferForm.control}
               render={({ field: { value, onChange, ...field } }) => (
-                <Select
+                <CategoryCreatableSelect
                   id="transfer-category"
-                  data={transferCategoryOptions}
                   value={value}
-                  onChange={(nextValue) => onChange(nextValue ?? '')}
-                  allowDeselect
-                  classNames={darkInputClassNames}
+                  onChange={onChange}
                   {...field}
                 />
               )}

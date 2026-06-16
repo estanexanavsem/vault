@@ -177,6 +177,7 @@ func newRouter() *gin.Engine {
 
 			protected.GET("/settings", handlers.GetSettings)
 			protected.PUT("/settings", handlers.UpdateSettings)
+			protected.DELETE("/settings/transfer-categories/:category", handlers.DeleteTransferCategory)
 		}
 	}
 	return r

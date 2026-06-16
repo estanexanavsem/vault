@@ -7,6 +7,7 @@ export const panelQueryKeys = {
   accounts: ['accounts'] as const,
   transfers: ['transfers'] as const,
   files: ['files'] as const,
+  settings: ['settings'] as const,
 }
 
 const panelQueryOptions = {

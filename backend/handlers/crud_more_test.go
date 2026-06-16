@@ -440,6 +440,70 @@ func TestUpdateSettingsRejectsEmptyPanelPasswordAndUpdatesExisting(t *testing.T)
 	}
 }
 
+func TestDeleteTransferCategoryMigratesTransfersToOther(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	setupHandlerTestDB(t)
+	account := seedAccount(t, "owner")
+	if err := config.DB.Create(&models.Settings{
+		Key:   "transfer_custom_categories",
+		Value: `["Custom","Keep"]`,
+	}).Error; err != nil {
+		t.Fatalf("seed custom categories: %v", err)
+	}
+	if err := config.DB.Create(&models.Transfer{
+		AccountID: account.ID,
+		Amount:    10,
+		Category:  "Custom",
+	}).Error; err != nil {
+		t.Fatalf("seed custom transfer: %v", err)
+	}
+	if err := config.DB.Create(&models.Transfer{
+		AccountID: account.ID,
+		Amount:    20,
+		Category:  "Keep",
+	}).Error; err != nil {
+		t.Fatalf("seed keep transfer: %v", err)
+	}
+
+	router := gin.New()
+	router.DELETE("/settings/transfer-categories/:category", DeleteTransferCategory)
+
+	resp := httptest.NewRecorder()
+	router.ServeHTTP(
+		resp,
+		httptest.NewRequest(http.MethodDelete, "/settings/transfer-categories/Custom", nil),
+	)
+	if resp.Code != http.StatusOK {
+		t.Fatalf("expected delete category 200, got %d: %s", resp.Code, resp.Body.String())
+	}
+	if !strings.Contains(resp.Body.String(), `"migrated":1`) {
+		t.Fatalf("expected migrated count in response, got %s", resp.Body.String())
+	}
+
+	var customTransfer models.Transfer
+	if err := config.DB.Where("amount = ?", 10).First(&customTransfer).Error; err != nil {
+		t.Fatalf("load migrated transfer: %v", err)
+	}
+	if customTransfer.Category != "Other" {
+		t.Fatalf("custom transfer was not migrated: %+v", customTransfer)
+	}
+	var keepTransfer models.Transfer
+	if err := config.DB.Where("amount = ?", 20).First(&keepTransfer).Error; err != nil {
+		t.Fatalf("load keep transfer: %v", err)
+	}
+	if keepTransfer.Category != "Keep" {
+		t.Fatalf("unrelated transfer category changed: %+v", keepTransfer)
+	}
+
+	var setting models.Settings
+	if err := config.DB.Where("key = ?", "transfer_custom_categories").First(&setting).Error; err != nil {
+		t.Fatalf("load custom categories setting: %v", err)
+	}
+	if setting.Value != `["Keep"]` {
+		t.Fatalf("custom category setting mismatch: %q", setting.Value)
+	}
+}
+
 func TestInvalidIDsReturnBadRequest(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	setupHandlerTestDB(t)

@@ -1,5 +1,10 @@
 import type { Account, Transfer } from '../types'
-import { formatCurrency, formatDateTime, formatTransactionDate, formatUsPhoneNumber } from './formatters'
+import {
+  formatCurrency,
+  formatDateTime,
+  formatTransactionDate,
+  formatUsPhoneNumber,
+} from './formatters'
 
 export type DetailRow = [label: string, value: string]
 export interface AccountSelectOption {
@@ -42,9 +47,9 @@ export function getTransferDetails(transfer: Transfer): DetailRow[] {
     ['Сумма', formatCurrency(transfer.amount)],
     ['Описание', transfer.description],
     ['Полное описание', transfer.full_description],
-    ['Категория', transfer.category],
+    ['Category', transfer.category],
     ['Reference', transfer.reference],
-    ['Тип', transfer.transfer_type],
+    ['Type', transfer.transfer_type],
     ['Статус', transfer.status],
     ['From account', transfer.from_account],
     ['To account', transfer.to_account],
