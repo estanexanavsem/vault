@@ -2,7 +2,7 @@ import styles from './UpcomingActivityEmpty.module.css'
 
 export function UpcomingActivityEmpty() {
   return (
-    <div className={styles.activityEmpty}>
+    <div className={styles.empty}>
       <p>You have no upcoming transactions.</p>
       <img
         alt=""

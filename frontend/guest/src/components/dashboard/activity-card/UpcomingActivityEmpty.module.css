@@ -1,4 +1,4 @@
-.activityEmpty {
+.empty {
   display: grid;
   justify-items: center;
   min-height: 238px;
@@ -6,13 +6,13 @@
   color: var(--color-text-muted);
 }
 
-.activityEmpty p {
+.empty p {
   justify-self: start;
   margin: 0;
   font-size: var(--font-size-lg);
 }
 
-.activityEmpty img {
+.empty img {
   width: 200px;
   max-width: 70%;
   height: auto;
