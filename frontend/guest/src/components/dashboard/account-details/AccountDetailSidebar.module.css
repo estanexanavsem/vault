@@ -1,4 +1,4 @@
-.sidebar {
+.root {
   --account-detail-sidebar-overlap: -291px;
 
   display: flex;
@@ -13,7 +13,7 @@
   border-radius: var(--radius-md);
 }
 
-.sidebarHead {
+.head {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,14 +21,14 @@
   border-bottom: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
-.sidebar h2 {
+.root h2 {
   margin: 0;
   font-size: var(--font-size-6xl);
   font-weight: var(--font-weight-bold);
   letter-spacing: 0;
 }
 
-.sidebarFamily {
+.family {
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr) auto;
   gap: var(--space-4);
@@ -39,12 +39,12 @@
   text-transform: uppercase;
 }
 
-.sidebarFamily span {
+.family span {
   font-weight: var(--font-weight-bold);
   font-variant-numeric: tabular-nums;
 }
 
-.sidebarAccount {
+.account {
   display: grid;
   gap: var(--space-1-5);
   width: 100%;
@@ -58,20 +58,20 @@
   border-radius: var(--radius-xs);
 }
 
-.sidebarAccount span,
-.sidebarAccount strong {
+.account span,
+.account strong {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
 }
 
-.sidebarAccount small {
+.account small {
   font-size: var(--font-size-sm);
   line-height: var(--line-height-snug);
   color: var(--color-text-subtle);
 }
 
 @media (width <= 1280px) {
-  .sidebar {
+  .root {
     display: none;
   }
 }
