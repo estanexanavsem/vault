@@ -1,0 +1,29 @@
+.notificationsCard {
+  align-self: start;
+  min-height: 104px;
+  padding: 24px 22px;
+}
+
+.notificationsTitle {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.notificationsCard p {
+  margin: 28px 0 0;
+  font-size: 18px;
+  color: var(--color-brand);
+}
+
+@media (width <= 760px) {
+  .notificationsCard {
+    order: 3;
+    min-height: 100px;
+    padding-top: 20px;
+  }
+
+  .notificationsCard p {
+    margin-top: 22px;
+  }
+}

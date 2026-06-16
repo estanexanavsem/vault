@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { cn } from '../../../utils/cn'
 import type { TransferSummary } from '../../../utils/transferSummary'
 import { TransactionIcon } from '../account-details/TransactionIcon'
-import styles from '../dashboard.module.css'
+import styles from './RecentActivitySummary.module.css'
 
 interface RecentActivitySummaryProps {
   accountRoute: string

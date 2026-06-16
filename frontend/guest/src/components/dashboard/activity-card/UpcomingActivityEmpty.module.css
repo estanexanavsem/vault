@@ -1,0 +1,20 @@
+.activityEmpty {
+  display: grid;
+  justify-items: center;
+  min-height: 238px;
+  margin-top: 20px;
+  color: var(--color-text-muted);
+}
+
+.activityEmpty p {
+  justify-self: start;
+  margin: 0;
+  font-size: 16px;
+}
+
+.activityEmpty img {
+  width: 200px;
+  max-width: 70%;
+  height: auto;
+  margin-top: 22px;
+}

@@ -1,4 +1,4 @@
-import styles from '../dashboard.module.css'
+import styles from './UpcomingActivityEmpty.module.css'
 
 export function UpcomingActivityEmpty() {
   return (

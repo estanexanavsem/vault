@@ -6,7 +6,8 @@ import { cn } from '../../utils/cn'
 import { getTransferBalance } from '../../utils/transferBalance'
 import { BusinessAccountSummary } from './account-card/BusinessAccountSummary'
 import { LinkedAccountEmpty } from './account-card/LinkedAccountEmpty'
-import styles from './dashboard.module.css'
+import styles from './AccountCard.module.css'
+import primitiveStyles from './DashboardPrimitives.module.css'
 
 interface AccountCardProps {
   accountRoute: string
@@ -19,23 +20,26 @@ export function AccountCard({ accountRoute, data }: AccountCardProps) {
   const isLinked = activeTab === 'linked'
 
   return (
-    <section className={cn(styles.card, styles.accountsCard)} aria-labelledby="accounts-title">
-      <div className={styles.sectionHeadingRow}>
-        <h2 id="accounts-title" className={styles.sectionKicker}>
+    <section
+      className={cn(primitiveStyles.card, styles.accountsCard)}
+      aria-labelledby="accounts-title"
+    >
+      <div className={primitiveStyles.sectionHeadingRow}>
+        <h2 id="accounts-title" className={primitiveStyles.sectionKicker}>
           Accounts
         </h2>
       </div>
 
-      <div className={styles.tabs} aria-label="Account groups">
+      <div className={primitiveStyles.tabs} aria-label="Account groups">
         <button
-          className={cn(styles.tab, activeTab === 'business' && styles.active)}
+          className={cn(primitiveStyles.tab, activeTab === 'business' && primitiveStyles.active)}
           type="button"
           onClick={() => setActiveTab('business')}
         >
           Business
         </button>
         <button
-          className={cn(styles.tab, isLinked && styles.active)}
+          className={cn(primitiveStyles.tab, isLinked && primitiveStyles.active)}
           type="button"
           onClick={() => setActiveTab('linked')}
         >

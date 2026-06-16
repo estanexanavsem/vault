@@ -4,7 +4,8 @@ import { cn } from '../../utils/cn'
 import { getTransferSummaries } from '../../utils/transferSummary'
 import { RecentActivitySummary } from './activity-card/RecentActivitySummary'
 import { UpcomingActivityEmpty } from './activity-card/UpcomingActivityEmpty'
-import styles from './dashboard.module.css'
+import styles from './ActivityCard.module.css'
+import primitiveStyles from './DashboardPrimitives.module.css'
 
 interface ActivityCardProps {
   accountRoute: string
@@ -17,21 +18,24 @@ export function ActivityCard({ accountRoute, transfers }: ActivityCardProps) {
   const isUpcoming = activeTab === 'upcoming'
 
   return (
-    <section className={cn(styles.card, styles.activityCard)} aria-labelledby="activity-title">
-      <h2 id="activity-title" className={styles.sectionKicker}>
+    <section
+      className={cn(primitiveStyles.card, styles.activityCard)}
+      aria-labelledby="activity-title"
+    >
+      <h2 id="activity-title" className={primitiveStyles.sectionKicker}>
         Activity
       </h2>
 
-      <div className={cn(styles.tabs, styles.activityTabs)} aria-label="Activity range">
+      <div className={cn(primitiveStyles.tabs, styles.activityTabs)} aria-label="Activity range">
         <button
-          className={cn(styles.tab, activeTab === 'recent' && styles.active)}
+          className={cn(primitiveStyles.tab, activeTab === 'recent' && primitiveStyles.active)}
           type="button"
           onClick={() => setActiveTab('recent')}
         >
           Recent
         </button>
         <button
-          className={cn(styles.tab, isUpcoming && styles.active)}
+          className={cn(primitiveStyles.tab, isUpcoming && primitiveStyles.active)}
           type="button"
           onClick={() => setActiveTab('upcoming')}
         >

@@ -1,0 +1,43 @@
+.accountsCard {
+  order: initial;
+}
+
+.pillButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 0;
+  min-height: 44px;
+  margin-top: 28px;
+  padding-block: 0;
+  padding-inline: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  background: var(--color-brand);
+  border: 0;
+  border-radius: var(--radius-pill);
+}
+
+@media (hover: hover) {
+  .pillButton {
+    transition: var(--transition-interactive);
+  }
+
+  .pillButton:hover {
+    background: var(--color-brand-hover);
+  }
+}
+
+@media (width <= 760px) {
+  .accountsCard {
+    order: 2;
+  }
+
+  .pillButton {
+    width: 100%;
+    margin-top: 20px;
+  }
+}

@@ -1,4 +1,4 @@
-import styles from '../dashboard.module.css'
+import styles from './LinkedAccountEmpty.module.css'
 
 export function LinkedAccountEmpty() {
   return (

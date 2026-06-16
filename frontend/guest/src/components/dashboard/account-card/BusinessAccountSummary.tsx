@@ -1,7 +1,7 @@
 import { Wallet } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { AccountSummary } from '../../../utils/accountSummary'
-import styles from '../dashboard.module.css'
+import styles from './BusinessAccountSummary.module.css'
 
 interface BusinessAccountSummaryProps {
   account: AccountSummary

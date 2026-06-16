@@ -1,0 +1,14 @@
+.activityCard {
+  align-self: start;
+  padding-bottom: 18px;
+}
+
+.activityTabs {
+  margin-top: 24px;
+}
+
+@media (width <= 760px) {
+  .activityCard {
+    order: 4;
+  }
+}

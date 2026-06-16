@@ -1,0 +1,19 @@
+.accountLinkedEmpty {
+  display: grid;
+  justify-items: center;
+  min-height: 250px;
+  padding-top: 58px;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.accountLinkedEmpty img {
+  width: 100px;
+  height: auto;
+}
+
+.accountLinkedEmpty p {
+  margin: 26px 0 0;
+  font-size: 16px;
+  line-height: 1.45;
+}

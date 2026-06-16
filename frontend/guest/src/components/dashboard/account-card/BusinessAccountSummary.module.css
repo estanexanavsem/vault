@@ -1,0 +1,113 @@
+.accountFamily {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  color: var(--color-brand-strong);
+}
+
+.accountFamilyLabel {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  min-width: 0;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.accountIcon {
+  display: inline-grid;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  place-items: center;
+  color: var(--color-brand-hover);
+  background: var(--color-surface-accent);
+  border-radius: var(--radius-pill);
+}
+
+.familyBalance {
+  flex: 0 0 auto;
+  font-size: 16px;
+}
+
+.accountRow {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 72px;
+  margin-top: 10px;
+  padding: 0 22px;
+  color: var(--color-brand-hover);
+  text-decoration: none;
+  text-align: left;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border-control);
+  border-radius: var(--radius-md);
+}
+
+.accountRow span,
+.accountRow strong {
+  min-width: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.accountRow span {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.accountRow strong {
+  flex: 0 0 auto;
+  margin-right: 36px;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--color-brand-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (hover: hover) {
+  .accountRow {
+    transition: var(--transition-interactive);
+  }
+
+  .accountRow:hover {
+    background: var(--color-surface-hover);
+    border-color: var(--color-brand);
+  }
+}
+
+@media (width <= 760px) {
+  .accountFamily {
+    align-items: flex-start;
+  }
+
+  .accountFamilyLabel {
+    gap: 12px;
+    flex: 1 1 auto;
+  }
+
+  .familyBalance {
+    flex: 0 0 auto;
+    padding-top: 8px;
+    font-size: 13px;
+  }
+
+  .accountRow {
+    display: grid;
+    gap: 2px;
+    justify-content: stretch;
+    width: 100%;
+    min-height: 62px;
+    padding: 10px 18px;
+  }
+
+  .accountRow span,
+  .accountRow strong {
+    font-size: 17px;
+  }
+}
