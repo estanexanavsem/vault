@@ -4,13 +4,23 @@
 }
 
 .grid {
+  --dashboard-home-grid-left: 770px;
+  --dashboard-home-grid-right: 550px;
+  --dashboard-home-thanks-min-height: 82px;
+  --dashboard-home-thanks-min-height-mobile: 58px;
+  --dashboard-home-padding-top: var(--space-19);
+  --dashboard-home-padding-bottom: var(--space-4-5);
+
   display: grid;
-  grid-template-columns: minmax(0, 770px) minmax(550px, 550px);
+  grid-template-columns: minmax(0, var(--dashboard-home-grid-left)) minmax(
+      var(--dashboard-home-grid-right),
+      var(--dashboard-home-grid-right)
+    );
   align-items: start;
   gap: var(--space-5);
   width: min(100%, var(--content-width));
   margin: 0 auto;
-  padding: var(--space-19) var(--space-9) var(--space-4-5);
+  padding: var(--dashboard-home-padding-top) var(--space-9) var(--dashboard-home-padding-bottom);
 }
 
 .left,
@@ -30,7 +40,7 @@
   gap: var(--space-5);
   align-items: center;
   justify-content: space-between;
-  min-height: 82px;
+  min-height: var(--dashboard-home-thanks-min-height);
   padding: 0 var(--space-6-5);
   font-size: var(--font-size-8xl);
   font-weight: var(--font-weight-regular);
@@ -70,7 +80,7 @@
   .thanks {
     width: 100%;
     order: 1;
-    min-height: 58px;
+    min-height: var(--dashboard-home-thanks-min-height-mobile);
     padding: var(--space-7) var(--space-3) var(--space-7) var(--space-5);
     font-size: var(--font-size-6xl);
     border-radius: var(--radius-2xl);
