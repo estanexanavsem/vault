@@ -51,7 +51,7 @@ export function DesktopProfileMenu({ greetingName, lastSignInText }: DesktopProf
         {...getReferenceProps({
           'aria-expanded': isOpen,
           'aria-label': `${greetingName} profile`,
-          className: styles.avatar,
+          className: styles.trigger,
         })}
       >
         {greetingName.slice(0, 2).toUpperCase()}
@@ -59,21 +59,21 @@ export function DesktopProfileMenu({ greetingName, lastSignInText }: DesktopProf
 
       {isOpen ? (
         <FloatingPortal>
-          <FloatingOverlay className={styles.profileMenuOverlay} style={{ top: 75 }} lockScroll>
+          <FloatingOverlay className={styles.overlay} style={{ top: 75 }} lockScroll>
             <FloatingFocusManager context={context}>
               <section
                 ref={setFloatingNode}
                 {...getFloatingProps({
                   'aria-labelledby': 'desktop-profile-menu-title',
-                  className: styles.profileMenu,
+                  className: styles.panel,
                 })}
               >
-                <div className={styles.profileMenuHead}>
+                <div className={styles.head}>
                   <h2 id="desktop-profile-menu-title">Hello, {greetingName}</h2>
                   {lastSignInText ? <p>Last sign in: {lastSignInText}</p> : null}
                 </div>
 
-                <nav className={styles.profileMenuGrid} aria-label="Profile menu">
+                <nav className={styles.grid} aria-label="Profile menu">
                   <Link to="/security-center" onClick={() => setIsOpen(false)}>
                     <UserRound size={22} aria-hidden="true" />
                     <span>
