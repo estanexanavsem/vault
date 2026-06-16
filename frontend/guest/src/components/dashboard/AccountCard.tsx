@@ -21,7 +21,7 @@ export function AccountCard({ accountRoute, data }: AccountCardProps) {
 
   return (
     <section
-      className={cn(primitiveStyles.card, styles.accountsCard)}
+      className={cn(primitiveStyles.card, styles.card)}
       aria-labelledby="accounts-title"
     >
       <div className={primitiveStyles.sectionHeadingRow}>
@@ -53,7 +53,7 @@ export function AccountCard({ accountRoute, data }: AccountCardProps) {
         <BusinessAccountSummary account={account} accountRoute={accountRoute} />
       )}
 
-      <Link className={styles.pillButton} to={accountRoute}>
+      <Link className={styles.button} to={accountRoute}>
         View all accounts
       </Link>
     </section>

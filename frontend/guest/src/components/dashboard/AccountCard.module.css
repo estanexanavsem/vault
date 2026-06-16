@@ -1,8 +1,8 @@
-.accountsCard {
+.card {
   order: initial;
 }
 
-.pillButton {
+.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -22,21 +22,21 @@
 }
 
 @media (hover: hover) {
-  .pillButton {
+  .button {
     transition: var(--transition-interactive);
   }
 
-  .pillButton:hover {
+  .button:hover {
     background: var(--color-brand-hover);
   }
 }
 
 @media (width <= 768px) {
-  .accountsCard {
+  .card {
     order: 2;
   }
 
-  .pillButton {
+  .button {
     width: 100%;
     margin-top: var(--space-6);
   }
