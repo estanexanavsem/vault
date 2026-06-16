@@ -78,7 +78,7 @@
   height: var(--size-indicator-xs);
   background: var(--color-surface);
   border-radius: var(--radius-pill);
-  opacity: 90%;
+  opacity: var(--opacity-subtle-indicator);
 }
 
 .signOutButton {

@@ -13,6 +13,7 @@ const rawVisualSizePattern =
 const rawLayerPattern = '/\\b\\d+\\b/'
 const rawMotionPattern = '/\\b(?:\\d+(?:\\.\\d+)?m?s|ease(?:-in|-out|-in-out)?|linear)\\b/'
 const rawBackdropFilterPattern = '/\\bblur\\(/'
+const rawOpacityPattern = '/\\b(?:\\d+(?:\\.\\d+)?%|0?\\.\\d+|1(?:\\.0+)?)\\b/'
 const viewportBreakpointValues = ['576px', '768px', '1024px', '1280px']
 
 /** @type {import('stylelint').Config} */
@@ -38,6 +39,7 @@ const config = {
           'z-index': [rawLayerPattern],
           '/^(?:transition|transition-duration|animation|animation-duration)$/': [rawMotionPattern],
           'backdrop-filter': [rawBackdropFilterPattern],
+          opacity: [rawOpacityPattern],
         },
       },
     },

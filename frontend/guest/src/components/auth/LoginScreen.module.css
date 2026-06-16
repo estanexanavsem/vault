@@ -116,7 +116,7 @@
 }
 
 .submitButton:disabled {
-  opacity: 65%;
+  opacity: var(--opacity-disabled-control);
 }
 
 @media (hover: hover) {
