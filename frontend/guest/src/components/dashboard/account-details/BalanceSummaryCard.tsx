@@ -53,11 +53,11 @@ export function BalanceSummaryCard({
 
   return (
     <>
-      <section className={styles.balanceCard} aria-labelledby="balance-title">
-        <div className={styles.balanceCardTop}>
+      <section className={styles.card} aria-labelledby="balance-title">
+        <div className={styles.head}>
           <h1 id="balance-title">{account.title}</h1>
           <button
-            className={styles.accountDetailsLink}
+            className={styles.details}
             type="button"
             aria-expanded={isAccountDetailsOpen}
             onClick={() => onAccountDetailsOpenChange(!isAccountDetailsOpen)}
@@ -67,21 +67,21 @@ export function BalanceSummaryCard({
           </button>
         </div>
         {isAccountDetailsOpen ? (
-          <div className={styles.accountInfoPanel}>
-            <div className={styles.accountInfoDivider} />
-            <h2 className={styles.accountInfoTitle}>
+          <div className={styles.info}>
+            <div className={styles.sep} />
+            <h2 className={styles.title}>
               <span aria-hidden="true">$</span>
               <List size={17} aria-hidden="true" />
               Account Information
             </h2>
-            <dl className={styles.accountInfoGrid}>
+            <dl className={styles.grid}>
               {accountNumber ? (
                 <div>
                   <dt>Account number</dt>
                   <dd>
                     {accountNumberText}
                     <button
-                      className={styles.accountNumberReveal}
+                      className={styles.reveal}
                       type="button"
                       aria-label={
                         isAccountNumberVisible ? 'Hide account number' : 'Show account number'
@@ -104,7 +104,7 @@ export function BalanceSummaryCard({
                 <dt>
                   Current balance
                   <button
-                    className={styles.accountInfoHelp}
+                    className={styles.help}
                     type="button"
                     aria-label="Current balance information"
                     onClick={() => setBalanceInfoDialog('current')}
@@ -121,13 +121,13 @@ export function BalanceSummaryCard({
                 </div>
               ) : null}
             </dl>
-            <div className={styles.accountInfoDivider} />
+            <div className={styles.sep} />
           </div>
         ) : null}
-        <p className={styles.balanceAmount}>
+        <p className={styles.amount}>
           {account.balanceText}
           <button
-            className={styles.balanceInfoButton}
+            className={styles.infoButton}
             type="button"
             aria-label="Available balance information"
             onClick={() => setBalanceInfoDialog('available')}
@@ -136,7 +136,7 @@ export function BalanceSummaryCard({
           </button>
         </p>
         {account.availableBalanceDate ? (
-          <p className={styles.balanceNote}>
+          <p className={styles.note}>
             Available balance as of {account.availableBalanceDate}
           </p>
         ) : null}
