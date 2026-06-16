@@ -101,43 +101,6 @@
   color: var(--color-text-subtle);
 }
 
-.openAccountCard {
-  display: grid;
-  grid-template-columns: 24px minmax(0, 1fr) 20px;
-  gap: 18px;
-  align-items: start;
-  min-height: 118px;
-  margin-top: 32px;
-  padding: 22px;
-  color: var(--color-brand);
-  text-align: left;
-  background: var(--color-surface);
-  border: 2px solid var(--color-border-control);
-  border-radius: var(--radius-md);
-}
-
-.openAccountCard span {
-  display: grid;
-  gap: 16px;
-  color: var(--color-text-primary);
-}
-
-.openAccountCard strong {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.openAccountCard small {
-  font-size: 16px;
-  line-height: 1.35;
-  color: var(--color-text-muted);
-}
-
-.openAccountChevron {
-  align-self: center;
-  rotate: 0deg;
-}
-
 .content {
   display: grid;
   grid-column: 2;
@@ -392,30 +355,6 @@
   color: var(--color-text-subtle);
 }
 
-.balanceActions {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-  margin-top: 4px;
-}
-
-.balanceActions button,
-.searchButton,
-.iconButton {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  justify-content: center;
-  min-height: 36px;
-  padding: 0 18px;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--color-brand);
-  background: var(--color-surface-brand);
-  border: 2px solid var(--color-border-control);
-  border-radius: var(--radius-pill);
-}
-
 .main {
   display: grid;
   grid-template-columns: 340px minmax(0, 1fr);
@@ -437,17 +376,6 @@
   border: 1px solid var(--color-border-subtle);
   border-top: 0;
   border-radius: 0 0 4px 4px;
-}
-
-.activityTools {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.iconButton {
-  width: 46px;
-  padding: 0;
 }
 
 .detailTabs {
@@ -852,13 +780,6 @@
   flex: 0 0 auto;
 }
 
-@media (hover: hover) {
-  .searchButton,
-  .iconButton {
-    transition: var(--transition-interactive);
-  }
-}
-
 @media (width <= 760px) {
   .hero {
     height: auto;
@@ -1001,24 +922,6 @@
     font-size: 14px;
   }
 
-  .balanceActions {
-    display: grid;
-    grid-template-columns: minmax(0, 151px) minmax(0, 190px);
-    gap: 8px;
-    justify-content: start;
-    margin-top: 22px;
-  }
-
-  .balanceActions button {
-    min-height: 36px;
-    padding: 0 10px;
-    font-size: 16px;
-  }
-
-  .balanceActions button:last-child {
-    display: none;
-  }
-
   .main {
     display: block;
     width: 100%;
@@ -1044,23 +947,6 @@
 
   .activityHeading h2 {
     padding-left: 16px;
-  }
-
-  .activityTools {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 48px 48px;
-    gap: 8px;
-  }
-
-  .searchButton {
-    min-height: 48px;
-    font-size: 16px;
-  }
-
-  .iconButton {
-    width: 48px;
-    min-height: 48px;
-    padding: 0;
   }
 
   .detailTabs {
