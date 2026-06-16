@@ -13,6 +13,7 @@
     /* Typography and layout */
     --font-sans: 'Vault Sans', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', sans-serif;
     --content-width: 1400px;
+    --layout-account-detail-columns: 340px minmax(0, 1fr);
     --size-header-height: 75px;
     --control-height-2xs: 32px;
     --control-height-xs: 36px;

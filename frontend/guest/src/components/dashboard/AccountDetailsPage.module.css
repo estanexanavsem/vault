@@ -1,6 +1,6 @@
 .main {
   display: grid;
-  grid-template-columns: 340px minmax(0, 1fr);
+  grid-template-columns: var(--layout-account-detail-columns);
   gap: 0 var(--space-7);
   align-items: stretch;
   width: min(100%, var(--content-width));
