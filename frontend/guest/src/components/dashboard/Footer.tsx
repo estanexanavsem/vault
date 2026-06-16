@@ -12,14 +12,14 @@ const externalLinkProps = {
 
 export function Footer() {
   return (
-    <footer className={styles.siteFooter}>
-      <div className={styles.footerInner}>
-        <Link className={styles.footerBrand} to="/">
+    <footer className={styles.root}>
+      <div className={styles.inner}>
+        <Link className={styles.brand} to="/">
           <span>TRUIST</span>
-          <TruistMark className={styles.footerBrandMark} />
+          <TruistMark className={styles.mark} />
         </Link>
 
-        <nav className={styles.footerLinks} aria-label="Footer">
+        <nav className={styles.links} aria-label="Footer">
           <a href="https://bank.truist.com/web/support" {...externalLinkProps}>
             Customer service
           </a>
@@ -41,12 +41,12 @@ export function Footer() {
           >
             Service agreements
           </a>
-          <a className={styles.phoneLink} href="tel:8444878478">
+          <a className={styles.phone} href="tel:8444878478">
             <Phone size={14} aria-hidden="true" />
             844-4TRUIST (844-487-8478)
           </a>
           <a
-            className={styles.sensitiveInfoLink}
+            className={styles.sensitive}
             href="https://privacycenter.truist.com/"
             {...externalLinkProps}
           >
@@ -55,7 +55,7 @@ export function Footer() {
           </a>
         </nav>
 
-        <div className={styles.legalCopy}>
+        <div className={styles.legal}>
           {legalSections.map((section, sectionIndex) => (
             <p key={sectionIndex}>
               {section.parts.map((part, partIndex) => (
