@@ -49,6 +49,8 @@ export const formatShortDate = (value: string) => {
   return shortDateFormatter.format(date)
 }
 
+export const formatCurrentShortDate = (date = new Date()) => shortDateFormatter.format(date)
+
 export const formatEasternDateTime = (value: string) => {
   const date = new Date(value)
 
@@ -135,4 +137,4 @@ export const formatStatusLabel = (value: string) =>
     .join(' ')
 
 export const getTransferDate = (transfer: Transfer | undefined) =>
-  transfer?.transaction_date ? formatShortDate(transfer.transaction_date) : ''
+  transfer ? formatCurrentShortDate() : ''

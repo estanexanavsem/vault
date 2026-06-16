@@ -617,16 +617,16 @@
   gap: 4px;
   align-items: center;
   margin: 0 0 14px;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   line-height: 1.2;
   color: var(--ink);
 }
 
 .transactionInfoButton {
   display: inline-grid;
-  width: 22px;
-  height: 22px;
+  width: 16px;
+  height: 16px;
   padding: 0;
   place-items: center;
   color: var(--ink);
@@ -644,14 +644,14 @@
 .transactionExpandedCard dt {
   margin: 0 0 2px;
   font-size: 14px;
-  line-height: 1.15;
+  line-height: normal;
   color: #5f5669;
 }
 
 .transactionExpandedCard dd {
   margin: 0;
   font-size: 16px;
-  line-height: 1.18;
+  line-height: normal;
   color: var(--ink);
 }
 
