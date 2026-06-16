@@ -24,11 +24,14 @@
 }
 
 .footerLinks {
+  --footer-links-offset-block: -25px;
+  --footer-links-offset-inline: 160px;
+
   display: grid;
   grid-template-columns: max-content max-content max-content max-content max-content;
   gap: var(--space-4-5) var(--space-21);
-  margin-top: -25px;
-  margin-left: 160px;
+  margin-top: var(--footer-links-offset-block);
+  margin-left: var(--footer-links-offset-inline);
   font-size: var(--font-size-md);
   color: var(--color-brand);
 }

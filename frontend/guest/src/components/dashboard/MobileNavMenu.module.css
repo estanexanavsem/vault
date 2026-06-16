@@ -47,8 +47,10 @@
 }
 
 .mobileNavFooter {
+  --mobile-nav-footer-divider-offset: 25px;
+
   margin: var(--space-3) var(--space-10) 0;
-  padding-top: 25px;
+  padding-top: var(--mobile-nav-footer-divider-offset);
   padding-bottom: var(--space-12);
   border-top: var(--stroke-width-hairline) solid var(--color-brand-border-muted);
 }

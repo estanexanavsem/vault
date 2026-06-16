@@ -216,7 +216,9 @@
   }
 
   .balanceNote {
-    margin-top: 9px;
+    --balance-note-mobile-offset: 9px;
+
+    margin-top: var(--balance-note-mobile-offset);
     font-size: var(--font-size-sm);
   }
 }

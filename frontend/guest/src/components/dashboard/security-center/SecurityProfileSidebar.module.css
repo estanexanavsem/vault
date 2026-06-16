@@ -40,9 +40,11 @@
 }
 
 .sideNav {
+  --security-side-nav-offset: 38px;
+
   display: grid;
   gap: var(--space-0-5);
-  margin-top: 38px;
+  margin-top: var(--security-side-nav-offset);
 }
 
 .sideNav button {

@@ -178,9 +178,11 @@
   }
 
   .transactionStatus {
+    --transaction-mobile-status-offset: 50px;
+
     grid-area: status;
     align-self: start;
-    margin-left: 50px;
+    margin-left: var(--transaction-mobile-status-offset);
     font-size: var(--font-size-2xs);
   }
 

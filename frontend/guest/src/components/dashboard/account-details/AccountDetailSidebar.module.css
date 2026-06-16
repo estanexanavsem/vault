@@ -1,9 +1,11 @@
 .sidebar {
+  --account-detail-sidebar-overlap: -291px;
+
   display: flex;
   grid-row: 1 / span 4;
   flex-direction: column;
   min-height: 900px;
-  margin-top: -291px;
+  margin-top: var(--account-detail-sidebar-overlap);
   padding: var(--space-7-5) var(--space-6);
   color: var(--color-brand-strong);
   background: var(--color-surface);
