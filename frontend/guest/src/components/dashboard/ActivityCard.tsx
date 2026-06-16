@@ -19,14 +19,14 @@ export function ActivityCard({ accountRoute, transfers }: ActivityCardProps) {
 
   return (
     <section
-      className={cn(primitiveStyles.card, styles.activityCard)}
+      className={cn(primitiveStyles.card, styles.card)}
       aria-labelledby="activity-title"
     >
       <h2 id="activity-title" className={primitiveStyles.sectionKicker}>
         Activity
       </h2>
 
-      <div className={cn(primitiveStyles.tabs, styles.activityTabs)} aria-label="Activity range">
+      <div className={cn(primitiveStyles.tabs, styles.tabs)} aria-label="Activity range">
         <button
           className={cn(primitiveStyles.tab, activeTab === 'recent' && primitiveStyles.active)}
           type="button"

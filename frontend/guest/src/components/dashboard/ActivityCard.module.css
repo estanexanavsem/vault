@@ -1,14 +1,14 @@
-.activityCard {
+.card {
   align-self: start;
   padding-bottom: var(--space-5-5);
 }
 
-.activityTabs {
+.tabs {
   margin-top: var(--space-7);
 }
 
 @media (width <= 768px) {
-  .activityCard {
+  .card {
     order: 4;
   }
 }
