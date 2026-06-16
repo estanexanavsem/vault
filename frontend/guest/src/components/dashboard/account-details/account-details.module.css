@@ -612,6 +612,35 @@
   justify-self: end;
 }
 
+.transactionLoadMoreRow {
+  display: flex;
+  justify-content: center;
+  padding: 18px 12px;
+  border-top: 1px solid var(--line);
+}
+
+.transactionLoadMoreButton {
+  min-width: 150px;
+  min-height: 40px;
+  padding: 0 22px;
+  font-family: 'Vault Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--purple-600);
+  background: #fff;
+  border: 2px solid var(--purple-300);
+  border-radius: 999px;
+}
+
+.transactionLoadMoreButton:hover {
+  background: var(--purple-100);
+}
+
+.transactionLoadMoreButton:focus-visible {
+  outline: 3px solid rgb(125 84 179 / 22%);
+  outline-offset: 2px;
+}
+
 .transactionExpandedPanel {
   padding: 34px 28px 36px;
   border-top: 0;
