@@ -50,7 +50,14 @@ export function TransactionRow({ transfer }: TransactionRowProps) {
           <TransactionIcon transfer={transfer} />
           {transfer.label ? <strong>{transfer.label}</strong> : null}
         </span>
-        <span className={styles.transactionCredit}>{transfer.amountText}</span>
+        <span
+          className={cn(
+            styles.transactionCredit,
+            !transfer.isPositive && styles.transactionAmountNegative,
+          )}
+        >
+          {transfer.amountText}
+        </span>
         {isExpanded ? (
           <ChevronUp size={18} aria-hidden="true" />
         ) : (

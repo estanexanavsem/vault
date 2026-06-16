@@ -326,7 +326,7 @@ func TestGuestSessionWithBasicAuthReturnsDataWithoutFileBlob(t *testing.T) {
 	}
 }
 
-func TestCreateTransferValidatesAccountAndAmount(t *testing.T) {
+func TestCreateTransferValidatesAccountAndAllowsNegativeAmount(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	setupHandlerTestDB(t)
 
@@ -342,14 +342,6 @@ func TestCreateTransferValidatesAccountAndAmount(t *testing.T) {
 	router := gin.New()
 	router.POST("/transfers", CreateTransfer)
 
-	negative := httptest.NewRequest(http.MethodPost, "/transfers", strings.NewReader(`{"account_id":1,"amount":-1}`))
-	negative.Header.Set("Content-Type", "application/json")
-	negativeResp := httptest.NewRecorder()
-	router.ServeHTTP(negativeResp, negative)
-	if negativeResp.Code != http.StatusBadRequest {
-		t.Fatalf("expected negative amount 400, got %d: %s", negativeResp.Code, negativeResp.Body.String())
-	}
-
 	missing := httptest.NewRequest(http.MethodPost, "/transfers", strings.NewReader(`{"account_id":99,"amount":15}`))
 	missing.Header.Set("Content-Type", "application/json")
 	missingResp := httptest.NewRecorder()
@@ -362,7 +354,7 @@ func TestCreateTransferValidatesAccountAndAmount(t *testing.T) {
 		"account_id":1,
 		"from_account":"checking",
 		"to_account":"savings",
-		"amount":15,
+		"amount":-15,
 		"status":"pending"
 	}`))
 	valid.Header.Set("Content-Type", "application/json")
@@ -376,7 +368,7 @@ func TestCreateTransferValidatesAccountAndAmount(t *testing.T) {
 	if err := config.DB.First(&transfer).Error; err != nil {
 		t.Fatalf("load transfer: %v", err)
 	}
-	if transfer.AccountID != account.ID || transfer.Amount != 15 || transfer.TransactionDate.IsZero() {
+	if transfer.AccountID != account.ID || transfer.Amount != -15 || transfer.TransactionDate.IsZero() {
 		t.Fatalf("stored transfer mismatch: %+v", transfer)
 	}
 }

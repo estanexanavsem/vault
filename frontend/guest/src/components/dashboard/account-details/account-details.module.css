@@ -594,6 +594,11 @@
   font-variant-numeric: tabular-nums;
 }
 
+.transactionAmountNegative {
+  color: #5f5669;
+  font-weight: 400;
+}
+
 .transactionDetailRow > svg {
   grid-column: 7;
   justify-self: end;
@@ -1064,7 +1069,7 @@
   .transactionStatus {
     grid-area: status;
     align-self: start;
-    margin-left: 58px;
+    margin-left: 50px;
     font-size: 12px;
   }
 

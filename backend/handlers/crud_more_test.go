@@ -319,8 +319,14 @@ func TestTransferListGetUpdateAndDelete(t *testing.T) {
 	negativeReq.Header.Set("Content-Type", "application/json")
 	negativeResp := httptest.NewRecorder()
 	router.ServeHTTP(negativeResp, negativeReq)
-	if negativeResp.Code != http.StatusBadRequest {
-		t.Fatalf("expected negative update 400, got %d: %s", negativeResp.Code, negativeResp.Body.String())
+	if negativeResp.Code != http.StatusOK {
+		t.Fatalf("expected negative update 200, got %d: %s", negativeResp.Code, negativeResp.Body.String())
+	}
+	if err := config.DB.First(&stored, transfer.ID).Error; err != nil {
+		t.Fatalf("reload transfer after negative update: %v", err)
+	}
+	if stored.Amount != -1 {
+		t.Fatalf("negative amount was not stored: %+v", stored)
 	}
 
 	deleteResp := httptest.NewRecorder()

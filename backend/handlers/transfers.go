@@ -70,10 +70,6 @@ func CreateTransfer(c *gin.Context) {
 		respondBadRequest(c, "account_id required")
 		return
 	}
-	if req.Amount < 0 {
-		respondBadRequest(c, "amount cannot be negative")
-		return
-	}
 	if err := ensureAccountExists(req.AccountID); err != nil {
 		respondDBError(c, err)
 		return
@@ -134,10 +130,6 @@ func UpdateTransfer(c *gin.Context) {
 	applyStringUpdate(&transfer.FromAccount, req.FromAccount)
 	applyStringUpdate(&transfer.ToAccount, req.ToAccount)
 	if req.Amount != nil {
-		if *req.Amount < 0 {
-			respondBadRequest(c, "amount cannot be negative")
-			return
-		}
 		transfer.Amount = *req.Amount
 	}
 	applyStringUpdate(&transfer.Description, req.Description)

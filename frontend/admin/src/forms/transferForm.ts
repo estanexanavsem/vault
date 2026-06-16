@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { numberFromInput } from './formValue'
 
 export const transferSchema = z.object({
-  amount: numberFromInput.refine((value) => value >= 0, 'Сумма не может быть отрицательной'),
+  amount: numberFromInput,
   description: z.string(),
   full_description: z.string(),
   category: z.string(),

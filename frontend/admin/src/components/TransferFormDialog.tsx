@@ -167,8 +167,7 @@ export function TransferFormDialog({
               render={({ field }) => (
                 <NumberInput
                   id="transfer-amount"
-                  min={0}
-                  allowNegative={false}
+                  allowNegative
                   placeholder="$ 1,999.99"
                   description="Формат суммы: $ 1,999.99"
                   error={transferErrors.amount?.message}
