@@ -1,4 +1,4 @@
-.pageFallback {
+.fallback {
   min-height: 56vh;
   background: var(--color-page);
 }
