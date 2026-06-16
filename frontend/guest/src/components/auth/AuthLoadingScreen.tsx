@@ -1,5 +1,5 @@
 import { LoaderCircle } from 'lucide-react'
-import styles from './auth.module.css'
+import styles from './AuthLoadingScreen.module.css'
 
 export function AuthLoadingScreen() {
   return (
