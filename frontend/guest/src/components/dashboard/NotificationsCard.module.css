@@ -1,29 +1,29 @@
-.notificationsCard {
+.card {
   align-self: start;
   min-height: 104px;
   padding: var(--space-7) var(--space-6-5);
 }
 
-.notificationsTitle {
+.title {
   display: flex;
   gap: var(--space-4-5);
   align-items: center;
 }
 
-.notificationsCard p {
+.card p {
   margin: var(--space-8) 0 0;
   font-size: var(--font-size-2xl);
   color: var(--color-brand);
 }
 
 @media (width <= 768px) {
-  .notificationsCard {
+  .card {
     order: 3;
     min-height: 100px;
     padding-top: var(--space-6);
   }
 
-  .notificationsCard p {
+  .card p {
     margin-top: var(--space-6-5);
   }
 }
