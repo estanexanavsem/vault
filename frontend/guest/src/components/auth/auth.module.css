@@ -12,7 +12,7 @@
   padding: 30px;
   background: var(--color-surface);
   border: 1px solid var(--color-border-control);
-  border-radius: 18px;
+  border-radius: var(--radius-4xl);
 }
 
 .brand {
@@ -64,7 +64,7 @@
   color: var(--color-danger-strong);
   background: var(--color-danger-surface);
   border: 1px solid var(--color-danger-border);
-  border-radius: 10px;
+  border-radius: var(--radius-lg);
 }
 
 .field {
@@ -83,7 +83,7 @@
   padding: 0 14px;
   color: var(--color-brand);
   border: 1px solid var(--color-border-control);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .inputShell input {
@@ -112,7 +112,7 @@
   color: var(--color-text-inverse);
   background: var(--color-brand);
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .submitButton:disabled {
@@ -122,9 +122,9 @@
 @media (hover: hover) {
   .submitButton {
     transition:
-      background-color 180ms ease,
-      color 180ms ease,
-      opacity 180ms ease;
+      background-color var(--duration-motion-base) var(--ease-standard),
+      color var(--duration-motion-base) var(--ease-standard),
+      opacity var(--duration-motion-base) var(--ease-standard);
   }
 
   .submitButton:hover {

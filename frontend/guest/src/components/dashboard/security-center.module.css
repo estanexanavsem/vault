@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: minmax(250px, 360px) minmax(0, 1fr);
   width: min(100%, var(--content-width));
-  min-height: calc(100dvh - 75px);
+  min-height: calc(100dvh - var(--size-header-height));
   margin: 0 auto;
   color: var(--color-brand-strong);
   background: var(--color-page);
@@ -33,7 +33,7 @@
   font-weight: 400;
   color: var(--color-brand-strong);
   background: var(--color-brand-avatar);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .profile h1 {
@@ -71,7 +71,7 @@
 .sideNav button {
   background: transparent;
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
 }
 
 .sideNav button.sideNavCurrent {
@@ -84,7 +84,7 @@
   height: 6px;
   content: '';
   background: var(--color-accent-indicator);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .content {
@@ -137,7 +137,7 @@
 .panelHead svg {
   margin-top: 34px;
   color: var(--color-accent);
-  transition: transform 160ms ease;
+  transition: var(--transition-transform-base);
 }
 
 .panelHead svg[data-open='true'] {
@@ -209,13 +209,13 @@
   color: var(--color-brand);
   background: var(--color-surface);
   border: 2px solid var(--color-border-control);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .modalOverlay {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: var(--z-modal);
   width: 100%;
   max-width: none;
   height: 100%;
@@ -241,7 +241,7 @@
   color: var(--color-brand-strong);
   background: var(--color-surface);
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-dialog);
 }
 
@@ -288,7 +288,7 @@
   overflow: hidden;
   background: var(--color-surface);
   border: 1px solid var(--color-border-strong);
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
 }
 
 .inputIcon {
@@ -335,7 +335,7 @@
   padding: 0 24px;
   font-size: 16px;
   font-weight: 700;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .primaryButton {

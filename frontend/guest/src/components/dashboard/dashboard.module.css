@@ -47,8 +47,8 @@
   cursor: pointer;
   background-color: var(--color-brand-action);
   border: 0;
-  border-radius: 18px;
-  transition: background-color 0.3s ease-out;
+  border-radius: var(--radius-4xl);
+  transition: var(--transition-background-slow);
 }
 
 .dashboardMain {
@@ -81,7 +81,7 @@
 .thanksCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border-subtle);
-  border-radius: 16px;
+  border-radius: var(--radius-3xl);
 }
 
 .card {
@@ -111,7 +111,7 @@
   color: var(--color-brand);
   background: var(--color-surface-brand);
   border: 2px solid var(--color-border-control);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .moreButton {
@@ -173,7 +173,7 @@
   place-items: center;
   color: var(--color-brand-hover);
   background: var(--color-surface-accent);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .familyBalance {
@@ -195,7 +195,7 @@
   text-align: left;
   background: var(--color-surface);
   border: 2px solid var(--color-border-control);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .accountRow span,
@@ -255,7 +255,7 @@
   text-decoration: none;
   background: var(--color-brand);
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .thanksCard {
@@ -391,7 +391,7 @@
   color: var(--color-brand);
   background: var(--color-surface);
   border: 1px solid var(--color-border-icon);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .activityTransactionIcon svg,
@@ -540,11 +540,7 @@
   .desktopQuickActions a,
   .tab,
   .iconButton {
-    transition:
-      background-color 180ms ease,
-      border-color 180ms ease,
-      color 180ms ease,
-      opacity 180ms ease;
+    transition: var(--transition-interactive);
   }
 
   .footerLinks a:hover {
@@ -609,7 +605,7 @@
     min-height: 58px;
     padding: 24px 8px 24px 16px;
     font-size: 22px;
-    border-radius: 14px;
+    border-radius: var(--radius-2xl);
   }
 
   .accountsCard {
@@ -630,7 +626,7 @@
     width: 100%;
     min-width: 0;
     padding: 20px 18px 22px;
-    border-radius: 12px;
+    border-radius: var(--radius-xl);
   }
 
   .sectionKicker {

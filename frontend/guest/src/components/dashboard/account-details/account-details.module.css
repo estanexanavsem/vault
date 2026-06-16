@@ -30,7 +30,7 @@
   color: var(--color-brand-strong);
   background: var(--color-surface);
   border: 1px solid var(--color-border-subtle);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .sidebarHead,
@@ -86,7 +86,7 @@
   text-align: left;
   background: var(--color-surface-neutral);
   border: 0;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
 }
 
 .sidebarAccount span,
@@ -113,7 +113,7 @@
   text-align: left;
   background: var(--color-surface);
   border: 2px solid var(--color-border-control);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .openAccountCard span {
@@ -171,7 +171,7 @@
   color: var(--color-text-primary);
   background: var(--color-surface);
   border: 1px solid var(--color-border-subtle);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .accountDetailsLink {
@@ -218,7 +218,7 @@
   padding: 24px 34px;
   color: var(--color-text-subtle);
   background: var(--color-surface-brand);
-  border-radius: 10px;
+  border-radius: var(--radius-lg);
 }
 
 .accountInfoGrid div {
@@ -263,7 +263,7 @@
   color: var(--color-brand);
   background: transparent;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .accountInfoHelp {
@@ -275,7 +275,7 @@
   color: var(--color-brand);
   background: transparent;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .accountInfoGrid svg {
@@ -304,13 +304,13 @@
   color: var(--color-brand-strong);
   background: transparent;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .balanceInfoOverlay {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: var(--z-modal);
   display: grid;
   place-items: center;
   padding: 24px;
@@ -325,7 +325,7 @@
   padding: 56px 44px;
   color: var(--color-text-primary);
   background: var(--color-surface);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-balance-dialog);
 }
 
@@ -383,7 +383,7 @@
   color: var(--color-text-inverse);
   background: var(--color-brand);
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .balanceNote {
@@ -413,7 +413,7 @@
   color: var(--color-brand);
   background: var(--color-surface-brand);
   border: 2px solid var(--color-border-control);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .main {
@@ -457,7 +457,7 @@
 .transactionPanel {
   margin-top: 26px;
   border: 1px solid var(--color-border-subtle);
-  border-radius: 3px;
+  border-radius: var(--radius-2xs);
 }
 
 .transactionHeader,
@@ -550,7 +550,7 @@
   height: 12px;
   flex: 0 0 12px;
   background: var(--color-success);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .transactionDescription {
@@ -628,7 +628,7 @@
   color: var(--color-brand);
   background: var(--color-surface);
   border: 2px solid var(--color-border-control);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .transactionLoadMoreButton:hover {
@@ -682,7 +682,7 @@
   color: var(--color-text-primary);
   background: transparent;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .transactionExpandedCard dl {
@@ -751,7 +751,7 @@
   overflow: hidden;
   margin-top: 12px;
   border: 1px solid var(--color-brand);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .upcomingTable header {
@@ -833,7 +833,7 @@
   text-align: left;
   background: var(--color-brand-strong);
   border: 0;
-  border-radius: 16px;
+  border-radius: var(--radius-3xl);
 }
 
 .downloadAppCard span {
@@ -855,11 +855,7 @@
 @media (hover: hover) {
   .searchButton,
   .iconButton {
-    transition:
-      background-color 180ms ease,
-      border-color 180ms ease,
-      color 180ms ease,
-      opacity 180ms ease;
+    transition: var(--transition-interactive);
   }
 }
 
@@ -924,7 +920,7 @@
   .balanceCard {
     min-height: 250px;
     padding: 26px 24px 22px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
   }
 
   .balanceCardTop {
@@ -1037,7 +1033,7 @@
     margin-top: 18px;
     padding: 40px 0 0;
     border: 1px solid var(--color-border-subtle);
-    border-radius: 5px;
+    border-radius: var(--radius-mobile-activity-card);
   }
 
   .activityHeading {
@@ -1231,7 +1227,7 @@
     margin-top: 14px;
     padding: 12px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: var(--radius-lg);
   }
 
   .downloadAppCard span {
