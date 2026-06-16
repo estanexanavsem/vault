@@ -13,8 +13,8 @@ export function SecurityProfileSidebar({
   lastSignInText,
 }: SecurityProfileSidebarProps) {
   return (
-    <aside className={styles.sidebar} aria-label="Profile settings">
-      <div className={styles.profile}>
+    <aside className={styles.root} aria-label="Profile settings">
+      <div className={styles.head}>
         <div className={styles.avatarWrap}>
           <span className={styles.avatar}>{initials}</span>
         </div>
@@ -22,8 +22,8 @@ export function SecurityProfileSidebar({
         {lastSignInText ? <p>Last sign-in at {lastSignInText}</p> : null}
       </div>
 
-      <nav className={styles.sideNav} aria-label="Security center sections">
-        <button className={styles.sideNavCurrent} type="button">
+      <nav className={styles.nav} aria-label="Security center sections">
+        <button className={styles.current} type="button">
           <UserRound size={20} aria-hidden="true" />
           Personal information
         </button>

@@ -1,10 +1,10 @@
-.sidebar {
+.root {
   padding: var(--space-17) var(--space-8) var(--space-11);
   background: var(--color-surface);
   border-right: var(--stroke-width-hairline) solid var(--color-border-subtle);
 }
 
-.profile {
+.head {
   display: grid;
   justify-items: center;
   text-align: center;
@@ -26,20 +26,20 @@
   border-radius: var(--radius-pill);
 }
 
-.profile h1 {
+.head h1 {
   margin: var(--space-4-5) 0 0;
   font-size: var(--font-size-10xl);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-tight);
 }
 
-.profile p {
+.head p {
   margin: var(--space-3) 0 0;
   font-size: var(--font-size-2xs);
   color: var(--color-text-muted);
 }
 
-.sideNav {
+.nav {
   --security-side-nav-offset: 38px;
 
   display: grid;
@@ -47,7 +47,7 @@
   margin-top: var(--security-side-nav-offset);
 }
 
-.sideNav button {
+.nav button {
   display: flex;
   gap: var(--space-5);
   align-items: center;
@@ -62,12 +62,12 @@
   border-radius: var(--radius-sm);
 }
 
-.sideNav button.sideNavCurrent {
+.nav button.current {
   color: var(--color-text-inverse);
   background: var(--color-brand-strong);
 }
 
-.sideNav button.sideNavCurrent::before {
+.nav button.current::before {
   width: var(--size-indicator-sm);
   height: var(--size-indicator-sm);
   content: '';
@@ -76,7 +76,7 @@
 }
 
 @media (width <= 1024px) {
-  .sidebar {
+  .root {
     padding: var(--space-8) var(--space-5) var(--space-6);
     border-right: 0;
     border-bottom: var(--stroke-width-hairline) solid var(--color-border-subtle);
@@ -88,15 +88,15 @@
     font-size: var(--font-size-11xl);
   }
 
-  .profile h1 {
+  .head h1 {
     font-size: var(--font-size-7xl);
   }
 
-  .sideNav {
+  .nav {
     margin-top: var(--space-6);
   }
 
-  .sideNav button {
+  .nav button {
     min-height: var(--control-height-3xl);
     padding: 0 var(--space-4-5);
     font-size: var(--font-size-sm);
