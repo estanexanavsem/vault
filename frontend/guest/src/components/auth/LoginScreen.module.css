@@ -58,7 +58,7 @@
   display: flex;
   gap: var(--space-3-5);
   align-items: center;
-  min-height: 48px;
+  min-height: var(--control-height-2xl);
   padding: var(--space-4) var(--space-4-5);
   font-size: var(--font-size-sm);
   color: var(--color-danger-strong);
@@ -79,7 +79,7 @@
   display: flex;
   gap: var(--space-3-5);
   align-items: center;
-  min-height: 48px;
+  min-height: var(--control-height-2xl);
   padding: 0 var(--space-4-5);
   color: var(--color-brand);
   border: 1px solid var(--color-border-control);
@@ -105,7 +105,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
+  min-height: var(--control-height-3xl);
   margin-top: var(--space-3);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);

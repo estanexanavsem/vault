@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    min-height: 40px;
+    min-height: var(--control-height-sm);
     padding: 0 var(--space-4-5);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-bold);
@@ -49,7 +49,7 @@
   .mobileQuickLinksMenu button {
     display: flex;
     align-items: center;
-    min-height: 44px;
+    min-height: var(--control-height-lg);
     padding: 0 var(--space-4-5);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-bold);

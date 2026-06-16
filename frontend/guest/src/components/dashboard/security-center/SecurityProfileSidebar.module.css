@@ -95,7 +95,7 @@
   }
 
   .sideNav button {
-    min-height: 50px;
+    min-height: var(--control-height-3xl);
     padding: 0 var(--space-4-5);
     font-size: var(--font-size-sm);
   }

@@ -70,7 +70,7 @@
   display: grid;
   grid-template-columns: 48px minmax(0, 1fr);
   align-items: center;
-  min-height: 48px;
+  min-height: var(--control-height-2xl);
   overflow: hidden;
   background: var(--color-surface);
   border: 1px solid var(--color-border-strong);
@@ -117,7 +117,7 @@
   align-items: center;
   justify-content: center;
   min-width: 104px;
-  min-height: 48px;
+  min-height: var(--control-height-2xl);
   padding: 0 var(--space-7);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);

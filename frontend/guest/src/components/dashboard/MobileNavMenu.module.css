@@ -58,7 +58,7 @@
   align-items: center;
   justify-content: center;
   width: min(100%, 250px);
-  min-height: 56px;
+  min-height: var(--control-height-6xl);
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-inverse);

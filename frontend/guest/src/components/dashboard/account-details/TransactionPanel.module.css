@@ -11,7 +11,7 @@
     minmax(118px, 0.72fr) minmax(78px, 0.64fr) minmax(58px, 0.52fr) 28px;
   gap: var(--space-3);
   align-items: center;
-  min-height: 52px;
+  min-height: var(--control-height-4xl);
   padding: 0 var(--space-4);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
@@ -60,7 +60,7 @@
 
 .transactionLoadMoreButton {
   min-width: 150px;
-  min-height: 40px;
+  min-height: var(--control-height-sm);
   padding: 0 var(--space-6-5);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
@@ -93,7 +93,7 @@
 
   .postedBalanceRow {
     grid-template-columns: 1fr auto;
-    min-height: 32px;
+    min-height: var(--control-height-2xs);
     padding: 0 var(--space-4-5);
     font-size: var(--font-size-sm);
   }

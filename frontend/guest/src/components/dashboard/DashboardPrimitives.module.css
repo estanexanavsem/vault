@@ -29,7 +29,7 @@
 
 .tab {
   min-width: 78px;
-  min-height: 40px;
+  min-height: var(--control-height-sm);
   padding: 0 var(--space-7) var(--space-3);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);

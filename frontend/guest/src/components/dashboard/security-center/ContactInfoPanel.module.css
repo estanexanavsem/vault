@@ -90,7 +90,7 @@
   align-items: center;
   justify-content: center;
   min-width: 96px;
-  min-height: 44px;
+  min-height: var(--control-height-lg);
   padding: 0 var(--space-5-5);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
